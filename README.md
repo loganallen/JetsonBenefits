@@ -30,7 +30,7 @@
 8. ``` python manage.py runserver ```
 9. Navigate to your localhost:8000 on a browser and you should see "Hello, Jetson Benefits!"
 
-##Rare Errors and how to fix them
+## Rare Errors and how to fix them
 * "Invalid configuration object" referring to webpack: solution
 	1. ``` npm uninstall webpack ```
 	2. ``` npm install webpack@2.1.0-beta.22 --save-dev ```
