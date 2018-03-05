@@ -22,12 +22,13 @@
 ### If you have questions/errors and are on a mac: ask Andrew, windows: ask Justin
 1. Install the above required downloads
 2. Clone the Jetson team repo into a local directory [Repo Link](https://github.com/loganallen/JetsonBenefits)
-3. Navigate to the root directory for the project and run ```npm install ```
-4. ``` virtualenv env ``` (on windows: ```py -3 -m venv env```) (put this wherever, do NOT commit it to the repo)
-5. ``` source env/bin/activate ``` (on windows: ``` env\scripts\activate.bat ```)
-6. ``` pip install -r requirements.txt```
-7. ``` python manage.py runserver ```
-8. Navigate to your localhost:8000 on a browser and you should see "Hello, Jetson Benefits!"
+3. Install the Python packages: navigate to the root directory for the project and run `npm install`
+4. Create a virtual environment (do this **once**): `virtualenv env` (on windows:`py -3 -m venv env`) (put this wherever, do NOT commit it to the repo)
+5. Enter the virtual environment: `source env/bin/activate` (on windows: `env\scripts\activate.bat`)
+6. Install the django requirements: `pip install -r requirements.txt`
+7. Run our dev server: `python manage.py runserver`
+8. Navigate to `localhost:8000` on your browser and you should see "Hello, Jetson Benefits!"
+9. Exit the virtual environment: `deactivate`
 
 ## Rare Errors and how to fix them
 * "Invalid configuration object" referring to webpack: solution
