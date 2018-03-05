@@ -26,9 +26,8 @@
 4. ``` virtualenv env ``` (on windows: ```py -3 -m venv env```) (put this wherever, do NOT commit it to the repo)
 5. ``` source env/bin/activate ``` (on windows: ``` env\scripts\activate.bat ```)
 6. ``` pip install -r requirements.txt```
-7. ``` npm install ```
-8. ``` python manage.py runserver ```
-9. Navigate to your localhost:8000 on a browser and you should see "Hello, Jetson Benefits!"
+7. ``` python manage.py runserver ```
+8. Navigate to your localhost:8000 on a browser and you should see "Hello, Jetson Benefits!"
 
 ## Rare Errors and how to fix them
 * "Invalid configuration object" referring to webpack: solution
