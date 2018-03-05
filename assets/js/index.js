@@ -1,13 +1,14 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
-var createReactClass = require('create-react-class')
+import React from 'react';
+import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
 
 var Hello = createReactClass ({
     render: function() {
         return (
-            <h1>
-            Hello, Jetson Benefits!
-            </h1>
+            <div>
+                <h1>Hello, Jetson Benefits!</h1>
+                <p>More info to come...</p>
+            </div>
         )
     }
 })
