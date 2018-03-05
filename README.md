@@ -1,16 +1,10 @@
 # Jetson Benefits Team Build Guide
 
-## List of Dependencies
-### Before asking about errors double check all are installed
+## Required Downloads
 * git
 * python 3.6 (or latest) + pip
 * virtualenv
 * node + npm
-* django + djangorestframework
-* webpack + webpack-cli
-* django-webpack-loader
-
-
 
 ## Recommended Downloads
 * Sublime / VSCode
