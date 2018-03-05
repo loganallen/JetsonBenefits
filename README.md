@@ -31,8 +31,10 @@
 6. Exit the virtual environment: `deactivate`
 
 The script `dev-script.sh` is a bash script holding shortcuts for development. To use a specific shortcut, run `./dev-script.sh shortcut`. The following shortcuts are available:
-* compile: "npm run-script build'
-* run: "python manage.py runserver"
+* `compile`: npm run-script build
+* `run`: python manage.py runserver
+
+For **example** run `./dev-script.sh run` to start the dev server instead of remembering the full command.
 
 ## Rare Errors and how to fix them
 * "Invalid configuration object" referring to webpack: solution
