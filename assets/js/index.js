@@ -1,16 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import createReactClass from 'create-react-class';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
-var Hello = createReactClass ({
-    render: function() {
-        return (
-            <div>
-                <h1>Hello, Jetson Benefits!</h1>
-                <p>More info to come...</p>
-            </div>
-        )
-    }
-})
+// Import css files here
+import Home from './components/Home';
+import reducers from './reducers';
 
-ReactDOM.render(<Hello />, document.getElementById('container'))
+// Create redux store
+const store = createStore(
+  reducers,
+  applyMiddleware(thunkMiddleware)
+);
+
+// Render the root element
+render(
+  <Provider store={store}>
+    <Home />
+  </Provider>,
+  document.getElementById('root')
+);

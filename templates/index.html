@@ -1,13 +1,15 @@
-{% load render_bundle from webpack_loader %} 
+{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- Semantic UI Styling -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
         <title>Jetson Benefits Home</title>
     </head>
 
     <body>
-        <div id="container"></div>
+        <div id="root"></div>
         {% render_bundle 'common' %}
         {% render_bundle 'index' %}
     </body>
