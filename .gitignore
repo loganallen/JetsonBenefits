@@ -9,7 +9,7 @@ __pycache__/
 *.pyc
 
 # webpack compiled js files
-assets/bundles/
+static/js/
 webpack-stats.json
 
 # Weird Mac Thing

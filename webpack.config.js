@@ -6,10 +6,13 @@ const BundlerTracker = require('webpack-bundle-tracker')
 
 const config = {
     context: __dirname,
-    entry: './assets/js/index',
+    entry: {
+        // add js modules here
+        index: './assets/js/index'
+    },
     output: {
-        path: path.resolve('./assets/bundles/'),
-        filename: '[name].js'       
+        path: path.resolve('./static/js/'),
+        filename: '[name].bundle.min.js'       
     },
     plugins: [
         new BundlerTracker({filename: './webpack-stats.json'}),
@@ -17,6 +20,10 @@ const config = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
+        }),
+        // common holds all the common js code -- should be included on all pages
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common'
         })
     ],
     module: {
