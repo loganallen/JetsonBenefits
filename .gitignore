@@ -4,8 +4,9 @@
 node_modules/
 env/
 
-# django autocreated folders to ignored
+# django autocreated folders and compiled pyc to ignored
 __pycache__/
+*.pyc
 
 # webpack compiled js files
 assets/bundles/
