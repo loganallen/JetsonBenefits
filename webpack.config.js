@@ -9,7 +9,7 @@ const config = {
     entry: './assets/js/index',
     output: {
         path: path.resolve('./assets/bundles/'),
-        filename: '[name]-[hash].js'       
+        filename: '[name].js'       
     },
     plugins: [
         new BundlerTracker({filename: './webpack-stats.json'}),
