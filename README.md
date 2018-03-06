@@ -38,7 +38,9 @@ The file `package.json` is a npm file that holds the specifcs about our javascri
 For **example** run `npm start` to start the dev server instead of remembering the full command.
 
 ## Rare Errors and how to fix them
-* "Invalid configuration object" referring to webpack: solution
+* "OSError" something about package.json being missing
+	1. Make sure to run `npm run build` before `npm start`
+* "Invalid configuration object" referring to webpack
 	1. ``` npm uninstall webpack ```
 	2. ``` npm install webpack@2.1.0-beta.22 --save-dev ```
 * "filesystem.statSync is not a function"
