@@ -36,7 +36,7 @@ The file `package.json` is a npm file that holds the specifcs about our javascri
 * `npm run-script env`: starts the python virtual environment (mac only): short for `source env/bin/activate`
 * `npm run-script django`: the same command as `npm start`
 
-For **example** run `./dev-script.sh run` to start the dev server instead of remembering the full command.
+For **example** run `npm start` to start the dev server instead of remembering the full command.
 
 ## Rare Errors and how to fix them
 * "Invalid configuration object" referring to webpack: solution
