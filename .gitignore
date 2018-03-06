@@ -9,3 +9,4 @@ __pycache__/
 
 # webpack compiled js files
 assets/bundles/
+webpack-stats.json

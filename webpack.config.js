@@ -1,10 +1,10 @@
 // http://geezhawk.github.io/using-react-with-django-rest-framework
 
-let path = require('path')
-let webpack = require('webpack')
-let BundlerTracker = require('webpack-bundle-tracker')
+const path = require('path')
+const webpack = require('webpack')
+const BundlerTracker = require('webpack-bundle-tracker')
 
-module.exports = {
+const config = {
     context: __dirname,
     entry: './assets/js/index',
     output: {
@@ -20,9 +20,9 @@ module.exports = {
         })
     ],
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.jsx?$/,
+                test:  /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
@@ -32,7 +32,9 @@ module.exports = {
         ]
     },
     resolve: {
-        modulesDirectories: ['node_modules'],
-        extensions: ['', '.js', '.jsx']
+        modules: ['node_modules'],
+        extensions: ['.js', '.jsx']
     }
-}
+};
+
+module.exports = config
