@@ -4,9 +4,11 @@
   "description": "Jetson Benefits Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/webpack --config webpack.config.js",
-    "django": "python manage.py runserver"
+    "start": "python manage.py runserver",
+    "compile": "./node_modules/.bin/webpack --config webpack.config.js",
+    "django": "python manage.py runserver",
+    "env": "source env/bin/activate",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",

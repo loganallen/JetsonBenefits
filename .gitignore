@@ -1,3 +1,11 @@
+# gitignore -- if you have any questions ask Andrew Grossfeld [amg445]
+
+# ignored js and python dependencies handled by npm and pip
 node_modules/
 env/
+
+# django autocreated folders to ignored
 __pycache__/
+
+# webpack compiled js files
+assets/bundles/
