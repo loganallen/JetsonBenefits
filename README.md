@@ -32,9 +32,8 @@
 
 The file `package.json` is a npm file that holds the specifcs about our javascript environment. It makes available the following commands:
 * `npm start`: starts the django server: short for `python manage.py runserver`
-* `npm run compile`: compiles our javascript files: short for `./node_modules/.bin/webpack --config webpack.config.js`
-* `npm run env`: starts the python virtual environment (mac only): short for `source env/bin/activate`
-* `npm run django`: the same command as `npm start`
+* `npm run autobuild`: re-compiles our javascript files everytime there is an update, will run and listen until terminated
+* `npm run build`: compiles our javascript files just once
 
 For **example** run `npm start` to start the dev server instead of remembering the full command.
 

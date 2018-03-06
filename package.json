@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "python manage.py runserver",
-    "compile": "./node_modules/.bin/webpack --config webpack.config.js",
-    "django": "python manage.py runserver",
-    "env": "source env/bin/activate",
+    "build": "./node_modules/.bin/webpack --config webpack.config.js",
+    "autobuild": "./node_modules/.bin/webpack --config webpack.config.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
