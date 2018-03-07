@@ -25,7 +25,7 @@
 ## Development Process
 1. Make sure to `git pull` from remote master before implementing changes
 2. Run `npm install` to ensure all python packages are included
-3. After making JS changes, you need to run `npm run compile` to recompile the JS
+3. After making JS changes, you need to run `npm run build` to compile the JS
 4. Enter the virtual environment and run `npm start` to start the dev server
 5. Navigate to `localhost:8000` on your browser to view our webpage
 6. Exit the virtual environment: `deactivate`
