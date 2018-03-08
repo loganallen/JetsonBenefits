@@ -12,7 +12,7 @@ const config = {
     },
     output: {
         path: path.resolve('./static/js/'),
-        filename: '[name].bundle.min.js'       
+        filename: '[name].bundle.min.js'
     },
     plugins: [
         new BundlerTracker({filename: './webpack-stats.json'}),
@@ -35,6 +35,10 @@ const config = {
                 query: {
                     presets: ['react']
                 }
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
             }
         ]
     },
