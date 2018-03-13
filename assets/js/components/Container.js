@@ -1,12 +1,8 @@
 import React from 'react';
 import Navigation from './Navigation';
 
-type Props = {
-  children: React.Element
-};
-
 class Container extends React.Component {
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
   }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
 
 class Home extends React.Component {
   constructor(props) {
@@ -10,7 +9,18 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <div id='homeSection1'>
+
+        </div>
+        <div id='homeSection2'>
+
+        </div>
+        <div id='homeSection3'>
         
+        </div>
+        <div id='homeSection4'>
+        
+        </div>
       </div>
     );
   }

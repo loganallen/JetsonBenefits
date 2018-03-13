@@ -14,3 +14,6 @@ webpack-stats.json
 
 # Weird Mac Thing
 .DS_Store
+
+# VSCode settings files
+.vscode/
