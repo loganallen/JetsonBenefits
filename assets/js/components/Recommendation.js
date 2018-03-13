@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Navigation from './Navigation';
 import QuestionsContainer from './QuestionsContainer';
 import QuotesContainer from './QuotesContainer';
 
@@ -13,8 +12,6 @@ class Recommendation extends React.Component {
     render() {
         return (
             <div>
-                <Navigation />
-                <div></div>
             </div>
         );
     }

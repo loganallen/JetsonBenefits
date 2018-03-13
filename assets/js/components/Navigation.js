@@ -1,5 +1,5 @@
 import React from 'react';
-import { } from 'semantic-ui-react';
+import {Header, Button} from 'semantic-ui-react';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -9,7 +9,15 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <Header id='menuTitle'>jetsonbenefits</Header>
+        <div id='menuButtonWrapper'>
+          <button type='button' className='menuButton'>How It Works</button>
+          <button type='button' className='menuButton'>Blog</button>
+          <button type='button' className='menuButton'>Resources</button>
+          <button type='button' className='menuButton'>Login</button>
+        </div>
+      </div>
     );
   }
 }
