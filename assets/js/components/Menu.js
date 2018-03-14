@@ -1,7 +1,16 @@
+/*
+The [Navigation] component is a header bar that gives the user buttons which link
+to the [How It Works], [Blog], [Resources], and [Login] components. Contained within
+both the [Home] and [Recommendation] components.
+
+Model filepath:
+Controller filepath:
+*/
+
 import React from 'react';
 import {Header, Button} from 'semantic-ui-react';
 
-class Navigation extends React.Component {
+class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -9,7 +18,7 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id='menuWrapper'>
         <Header id='menuTitle'>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
           <button type='button' className='menuButton'>How It Works</button>
@@ -22,4 +31,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+export default Menu;

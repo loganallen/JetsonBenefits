@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './Navigation';
+import Menu from './Menu';
 
 class Container extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Container extends React.Component {
   render() {
     return (
       <div className='container'>
-        <Navigation />
+        <Menu />
         {this.props.children}
       </div>
     );
