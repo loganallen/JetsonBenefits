@@ -1,3 +1,11 @@
+/*
+The [Login] component is a modal which prompts the user to either enter their
+login information or create an account on the spot.
+
+Model filepath:
+Controller filepath:
+*/
+
 import React from 'react';
 import { } from 'semantic-ui-react';
 

@@ -1,3 +1,11 @@
+/*
+The [Sidebar] component uses the user information to query the db for simplified
+quote information.
+
+Model filepath:
+Controller filepath:
+*/
+
 import React from 'react';
 import { } from 'semantic-iu-react';
 
