@@ -62,6 +62,7 @@ class Home extends React.Component {
             className='homeS2Input'
             id='homeS2Input1'
             onChange={(e) => this.onInputChange('age', e)}
+            placeholder='30'
           />
           <p>years old and I live in</p>
           <input
@@ -69,6 +70,7 @@ class Home extends React.Component {
             className='homeS2Input'
             id='homeS2Input2'
             onChange={(e) => this.onInputChange('zip', e)}
+            placeholder='60601'
           />
           <p>.</p><br/>
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
