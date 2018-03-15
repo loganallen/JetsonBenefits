@@ -21,10 +21,10 @@ class Menu extends React.Component {
       <div id='menuWrapper'>
         <Header id='menuTitle'>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
-          <button type='button' className='menuButton'>How It Works</button>
-          <button type='button' className='menuButton'>Blog</button>
-          <button type='button' className='menuButton'>Resources</button>
-          <button type='button' className='menuButton'>Login</button>
+          <button type='button' className='menuButton'>HOW IT WORKS</button>
+          <button type='button' className='menuButton'>BLOG</button>
+          <button type='button' className='menuButton'>RESOURCES</button>
+          <button type='button' className='menuButton'>LOGIN</button>
         </div>
       </div>
     );
