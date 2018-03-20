@@ -8,13 +8,17 @@ Controller filepath:
 */
 
 import React from 'react';
+import {connect} from 'react-redux';
+
+import Actions from '../actions';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       age: '',
-      zipcode: ''
+      zipcode: '',
+      loginModalOpen: true
     };
   }
 
@@ -39,7 +43,7 @@ class Home extends React.Component {
   }
 
   onSignUpClick = () => {
-
+    this.setState({ loginModalOpen: true });
   }
 
   section1() {
@@ -76,7 +80,7 @@ class Home extends React.Component {
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
             Find My Benefits
           </button><br/>
-          <button type='button' id='homeS2B2' onClick={this.onSignUpClick}>
+          <button type='button' id='homeS2B2' onClick={() => this.props.toggleLoginModal(false)}>
             or Sign Up
           </button>
         </div>
@@ -115,4 +119,13 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  ...state,
+  loginModalOpen: state.mainState.loginModalOpen
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
