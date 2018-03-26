@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'jetson.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jetson_database',
-        'USERNAME': 'root',
-        'PASSWORD': 'password',
+        'NAME': os.environ['MYSQL_DB'],
+        'USERNAME': os.environ['MYSQL_USER'],
+        'PASSWORD': os.environ['MYSQL_PASSWORD']
     }
 }
 
