@@ -45,3 +45,7 @@ For **example** run `npm start` to start the dev server instead of remembering t
 	2. ``` npm install webpack@2.1.0-beta.22 --save-dev ```
 * "filesystem.statSync is not a function"
 	1. ``` npm install babel-loader@7.1.1 --save-dev ```
+
+## Database changes
+1. `python manage.py makemigration app`
+2. `python migrate`
