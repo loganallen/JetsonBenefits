@@ -1,0 +1,16 @@
+[
+    {
+        "model": "health_questions",
+        "pk":1,
+        "fields":{
+            "health_question_id":1,
+            "question":"Do you take prescription medications?", 
+            "high_deductible_total":1,
+            "low_deductible_total":1, 
+            "HMO_total":0,
+            "PPO_total":0,
+            "HSA_total":0.5,
+            "critical_illness_accident_policy_total":0
+        }
+    }
+]
