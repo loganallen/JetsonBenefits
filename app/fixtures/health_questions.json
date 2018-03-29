@@ -31,7 +31,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":3,
+        "pk":5,
         "fields":{
             "question":"How likely are you visit your doctor for you annual physical exam?", 
             "high_deductible_total":0,
@@ -46,7 +46,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":4,
+        "pk":6,
         "fields":{
             "question":"How many times are you likely to visit the doctor each year?", 
             "high_deductible_total":1,
@@ -61,7 +61,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":5,
+        "pk":7,
         "fields":{
             "question":"There's a cold going around the office and you wake up with a sore throat. What do you do?", 
             "high_deductible_total":0.5,
@@ -76,7 +76,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":6,
+        "pk":8,
         "fields":{
             "question":"Your doctor asks you to come back for additional tests after you physical exam. What do you do?", 
             "high_deductible_total":1,
@@ -91,7 +91,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":7,
+        "pk":9,
         "fields":{
             "question":"How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?", 
             "high_deductible_total":0,
@@ -106,7 +106,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":8,
+        "pk":10,
         "fields":{
             "question":"How much do you worry about the medical expenses associated with a serious accident?", 
             "high_deductible_total":0,
@@ -121,7 +121,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":9,
+        "pk":11,
         "fields":{
             "question":"How do you schedule your doctor's appointments?", 
             "high_deductible_total":0,
@@ -136,7 +136,7 @@
 
     {
         "model": "app.health_questions",
-        "pk":10,
+        "pk":12,
         "fields":{
             "question":"How likely are you to seek out advice from a specialist?", 
             "high_deductible_total":0,
