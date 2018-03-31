@@ -8,9 +8,8 @@ Controller filepath:
 */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import {Header, Button} from 'semantic-ui-react';
-
-import {connect} from 'react-redux';
 
 import Login from './Login';
 import Actions from '../actions';
