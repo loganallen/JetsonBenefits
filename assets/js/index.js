@@ -8,12 +8,17 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import '../css/index.css';
 
+import App from './components/App';
+import Home from './components/Home';
+
 const store = configureStore();
 const history = syncHistoryWithStore(createBrowserHistory(), store);
+console.log('start');
 
 const root = (
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    {/* <Router history={history} routes={routes} /> */}
+    <App><Home/></App>
   </Provider>
 );
 

@@ -37,8 +37,8 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => ({
   ...state,
-  loginModalOpen: state.mainState.loginModal.isOpen,
-  loginModalType: state.mainState.loginModal.type
+  loginModalOpen: state.app.loginModal.isOpen,
+  loginModalType: state.app.loginModal.type
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,7 +8,7 @@ Controller filepath:
 */
 
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Actions from '../actions';
 
@@ -20,6 +20,7 @@ class Home extends React.Component {
       zipcode: '',
       loginModalOpen: true
     };
+    console.log('home constructor', props);
   }
 
   onInputChange = (id, event) => {
@@ -121,7 +122,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => ({
   ...state,
-  loginModalOpen: state.mainState.loginModalOpen
+  loginModalOpen: state.app.loginModal.isOpen
 });
 
 const mapDispatchToProps = (dispatch) => ({
