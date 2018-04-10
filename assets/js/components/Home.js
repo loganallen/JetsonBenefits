@@ -18,9 +18,8 @@ class Home extends React.Component {
     this.state = {
       age: '',
       zipcode: '',
-      loginModalOpen: true
+      loginModalOpen: this.props.loginModalOpen
     };
-    console.log('home constructor', props);
   }
 
   onInputChange = (id, event) => {
@@ -121,7 +120,6 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
   loginModalOpen: state.app.loginModal.isOpen
 });
 

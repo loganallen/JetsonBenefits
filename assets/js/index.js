@@ -11,7 +11,6 @@ import App from './components/App';
 import Home from './components/Home';
 
 const store = configureStore();
-console.log('start');
 
 const root = (
   <Provider store={store}>
