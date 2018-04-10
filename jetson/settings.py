@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ['MYSQL_DB'],
-        'USERNAME': os.environ['MYSQL_USER'],
+        'USER': os.environ['MYSQL_USER'],
         'PASSWORD': os.environ['MYSQL_PASSWORD']
     }
 }
@@ -126,7 +126,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     #This lets Django's collectstatic store our bundles
-    os.path.join(BASE_DIR, 'static'), 
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 WEBPACK_LOADER = {
