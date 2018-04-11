@@ -1,0 +1,41 @@
+[
+    {
+        "model": "app.life_questions",
+        "pk":1,
+        "fields":{
+            "question":"Do you want to pay for your kids' college?"
+        }
+    }
+,
+    {
+        "model": "app.life_questions",
+        "pk":2,
+        "fields":{
+            "question":"What is the balance of your mortgage?"
+        }
+    }
+,
+    {
+        "model": "app.life_questions",
+        "pk":3,
+        "fields":{
+            "question":"What is the balance of your other debts?"
+        }
+    }
+,
+    {
+        "model": "app.life_questions",
+        "pk":4,
+        "fields":{
+            "question":"Do you have any existing life insurance (policy value)?"
+        }
+    }
+,
+    {
+        "model": "app.life_questions",
+        "pk":5,
+        "fields":{
+            "question":"What is the total current balance of your investments and savings?"
+        }
+    }  
+]
