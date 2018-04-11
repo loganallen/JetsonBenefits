@@ -17,8 +17,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       age: '',
-      zipcode: '',
-      loginModalOpen: this.props.loginModalOpen
+      zipcode: ''
     };
   }
 
@@ -39,11 +38,11 @@ class Home extends React.Component {
   }
 
   onFindBenefitsClick = () => {
+    // TODO: Validate that input fields are filled & valid
+    let age = this.state.age;
+    let zipcode = this.state.zipcode;
 
-  }
-
-  onSignUpClick = () => {
-    this.setState({ loginModalOpen: true });
+    this.props.pushToRecommendationPage(age, zipcode);
   }
 
   section1() {
@@ -80,7 +79,7 @@ class Home extends React.Component {
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
             Find My Benefits
           </button><br/>
-          <button type='button' id='homeS2B2' onClick={() => this.props.toggleLoginModal(false)}>
+          <button type='button' id='homeS2B2' onClick={this.props.openSignupModal}>
             or Sign Up
           </button>
         </div>
@@ -120,11 +119,12 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loginModalOpen: state.app.loginModal.isOpen
+  ...state.app
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen))
+  openSignupModal: () => dispatch(Actions.toggleLoginModal(true, false)),
+  pushToRecommendationPage: (age, zip) => dispatch(Actions.pushToRecommendationPage(age, zip))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

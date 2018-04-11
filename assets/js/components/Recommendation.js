@@ -16,6 +16,7 @@ import QuotesContainer from './QuotesContainer';
 class Recommendation extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {
@@ -28,7 +29,7 @@ class Recommendation extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    ...state
+    ...state.app
 });
 
 export default connect(mapStateToProps, null)(Recommendation);

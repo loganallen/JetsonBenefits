@@ -2,10 +2,11 @@ import ActionTypes from './actionTypes';
 
 // these functions return an action
 
-const toggleLoginModal = (type) => ({
+const toggleLoginModal = (willOpen, isLogin) => ({
     type: ActionTypes.TOGGLE_LOGIN_MODAL,
     data: {
-        type: type
+        willOpen: willOpen,
+        isLogin: isLogin
     }
 });
 
