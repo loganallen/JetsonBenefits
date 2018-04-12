@@ -127,7 +127,7 @@ class QuestionsContainer extends React.Component {
     	 'Just tell us a bit about yourself.';
         return (
             <div>
-            	<Header> {headerText} </Header>
+            	<h1 id="header-h1">{headerText}</h1>
             	{this.questionContent()} 
             	<button 
             		id='quotesButton' 
