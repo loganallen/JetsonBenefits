@@ -25,7 +25,8 @@ class Recommendation extends React.Component {
             marriage: '',
             kidages: '',
             spouseage: '',
-            income: ''
+            income: '',
+            condition: ''
         };
     }
 
@@ -50,7 +51,8 @@ class Recommendation extends React.Component {
             marriage: answers.marriage,
             kidages: answers.kidages,
             spouseage: answers.spouseage,
-            income: answers.income
+            income: answers.income,
+            condition: answers.condition
         });
     }
 
