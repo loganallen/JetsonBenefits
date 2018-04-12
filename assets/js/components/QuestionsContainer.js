@@ -26,6 +26,16 @@ class QuestionsContainer extends React.Component {
     	};
     }
 
+    onInputChange = (key, event) => {
+    	console.log(event)
+    	this.setState({[key]: event.target.value});
+    	console.log(this.state);
+    }
+
+    onDropdownChange = (value) => {
+    	this.setState({marriage: value})
+    }
+
     //Main question page content
     questionContent() {
     	return (
@@ -54,7 +64,7 @@ class QuestionsContainer extends React.Component {
             id='questionsDropdown'
             className='questionsInput'
             icon={null}
-            onChange={(e) => this.onInputChange('marriage', e)}
+			onChange={(param, data) => this.onDropdownChange(data.value)}
             placeholder='Single'
             options={[
  				{ value: 'single', text: 'Single' },
@@ -72,7 +82,7 @@ class QuestionsContainer extends React.Component {
           <p>kids</p>
           <p>.</p>
           <br/>
-          <p>My spouse is </p>
+          {this.state.marriage == 'married' && <div><p>My spouse is </p>
           <input
             type='text'
             id='questionsInput1'
@@ -81,7 +91,8 @@ class QuestionsContainer extends React.Component {
             placeholder='0'
           />
       {/*this should only show up if they have kids*/}
-          <p>years old and my kids are </p>
+          <p>years old</p></div>}
+          {this.state.kids > 0 && <div><p>and my kids are </p>
           <input
             type='text'
             id='questionsInput1'
@@ -89,7 +100,7 @@ class QuestionsContainer extends React.Component {
             onChange={(e) => this.onInputChange('kidages', e)}
             placeholder='0'
           />
-          <p>.</p>
+          <p>.</p></div>}
           <br/>
           <p>I make $</p>
           <input
