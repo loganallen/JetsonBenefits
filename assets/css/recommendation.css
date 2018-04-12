@@ -99,11 +99,33 @@ blue color: #3AAFA9;
   text-align: right;
   font-size: 1.25em;
 }
-.activeText {
+.activeText p{
   color: black;
+}
+.activeText i {
+  color: #3AAFA9;
 }
 .greyText {
   color: grey;
+  opacity: .3;
+}
+.sidebarSum {
+  display: block;
+  width: 85%;
+  margin-left: auto; margin-right: auto;
+  padding-top: 20px;
+  border-top: 2px solid grey;
+}
+.sidebarSum #sum {
+  font-size: 1.5em;
+  margin-bottom: 0px;
+  text-align: center;
+  font-weight: 500;
+}
+.sidebarSum #label {
+  font-size: .8em;
+  text-align: center;
+  font-weight: 300;
 }
 
 /* 

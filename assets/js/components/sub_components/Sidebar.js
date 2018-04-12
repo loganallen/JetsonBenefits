@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
       <List.Item key={item.title}>
         <div className="sidebar-item">
           <div className={item.active == true ? 'activeText' : 'greyText'}>
-            <Icon name='circle thin' className='sidebarIcon'/>
+            <Icon name='circle' className='sidebarIcon'/>
             <p className='sidebarTextLeft'>{item.title}</p>
             <p className='sidebarTextRight'>${item.value}</p>
           </div>
@@ -45,7 +45,8 @@ class Sidebar extends React.Component {
           {this.listContent()}
         </List>
         <div className='sidebarSum'>
-        ${this.insuranceSum()}-${this.insuranceSum()} per month
+          <p id="sum">${this.insuranceSum()}-${this.insuranceSum()}</p>
+          <p id="label">per month</p>
         </div>
       </div>
     );
