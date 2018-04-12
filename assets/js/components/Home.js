@@ -9,6 +9,7 @@ Controller filepath:
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Actions from '../actions';
 
@@ -17,7 +18,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       age: '',
-      zipcode: ''
+      zipcode: '',
+      pushToRecommendationPage: false
     };
   }
 
@@ -42,7 +44,10 @@ class Home extends React.Component {
     let age = this.state.age;
     let zipcode = this.state.zipcode;
 
-    this.props.pushToRecommendationPage(age, zipcode);
+    let shouldRedirect = true;
+    this.setState({
+      pushToRecommendationPage: shouldRedirect
+    })
   }
 
   section1() {
@@ -107,6 +112,10 @@ class Home extends React.Component {
   }
 
   render() {
+    if (this.state.pushToRecommendationPage) {
+      return <Redirect push to='/recommendation' />;
+    }
+
     return (
       <div>
         {this.section1()}
@@ -123,8 +132,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openSignupModal: () => dispatch(Actions.toggleLoginModal(true, false)),
-  pushToRecommendationPage: (age, zip) => dispatch(Actions.pushToRecommendationPage(age, zip))
+  openSignupModal: () => dispatch(Actions.toggleLoginModal(true, false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
