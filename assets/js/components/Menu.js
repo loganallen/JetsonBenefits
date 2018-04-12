@@ -8,9 +8,8 @@ Controller filepath:
 */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import {Header, Button} from 'semantic-ui-react';
-
-import {connect} from 'react-redux';
 
 import Login from './Login';
 import Actions from '../actions';
@@ -28,9 +27,9 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>HOW IT WORKS</button>
           <button type='button' className='menuButton'>BLOG</button>
           <button type='button' className='menuButton'>RESOURCES</button>
-          <button type='button' className='menuButton' onClick={() => this.props.toggleLoginModal(true)}>LOGIN</button>
+          <button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>
         </div>
-        <Login open={this.props.loginModalOpen} login={this.props.loginModalType} onClose={() => this.props.toggleLoginModal(true)} />
+        <Login open={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
       </div>
     );
   }
@@ -38,12 +37,13 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => ({
   ...state,
-  loginModalOpen: state.mainState.loginModal.isOpen,
-  loginModalType: state.mainState.loginModal.type
+  loginModalOpen: state.app.loginModal.isOpen,
+  loginModalType: state.app.loginModal.isLogin
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleLoginModal: (isLogin) => dispatch(Actions.toggleLoginModal(isLogin))
+  openLoginModal: () => dispatch(Actions.toggleLoginModal(true, true)),
+  closeLoginModal: () => dispatch(Actions.toggleLoginModal(false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

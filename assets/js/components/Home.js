@@ -8,7 +8,8 @@ Controller filepath:
 */
 
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Actions from '../actions';
 
@@ -18,7 +19,7 @@ class Home extends React.Component {
     this.state = {
       age: '',
       zipcode: '',
-      loginModalOpen: true
+      pushToRecommendationPage: false
     };
   }
 
@@ -39,11 +40,14 @@ class Home extends React.Component {
   }
 
   onFindBenefitsClick = () => {
+    // TODO: Validate that input fields are filled & valid
+    let age = this.state.age;
+    let zipcode = this.state.zipcode;
 
-  }
-
-  onSignUpClick = () => {
-    this.setState({ loginModalOpen: true });
+    let shouldRedirect = true;
+    this.setState({
+      pushToRecommendationPage: shouldRedirect
+    })
   }
 
   section1() {
@@ -80,7 +84,7 @@ class Home extends React.Component {
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
             Find My Benefits
           </button><br/>
-          <button type='button' id='homeS2B2' onClick={() => this.props.toggleLoginModal(false)}>
+          <button type='button' id='homeS2B2' onClick={this.props.openSignupModal}>
             or Sign Up
           </button>
         </div>
@@ -108,6 +112,10 @@ class Home extends React.Component {
   }
 
   render() {
+    if (this.state.pushToRecommendationPage) {
+      return <Redirect push to='/recommendation' />;
+    }
+
     return (
       <div>
         {this.section1()}
@@ -120,12 +128,11 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
-  loginModalOpen: state.mainState.loginModalOpen
+  ...state.app
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen))
+  openSignupModal: () => dispatch(Actions.toggleLoginModal(true, false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

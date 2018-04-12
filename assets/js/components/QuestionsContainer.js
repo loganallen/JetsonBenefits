@@ -10,7 +10,7 @@ Controller filepath:
 import React from 'react';
 import { } from 'semantic-ui-react';
 
-import Sidebar from './Sidebar';
+import Sidebar from './sub_components/Sidebar';
 
 class QuestionsContainer extends React.Component {
     constructor(props) {

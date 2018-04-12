@@ -20,13 +20,13 @@ class Login extends React.Component {
   }
 
   render() {
-    const header = this.props.login ? (
+    const header = this.props.isLogin ? (
       <Modal.Header>Login</Modal.Header>
     ) : (
       <Modal.Header>Sign Up</Modal.Header>
     );
 
-    const content = this.props.login ? (
+    const content = this.props.isLogin ? (
       <Modal.Content>
         <input type="email" placeholder="Email"/><br/>
         <input type="password" placeholder="Password"/><br/>
@@ -57,9 +57,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
-  loginModalOpen: state.mainState.loginModal.isOpen,
-  loginModalType: state.mainState.loginModal.type
+  ...state.app
 });
 
 const mapDispatchToProps = (dispatch) => ({

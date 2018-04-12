@@ -1,19 +1,17 @@
 import React from 'react';
 import Menu from './Menu';
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class App extends React.Component {
   render() {
+    const { children } = this.props;
+
     return (
       <div className='container'>
         <Menu />
-        {this.props.children}
+        {children}
       </div>
     );
   }
 }
 
-export default Container;
+export default App;

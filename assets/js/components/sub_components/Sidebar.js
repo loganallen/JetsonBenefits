@@ -7,7 +7,7 @@ Controller filepath:
 */
 
 import React from 'react';
-import { } from 'semantic-iu-react';
+import { } from 'semantic-ui-react';
 
 class Sidebar extends React.Component {
   constructor(props) {

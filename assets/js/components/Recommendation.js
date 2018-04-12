@@ -8,6 +8,7 @@ Controller filepath:
 */
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import QuestionsContainer from './QuestionsContainer';
 import QuotesContainer from './QuotesContainer';
@@ -15,15 +16,20 @@ import QuotesContainer from './QuotesContainer';
 class Recommendation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        console.log(props);
     }
 
     render() {
         return (
             <div>
+                <h1>Recommendation</h1>
             </div>
         );
     }
 }
 
-export default Recommendation;
+const mapStateToProps = (state) => ({
+    ...state.app
+});
+
+export default connect(mapStateToProps, null)(Recommendation);
