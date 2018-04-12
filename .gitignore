@@ -7,6 +7,7 @@ env/
 # django autocreated folders and compiled pyc to ignored
 **/__pycache__
 *.pyc
+migrations/
 
 
 # webpack compiled js files

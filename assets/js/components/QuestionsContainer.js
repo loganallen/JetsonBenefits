@@ -69,12 +69,12 @@ class QuestionsContainer extends React.Component {
             id='questionsDropdown'
             className='questionsInput'
             icon={null}
-			onChange={(param, data) => this.onDropdownChange(data.value)}
+            onChange={(param, data) => this.onDropdownChange(data.value)}
             placeholder='Single'
             options={[
- 				{ value: 'single', text: 'Single' },
-  				{ value: 'married', text: 'Married' },
-			]}
+              { value: 'single', text: 'Single' },
+              { value: 'married', text: 'Married' },
+            ]}
           />
           <p>with</p>
           <input
@@ -118,11 +118,11 @@ class QuestionsContainer extends React.Component {
           <br/>
           <p>Generally I would say my health is</p><br/>
           <Button.Group onClick={(e) => this.onButtonChange(e)}>
-    		<Button id='poor'>Poor</Button>
-    		<Button id='meh'>Meh</Button>
-    		<Button id='good'>Good</Button>
-			<Button id='excellent'>Excellent</Button>  		   
-  		   </Button.Group>
+            <Button id='poor'>Poor</Button>
+            <Button id='meh'>Meh</Button>
+            <Button id='good'>Good</Button>
+            <Button id='excellent'>Excellent</Button>  		   
+          </Button.Group>
           <br/>
         </div>
       </div>

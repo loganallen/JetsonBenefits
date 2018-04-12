@@ -139,18 +139,23 @@ blue color: #3AAFA9;
 #questionsInput2 {
   width: 120px;
 }
-#questionsDropdown {
-  width: 100px;
-}
 #quotesButton {
-  background-color: #ffffff;
-  color: #55b2ae;
+  display: block;
+  background-color: #55b2ae;
+  color: #ffffff;
   outline: 0;
   font-size: 2em;
   font-weight: 300;
   margin-top: 50px;
+  margin-bottom: 100px;
+  margin-left: auto; margin-right: auto;
   padding-top: 15px; padding-bottom: 15px;
   padding-left: 20px; padding-right: 20px;
   border: none;
   border-radius: 6px;
+}
+
+#questionsDropdown .default.text {
+  color: #3AAFA9;
+  opacity: 0.5;
 }
