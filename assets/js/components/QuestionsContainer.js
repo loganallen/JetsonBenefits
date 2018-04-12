@@ -17,8 +17,8 @@ class QuestionsContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-      		age: '',
-      		zipcode: '',
+      		age: this.props.age,
+      		zipcode: this.props.zipcode,
       		marriage: '',
       		kidages: '',
       		spouseage: '',
@@ -52,6 +52,7 @@ class QuestionsContainer extends React.Component {
             id='questionsInput1'
             className='questionsInput'
             onChange={(e) => this.onInputChange('age', e)}
+            value={this.state.age}
             placeholder='30'
           />
           <p>years old and I live in</p>

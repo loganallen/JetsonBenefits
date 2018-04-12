@@ -34,13 +34,22 @@ class Recommendation extends React.Component {
     //Returns basic quote information (from the model)
     // ***hard coded for now ***
     getInsuraceInfo = () => {
-        return [{title: 'Basic Health', value: 0},
-                {title: 'Term Life', value: 0},
-                {title: 'Disability', value: 0}]
+        return [{title: 'Basic Health', value: 0, active: true},
+                {title: 'Term Life', value: 0, active: true},
+                {title: 'Disability', value: 0, active: true},
+                {title: 'Dental', value: 0, active: false},
+                {title: 'Vision', value: 0, active: false},
+                {title: 'Critical Illness', value: 0, active: false},]
     }
 
     mainContent = (stage) => {
-        return (stage == 'questions') ? <QuestionsContainer className='questionsWrapper' onPurchaseClick={this.onPurchaseClick}/> : <QuotesContainer />;
+        return (stage == 'questions') ? 
+        <QuestionsContainer 
+            className='questionsWrapper' 
+            onPurchaseClick={this.onPurchaseClick}
+            age={this.state.age}
+            zipcode={this.state.zipcode}
+            /> : <QuotesContainer />;
     }
 
     onPurchaseClick = (answers) => {
