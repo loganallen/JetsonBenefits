@@ -87,7 +87,6 @@ class QuestionsContainer extends React.Component {
           />
           <p>kids</p>
           <p>.</p>
-          <br/>
           {this.state.marriage == 'married' && <div><p>My spouse is </p>
           <input
             type='text'
@@ -135,8 +134,8 @@ class QuestionsContainer extends React.Component {
     	const headerText = 'Let\'s find the best package for you. '+ 
     	 'Just tell us a bit about yourself.';
         return (
-            <div>
-            	<Header> {headerText} </Header>
+            <div id="questions-container">
+            	<h1 id="header-h1">{headerText}</h1>
             	{this.questionContent()} 
             	<button 
             		id='quotesButton' 

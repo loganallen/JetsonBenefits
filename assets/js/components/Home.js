@@ -39,7 +39,7 @@ class Home extends React.Component {
   }
 
   onFindBenefitsClick = () => {
-
+    this.props.history.push("/recommendation");
   }
 
   onSignUpClick = () => {
