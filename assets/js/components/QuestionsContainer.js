@@ -9,7 +9,7 @@ Controller filepath:
 
 import React from 'react';
 import { connect } from 'react-redux';
-import {Header, List , Dropdown} from 'semantic-ui-react';
+import {Header, List , Dropdown, Button} from 'semantic-ui-react';
 
 import Sidebar from './sub_components/Sidebar';
 
@@ -22,7 +22,8 @@ class QuestionsContainer extends React.Component {
       		marriage: '',
       		kidages: '',
       		spouseage: '',
-      		income: ''
+      		income: '',
+      		condition: ''
     	};
     }
 
@@ -34,6 +35,10 @@ class QuestionsContainer extends React.Component {
 
     onDropdownChange = (value) => {
     	this.setState({marriage: value})
+    }
+
+    onButtonChange = (event) => {
+    	this.setState({condition: event.target.id})
     }
 
     //Main question page content
@@ -112,10 +117,13 @@ class QuestionsContainer extends React.Component {
           />
           <p>per year.</p>
           <br/>
-          {/*optional question about spouse income*/}
-          <p>Generally I would say my health is</p>
-          {/*4 option thing*/}
-
+          <p>Generally I would say my health is</p><br/>
+          <Button.Group onClick={(e) => this.onButtonChange(e)}>
+    		<Button id='poor'>Poor</Button>
+    		<Button id='meh'>Meh</Button>
+    		<Button id='good'>Good</Button>
+			<Button id='excellent'>Excellent</Button>  		   
+  		   </Button.Group>
           <br/>
         </div>
       </div>
