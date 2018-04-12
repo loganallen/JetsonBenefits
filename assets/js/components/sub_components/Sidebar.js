@@ -30,6 +30,10 @@ class Sidebar extends React.Component {
           ))
   }
 
+  insuranceSum = () => {
+    return this.state.values.reduce((acc, item) => (acc + parseInt(item.value)), 0)
+  }
+
   render() {
     console.log(this.listContent())
     return (
@@ -38,6 +42,9 @@ class Sidebar extends React.Component {
       	<List>
           {this.listContent()}
         </List>
+        <div className='sidebarSum'>
+        ${this.insuranceSum()}-${this.insuranceSum()} per month
+        </div>
       </div>
     );
   }
