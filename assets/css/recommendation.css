@@ -69,13 +69,41 @@ blue color: #3AAFA9;
   font-size: 1.5em;
   font-weight: 200;
   background-color: #f0f0f0;
-  padding-left: 15px;
+  padding-left: 15px; padding-right: 15px;
 }
 
 #sidebar-title {
   padding-top: 50px;
   font-size: 1em;
   font-weight: 200;
+}
+
+.sidebar-item {
+  display: block;
+  font-size: .8em;
+}
+.sidebar-item div {
+  display: block;
+  width: 100%;
+}
+.sidebar-item i {
+  display: inline-block;
+  width: 15%;
+  margin-right: 0px;
+}
+.sidebar-item div p {
+  display: inline-block;
+  width: 42.5%;
+}
+.sidebarTextRight {
+  text-align: right;
+  font-size: 1.25em;
+}
+.activeText {
+  color: black;
+}
+.greyText {
+  color: grey;
 }
 
 /* 
