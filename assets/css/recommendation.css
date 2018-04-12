@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue';
+  background-color: #ffffff;
+}
+
+.container {
+  margin: auto;
+  max-width: 1024px;
+  padding: 0px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: 0;
+}
+
+/*
+blue color: #3AAFA9;
+*/
+
+/* 
+ * Navigation Menu CSS
+ */
+
+#menuWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 30px;
+}
+#menuTitle {
+  display: inline-block;
+  width: 200px;
+  margin-top: 0; margin-left: 0; margin-right: 0;
+  margin-bottom: 1px;
+  color: #3AAFA9;
+  font-size: 2em;
+  font-weight: bold;
+}
+#menuButtonWrapper {
+  float: right;
+}
+.menuButton {
+  display: inline-block;
+  margin-left: 30px;
+  border: none;
+  font-size: 1.2em;
+  font-weight: 200;
+}
+
+
+/* sidebar CSS */
+
+#rec {
+}
+
+#sidebar {
+  width: 30%;
+  height:500px;
+  margin: auto;
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: 200;
+  display: inline-block;
+  float: left;
+}
+
+/* 
+ * questions Page CSS
+ */
+
+#questionsWrapper {
+  width: 70%;
+  display: inline-block;
+  float:left;
+}
+
+#questions {
+  padding: 75px 0px;
+}
+#questionsContent {
+  margin: auto;
+  text-align: center;
+  color: #ffffff;
+}
+#questionsContent p {
+  margin: 15px 5px;
+  font-size: 2.5em;
+  font-weight: 200;
+  display: inline-block;
+}
+.questionsInput {
+  margin: 15px 5px;
+  padding-bottom: 5px;
+  background: transparent;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  font-size: 2.4em;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+}
+.questionsInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #e2e2e2;
+  opacity: 0.5; /* Firefox */
+}
+.questionsInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #e2e2e2;
+  opacity: 0.5; /* Firefox */
+}
+.questionsInput::-ms-input-placeholder { /* Microsoft Edge */
+  color: #e2e2e2;
+  opacity: 0.5; /* Firefox */
+}
+#questionsInput1 {
+  width: 40px;
+}
+#questionsInput2 {
+  width: 120px;
+}
+#questionsDropdown {
+  width: 100px;
+}
+#quotesButton {
+  background-color: #ffffff;
+  color: #55b2ae;
+  outline: 0;
+  font-size: 2em;
+  font-weight: 300;
+  margin-top: 50px;
+  padding-top: 15px; padding-bottom: 15px;
+  padding-left: 20px; padding-right: 20px;
+  border: none;
+  border-radius: 6px;
+}

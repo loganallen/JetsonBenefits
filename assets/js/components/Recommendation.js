@@ -13,34 +13,55 @@ import { connect } from 'react-redux';
 import QuestionsContainer from './QuestionsContainer';
 import QuotesContainer from './QuotesContainer';
 import Sidebar from './sub_components/Sidebar';
+import '../../css/recommendation.css';
 
 class Recommendation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            stage: 'questions'
+            stage: 'questions', 
+            age: '',
+            zipcode: '',
+            marriage: '',
+            kidages: '',
+            spouseage: '',
+            income: ''
         };
     }
 
-    mainContent = (stage) => {
-        return (stage == 'questions') ? <QuestionsContainer /> : <QuotesContainer />;
+
+    //Returns basic quote information (from the model)
+    // ***hard coded for now ***
+    getInsuraceInfo = () => {
+        return [{title: 'Basic Health', value: 0},
+                {title: 'Term Life', value: 0},
+                {title: 'Disability', value: 0}]
     }
 
-    onPurchaseClick = () => {
+    mainContent = (stage) => {
+        return (stage == 'questions') ? <QuestionsContainer className='questionsWrapper' onPurchaseClick={this.onPurchaseClick}/> : <QuotesContainer />;
+    }
+
+    onPurchaseClick = (answers) => {
         this.setState({
-            stage: 'quotes'
+            stage: 'quotes',
+            age: answers.age,
+            zipcode: answers.zipcode,
+            marriage: answers.marriage,
+            kidages: answers.kidages,
+            spouseage: answers.spouseage,
+            income: answers.income
         });
     }
 
     render() {
         return (
-            <div>
-                <Sidebar />
-                {this.mainContent(this.state.stage)}
-                {this.state.stage == 'questions' && <button type='button' 
-                 id='homeS2B1' onClick={this.onPurchaseClick}>
-                    Purchase
-                </button>}
+            <div id='rec'>
+                <Sidebar
+                 className='sidebar' 
+                 id='sidebar' 
+                 values={this.getInsuraceInfo()}/>
+                 {this.mainContent(this.state.stage)}
             </div>
         );
     }
