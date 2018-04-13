@@ -12,6 +12,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { } from 'semantic-ui-react';	
 import QuoteItem from './sub_components/QuoteItem'
+import '../../css/quotes.css';
 
 class QuotesContainer extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class QuotesContainer extends React.Component {
     		quoteid: 1
     	},
     	{
-    		type: 'INSURANCE',
+    		type: 'LIFE',
     		field1: {header: '1.25M', subheader:'AVERAGE AMT'},
     		field2: {header: '20YR', subheader: 'TERM'},
     		field3: {imagesrc: '', carrier: 'CARRIER'},
@@ -57,7 +58,8 @@ class QuotesContainer extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="quotesContainer">
+				<h1 id="quotesTitle">YOUR BENEFITS</h1>
             	{this.getQuoteItems(this.getQuotes())}
             </div>
         );
