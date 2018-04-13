@@ -68,10 +68,11 @@ class Recommendation extends React.Component {
     render() {
         return (
             <div id='rec'>
-                <Sidebar
-                 className='sidebar' 
-                 id='sidebar' 
-                 values={this.getInsuraceInfo()}/>
+                {(this.state.stage == 'questions') &&
+                    <Sidebar
+                    className='sidebar' 
+                    id='sidebar' 
+                    values={this.getInsuraceInfo()}/>}
                  {this.mainContent(this.state.stage)}
             </div>
         );
