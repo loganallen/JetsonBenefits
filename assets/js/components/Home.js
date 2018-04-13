@@ -31,10 +31,12 @@ class Home extends React.Component {
       this.setState({
         age: value
       });
+      this.props.updateUserAge(value);
     } else if (id == 'zip') {
       this.setState({
         zipcode: value
       });
+      this.props.updateUserZipcode(value);
     }
   }
 
@@ -120,11 +122,15 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loginModalOpen: state.app.loginModal.isOpen
+  loginModalOpen: state.app.loginModal.isOpen,
+  age: state.app.age,
+  zipcode: state.app.zipcode
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen))
+  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen)),
+  updateUserZipcode: (zipcode) => dispatch(Actions.updateUserZipcode(zipcode)),
+  updateUserAge: (age) => dispatch(Actions.updateUserAge(age))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -20,8 +20,8 @@ class Recommendation extends React.Component {
         super(props);
         this.state = {
             stage: 'questions', 
-            age: '',
-            zipcode: '',
+            age: this.props.age,
+            zipcode: this.props.zipcode,
             marriage: '',
             kidages: '',
             spouseage: '',
@@ -80,7 +80,8 @@ class Recommendation extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    ...state
+    age: state.app.age,
+    zipcode: state.app.zipcode
 });
 
 export default connect(mapStateToProps, null)(Recommendation);

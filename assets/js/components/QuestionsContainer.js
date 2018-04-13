@@ -61,6 +61,7 @@ class QuestionsContainer extends React.Component {
             id='questionsInput2'
             className='questionsInput'
             onChange={(e) => this.onInputChange('zip', e)}
+            value={this.state.zipcode}
             placeholder='60601'
           />
           <p>.</p>

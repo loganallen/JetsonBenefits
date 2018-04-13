@@ -14,7 +14,23 @@ const toggleLoginModalType = () => ({
     data: {}
 });
 
+const updateUserZipcode = (zipcode) => ({
+    type: ActionTypes.UPDATE_USER_ZIPCODE,
+    data: {
+        zipcode: zipcode
+    }
+});
+
+const updateUserAge = (age) => ({
+    type: ActionTypes.UPDATE_USER_AGE,
+    data: {
+        age: age
+    }
+});
+
 export default {
     toggleLoginModal,
-    toggleLoginModalType
+    toggleLoginModalType,
+    updateUserZipcode,
+    updateUserAge
 };

@@ -3,6 +3,8 @@ import ActionTypes from '../actions/actionTypes'
 const initialState = {
   data: "hello",
   user: null,
+  zipcode: '',
+  age: '',
   loginModal: {
     isOpen: false,
     type: true
@@ -26,7 +28,17 @@ const mainReducer = (state = initialState, action) => {
           isOpen: state.loginModal.isOpen,
           type: !state.loginModal.type
         }
-      }
+      };
+    case ActionTypes.UPDATE_USER_ZIPCODE:
+      return {
+        ...state,
+        zipcode: action.data.zipcode
+      };
+    case ActionTypes.UPDATE_USER_AGE:
+      return {
+        ...state,
+        age: action.data.age
+      };
     default:
       return state;
   }
