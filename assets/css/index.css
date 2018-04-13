@@ -26,17 +26,27 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
   padding: 30px;
+}
+#menuWrapper.themeWhite {
+  background-color: #ffffff;
+}
+#menuWrapper.themeBlue {
+  background-color: #3AAFA9;
 }
 #menuTitle {
   display: inline-block;
   width: 200px;
   margin-top: 0; margin-left: 0; margin-right: 0;
   margin-bottom: 1px;
-  color: #3AAFA9;
   font-size: 2em;
   font-weight: bold;
+}
+#menuTitle.themeWhite {
+  color: #3AAFA9;
+}
+#menuTitle.themeBlue {
+  color: white;
 }
 #menuButtonWrapper {
   float: right;
@@ -48,7 +58,6 @@ button {
   font-size: 1.2em;
   font-weight: 200;
 }
-
 
 /* 
  * Home Page CSS
