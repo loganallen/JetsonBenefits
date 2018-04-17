@@ -26,7 +26,7 @@ class Login extends React.Component {
       </div>
     ) : (
       <div className="loginHeaderWrapper">
-        <h1 className="loginHeader">Sign Up</h1>
+        <h1 className="loginHeader">Create an Account</h1>
         <p className="loginSubheader">Get started finding your personalized benefits package today.</p>
       </div>
     );
