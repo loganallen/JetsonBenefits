@@ -30,7 +30,7 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>RESOURCES</button>
           <button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>
         </div>
-        <Login open={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
+        <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
       </div>
     );
   }
@@ -44,8 +44,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openLoginModal: () => dispatch(Actions.toggleLoginModal(true, true)),
-  closeLoginModal: () => dispatch(Actions.toggleLoginModal(false))
+  openLoginModal: () => dispatch(Actions.updateLoginModal(true, true)),
+  closeLoginModal: () => dispatch(Actions.updateLoginModal(false, true))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

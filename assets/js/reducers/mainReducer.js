@@ -19,21 +19,10 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         menuTheme: action.data.menuTheme
       };
-    case ActionTypes.TOGGLE_LOGIN_MODAL:
+    case ActionTypes.UPDATE_LOGIN_MODAL:
       return {
         ...state,
-        loginModal: {
-          isOpen: action.data.willOpen,
-          isLogin: action.data.isLogin ? action.data.isLogin : state.data.isLogin
-        }
-      };
-    case ActionTypes.TOGGLE_LOGIN_MODAL_TYPE:
-      return {
-        ...state,
-        loginModal: {
-          ...state.loginModal,
-          isLogin: !state.loginModal.isLogin
-        }
+        loginModal: action.data
       };
     case ActionTypes.UPDATE_USER_ZIPCODE:
       return {

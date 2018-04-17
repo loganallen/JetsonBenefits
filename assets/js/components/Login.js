@@ -20,9 +20,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const header = this.props.login ? (
+    const header = this.props.isLogin ? (
       <div className="loginHeaderWrapper">
-        <h1 className="loginHeader">Sign in</h1>
+        <h1 className="loginHeader">Sign In</h1>
       </div>
     ) : (
       <div className="loginHeaderWrapper">
@@ -31,14 +31,14 @@ class Login extends React.Component {
       </div>
     );
 
-    const content = this.props.login ? (
+    const content = this.props.isLogin ? (
       <div>
         <input className="modalInput" type="email" placeholder="email"/>
         <input className="modalInput" type="password" placeholder="password"/>
         <button className="modalButton">
           Sign in
          </button> 
-        <p className="modalFooter">Dont have an account yet? <button className='typeSwitcher' onClick={this.props.toggleLoginModalType}>Sign Up</button></p>
+        <p className="modalFooter">Dont have an account yet? <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, false)}>Sign Up</button></p>
       </div>
     ) : (
       <div>
@@ -48,14 +48,13 @@ class Login extends React.Component {
         <button className="modalButton">
           Sign up
          </button> 
-        <p className="modalFooter">Already have an account? <button className='typeSwitcher' onClick={this.props.toggleLoginModalType}>Login</button></p>
+        <p className="modalFooter">Already have an account? <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, true)}>Login</button></p>
       </div>
     );
 
     return (
-
       <div>
-        <Modal size={'large'} open={this.props.open} onClose={this.props.onClose}>
+        <Modal size={'large'} open={this.props.isOpen} onClose={this.props.onClose}>
           <div id="modalWrapper">
             <div id="modalImg">
               <h1>jetsonbenefits</h1>
@@ -76,7 +75,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleLoginModalType: () => dispatch(Actions.toggleLoginModalType())
+  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

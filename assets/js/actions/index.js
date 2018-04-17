@@ -9,17 +9,12 @@ const changeMenuTheme = (theme) => ({
     }
 });
 
-const toggleLoginModal = (type) => ({
-    type: ActionTypes.TOGGLE_LOGIN_MODAL,
+const updateLoginModal = (isOpen=false, isLogin=true) => ({
+    type: ActionTypes.UPDATE_LOGIN_MODAL,
     data: {
-        willOpen: willOpen,
+        isOpen: isOpen,
         isLogin: isLogin
     }
-});
-
-const toggleLoginModalType = () => ({
-    type: ActionTypes.TOGGLE_LOGIN_MODAL_TYPE,
-    data: {}
 });
 
 const updateUserZipcode = (zipcode) => ({
@@ -38,8 +33,7 @@ const updateUserAge = (age) => ({
 
 export default {
     changeMenuTheme,
-    toggleLoginModal,
-    toggleLoginModalType,
+    updateLoginModal,
     updateUserZipcode,
     updateUserAge
 };

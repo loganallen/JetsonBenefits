@@ -23,6 +23,10 @@ class Home extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.props.changeMenuTheme('themeWhite');
+  }
+
   onInputChange = (id, event) => {
     console.log(`${id} change...`);
     let value = parseInt(event.target.value);
@@ -43,10 +47,6 @@ class Home extends React.Component {
 
   onFindBenefitsClick = () => {
     this.props.history.push("/recommendation");
-  }
-
-  onSignUpClick = () => {
-    this.setState({ loginModalOpen: true });
   }
 
   section1() {
@@ -83,7 +83,7 @@ class Home extends React.Component {
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
             Find My Benefits
           </button><br/>
-          <button type='button' id='homeS2B2' onClick={this.props.openSignupModal}>
+          <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
             or Sign Up
           </button>
         </div>
@@ -111,7 +111,6 @@ class Home extends React.Component {
   }
 
   render() {
-    this.props.changeMenuTheme('themeWhite');
     return (
       <div>
         {this.section1()}
@@ -131,7 +130,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
-  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen)),
+  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
   updateUserZipcode: (zipcode) => dispatch(Actions.updateUserZipcode(zipcode)),
   updateUserAge: (age) => dispatch(Actions.updateUserAge(age))
 });

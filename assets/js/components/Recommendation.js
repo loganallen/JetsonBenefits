@@ -31,6 +31,9 @@ class Recommendation extends React.Component {
         };
     }
 
+    componentWillMount() {
+        this.props.changeMenuTheme('themeBlue');
+    }
 
     //Returns basic quote information (from the model)
     // ***hard coded for now ***
@@ -67,7 +70,6 @@ class Recommendation extends React.Component {
     }
 
     render() {
-        this.props.changeMenuTheme('themeBlue');
         return (
             <div id='rec'>
                 {(this.state.stage == 'questions') &&
