@@ -10,6 +10,7 @@ Controller filepath:
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Actions from '../actions';
 import QuestionsContainer from './QuestionsContainer';
 import QuotesContainer from './QuotesContainer';
 import Sidebar from './sub_components/Sidebar';
@@ -66,6 +67,7 @@ class Recommendation extends React.Component {
     }
 
     render() {
+        this.props.changeMenuTheme('themeBlue');
         return (
             <div id='rec'>
                 {(this.state.stage == 'questions') &&
@@ -84,4 +86,8 @@ const mapStateToProps = (state) => ({
     zipcode: state.app.zipcode
 });
 
-export default connect(mapStateToProps, null)(Recommendation);
+const mapDispatchToProps = (dispatch) => ({
+    changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme))
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);

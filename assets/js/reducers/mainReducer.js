@@ -2,6 +2,7 @@ import ActionTypes from '../actions/actionTypes'
 
 const initialState = {
   data: "hello",
+  menuTheme: "themeWhite",
   user: null,
   zipcode: '',
   age: '',
@@ -13,6 +14,11 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionTypes.CHANGE_MENU_THEME:
+      return {
+        ...state,
+        menuTheme: action.data.menuTheme
+      };
     case ActionTypes.TOGGLE_LOGIN_MODAL:
       return {
         ...state,

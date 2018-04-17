@@ -17,21 +17,12 @@ import Actions from '../actions';
 class Menu extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { theme: 'themeWhite' };
-  }
-
-  changeTheme() {
-    if (this.state.theme == 'themeWhite') { 
-      this.setState({ theme: 'themeBlue'});
-    } else {
-      this.setState({ theme: 'themeWhite'});
-    }
+    this.state = {};
   }
 
   render() {
     return (
-      <div id='menuWrapper' className={this.state.theme}>
+      <div id='menuWrapper' className={this.props.menuTheme}>
         <Header id='menuTitle'>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
           <button type='button' className='menuButton'>HOW IT WORKS</button>
@@ -47,6 +38,7 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => ({
   ...state,
+  menuTheme: state.app.menuTheme,
   loginModalOpen: state.app.loginModal.isOpen,
   loginModalType: state.app.loginModal.type
 });

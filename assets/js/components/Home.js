@@ -110,6 +110,7 @@ class Home extends React.Component {
   }
 
   render() {
+    this.props.changeMenuTheme('themeWhite');
     return (
       <div>
         {this.section1()}
@@ -128,6 +129,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
   toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen)),
   updateUserZipcode: (zipcode) => dispatch(Actions.updateUserZipcode(zipcode)),
   updateUserAge: (age) => dispatch(Actions.updateUserAge(age))

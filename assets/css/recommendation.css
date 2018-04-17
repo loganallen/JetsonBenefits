@@ -74,6 +74,7 @@ blue color: #3AAFA9;
 
 #sidebar-title {
   padding-top: 50px;
+  padding-bottom: 20px;
   font-size: 1em;
   font-weight: 200;
 }
@@ -94,13 +95,14 @@ blue color: #3AAFA9;
 .sidebar-item div p {
   display: inline-block;
   width: 42.5%;
+  font-weight: 400;
 }
 .sidebarTextRight {
   text-align: right;
   font-size: 1.25em;
 }
 .activeText p{
-  color: black;
+  color: #474747;
 }
 .activeText i {
   color: #3AAFA9;
@@ -139,6 +141,7 @@ blue color: #3AAFA9;
   text-align: center;
   width: 65%;
   padding-top: 50px;
+  color: #474747;
 }
 
  #questionsWrapper {
