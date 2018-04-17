@@ -9,6 +9,7 @@ Controller filepath:
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Actions from '../actions';
 
@@ -18,7 +19,7 @@ class Home extends React.Component {
     this.state = {
       age: '',
       zipcode: '',
-      loginModalOpen: this.props.loginModalOpen
+      pushToRecommendationPage: false
     };
   }
 
@@ -82,7 +83,7 @@ class Home extends React.Component {
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
             Find My Benefits
           </button><br/>
-          <button type='button' id='homeS2B2' onClick={() => this.props.toggleLoginModal(false)}>
+          <button type='button' id='homeS2B2' onClick={this.props.openSignupModal}>
             or Sign Up
           </button>
         </div>

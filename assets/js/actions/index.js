@@ -12,7 +12,8 @@ const changeMenuTheme = (theme) => ({
 const toggleLoginModal = (type) => ({
     type: ActionTypes.TOGGLE_LOGIN_MODAL,
     data: {
-        type: type
+        willOpen: willOpen,
+        isLogin: isLogin
     }
 });
 

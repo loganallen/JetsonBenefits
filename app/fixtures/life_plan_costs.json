@@ -1,0 +1,1405 @@
+[
+    {
+        "model": "app.life_plan_costs",
+        "pk":1,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":25,
+            "monthly":25.88
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":2,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":25,
+            "monthly":18.48
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":3,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":25,
+            "monthly":21
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":4,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":25,
+            "monthly":18.92
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":5,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":25,
+            "monthly":15.04
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":6,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":25,
+            "monthly":19.68
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":7,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":25,
+            "monthly":29.92
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":8,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":25,
+            "monthly":21.67
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":9,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":25,
+            "monthly":23.71
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":10,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":25,
+            "monthly":21.57
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":11,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":25,
+            "monthly":17.54
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":12,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":25,
+            "monthly":22.13
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":13,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":25,
+            "monthly":33.97
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":14,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":25,
+            "monthly":24.85
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":15,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":25,
+            "monthly":26.42
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":16,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":25,
+            "monthly":24.22
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":17,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":25,
+            "monthly":20.03
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":18,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":25,
+            "monthly":24.58
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":19,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":400000, 
+            "gender":"male",
+            "age":25,
+            "monthly":38.01
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":20,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":400000, 
+            "gender":"male",
+            "age":25,
+            "monthly":28.03
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":21,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":400000, 
+            "gender":"male",
+            "age":25,
+            "monthly":29.13
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":22,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":400000, 
+            "gender":"male",
+            "age":25,
+            "monthly":26.88
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":23,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":400000, 
+            "gender":"male",
+            "age":25,
+            "monthly":20.75
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":24,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":400000, 
+            "gender":"male",
+            "age":25,
+            "monthly":22.53
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":25,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":450000, 
+            "gender":"male",
+            "age":25,
+            "monthly":42.06
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":26,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":450000, 
+            "gender":"male",
+            "age":25,
+            "monthly":31.21
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":27,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":450000, 
+            "gender":"male",
+            "age":25,
+            "monthly":31.84
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":28,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":450000, 
+            "gender":"male",
+            "age":25,
+            "monthly":29.53
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":29,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":450000, 
+            "gender":"male",
+            "age":25,
+            "monthly":25.02
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":30,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":450000, 
+            "gender":"male",
+            "age":25,
+            "monthly":29.48
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":31,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":500000, 
+            "gender":"male",
+            "age":25,
+            "monthly":45.23
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":32,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":500000, 
+            "gender":"male",
+            "age":25,
+            "monthly":31.81
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":33,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":500000, 
+            "gender":"male",
+            "age":25,
+            "monthly":34.56
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":34,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":500000, 
+            "gender":"male",
+            "age":25,
+            "monthly":31.75
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":35,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":500000, 
+            "gender":"male",
+            "age":25,
+            "monthly":24.5
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":36,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":500000, 
+            "gender":"male",
+            "age":25,
+            "monthly":31.93
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":37,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":35,
+            "monthly":27.84
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":38,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":35,
+            "monthly":25.8
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":39,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":35,
+            "monthly":22.97
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":40,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":35,
+            "monthly":20.45
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":41,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":35,
+            "monthly":18.92
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":42,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"male",
+            "age":35,
+            "monthly":20.78
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":43,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":35,
+            "monthly":32.28
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":44,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":35,
+            "monthly":30.44
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":45,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":35,
+            "monthly":26.88
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":46,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":35,
+            "monthly":23.4
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":47,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":35,
+            "monthly":22.19
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":48,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"male",
+            "age":35,
+            "monthly":23.45
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":49,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":35,
+            "monthly":36.71
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":50,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":35,
+            "monthly":35.09
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":51,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":35,
+            "monthly":29.18
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":52,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":35,
+            "monthly":26.36
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":53,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":35,
+            "monthly":25.46
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":54,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"male",
+            "age":35,
+            "monthly":26.12
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":55,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"female",
+            "age":25,
+            "monthly":19.58
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":56,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"female",
+            "age":25,
+            "monthly":15.48
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":57,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":250000, 
+            "gender":"female",
+            "age":25,
+            "monthly":16.41
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":58,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"female",
+            "age":25,
+            "monthly":15.66
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":59,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"female",
+            "age":25,
+            "monthly":11.83
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":60,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":250000, 
+            "gender":"female",
+            "age":25,
+            "monthly":15.75
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":61,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"female",
+            "age":25,
+            "monthly":22.36
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":62,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"female",
+            "age":25,
+            "monthly":18.06
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":63,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":300000, 
+            "gender":"female",
+            "age":25,
+            "monthly":18.2
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":64,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"female",
+            "age":25,
+            "monthly":17.66
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":65,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"female",
+            "age":25,
+            "monthly":13.67
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":66,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":300000, 
+            "gender":"female",
+            "age":25,
+            "monthly":17.41
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":67,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"female",
+            "age":25,
+            "monthly":25.14
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":68,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"female",
+            "age":25,
+            "monthly":20.64
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":69,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":350000, 
+            "gender":"female",
+            "age":25,
+            "monthly":19.99
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":70,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"female",
+            "age":25,
+            "monthly":19.66
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":71,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"female",
+            "age":25,
+            "monthly":15.52
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":72,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":350000, 
+            "gender":"female",
+            "age":25,
+            "monthly":19.08
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":73,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":400000, 
+            "gender":"female",
+            "age":25,
+            "monthly":27.93
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":74,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":400000, 
+            "gender":"female",
+            "age":25,
+            "monthly":23.22
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":75,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":400000, 
+            "gender":"female",
+            "age":25,
+            "monthly":21.79
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":76,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":400000, 
+            "gender":"female",
+            "age":25,
+            "monthly":21.66
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":77,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":400000, 
+            "gender":"female",
+            "age":25,
+            "monthly":17.37
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":78,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":400000, 
+            "gender":"female",
+            "age":25,
+            "monthly":18.85
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":79,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":450000, 
+            "gender":"female",
+            "age":25,
+            "monthly":30.71
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":80,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":450000, 
+            "gender":"female",
+            "age":25,
+            "monthly":25.8
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":81,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":450000, 
+            "gender":"female",
+            "age":25,
+            "monthly":23.58
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":82,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":450000, 
+            "gender":"female",
+            "age":25,
+            "monthly":23.66
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":83,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":450000, 
+            "gender":"female",
+            "age":25,
+            "monthly":19.22
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":84,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":450000, 
+            "gender":"female",
+            "age":25,
+            "monthly":22.4
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":85,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":500000, 
+            "gender":"female",
+            "age":25,
+            "monthly":32.63
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":86,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":500000, 
+            "gender":"female",
+            "age":25,
+            "monthly":24.51
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":87,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":500000, 
+            "gender":"female",
+            "age":25,
+            "monthly":25.38
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":88,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":500000, 
+            "gender":"female",
+            "age":25,
+            "monthly":24.36
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":89,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":500000, 
+            "gender":"female",
+            "age":25,
+            "monthly":16.77
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":90,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":500000, 
+            "gender":"female",
+            "age":25,
+            "monthly":24.06
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":91,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":600000, 
+            "gender":"female",
+            "age":25,
+            "monthly":38.02
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":92,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":600000, 
+            "gender":"female",
+            "age":25,
+            "monthly":28.9
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":93,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":600000, 
+            "gender":"female",
+            "age":25,
+            "monthly":28.96
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":94,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":600000, 
+            "gender":"female",
+            "age":25,
+            "monthly":28.1
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":95,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":600000, 
+            "gender":"female",
+            "age":25,
+            "monthly":19.61
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":96,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":600000, 
+            "gender":"female",
+            "age":25,
+            "monthly":27.03
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":97,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":700000, 
+            "gender":"female",
+            "age":25,
+            "monthly":43.41
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":98,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":700000, 
+            "gender":"female",
+            "age":25,
+            "monthly":33.58
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":99,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":700000, 
+            "gender":"female",
+            "age":25,
+            "monthly":32.55
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":100,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":700000, 
+            "gender":"female",
+            "age":25,
+            "monthly":31.84
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":101,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":700000, 
+            "gender":"female",
+            "age":25,
+            "monthly":22.45
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":102,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":700000, 
+            "gender":"female",
+            "age":25,
+            "monthly":30.71
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":103,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":30,
+            "policy_amount":750000, 
+            "gender":"female",
+            "age":25,
+            "monthly":46.11
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":104,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":30,
+            "policy_amount":750000, 
+            "gender":"female",
+            "age":25,
+            "monthly":35.48
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":105,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":30,
+            "policy_amount":750000, 
+            "gender":"female",
+            "age":25,
+            "monthly":34.34
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":106,
+        "fields":{
+            "carrier":"FidelityLife", 
+            "policy_term":20,
+            "policy_amount":750000, 
+            "gender":"female",
+            "age":25,
+            "monthly":33.71
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":107,
+        "fields":{
+            "carrier":"Transamerica", 
+            "policy_term":20,
+            "policy_amount":750000, 
+            "gender":"female",
+            "age":25,
+            "monthly":23.87
+        }
+    }
+,
+    {
+        "model": "app.life_plan_costs",
+        "pk":108,
+        "fields":{
+            "carrier":"Prudendential", 
+            "policy_term":20,
+            "policy_amount":750000, 
+            "gender":"female",
+            "age":25,
+            "monthly":32.38
+        }
+    }
+]

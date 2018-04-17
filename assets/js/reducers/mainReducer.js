@@ -8,7 +8,7 @@ const initialState = {
   age: '',
   loginModal: {
     isOpen: false,
-    type: true
+    isLogin: true
   }
 };
 
@@ -23,16 +23,16 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         loginModal: {
-          isOpen: !state.loginModal.isOpen,
-          type: action.data.type
+          isOpen: action.data.willOpen,
+          isLogin: action.data.isLogin ? action.data.isLogin : state.data.isLogin
         }
       };
     case ActionTypes.TOGGLE_LOGIN_MODAL_TYPE:
       return {
         ...state,
         loginModal: {
-          isOpen: state.loginModal.isOpen,
-          type: !state.loginModal.type
+          ...state.loginModal,
+          isLogin: !state.loginModal.isLogin
         }
       };
     case ActionTypes.UPDATE_USER_ZIPCODE:

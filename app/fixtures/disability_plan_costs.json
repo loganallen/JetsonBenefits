@@ -1,0 +1,229 @@
+[
+    {
+        "model": "app.disability_plan_costs",
+        "pk":1,
+        "fields":{
+            "benefit_amount":1000, 
+            "monthly":"44-60",
+            "salary":20000, 
+            "gender":"male",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":2,
+        "fields":{
+            "benefit_amount":1500, 
+            "monthly":"67-91",
+            "salary":30000, 
+            "gender":"male",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":3,
+        "fields":{
+            "benefit_amount":2000, 
+            "monthly":"89-121",
+            "salary":40000, 
+            "gender":"male",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":4,
+        "fields":{
+            "benefit_amount":2500, 
+            "monthly":"112-152",
+            "salary":50000, 
+            "gender":"male",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":5,
+        "fields":{
+            "benefit_amount":3000, 
+            "monthly":"130-176",
+            "salary":60000, 
+            "gender":"male",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":6,
+        "fields":{
+            "benefit_amount":1000, 
+            "monthly":"75-102",
+            "salary":20000, 
+            "gender":"female",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":7,
+        "fields":{
+            "benefit_amount":1500, 
+            "monthly":"113-154",
+            "salary":30000, 
+            "gender":"female",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":8,
+        "fields":{
+            "benefit_amount":2000, 
+            "monthly":"151-205",
+            "salary":40000, 
+            "gender":"female",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":9,
+        "fields":{
+            "benefit_amount":2500, 
+            "monthly":"189-256",
+            "salary":50000, 
+            "gender":"female",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":10,
+        "fields":{
+            "benefit_amount":3000, 
+            "monthly":"220-297",
+            "salary":60000, 
+            "gender":"female",
+            "age":25
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":11,
+        "fields":{
+            "benefit_amount":1000, 
+            "monthly":"58-79",
+            "salary":20000, 
+            "gender":"male",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":12,
+        "fields":{
+            "benefit_amount":1500, 
+            "monthly":"88-119",
+            "salary":30000, 
+            "gender":"male",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":13,
+        "fields":{
+            "benefit_amount":2000, 
+            "monthly":"117-159",
+            "salary":40000, 
+            "gender":"male",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":14,
+        "fields":{
+            "benefit_amount":2500, 
+            "monthly":"147-198",
+            "salary":50000, 
+            "gender":"male",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":15,
+        "fields":{
+            "benefit_amount":1000, 
+            "monthly":"90-122",
+            "salary":20000, 
+            "gender":"female",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":16,
+        "fields":{
+            "benefit_amount":1500, 
+            "monthly":"135-183",
+            "salary":30000, 
+            "gender":"female",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":17,
+        "fields":{
+            "benefit_amount":2000, 
+            "monthly":"181-245",
+            "salary":40000, 
+            "gender":"female",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":18,
+        "fields":{
+            "benefit_amount":2500, 
+            "monthly":"226-306",
+            "salary":50000, 
+            "gender":"female",
+            "age":35
+        }
+    }
+,
+    {
+        "model": "app.disability_plan_costs",
+        "pk":19,
+        "fields":{
+            "benefit_amount":3000, 
+            "monthly":"271-367",
+            "salary":60000, 
+            "gender":"female",
+            "age":35
+        }
+    }
+]
