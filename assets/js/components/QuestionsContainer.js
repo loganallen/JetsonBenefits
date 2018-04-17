@@ -60,7 +60,7 @@ class QuestionsContainer extends React.Component {
             type='text'
             id='questionsInput2'
             className='questionsInput'
-            onChange={(e) => this.onInputChange('zip', e)}
+            onChange={(e) => this.onInputChange('zipcode', e)}
             value={this.state.zipcode}
             placeholder='60601'
           />
