@@ -1,0 +1,93 @@
+/* Styles for QuotesContainer Component */
+
+#quotesContainer {
+    display: block;
+    width: 100%;
+    padding-left: 25px; padding-right: 25px;
+}
+
+#quotesTitle {
+    font-size: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 50px; 
+}
+
+.quoteItem {
+    display: flex;
+    width: 90%;
+    margin-left: auto; margin-right: auto;
+    margin-bottom: 50px;
+    box-shadow: 1px 2px 1px 2px #bdbdbd;
+}
+
+.quoteLeft {
+    display: inline-block;
+    width: 80%;
+}
+.quoteLeft .top {
+    display: block;
+    width: 100%;
+}
+.insuranceType {
+    display: inline-block;
+    width: 40%;
+    color: white;
+    background: linear-gradient(295deg, transparent 15px, #3AAFA9 0);
+    padding: 10px 10px;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.refineButton {
+    color: #3AAFA9;
+    font-size: 1.2em;
+    font-weight: 300;
+}
+.fields {
+    display: block;
+    padding-left: 5%;
+    padding-right: 25%;
+    padding-top: 40px; padding-bottom: 40px;
+    text-align: center;
+}
+.field {
+    display: inline-block;
+    width: 33%;
+}
+.field .headerText, .field .logo { /* TODO: .field .logo is only temporary */
+    font-size: 2.4em;
+    margin-bottom: 15px;
+}
+.field .subheaderText {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.quoteRight {
+    display: inline-block;
+    width: 20%;
+}
+.estimatedLabel {
+    color: grey;
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 0px;
+}
+.permonth .headerText{
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.permonth .permonthLabel {
+    font-size: 1em;
+    text-align: center;
+}
+.getCoveredButton {
+    display: block;
+    margin-top: 25px;
+    margin-left: auto; margin-right: auto;
+    padding-top: 15px; padding-bottom: 15px;
+    border-radius: 5%;
+    color: white;
+    background-color: #3AAFA9;
+    font-size: 1.2em;
+}

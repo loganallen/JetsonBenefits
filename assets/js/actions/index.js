@@ -2,20 +2,38 @@ import ActionTypes from './actionTypes';
 
 // these functions return an action
 
-const toggleLoginModal = (willOpen, isLogin) => ({
-    type: ActionTypes.TOGGLE_LOGIN_MODAL,
+const changeMenuTheme = (theme) => ({
+    type: ActionTypes.CHANGE_MENU_THEME,
     data: {
-        willOpen: willOpen,
+        menuTheme: theme
+    }
+});
+
+const updateLoginModal = (isOpen=false, isLogin=true) => ({
+    type: ActionTypes.UPDATE_LOGIN_MODAL,
+    data: {
+        isOpen: isOpen,
         isLogin: isLogin
     }
 });
 
-const toggleLoginModalType = () => ({
-    type: ActionTypes.TOGGLE_LOGIN_MODAL_TYPE,
-    data: {}
+const updateUserZipcode = (zipcode) => ({
+    type: ActionTypes.UPDATE_USER_ZIPCODE,
+    data: {
+        zipcode: zipcode
+    }
+});
+
+const updateUserAge = (age) => ({
+    type: ActionTypes.UPDATE_USER_AGE,
+    data: {
+        age: age
+    }
 });
 
 export default {
-    toggleLoginModal,
-    toggleLoginModalType
+    changeMenuTheme,
+    updateLoginModal,
+    updateUserZipcode,
+    updateUserAge
 };

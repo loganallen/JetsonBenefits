@@ -11,6 +11,12 @@
 
     <body>
         <div id="root"></div>
+        <script>
+            var env = {
+                'device': "{{env.device}}",
+                'is_mobile': "{{env.is_mobile}}"
+            };
+        </script>
         {% render_bundle 'common' %}
         {% render_bundle 'index' %}
     </body>

@@ -17,11 +17,12 @@ import Actions from '../actions';
 class Menu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {
     return (
-      <div id='menuWrapper'>
+      <div id='menuWrapper' className={this.props.menuTheme}>
         <Header id='menuTitle'>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
           <button type='button' className='menuButton'>HOW IT WORKS</button>
@@ -29,7 +30,7 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>RESOURCES</button>
           <button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>
         </div>
-        <Login open={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
+        <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
       </div>
     );
   }
@@ -37,13 +38,14 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => ({
   ...state,
+  menuTheme: state.app.menuTheme,
   loginModalOpen: state.app.loginModal.isOpen,
   loginModalType: state.app.loginModal.isLogin
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openLoginModal: () => dispatch(Actions.toggleLoginModal(true, true)),
-  closeLoginModal: () => dispatch(Actions.toggleLoginModal(false))
+  openLoginModal: () => dispatch(Actions.updateLoginModal(true, true)),
+  closeLoginModal: () => dispatch(Actions.updateLoginModal(false, true))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

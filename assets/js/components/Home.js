@@ -23,6 +23,10 @@ class Home extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.props.changeMenuTheme('themeWhite');
+  }
+
   onInputChange = (id, event) => {
     console.log(`${id} change...`);
     let value = parseInt(event.target.value);
@@ -32,22 +36,17 @@ class Home extends React.Component {
       this.setState({
         age: value
       });
+      this.props.updateUserAge(value);
     } else if (id == 'zip') {
       this.setState({
         zipcode: value
       });
+      this.props.updateUserZipcode(value);
     }
   }
 
   onFindBenefitsClick = () => {
-    // TODO: Validate that input fields are filled & valid
-    let age = this.state.age;
-    let zipcode = this.state.zipcode;
-
-    let shouldRedirect = true;
-    this.setState({
-      pushToRecommendationPage: shouldRedirect
-    })
+    this.props.history.push("/recommendation");
   }
 
   section1() {
@@ -84,7 +83,7 @@ class Home extends React.Component {
           <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
             Find My Benefits
           </button><br/>
-          <button type='button' id='homeS2B2' onClick={this.props.openSignupModal}>
+          <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
             or Sign Up
           </button>
         </div>
@@ -112,10 +111,6 @@ class Home extends React.Component {
   }
 
   render() {
-    if (this.state.pushToRecommendationPage) {
-      return <Redirect push to='/recommendation' />;
-    }
-
     return (
       <div>
         {this.section1()}
@@ -128,11 +123,16 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state.app
+  loginModalOpen: state.app.loginModal.isOpen,
+  age: state.app.age,
+  zipcode: state.app.zipcode
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openSignupModal: () => dispatch(Actions.toggleLoginModal(true, false))
+  changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
+  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  updateUserZipcode: (zipcode) => dispatch(Actions.updateUserZipcode(zipcode)),
+  updateUserAge: (age) => dispatch(Actions.updateUserAge(age))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
