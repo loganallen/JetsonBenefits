@@ -1,7 +1,7 @@
 import React from 'react';
-import Menu from './Menu';
-
 import { connect } from 'react-redux';
+
+import Menu from './Menu';
 
 class App extends React.Component {
   render() {

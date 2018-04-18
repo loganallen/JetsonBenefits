@@ -1,11 +1,18 @@
 import ActionTypes from '../actions/actionTypes'
 
 const initialState = {
-  data: "hello",
   menuTheme: "themeWhite",
   user: null,
-  zipcode: '',
-  age: '',
+  userData: {
+    age: '',
+    zipcode: '',
+    marriageStatus: '',
+    spouseAge: '',
+    numKids: '',
+    kidAges: [],
+    income: '',
+    healthCondition: ''
+  },
   loginModal: {
     isOpen: false,
     isLogin: true
@@ -24,15 +31,20 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         loginModal: action.data
       };
-    case ActionTypes.UPDATE_USER_ZIPCODE:
+    case ActionTypes.UPDATE_USER_DATA:
+      console.log(action);
+      var updatedValue = action.data.value;
+      if (action.data.key === 'kidAges') {
+        // TODO: This yields warning but not sure why
+        updatedValue = [ ...state.userData.kidAges ];
+        updatedValue[action.data.value.idx] = action.data.value.age;
+      }
       return {
         ...state,
-        zipcode: action.data.zipcode
-      };
-    case ActionTypes.UPDATE_USER_AGE:
-      return {
-        ...state,
-        age: action.data.age
+        userData: {
+          ...state.userData,
+          [action.data.key]: updatedValue
+        }
       };
     default:
       return state;

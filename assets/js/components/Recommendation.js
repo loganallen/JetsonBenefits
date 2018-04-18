@@ -20,15 +20,9 @@ class Recommendation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            stage: 'questions', 
-            age: this.props.age,
-            zipcode: this.props.zipcode,
-            marriage: '',
-            kidages: '',
-            spouseage: '',
-            income: '',
-            condition: ''
+            stage: 'questions'
         };
+        console.log('rec', props);
     }
 
     componentWillMount() {
@@ -38,58 +32,59 @@ class Recommendation extends React.Component {
     //Returns basic quote information (from the model)
     // ***hard coded for now ***
     getInsuraceInfo = () => {
-        return [{title: 'Basic Health', value: 0, active: true},
-                {title: 'Term Life', value: 0, active: true},
-                {title: 'Disability', value: 0, active: true},
-                {title: 'Dental', value: 0, active: false},
-                {title: 'Vision', value: 0, active: false},
-                {title: 'Critical Illness', value: 0, active: false},]
+        return [
+            {title: 'Basic Health', value: 0, active: true},
+            {title: 'Term Life', value: 0, active: true},
+            {title: 'Disability', value: 0, active: true},
+            {title: 'Dental', value: 0, active: false},
+            {title: 'Vision', value: 0, active: false},
+            {title: 'Critical Illness', value: 0, active: false}
+        ];
     }
 
-    mainContent = (stage) => {
-        return (stage == 'questions') ? 
-        <QuestionsContainer 
-            className='questionsWrapper' 
-            onPurchaseClick={this.onPurchaseClick}
-            age={this.state.age}
-            zipcode={this.state.zipcode}
-            /> : <QuotesContainer />;
-    }
-
-    onPurchaseClick = (answers) => {
+    onShowQuotes = () => {
         this.setState({
-            stage: 'quotes',
-            age: answers.age,
-            zipcode: answers.zipcode,
-            marriage: answers.marriage,
-            kidages: answers.kidages,
-            spouseage: answers.spouseage,
-            income: answers.income,
-            condition: answers.condition
+            stage: 'quotes'
         });
     }
 
+    mainContent(stage) {
+        return (stage == 'questions') ?
+            <QuestionsContainer
+                className='questionsWrapper'
+                onShowQuotes={this.onShowQuotes}
+                userData={this.props.userData}
+                updateUserData={this.props.updateUserData}
+            /> : 
+            <QuotesContainer 
+                userData={this.props.userData}
+                updateUserData={this.props.updateUserData}
+            />;
+    }
+
     render() {
+        console.log(this.props.userData);
         return (
             <div id='rec'>
                 {(this.state.stage == 'questions') &&
                     <Sidebar
-                    className='sidebar' 
-                    id='sidebar' 
-                    values={this.getInsuraceInfo()}/>}
-                 {this.mainContent(this.state.stage)}
+                        className='sidebar' 
+                        id='sidebar' 
+                        values={this.getInsuraceInfo()}
+                    />}
+                {this.mainContent(this.state.stage)}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    age: state.app.age,
-    zipcode: state.app.zipcode
+    userData: state.app.userData
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme))
-  });
+    changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
+    updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);
