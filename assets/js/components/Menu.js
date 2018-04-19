@@ -9,7 +9,7 @@ Controller filepath:
 
 import React from 'react';
 import { connect } from 'react-redux';
-import {Header, Button} from 'semantic-ui-react';
+import { Header, Button } from 'semantic-ui-react';
 
 import Login from './Login';
 import Actions from '../actions';
@@ -20,10 +20,14 @@ class Menu extends React.Component {
     this.state = {};
   }
 
+  onHomeClick = () => {
+    // TODO
+  }
+
   render() {
     return (
       <div id='menuWrapper' className={this.props.menuTheme}>
-        <Header id='menuTitle'>jetsonbenefits</Header>
+        <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
           <button type='button' className='menuButton'>HOW IT WORKS</button>
           <button type='button' className='menuButton'>BLOG</button>

@@ -11,12 +11,7 @@ const routes = (
     <Switch>
       <Route exact path='/' component={Home} />
       <Route path='/home' component={Home} />
-      <Route path='/recommendation' render={
-        () => <Recommendation page='questions' />
-      } />
-      <Route path='/recommendation/quotes' render={
-        () => <Recommendation page='quotes' />
-      } />
+      <Route path='/recommendation' component={Recommendation} />
     </Switch>
   </BrowserRouter>
 );
