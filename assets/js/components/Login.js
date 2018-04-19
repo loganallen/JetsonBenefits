@@ -18,7 +18,6 @@ class Login extends React.Component {
   
   constructor(props) {
     super(props);
-    Auth.login('username', 'password', (res) => console.log(res));
   }
 
   render() {
