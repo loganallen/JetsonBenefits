@@ -1,7 +1,9 @@
-const ActionTypes = {
-    CHANGE_MENU_THEME: "CHANGE_MENU_THEME",
-    UPDATE_LOGIN_MODAL: "UPDATE_LOGIN_MODAL",
-    UPDATE_USER_DATA: "UPDATE_USER_DATA"
-};
+import keyMirror from 'keymirror';
+
+const ActionTypes = keyMirror({
+    CHANGE_MENU_THEME: null,
+    UPDATE_LOGIN_MODAL: null,
+    UPDATE_USER_DATA: null
+});
 
 export default ActionTypes;
