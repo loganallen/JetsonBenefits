@@ -12,11 +12,13 @@ import {Modal, Button} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
 import Actions from '../actions';
+import Auth from '../auth';
 
 class Login extends React.Component {
   
   constructor(props) {
     super(props);
+    Auth.login('username', 'password', (res) => console.log(res));
   }
 
   render() {
