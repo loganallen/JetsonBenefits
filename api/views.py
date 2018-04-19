@@ -98,7 +98,7 @@ def updateUserInfo(request):
         return JsonResponse({ 'error': 'POST required' })
 
 
-@require_POST
+@require_GET
 def getUserInfo(request):
     """
         Get a users information
@@ -110,8 +110,8 @@ def getUserInfo(request):
     """
     requiredKeys = ['apiToken']
 
-    if (validateRequest(request, requiredKeys, 'POST')):
-        token = request.POST.apiToken
+    if (validateRequest(request, requiredKeys, 'GET')):
+        token = request.GET.apiToken
         # -- fetch from USER table here
         # -- retrieve fields
         return JsonResponse({ 'msg': 'success' })
