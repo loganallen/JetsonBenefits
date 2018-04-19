@@ -38,7 +38,7 @@ def signUp(request):
 
     """
     requiredKeys = ['firstName', 'lastName', 'email', 'password']
-    res = { 'success': False, 'error': '', 'apiToken': '' }
+    res = { 'success': False, 'error': '', 'token': '' }
 
     if (validateRequest(request, requiredKeys, 'POST')):
         firstName = request.POST['firstName']
@@ -77,7 +77,7 @@ def signIn(request):
 
     """
     requiredKeys = ['username', 'password']
-    res = { 'success': False, 'error': '', 'apiToken': '' }
+    res = { 'success': False, 'error': '', 'token': '' }
 
     if (validateRequest(request, requiredKeys, 'POST')):
         print(request.POST)
