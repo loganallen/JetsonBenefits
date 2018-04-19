@@ -37,7 +37,6 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    console.log(this.listContent())
     return (
       <div id='sidebar' className='sidebar'>
         <h1 id="sidebar-title">JETSON RECOMMENDS</h1>

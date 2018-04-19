@@ -17,23 +17,16 @@ const updateLoginModal = (isOpen=false, isLogin=true) => ({
     }
 });
 
-const updateUserZipcode = (zipcode) => ({
-    type: ActionTypes.UPDATE_USER_ZIPCODE,
+const updateUserData = (key, value) => ({
+    type: ActionTypes.UPDATE_USER_DATA,
     data: {
-        zipcode: zipcode
-    }
-});
-
-const updateUserAge = (age) => ({
-    type: ActionTypes.UPDATE_USER_AGE,
-    data: {
-        age: age
+        key: key,
+        value: value
     }
 });
 
 export default {
     changeMenuTheme,
     updateLoginModal,
-    updateUserZipcode,
-    updateUserAge
+    updateUserData
 };
