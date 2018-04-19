@@ -2,12 +2,13 @@
 
 // login api endpoint
 const tokenURL = `http://${env.baseURL}/api/signin`;
+const signUpURL = `http://${env.baseURL}/api/signup`;
 
 /**
  * login: attempts to login with given username and password
- * @param {String} username 
- * @param {String} password 
- * @param {Function} callback 
+ * @param {String} username
+ * @param {String} password
+ * @param {Function} callback
  */
 const login = function login(username, password, callback) {
     if (sessionStorage.token) {
@@ -23,6 +24,34 @@ const login = function login(username, password, callback) {
             }
         });
     }
+};
+
+/**
+ * signUp: attempts to signUp the user with the given information
+ * @param {String} firstName
+ * @param {String} lastName
+ * @param {String} email
+ * @param {String} password
+ * @param {Function} callback
+ */
+const signUp = function signUp(firstName, lastName, email, password, callback) {
+    $.ajax({
+        type: 'POST',
+        url: signUpURL,
+        data: {
+            csrfmiddlewaretoken: env.crsf_token,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        },
+        success: (res) => {
+            callback({
+                authenticated: true,
+                token: res.token
+            });
+        }
+    });
 };
 
 /**
@@ -50,9 +79,9 @@ const token = function token() {
 
 /**
  * getToken: makes a server request to retrieve a users token
- * @param {String} username 
- * @param {String} password 
- * @param {Function} callback 
+ * @param {String} username
+ * @param {String} password
+ * @param {Function} callback
  */
 const getToken = function getToken(username, password, callback) {
     $.ajax({
@@ -64,7 +93,6 @@ const getToken = function getToken(username, password, callback) {
             password: password
         },
         success: (res) => {
-            console.log(res);
             callback({
                 authenticated: true,
                 token: res.token
