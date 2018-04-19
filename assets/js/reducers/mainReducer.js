@@ -32,7 +32,6 @@ const mainReducer = (state = initialState, action) => {
         loginModal: action.data
       };
     case ActionTypes.UPDATE_USER_DATA:
-      console.log(action);
       var updatedValue = action.data.value;
       if (action.data.key === 'kidAges') {
         // TODO: This yields warning but not sure why

@@ -22,7 +22,6 @@ class Recommendation extends React.Component {
         this.state = {
             stage: 'questions'
         };
-        console.log('rec', props);
     }
 
     componentWillMount() {
@@ -63,7 +62,6 @@ class Recommendation extends React.Component {
     }
 
     render() {
-        console.log(this.props.userData);
         return (
             <div id='rec'>
                 {(this.state.stage == 'questions') &&
