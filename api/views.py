@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 def validateRequest(request, keys, type):
     """
         Validates that a request has the correct keys
@@ -27,19 +30,22 @@ def signUp(request):
     """
         Sign Up for JetsonBenefits
         :param request 
-            { POST: { name: string, email: string, password: string } }
+            { POST: { firstName: string, lastName: string, email: string, password: string } }
 
         :return JsonResponse
             { success: bool, apiToken: string }
 
     """
-    requiredKeys = ['name', 'email', 'password']
+    requiredKeys = ['firstName', 'lastName', 'email', 'password']
 
     if (validateRequest(request, requiredKeys, 'POST')):
-        name = request.POST.name
+        firstName = request.POST.firstName
+        lastName = request.POST.lastName
         email = request.POST.email
         password = request.POST.password
-        # -- add to USER table here
+
+        user = User.objects.create_user(username=email, email=email, password=password)
+        user.save()
         return JsonResponse({ 'msg': 'signed up' })
     else:
         return JsonResponse({ 'error': 'POST required' })
@@ -60,8 +66,13 @@ def signIn(request):
     if (validateRequest(request, requiredKeys, 'POST')):
         email = request.POST.email
         password = request.POST.password
-        # -- fetch from USER table here
-        return JsonResponse({ 'msg': 'logged in' })
+
+        success = True
+        user = authenticate(email=email, password=password)
+        if user is None: 
+                success = False
+
+        return JsonResponse({ 'success': success })
     else:
         return JsonResponse({ 'error': 'POST required' })
 
