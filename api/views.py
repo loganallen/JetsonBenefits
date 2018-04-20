@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
 
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -30,7 +31,7 @@ def validateRequest(request, keys, method):
     return result
 
 
-@api_view(['POST'])
+@require_POST
 def signUp(request):
     """
         Sign Up for JetsonBenefits
@@ -67,7 +68,7 @@ def signUp(request):
 
     return JsonResponse(res)
 
-@api_view(['POST'])
+@require_POST
 def signIn(request):
     """
         Sign In for JetsonBenefits
