@@ -88,7 +88,7 @@ const getToken = function getToken(username, password, callback) {
         type: 'POST',
         url: tokenURL,
         data: {
-            csrfmiddlewaretoken: env.crsf_token,
+            csrfmiddlewaretoken: env.csrf_token,
             username: username,
             password: password
         },
