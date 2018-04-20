@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from django.views.decorators.http import require_POST, require_GET
 
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 
 def validateRequest(request, keys, method):
     """
@@ -28,7 +30,7 @@ def validateRequest(request, keys, method):
     return result
 
 
-@require_POST
+@api_view(['POST'])
 def signUp(request):
     """
         Sign Up for JetsonBenefits
@@ -65,7 +67,7 @@ def signUp(request):
 
     return JsonResponse(res)
 
-@require_POST
+@api_view(['POST'])
 def signIn(request):
     """
         Sign In for JetsonBenefits
@@ -90,7 +92,8 @@ def signIn(request):
             res['success'] = False
             res['error'] = 'Incorrect username and password combination'
         else:
-            # create user & api token
+            print('authenticated user: ' + username)
+            # retrieve api token
             token = Token.objects.get(user=user)
             if token is not None:
                 res['success'] = True
@@ -106,20 +109,22 @@ def signIn(request):
     return JsonResponse(res)
 
 
-@require_POST
+@api_view(['POST'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
 def updateUserInfo(request):
     """
         Update a users information
         :param request
-            { POST: { apiToken: string, userData: object } }
+            { POST: { userData: object } }
 
         :return JsonResponse
             { success: bool }
     """
-    requiredKeys = ['apiToken', 'userData']
+    requiredKeys = ['userData']
 
     if (validateRequest(request, requiredKeys, 'POST')):
-        token = request.POST.apiToken
+        user = request.user
         # -- fetch from USER table here
         # -- update corresponding fields
         return JsonResponse({ 'msg': 'success' })
@@ -127,20 +132,21 @@ def updateUserInfo(request):
         return JsonResponse({ 'error': 'POST required' })
 
 
-@require_GET
+@api_view(['GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
 def getUserInfo(request):
     """
         Get a users information
-        :param request
-            { POST: { apiToken: string } }
+        :param request:
         
         :return JsonResponse
             { user data }
     """
-    requiredKeys = ['apiToken']
+    requiredKeys = []
 
     if (validateRequest(request, requiredKeys, 'GET')):
-        token = request.GET.apiToken
+        user = request.user
         # -- fetch from USER table here
         # -- retrieve fields
         return JsonResponse({ 'msg': 'success' })

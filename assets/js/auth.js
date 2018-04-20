@@ -12,15 +12,17 @@ const signUpURL = `http://${env.baseURL}/api/signup`;
  */
 const login = function login(username, password, callback) {
     if (sessionStorage.token) {
-        if (callback) callback(true);
+        if (callback) callback({ success: true, error: '' });
         return;
     } else {
         getToken(username, password, (res) => {
-            if (res.success) { 
-                sessionStorage.token = res.token
-                if (callback) callback(true);
-            } else {
-                if (callback) callback(false);
+            if (res.authenticated) { sessionStorage.token = res.token  }
+            
+            if (callback) {
+                callback({ 
+                    success: res.success,
+                    error: res.error 
+                });
             }
         });
     }
@@ -43,10 +45,14 @@ const signup = function signUp(userData, callback) {
             password: userData.password
         },
         success: (res) => {
-            callback({
-                authenticated: true,
-                token: res.token
-            });
+            if (res.success) { sessionStorage.token = res.token; }
+
+            if (callback) {
+                callback({
+                    success: res.success,
+                    error: res.error
+                });
+            }
         }
     });
 };
@@ -91,8 +97,9 @@ const getToken = function getToken(username, password, callback) {
         },
         success: (res) => {
             callback({
-                authenticated: true,
-                token: res.token
+                authenticated: res.success,
+                token: res.token === '' ? undefined : res.token,
+                error: res.error
             });
         }
     });

@@ -18,19 +18,31 @@ class Login extends React.Component {
   
   constructor(props) {
     super(props);
+  
+    if (Auth.loggedIn()) {
+      this.thing();
+    }
   }
 
-  login() {
+  login = () => {
     const [ username, password ] = [ $('#login-email').val(), $('#login-password').val() ];
+
+    console.log(this);
 
     const cb = (res) => {
       console.log(res);
+      
+      if (res.success) {
+        this.props.updateLoginModal(false, true);
+      } else {
+        // display error message res.error
+      }
     };
 
     Auth.login(username, password, cb);
   }
 
-  signup() {
+  signup = () => {
     const userData = {
       firstName: $('#signup-firstName').val(),
       lastName: $('#signup-lastName').val(),
@@ -39,7 +51,13 @@ class Login extends React.Component {
     };
 
     const cb = (res) => {
-      console.log(res); 
+      console.log(res);
+
+      if (res.success) {
+        this.props.updateLoginModal(false, true);
+      } else {
+        // display error message res.error
+      }
     }
 
     Auth.signup(userData, cb);
@@ -59,20 +77,20 @@ class Login extends React.Component {
 
     const content = this.props.isLogin ? (
       <div>
-        <input id="login-email" className="modalInput" type="email" placeholder="email"/>
-        <input id="login-password" className="modalInput" type="password" placeholder="password"/>
-        <button id="login" className="modalButton" onClick={this.login}>
+        <input id="login-email" name="login-email" className="modalInput" type="email" placeholder="email"/>
+        <input id="login-password" name="login-password" className="modalInput" type="password" placeholder="password"/>
+        <button id="login" name="login" className="modalButton" onClick={this.login}>
           Sign in
          </button> 
         <p className="modalFooter">Dont have an account yet? <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, false)}>Sign Up</button></p>
       </div>
     ) : (
       <div>
-        <input id="signup-firstName" className="modalInput_half left" type="text" placeholder="first name"/>
-        <input id="signup-lastName" className="modalInput_half right" type="text" placeholder="last name"/>
-        <input id="signup-email" className="modalInput" type="email" placeholder="email"/>
-        <input id="signup-password" className="modalInput" type="password" placeholder="password"/>
-        <button id="signup" className="modalButton" onClick={this.signup}>
+        <input id="signup-firstName" name="signup-firstName" className="modalInput_half left" type="text" placeholder="first name"/>
+        <input id="signup-lastName" name="signup-lastName" className="modalInput_half right" type="text" placeholder="last name"/>
+        <input id="signup-email" name="signup-email" className="modalInput" type="email" placeholder="email"/>
+        <input id="signup-password" name="signup-password" className="modalInput" type="password" placeholder="password"/>
+        <button id="signup" name="signup" className="modalButton" onClick={this.signup}>
           Sign up
          </button> 
         <p className="modalFooter">Already have an account? <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, true)}>Login</button></p>
