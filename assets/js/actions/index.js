@@ -1,6 +1,9 @@
 import ActionTypes from './actionTypes';
-import { Endpoints } from '../API'; 
+import { Endpoints } from '../utils'; 
 
+/*
+ * App actions
+ */
 const changeMenuTheme = (theme) => ({
     type: ActionTypes.CHANGE_MENU_THEME,
     data: {
@@ -24,24 +27,25 @@ const updateUserData = (key, value) => ({
     }
 });
 
-// const updateBulkUserData = (data) => ({
-//     type: ActionTypes.UPDATE_BULK_USER_DATA,
-//     data: data
-// });
+// data: { key: value } object
+const updateBulkUserData = (data) => ({
+    type: ActionTypes.UPDATE_BULK_USER_DATA,
+    data: data
+});
 
 /*
- * API Requests as Thunks
+ * Thunks for API requests
  */
 
- // POST user info for specified authenticated user
+ // POST updated user info for the active auth user
 const postUserInfo = (token, data) => (dispatch, getState) => {
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_USER_INFO,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            userToken: token,
-            data: data
+            apiToken: token,
+            userData: data
         }
     }).done(res => {
         console.log(res);
@@ -50,18 +54,102 @@ const postUserInfo = (token, data) => (dispatch, getState) => {
     });
 }
 
-// FETCH user info for the authenticated user
+// FETCH user info for the active auth user
 const fetchUserInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
-        url: Endpoints.FETCH_USER_INFO,
+        url: Endpoints.GET_USER_INFO,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            userToken: token
+            apiToken: token
         }
     }).done(res => {
         console.log(res);
-        dispatch()
+        dispatch(updateBulkUserData(res.data));
+    }).fail(err => {
+        console.log(err);
+    });
+}
+
+// POST updated insurance info for the active auth user
+const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) => {
+    $.ajax({
+        type: 'POST',
+        url: Endpoints.UPDATE_INSURANCE_INFO,
+        data: {
+            csrfmiddlewaretoken: env.csrf_token,
+            apiToken: token,
+            insuranceType: insuranceType,
+            insuranceData: data
+        }
+    }).done(res => {
+        console.log(res);
+    }).fail(err => {
+        console.log(err);
+    });
+}
+
+// FETCH specific insurance info for the active auth user
+const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GET_INSURANCE_INFO,
+        data: {
+            csrfmiddlewaretoken: env.csrf_token,
+            apiToken: token,
+            insuranceType: insuranceType
+        }
+    }).done(res => {
+        console.log(res);
+    }).fail(err => {
+        console.log(err);
+    });
+}
+
+// FETCH all insurance info for the active auth user
+const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GET_ALL_INSURANCE_INFO,
+        data: {
+            csrfmiddlewaretoken: env.csrf_token,
+            apiToken: token
+        }
+    }).done(res => {
+        console.log(res);
+    }).fail(err => {
+        console.log(err);
+    });
+}
+
+// FETCH specific insurance quote info for the active auth user
+const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GET_INSURANCE_QUOTE,
+        data: {
+            csrfmiddlewaretoken: env.csrf_token,
+            apiToken: token,
+            insuranceType: insuranceType
+        }
+    }).done(res => {
+        console.log(res);
+    }).fail(err => {
+        console.log(err);
+    });
+}
+
+// FETCH all insurance quote info for the active auth user
+const fetchAllInsuranceQuote = (token) => (dispatch, getState) => {
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GET_ALL_INSURANCE_QUOTES,
+        data: {
+            csrfmiddlewaretoken: env.csrf_token,
+            apiToken: token
+        }
+    }).done(res => {
+        console.log(res);
     }).fail(err => {
         console.log(err);
     });
@@ -71,5 +159,6 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
 export default {
     changeMenuTheme,
     updateLoginModal,
-    updateUserData
+    updateUserData,
+    postUserInfo
 };

@@ -45,6 +45,13 @@ const mainReducer = (state = initialState, action) => {
           [action.data.key]: updatedValue
         }
       };
+    case ActionTypes.UPDATE_BULK_USER_DATA:
+      let updatedUserData = { ...state.userData };
+      // TODO: Walk through action.data and update each key/value pair
+      return {
+        ...state,
+        userData: updatedUserData
+      };
     default:
       return state;
   }

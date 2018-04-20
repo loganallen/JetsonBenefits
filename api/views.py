@@ -112,7 +112,7 @@ def updateUserInfo(request):
     """
         Update a users information
         :param request
-            { POST: { user data , apiToken: string} }
+            { POST: { apiToken: string, userData: object } }
 
         :return JsonResponse
             { success: bool }

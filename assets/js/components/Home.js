@@ -35,6 +35,10 @@ class Home extends React.Component {
   }
 
   onFindBenefitsClick = () => {
+    this.props.postUserInfo(
+      'temp_token',
+      { age: this.props.age, zipcode: this.props.zipcode }
+    );
     this.props.history.push("/recommendation");
   }
 
@@ -121,7 +125,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
   updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
-  updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value))
+  updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
+  postUserInfo: (token, data) => dispatch(Actions.postUserInfo(token, data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

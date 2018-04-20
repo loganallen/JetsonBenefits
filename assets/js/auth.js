@@ -39,7 +39,7 @@ const signUp = function signUp(firstName, lastName, email, password, callback) {
         type: 'POST',
         url: signUpURL,
         data: {
-            csrfmiddlewaretoken: env.crsf_token,
+            csrfmiddlewaretoken: env.csrf_token,
             firstName: firstName,
             lastName: lastName,
             email: email,
