@@ -236,6 +236,26 @@ button {
   font-size: 1.2em;
 }
 
+.modalInput_half {
+  display: inline-block;
+  width: 40%;
+  padding: 12px 20px;
+  margin-top: 12px; margin-bottom: 0px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  font-size: 1.2em;
+}
+
+.modalInput_half.left {
+  margin-left: 7.5%;
+  margin-right: 2.5%;
+}
+
+.modalInput_half.right {
+  margin-left: 2.5%;
+  margin-right: 7.5%;
+}
+
 .modalButton {
   display: block;
   margin-left: auto; margin-right: auto;

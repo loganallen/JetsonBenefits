@@ -28,22 +28,19 @@ const login = function login(username, password, callback) {
 
 /**
  * signUp: attempts to signUp the user with the given information
- * @param {String} firstName
- * @param {String} lastName
- * @param {String} email
- * @param {String} password
+ * @param {Object} userData: { firstName, lastName, email, password }
  * @param {Function} callback
  */
-const signUp = function signUp(firstName, lastName, email, password, callback) {
+const signUp = function signUp(userData, callback) {
     $.ajax({
         type: 'POST',
         url: signUpURL,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            password: userData.password
         },
         success: (res) => {
             callback({

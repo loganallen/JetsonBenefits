@@ -1,8 +1,11 @@
 import ActionTypes from '../actions/actionTypes'
+import Auth from '../auth'
 
 const initialState = {
   menuTheme: "themeWhite",
-  user: null,
+  user: {
+    token: Auth.loggedIn() ? Auth.token() : null,
+  },
   userData: {
     age: '',
     zipcode: '',
