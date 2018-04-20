@@ -4,7 +4,7 @@ import Auth from '../auth'
 const initialState = {
   menuTheme: "themeWhite",
   user: {
-    token: Auth.loggedIn() ? Auth.token() : null,
+    loggedIn: Auth.loggedIn()
   },
   userData: {
     age: '',

@@ -44,8 +44,10 @@ const postUserInfo = (token, data) => (dispatch, getState) => {
         url: Endpoints.UPDATE_USER_INFO,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token,
             userData: data
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
@@ -60,8 +62,10 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_USER_INFO,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token
+            csrfmiddlewaretoken: env.csrf_token
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
@@ -78,9 +82,11 @@ const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) =
         url: Endpoints.UPDATE_INSURANCE_INFO,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token,
             insuranceType: insuranceType,
             insuranceData: data
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
@@ -96,8 +102,10 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
         url: Endpoints.GET_INSURANCE_INFO,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token,
             insuranceType: insuranceType
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
@@ -112,8 +120,10 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_INFO,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token
+            csrfmiddlewaretoken: env.csrf_token
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
@@ -129,8 +139,10 @@ const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
         url: Endpoints.GET_INSURANCE_QUOTE,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token,
             insuranceType: insuranceType
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
@@ -145,8 +157,10 @@ const fetchAllInsuranceQuote = (token) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_QUOTES,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
-            apiToken: token
+            csrfmiddlewaretoken: env.csrf_token
+        },
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
         console.log(res);
