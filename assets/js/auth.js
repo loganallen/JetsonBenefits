@@ -31,7 +31,7 @@ const login = function login(username, password, callback) {
  * @param {Object} userData: { firstName, lastName, email, password }
  * @param {Function} callback
  */
-const signUp = function signUp(userData, callback) {
+const signup = function signUp(userData, callback) {
     $.ajax({
         type: 'POST',
         url: signUpURL,
@@ -102,6 +102,7 @@ module.exports = {
     login,
     logout,
     loggedIn,
+    signup,
     token,
     getToken
 }

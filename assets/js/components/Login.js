@@ -39,7 +39,7 @@ class Login extends React.Component {
     };
 
     const cb = (res) => {
-      console.log(res);
+      console.log(res); 
     }
 
     Auth.signup(userData, cb);
