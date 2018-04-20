@@ -20,8 +20,10 @@ def validateRequest(request, keys, method):
     """
     result = True
 
+    d = request.POST if method == 'POST' else request.GET
+
     for key in keys:
-        result = result and (key in request[method])
+        result = result and (key in d)
     
     return result
 
@@ -53,9 +55,7 @@ def signUp(request):
         else:
             # create user & api token
             user = User.objects.create_user(username=email, email=email, password=password)
-            user.save()
             token = Token.objects.create(user=user)
-            token.save()
             res['success'] = True
             res['token'] = token.key
 
@@ -80,7 +80,6 @@ def signIn(request):
     res = { 'success': False, 'error': '', 'token': '' }
 
     if (validateRequest(request, requiredKeys, 'POST')):
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
 
