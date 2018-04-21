@@ -11,7 +11,7 @@ urlpatterns = [
     path('signin', views.signIn, name="signIn"),
     path('update-user-info', views.updateUserInfo, name="updateUserInfo"),
     path('get-user-info', views.getUserInfo, name="getUserInfo"),
-    path('update-insurance-info', views.updateInsuranceInfo, name"updateInsuranceInfo),
+    path('update-insurance-info', views.updateInsuranceInfo, name="updateInsuranceInfo"),
     path('get-insurance-info', views.getInsuranceInfo, name="getInsuranceInfo"),
     path('get-all-insurance-info', views.getAllInsuranceInfo, name="getAllInsuranceInfo"),
     path('get-insurance-quote', views.getInsuranceQuote, name="getInsuranceQuote"),

@@ -9,7 +9,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 
-def validateRequest(request, keys, method):
+def validateRequest(request, keys, method, response):
     """
         Validates that a request has the correct keys
         :param keys
@@ -20,6 +20,7 @@ def validateRequest(request, keys, method):
             string --> 'GET' or 'POST'
         
         :return bool
+            --> Note: updates response object passed in to set success and error messages
     """
     result = True
 
@@ -28,6 +29,10 @@ def validateRequest(request, keys, method):
     for key in keys:
         result = result and (key in d)
     
+    if not result:
+        response['sucess'] = False
+        response['error'] = 'Invalid ' + method + ' arguments'
+
     return result
 
 
@@ -45,7 +50,7 @@ def signUp(request):
     requiredKeys = ['firstName', 'lastName', 'email', 'password']
     res = { 'success': False, 'error': '', 'token': '' }
 
-    if (validateRequest(request, requiredKeys, 'POST')):
+    if (validateRequest(request, requiredKeys, 'POST', res)):
         firstName = request.POST['firstName']
         lastName = request.POST['lastName']
         email = request.POST['email']
@@ -64,10 +69,6 @@ def signUp(request):
             res['token'] = token.key
             print('created user: ' + username)
 
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid POST args'
-
     return JsonResponse(res)
 
 
@@ -85,7 +86,7 @@ def signIn(request):
     requiredKeys = ['username', 'password']
     res = { 'success': False, 'error': '', 'token': '' }
 
-    if (validateRequest(request, requiredKeys, 'POST')):
+    if (validateRequest(request, requiredKeys, 'POST', res)):
         username = request.POST['username']
         password = request.POST['password']
 
@@ -106,10 +107,6 @@ def signIn(request):
                 res['success'] = False
                 res['error'] = 'No token exists for user'
 
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid POST args'
-
     return JsonResponse(res)
 
 
@@ -128,14 +125,11 @@ def updateUserInfo(request):
     requiredKeys = ['userData']
     res = { 'success': False, 'error': '' }
 
-    if (validateRequest(request, requiredKeys, 'POST')):
+    if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
         # -- fetch from USER table here
         # -- update corresponding fields
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
 
@@ -154,14 +148,11 @@ def getUserInfo(request):
     requiredKeys = []
     res = { 'success': False, 'error': '', data: None }
 
-    if (validateRequest(request, requiredKeys, 'GET')):
+    if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- retrieve fields
         #-- add data to res['data']
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
 
     return JsonResponse(res)
 
@@ -180,14 +171,11 @@ def updateInsuranceInfo(request):
     requiredKeys = []
     res = { 'success': False, 'error': '' }
 
-    if (validateRequest(request, requiredKeys, 'POST')):
+    if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
         # -- get information from POST request
         # -- make updates
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
 
@@ -206,14 +194,11 @@ def getInsuranceInfo(request):
     requiredKeys = []
     res = { 'success': False, 'error': '', data: None }
 
-    if (validateRequest(request, requiredKeys, 'GET')):
+    if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- get data
         # -- add data to res['data']
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
 
@@ -232,14 +217,11 @@ def getAllInsuranceInfo(request):
     requiredKeys = []
     res = { 'success': False, 'error': '', data: None }
 
-    if (validateRequest(request, requiredKeys, 'GET')):
+    if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- get data
         # -- add data to res['data']
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
 
@@ -258,14 +240,11 @@ def getInsuranceQuote(request):
     requiredKeys = []
     res = { 'success': False, 'error': '', data: None }
 
-    if (validateRequest(request, requiredKeys, 'GET')):
+    if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- get data
         # -- add data to res['data']
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
 
@@ -284,14 +263,11 @@ def getAllInsuranceQuotes(request):
     requiredKeys = []
     res = { 'success': False, 'error': '', data: None }
 
-    if (validateRequest(request, requiredKeys, 'GET')):
+    if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- get data
         # -- add data to res['data']
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
 
@@ -310,13 +286,10 @@ def generateInsuranceQuotes(request):
     requiredKeys = []
     res = { 'success': False, 'error': '', data: None }
 
-    if (validateRequest(request, requiredKeys, 'GET')):
+    if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- get data
         # -- add data to res['data']
         res['success'] = True
-    else:
-        res['success'] = False
-        res['error'] = 'Invalid request args'
     
     return JsonResponse(res)
