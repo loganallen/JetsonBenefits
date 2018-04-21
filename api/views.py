@@ -39,7 +39,7 @@ def signUp(request):
             { POST: { firstName: string, lastName: string, email: string, password: string } }
 
         :return JsonResponse
-            { success: bool, apiToken: string }
+            { success: bool, token: string, error: string }
 
     """
     requiredKeys = ['firstName', 'lastName', 'email', 'password']
@@ -55,18 +55,21 @@ def signUp(request):
         if User.objects.filter(username=email).exists():
             res['success'] = False
             res['error'] = 'Existing account already associated with ' + email
+            print(res['error'])
         else:
             # create user & api token
             user = User.objects.create_user(username=email, email=email, password=password)
             token = Token.objects.create(user=user)
             res['success'] = True
             res['token'] = token.key
+            print('created user: ' + username)
 
     else:
         res['success'] = False
         res['error'] = 'Invalid POST args'
 
     return JsonResponse(res)
+
 
 @require_POST
 def signIn(request):
@@ -76,7 +79,7 @@ def signIn(request):
             { POST: { username: string, password: string } }
 
         :return JsonResponse
-            { success: bool, apiToken: string }
+            { success: bool, token: string, error: string }
 
     """
     requiredKeys = ['username', 'password']
@@ -120,17 +123,21 @@ def updateUserInfo(request):
             { POST: { userData: object } }
 
         :return JsonResponse
-            { success: bool }
+            { success: bool, error: string }
     """
     requiredKeys = ['userData']
+    res = { 'success': False, 'error': '' }
 
     if (validateRequest(request, requiredKeys, 'POST')):
         user = request.user
         # -- fetch from USER table here
         # -- update corresponding fields
-        return JsonResponse({ 'msg': 'success' })
+        res['success'] = True
     else:
-        return JsonResponse({ 'error': 'POST required' })
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
 
 
 @api_view(['GET'])
@@ -142,14 +149,174 @@ def getUserInfo(request):
         :param request:
         
         :return JsonResponse
-            { user data }
+            { success: bool, error: string, data: object }
     """
     requiredKeys = []
+    res = { 'success': False, 'error': '', data: None }
 
     if (validateRequest(request, requiredKeys, 'GET')):
         user = request.user
-        # -- fetch from USER table here
         # -- retrieve fields
-        return JsonResponse({ 'msg': 'success' })
+        #-- add data to res['data']
+        res['success'] = True
     else:
-        return JsonResponse({ 'error': 'POST required' })
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+
+    return JsonResponse(res)
+
+
+@api_view(['POST'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def updateInsuranceInfo(request):
+    """
+        Update insurance info for a user
+        :param request:
+
+        :return JsonResponse
+            { success: bool, error: string }
+    """
+    requiredKeys = []
+    res = { 'success': False, 'error': '' }
+
+    if (validateRequest(request, requiredKeys, 'POST')):
+        user = request.user
+        # -- get information from POST request
+        # -- make updates
+        res['success'] = True
+    else:
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
+
+
+@api_view(['GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def getInsuranceInfo(request):
+    """
+        Gets insurance info for a user
+        :param request:
+
+        :return JsonResponse
+            { success: bool, error: string, data: object }
+    """
+    requiredKeys = []
+    res = { 'success': False, 'error': '', data: None }
+
+    if (validateRequest(request, requiredKeys, 'GET')):
+        user = request.user
+        # -- get data
+        # -- add data to res['data']
+        res['success'] = True
+    else:
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
+
+
+@api_view(['GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def getAllInsuranceInfo(request):
+    """
+        Gets all insurance info for a user
+        :param request:
+
+        :return JsonResponse
+            { success: bool, error: string, data: object }
+    """
+    requiredKeys = []
+    res = { 'success': False, 'error': '', data: None }
+
+    if (validateRequest(request, requiredKeys, 'GET')):
+        user = request.user
+        # -- get data
+        # -- add data to res['data']
+        res['success'] = True
+    else:
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
+
+
+@api_view(['GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def getInsuranceQuote(request):
+    """
+        Get insurance quote for a user
+        :param request:
+
+        :return JsonResponse
+            { success: bool, error: string, data: object }
+    """
+    requiredKeys = []
+    res = { 'success': False, 'error': '', data: None }
+
+    if (validateRequest(request, requiredKeys, 'GET')):
+        user = request.user
+        # -- get data
+        # -- add data to res['data']
+        res['success'] = True
+    else:
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
+
+
+@api_view(['GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def getAllInsuranceQuotes(request):
+    """
+        Gets all insurance quotes for a user
+        :param request:
+
+        :return JsonResponse
+            { success: bool, error: string, data: object }
+    """
+    requiredKeys = []
+    res = { 'success': False, 'error': '', data: None }
+
+    if (validateRequest(request, requiredKeys, 'GET')):
+        user = request.user
+        # -- get data
+        # -- add data to res['data']
+        res['success'] = True
+    else:
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
+
+
+@api_view(['GET', 'POST']) #TODO: not sure if this is get or post
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def generateInsuranceQuotes(request):
+    """
+        Generates insurance quotes for a user
+        :param request:
+
+        :return JsonResponse
+            { success: bool, error: string, data: object }
+    """
+    requiredKeys = []
+    res = { 'success': False, 'error': '', data: None }
+
+    if (validateRequest(request, requiredKeys, 'GET')):
+        user = request.user
+        # -- get data
+        # -- add data to res['data']
+        res['success'] = True
+    else:
+        res['success'] = False
+        res['error'] = 'Invalid request args'
+    
+    return JsonResponse(res)
