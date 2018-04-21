@@ -32,9 +32,9 @@ class QuoteItem extends React.Component {
           <div className='top'>
             <div className="insuranceType">{this.props.type} INSURANCE</div>
             <button  
-                  className='refineButton'
-                  onClick={(e) => this.props.onRefineClick(e)}>
-                  Refine V
+              className='refineButton'
+              onClick={(e) => this.props.onRefineClick(e)}>
+              Refine V
             </button>
           </div>
 
@@ -64,9 +64,9 @@ class QuoteItem extends React.Component {
           </div>
 
           <button 
-                className='getCoveredButton'
-                onClick={() => this.props.onCoverageClick(this.state.quoteid)}>
-                GET COVERED
+            className='getCoveredButton'
+            onClick={() => this.props.onCoverageClick(this.state.quoteid)}>
+            GET COVERED
           </button>
 
         </div>
