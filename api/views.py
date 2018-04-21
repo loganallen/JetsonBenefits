@@ -29,9 +29,11 @@ def validateRequest(request, keys, method, response):
     for key in keys:
         result = result and (key in d)
     
+    # if incorrect args, update the response object and set status_code to an error code
     if not result:
         response['sucess'] = False
         response['error'] = 'Invalid ' + method + ' arguments'
+        response.status_code = 5000
 
     return result
 
