@@ -1,10 +1,11 @@
-import ActionTypes from '../actions/actionTypes'
-import Auth from '../auth'
+import ActionTypes from '../actions/actionTypes';
+import { isLoggedIn } from '../auth';
 
 const initialState = {
   menuTheme: "themeWhite",
   user: {
-    loggedIn: Auth.loggedIn()
+    name: '',
+    isAuth: isLoggedIn()
   },
   userData: {
     age: '',
@@ -55,6 +56,11 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         userData: updatedUserData
       };
+    case ActionTypes.UPDATE_USER_AUTH:
+      return {
+        ...state,
+        user: action.data
+      }
     default:
       return state;
   }

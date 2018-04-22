@@ -19,30 +19,20 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
   
-    if (Auth.loggedIn()) {
-      this.thing();
+    if (Auth.isLoggedIn()) {
+      // this.thing();
     }
   }
 
-  login = () => {
+  onLoginClick = () => {
     const [ username, password ] = [ $('#login-email').val(), $('#login-password').val() ];
 
-    console.log(this);
-
-    const cb = (res) => {
-      console.log(res);
-      
-      if (res.success) {
-        this.props.updateLoginModal(false, true);
-      } else {
-        // display error message res.error
-      }
-    };
-
-    Auth.login(username, password, cb);
+    if (username.length > 0 && password.length > 0) {
+      this.props.onLogin(username, password);
+    }
   }
 
-  signup = () => {
+  onSignupClick = () => {
     const userData = {
       firstName: $('#signup-firstName').val(),
       lastName: $('#signup-lastName').val(),
@@ -50,17 +40,11 @@ class Login extends React.Component {
       password: $('#signup-password').val()
     };
 
-    const cb = (res) => {
-      console.log(res);
-
-      if (res.success) {
-        this.props.updateLoginModal(false, true);
-      } else {
-        // display error message res.error
-      }
+    let valid = Object.values(userData).reduce((acc, val) => acc && val.length > 0, true); // TODO
+   
+    if (valid) {
+      this.props.onSignup(userData);
     }
-
-    Auth.signup(userData, cb);
   }
 
   render() {
@@ -79,10 +63,15 @@ class Login extends React.Component {
       <div>
         <input id="login-email" name="login-email" className="modalInput" type="email" placeholder="email"/>
         <input id="login-password" name="login-password" className="modalInput" type="password" placeholder="password"/>
-        <button id="login" name="login" className="modalButton" onClick={this.login}>
+        <button id="login" name="login" className="modalButton" onClick={this.onLoginClick}>
           Sign in
-         </button> 
-        <p className="modalFooter">Dont have an account yet? <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, false)}>Sign Up</button></p>
+        </button> 
+        <p className="modalFooter">
+          Dont have an account yet?
+          <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, false)}>
+            Sign Up
+          </button>
+        </p>
       </div>
     ) : (
       <div>
@@ -90,10 +79,14 @@ class Login extends React.Component {
         <input id="signup-lastName" name="signup-lastName" className="modalInput_half right" type="text" placeholder="last name"/>
         <input id="signup-email" name="signup-email" className="modalInput" type="email" placeholder="email"/>
         <input id="signup-password" name="signup-password" className="modalInput" type="password" placeholder="password"/>
-        <button id="signup" name="signup" className="modalButton" onClick={this.signup}>
+        <button id="signup" name="signup" className="modalButton" onClick={this.onSignupClick}>
           Sign up
          </button> 
-        <p className="modalFooter">Already have an account? <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, true)}>Login</button></p>
+        <p className="modalFooter">Already have an account?
+          <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, true)}>
+            Login
+          </button>
+        </p>
       </div>
     );
 
@@ -120,7 +113,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin))
+  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  onLogin: (username, password) => dispatch(Actions.loginUser(username, password)),
+  onSignup: (userData) => dispatch(Actions.signupUser(userData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

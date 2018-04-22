@@ -7,8 +7,8 @@ from api import views
 """
 
 urlpatterns = [
-    path('signup', views.signUp, name='signup'),
-    path('signin', views.signIn, name="signIn"),
+    path('signup', views.signup, name='signup'),
+    path('login', views.login, name="signIn"),
     path('update-user-info', views.updateUserInfo, name="updateUserInfo"),
     path('get-user-info', views.getUserInfo, name="getUserInfo"),
     path('update-insurance-info', views.updateInsuranceInfo, name="updateInsuranceInfo"),

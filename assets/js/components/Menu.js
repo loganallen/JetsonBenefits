@@ -13,6 +13,7 @@ import { Header, Button } from 'semantic-ui-react';
 
 import Login from './Login';
 import Actions from '../actions';
+import { isLoggedIn } from '../auth';
 
 class Menu extends React.Component {
   constructor(props) {
@@ -25,6 +26,10 @@ class Menu extends React.Component {
   }
 
   render() {
+    let loginButton = isLoggedIn() ?
+      (<button type='button' className='menuButton' onClick={this.props.onLogoutClick}>LOGOUT</button>) :
+      (<button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>);
+
     return (
       <div id='menuWrapper' className={this.props.menuTheme}>
         <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
@@ -32,7 +37,7 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>HOW IT WORKS</button>
           <button type='button' className='menuButton'>BLOG</button>
           <button type='button' className='menuButton'>RESOURCES</button>
-          <button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>
+          {loginButton}
         </div>
         <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
       </div>
@@ -48,8 +53,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openLoginModal: () => dispatch(Actions.updateLoginModal(true, true)),
-  closeLoginModal: () => dispatch(Actions.updateLoginModal(false, true))
+  openLoginModal: () => dispatch(Actions.updateLoginModal(true)),
+  closeLoginModal: () => dispatch(Actions.updateLoginModal(false)),
+  onLogoutClick: () => dispatch(Actions.logoutUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

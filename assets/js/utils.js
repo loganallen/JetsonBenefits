@@ -1,6 +1,6 @@
 import keyMirror from "keymirror";
 
-const baseAPI = `${env.baseURL}/api`;
+const baseAPI = `http://${env.baseURL}/api`;
 
 export const Endpoints = {
   SIGNUP: `${baseAPI}/signup`,

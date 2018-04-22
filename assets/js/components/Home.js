@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import Actions from '../actions';
+import { authToken } from '../auth';
 
 class Home extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class Home extends React.Component {
 
   onFindBenefitsClick = () => {
     this.props.postUserInfo(
-      'temp_token',
+      authToken(),
       { age: this.props.age, zipcode: this.props.zipcode }
     );
     this.props.history.push("/recommendation");
@@ -106,6 +107,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props.user);
     return (
       <div>
         {this.section1()}
@@ -119,7 +121,8 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => ({
   age: state.app.userData.age,
-  zipcode: state.app.userData.zipcode
+  zipcode: state.app.userData.zipcode,
+  user: state.app.user
 });
 
 const mapDispatchToProps = (dispatch) => ({

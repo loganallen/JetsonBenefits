@@ -1,8 +1,5 @@
 // frontent authentication module
-
-// login api endpoint
-const tokenURL = `http://${env.baseURL}/api/signin`;
-const signUpURL = `http://${env.baseURL}/api/signup`;
+import { Endpoints } from './utils';
 
 /**
  * login: attempts to login with given username and password
@@ -17,10 +14,11 @@ const login = function login(username, password, callback) {
     } else {
         getToken(username, password, (res) => {
             if (res.authenticated) { sessionStorage.token = res.token  }
-            
+            console.log('login', res);
             if (callback) {
                 callback({ 
-                    success: res.success,
+                    success: res.authenticated,
+                    name: res.name,
                     error: res.error 
                 });
             }
@@ -29,14 +27,14 @@ const login = function login(username, password, callback) {
 };
 
 /**
- * signUp: attempts to signUp the user with the given information
+ * signup: attempts to signup the user with the given information
  * @param {Object} userData: { firstName, lastName, email, password }
  * @param {Function} callback
  */
-const signup = function signUp(userData, callback) {
+const signup = function signup(userData, callback) {
     $.ajax({
         type: 'POST',
-        url: signUpURL,
+        url: Endpoints.SIGNUP,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
             firstName: userData.firstName,
@@ -50,6 +48,7 @@ const signup = function signUp(userData, callback) {
             if (callback) {
                 callback({
                     success: res.success,
+                    name: userData.firstName,
                     error: res.error
                 });
             }
@@ -65,18 +64,18 @@ const logout = function logout() {
 };
 
 /**
- * loggedIn: returns true if logged in, false otherwise
+ * isLoggedIn: returns true if logged in, false otherwise
  * @return {Boolean}
  */
-const loggedIn = function loggedIn() {
+const isLoggedIn = function isLoggedIn() {
     return !!sessionStorage.token;
 };
 
 /**
- * token: returns the currently stored token, will be undefined if doesn't exist
+ * authToken: returns the currently stored auth token or undefined if it does not exist
  * @return {String | undefined}
  */
-const token = function token() {
+const authToken = function authToken() {
     return sessionStorage.token;
 };
 
@@ -89,16 +88,18 @@ const token = function token() {
 const getToken = function getToken(username, password, callback) {
     $.ajax({
         type: 'POST',
-        url: tokenURL,
+        url: Endpoints.LOGIN,
         data: {
             csrfmiddlewaretoken: env.csrf_token,
             username: username,
             password: password
         },
         success: (res) => {
+            console.log('getToken', res);
             callback({
                 authenticated: res.success,
-                token: res.token === '' ? undefined : res.token,
+                token: res.token === '' ? null : res.token,
+                name: res.name === '' ? null : res.name,
                 error: res.error
             });
         }
@@ -108,8 +109,8 @@ const getToken = function getToken(username, password, callback) {
 module.exports = {
     login,
     logout,
-    loggedIn,
+    isLoggedIn,
     signup,
-    token,
+    authToken,
     getToken
 }

@@ -24,7 +24,7 @@ def validateRequest(request, keys, method, response):
     """
     result = True
 
-    d = request.POST if method == 'POST' else request.GET
+    d = request.POST.dict() if method == 'POST' else request.GET.dict()
 
     for key in keys:
         result = result and (key in d)
@@ -33,13 +33,13 @@ def validateRequest(request, keys, method, response):
     if not result:
         response['sucess'] = False
         response['error'] = 'Invalid ' + method + ' arguments'
-        response.status_code = 5000
+        response['status_code'] = 500
 
     return result
 
 
 @require_POST
-def signUp(request):
+def signup(request):
     """
         Sign Up for JetsonBenefits
         :param request 
@@ -65,19 +65,25 @@ def signUp(request):
             print(res['error'])
         else:
             # create user & api token
-            user = User.objects.create_user(username=email, email=email, password=password)
+            user = User.objects.create_user(
+                username=email,
+                email=email,
+                password=password,
+                first_name=firstName,
+                last_name=lastName
+            )
             token = Token.objects.create(user=user)
             res['success'] = True
             res['token'] = token.key
-            print('created user: ' + username)
+            print('created user: ' + user.username)
 
     return JsonResponse(res)
 
 
 @require_POST
-def signIn(request):
+def login(request):
     """
-        Sign In for JetsonBenefits
+        Log In for JetsonBenefits
         :param request 
             { POST: { username: string, password: string } }
 
@@ -105,6 +111,7 @@ def signIn(request):
             if token is not None:
                 res['success'] = True
                 res['token'] = token.key
+                res['name'] = user.first_name
             else:
                 res['success'] = False
                 res['error'] = 'No token exists for user'
@@ -126,7 +133,7 @@ def updateUserInfo(request):
     """
     requiredKeys = ['userData']
     res = { 'success': False, 'error': '' }
-
+    
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
         # -- fetch from USER table here
