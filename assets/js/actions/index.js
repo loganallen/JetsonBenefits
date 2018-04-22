@@ -163,7 +163,7 @@ const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) =
         data: {
             csrfmiddlewaretoken: env.csrf_token,
             insuranceType: insuranceType,
-            insuranceData: data
+            insuranceData: JSON.stringify(data)
         },
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);

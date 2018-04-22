@@ -14,7 +14,7 @@ const login = function login(username, password, callback) {
     } else {
         getToken(username, password, (res) => {
             if (res.authenticated) { sessionStorage.token = res.token  }
-            console.log('login', res);
+            
             if (callback) {
                 callback({ 
                     success: res.authenticated,
@@ -95,7 +95,6 @@ const getToken = function getToken(username, password, callback) {
             password: password
         },
         success: (res) => {
-            console.log('getToken', res);
             callback({
                 authenticated: res.success,
                 token: res.token === '' ? null : res.token,

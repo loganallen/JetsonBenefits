@@ -107,7 +107,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log(this.props.user);
     return (
       <div>
         {this.section1()}
@@ -121,8 +120,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => ({
   age: state.app.userData.age,
-  zipcode: state.app.userData.zipcode,
-  user: state.app.user
+  zipcode: state.app.userData.zipcode
 });
 
 const mapDispatchToProps = (dispatch) => ({
