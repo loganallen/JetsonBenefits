@@ -37,7 +37,11 @@ const updateBulkUserData = (data) => ({
  * Thunks for API requests
  */
 
- // POST updated user info for the active auth user
+/**
+ *  postUserInfo: update user info for the active auth user
+ *  @param {String} token
+ *  @param {Object} data { key: value }
+ */ 
 const postUserInfo = (token, data) => (dispatch, getState) => {
     $.ajax({
         type: 'POST',
@@ -56,7 +60,10 @@ const postUserInfo = (token, data) => (dispatch, getState) => {
     });
 }
 
-// FETCH user info for the active auth user
+/**
+ * fetchUserInfo: get user info for the active auth user
+ * @param {String} token
+ */
 const fetchUserInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
@@ -75,7 +82,12 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
     });
 }
 
-// POST updated insurance info for the active auth user
+/**
+ * postInsuranceInfo: update insurance info for the active auth user
+ * @param {String} token
+ * @param {String} insuranceType
+ * @param {Object} data: { key: value }
+ */
 const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) => {
     $.ajax({
         type: 'POST',
@@ -95,7 +107,11 @@ const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) =
     });
 }
 
-// FETCH specific insurance info for the active auth user
+/**
+ * fetchInsuranceInfo: get specific insurance info for the active auth user
+ * @param {String} token
+ * @param {String} insuranceType
+ */
 const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
@@ -114,7 +130,10 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
     });
 }
 
-// FETCH all insurance info for the active auth user
+/**
+ * fetchAllInsuranceInfo: get all insurance info for the active auth user
+ * @param {String} token
+ */
 const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
@@ -132,7 +151,11 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
     });
 }
 
-// FETCH specific insurance quote info for the active auth user
+/**
+ * fetchInsuranceQuote: get specific insurance quote info for the active auth user
+ * @param {String} token
+ * @param {String} insuranceType
+ */
 const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
@@ -151,7 +174,10 @@ const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
     });
 }
 
-// FETCH all insurance quote info for the active auth user
+/**
+ * fetchAllInsuranceQuote: get all insurance quote info for the active auth user
+ * @param {String} token
+ */
 const fetchAllInsuranceQuote = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
