@@ -2,13 +2,12 @@
 The [QuoteItem] component contains the most relevent quote information for a 
 given area of insurance. Contains a tab which drops down the [RefineQuoteItem]
 component for the given area of insurance.
-
-Model filepath:
-Controller filepath:
 */
 
 import React from 'react';
 import {} from 'semantic-ui-react';
+
+import RefineQuoteItem from './RefineQuoteItem';
 
 class QuoteItem extends React.Component {
   constructor(props) {
@@ -19,23 +18,40 @@ class QuoteItem extends React.Component {
       field2: {header: this.props.field2.header, subheader: this.props.field2.subheader},
       field3: {imagesrc: this.props.field3.imagesrc, carrier: this.props.field3.carrier},
       permonth: this.props.permonth,
-      quoteid: this.props.quoteid
+      quoteid: this.props.quoteid,
+      refineOpen: false,
     };
   }
 
+
+getRefineComponent = (insuranceType) => (
+  <RefineQuoteItem 
+    insuranceType={insuranceType}
+    userData={this.props.userData}
+    updateUserData={this.props.updateUserData}
+    />
+)
+
+onRefineClick = (event) => {
+  this.setState({
+    refineOpen: !this.state.refineOpen
+  })
+}
+
   render() {
     return (
+      <div className='outerWrapper'>
       <div className="quoteItem">
 
         <div className='quoteLeft'>
 
           <div className='top'>
             <div className="insuranceType">{this.props.type} INSURANCE</div>
-            <button  
+            {this.state.insuranceType != 'disability' && <button  
               className='refineButton'
-              onClick={(e) => this.props.onRefineClick(e)}>
+              onClick={(e) => this.onRefineClick(e)}>
               Refine V
-            </button>
+            </button>}
           </div>
 
           <div className='fields'>
@@ -70,6 +86,10 @@ class QuoteItem extends React.Component {
           </button>
 
         </div>
+      </div>
+      <div className='refineWrapper'>
+        {this.state.refineOpen && this.getRefineComponent(this.state.type)}
+      </div>
       </div>
     );
   }
