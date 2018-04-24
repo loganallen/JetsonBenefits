@@ -21,7 +21,7 @@ button {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* Desktop Only Styles */

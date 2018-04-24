@@ -15,10 +15,8 @@
 }
 #menuTitle {
     display: inline-block;
-    width: 200px;
     margin-top: 0; margin-left: 0; margin-right: 0;
     margin-bottom: 1px;
-    font-size: 2em;
     font-weight: bold;
     cursor: pointer;
 }
@@ -38,4 +36,31 @@
     font-size: 1.2em;
     font-weight: 200;
     background: none;
+}
+
+/* Desktop Only Styles */
+@media screen and (min-device-width: 768px) {
+    #menuTitle {
+        font-size: 2em;
+    }
+}
+
+/* Mobile Only Styles */
+@media screen and (max-device-width: 768px) {
+    #menuTitle {
+        font-size: 4em;
+    }
+
+    #icon-wrapper {
+        display: block;
+        width: 100%;
+    }
+    #icon-wrapper button {
+        float: right;
+        background: none;
+    }
+
+    .mobileMenuButton {
+        font-size: 1.5em;
+    }
 }

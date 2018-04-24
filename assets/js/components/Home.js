@@ -21,8 +21,9 @@ import '../../css/home.css';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.hide = () => is_mobile(this.props.deviceWidth); 
+    this.state = {
+      is_mobile: is_mobile(this.props.deviceWidth)
+    };
   }
 
   componentWillMount() {
@@ -52,7 +53,7 @@ class Home extends React.Component {
     return (
       <div id='homeS1'>
         <div id='homeS1Content'
-          className={ classNames({ hidden: this.hide() }) }>
+          className={ classNames({ hidden: this.state.is_mobile}) }>
           <p><span>Benefits</span> that fit your life.</p>
         </div>
       </div>
@@ -60,7 +61,7 @@ class Home extends React.Component {
   }
 
   section2() {
-    if (is_mobile(this.props.deviceWidth)) {
+    if (this.state.is_mobile) {
       return (
         <div id='homeS2'>
           <div id='homeS2Content'>
