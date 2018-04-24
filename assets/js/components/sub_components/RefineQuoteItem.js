@@ -20,7 +20,9 @@ class RefineQuoteItem extends React.Component {
     }
 
   onDropdownChange = (value, id) => {
-      this.props.updateUserData('dropdown'+id, value);
+    console.log(id);
+    console.log(this.props.userData[`dropdown${id}`]);
+      this.props.updateUserData(`dropdown${id}`, value);
     }
 
   createDropdown = (answers, id) => (
@@ -30,7 +32,7 @@ class RefineQuoteItem extends React.Component {
         key={`dropdown${id}`}
         options={answers}
         value={this.props.userData[`dropdown${id}`]}
-        onChange={(_, option, id) => this.onDropdownChange(option.value, id)}
+        onChange={(_, option) => this.onDropdownChange(option.value, id)}
       />
     );
 
@@ -155,6 +157,7 @@ class RefineQuoteItem extends React.Component {
             id='spouseName'
             className='spouseName'
             onChange={(e) => this.onInputChange('spouseName', e)}
+            value={this.props.userData.spouseName}
             placeholder=''
           />
           </Grid.Column>
@@ -164,6 +167,7 @@ class RefineQuoteItem extends React.Component {
             id='spouseAge'
             className='spouseAge'
             onChange={(e) => this.onInputChange('spouseAge', e)}
+            value={this.props.userData.spouseAge}
             placeholder=''
           />
           </Grid.Column>
@@ -177,6 +181,7 @@ class RefineQuoteItem extends React.Component {
           id='mortgageInput'
           className='mortgageInput'
           onChange={(e) => this.onInputChange('mortgageBalance', e)}
+          value={this.props.userData.mortgageBalance}
           placeholder='100,000'
         />
       </div>
@@ -187,6 +192,7 @@ class RefineQuoteItem extends React.Component {
           id='debtTotal'
           className='debtTotal'
           onChange={(e) => this.onInputChange('debtTotal', e)}
+          value={this.props.userData.debtTotal}
           placeholder='250,000'
         />
       </div>
@@ -197,6 +203,7 @@ class RefineQuoteItem extends React.Component {
            id='existingLifeInsurance'
            className='existingLifeInsurance'
            onChange={(e) => this.onInputChange('existingLifeInsurance', e)}
+           value={this.props.userData.existingLifeInsurance}
            placeholder='1,000,000'
           />
       </div>
@@ -207,17 +214,11 @@ class RefineQuoteItem extends React.Component {
            id='investments'
            className='investments'
            onChange={(e) => this.onInputChange('investments', e)}
+           value={this.props.userData.investments}
            placeholder='60,000'
           />
       </div>  
     </div>
-    /*
-    child, name, age, pay for college
-    
-    What is the balance of your other debts
-    Do you have any existing life insurance (polciy value)
-    What is the total current balance of your investments and savings
-    */
   )
 
   disabilityQuestions = () =>{
