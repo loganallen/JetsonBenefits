@@ -56,4 +56,4 @@ For **example** run `npm start` to start the dev server instead of remembering t
 
 ## Database changes
 1. `python manage.py makemigrations`
-2. `python migrate`
+2. `python manage.py migrate`
