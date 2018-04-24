@@ -20,33 +20,46 @@ class Login extends React.Component {
   
   constructor(props) {
     super(props);
-  
-    if (Auth.isLoggedIn()) {
-      // this.thing();
-    }
+    this.state = Auth.isLoggedIn() ? {} :
+    {
+      loginEmail: '',
+      loginPassword: '',
+      signupFirstName: '',
+      signupLastName: '',
+      signupEmail: '',
+      signupPassword: ''
+    };
   }
 
   onLoginClick = () => {
-    const [ username, password ] = [ $('#login-email').val(), $('#login-password').val() ];
-
-    if (username.length > 0 && password.length > 0) {
+  if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
       this.props.onLogin(username, password);
     }
   }
 
   onSignupClick = () => {
     const userData = {
-      firstName: $('#signup-firstName').val(),
-      lastName: $('#signup-lastName').val(),
-      email: $('#signup-email').val(),
-      password: $('#signup-password').val()
-    };
+      firstName: this.state.signupFirstName,
+      lastName: this.state.signupLastName,
+      email: this.state.signupEmail,
+      password: this.state.signupPassword
+    }
 
     let valid = Object.values(userData).reduce((acc, val) => acc && val.length > 0, true); // TODO
    
     if (valid) {
       this.props.onSignup(userData);
     }
+  }
+
+  /**
+   * Creates a handler that updates the state for the login & sign up modal
+   * @param {Object} event: js event
+   */
+  handleInputChange = event => {
+    const data = this.state;
+    data[event.target.name] = event.target.value;
+    this.setState(data);
   }
 
   render() {
@@ -63,8 +76,22 @@ class Login extends React.Component {
 
     const content = this.props.isLogin ? (
       <div>
-        <input id="login-email" name="login-email" className="modalInput" type="email" placeholder="email"/>
-        <input id="login-password" name="login-password" className="modalInput" type="password" placeholder="password"/>
+        <input 
+          name="loginEmail"
+          value={this.state.loginEmail}
+          className="modalInput" 
+          type="email"
+          placeholder="email"
+          onChange={this.handleInputChange} 
+        />
+        <input
+          name="loginPassword"
+          value={this.state.loginPassword}
+          className="modalInput"
+          type="password"
+          placeholder="password"
+          onChange={this.handleInputChange}
+        />
         <button id="login" name="login" className="modalButton" onClick={this.onLoginClick}>
           Sign in
         </button> 
@@ -77,10 +104,38 @@ class Login extends React.Component {
       </div>
     ) : (
       <div>
-        <input id="signup-firstName" name="signup-firstName" className="modalInput_half left" type="text" placeholder="first name"/>
-        <input id="signup-lastName" name="signup-lastName" className="modalInput_half right" type="text" placeholder="last name"/>
-        <input id="signup-email" name="signup-email" className="modalInput" type="email" placeholder="email"/>
-        <input id="signup-password" name="signup-password" className="modalInput" type="password" placeholder="password"/>
+        <input
+          name="signupFirstName"
+          value={this.state.signupFirstName}
+          className="modalInput_half left"
+          type="text"
+          placeholder="first name"
+          onChange={this.handleInputChange}
+        />
+        <input
+          name="signupLastName"
+          value={this.state.signupLastName}
+          className="modalInput_half right"
+          type="text"
+          placeholder="last name"
+          onChange={this.handleInputChange}
+        />
+        <input
+          name="signupEmail"
+          value={this.state.signupEmail}
+          className="modalInput"
+          type="email"
+          placeholder="email"
+          onChange={this.handleInputChange}
+        />
+        <input
+          name="signupPassword"
+          value={this.state.signupPassword}
+          className="modalInput"
+          type="password"
+          placeholder="password"
+          onChange={this.handleInputChange}
+        />
         <button id="signup" name="signup" className="modalButton" onClick={this.onSignupClick}>
           Sign up
          </button> 
