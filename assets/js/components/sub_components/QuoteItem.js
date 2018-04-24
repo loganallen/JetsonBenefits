@@ -8,7 +8,7 @@ Controller filepath:
 */
 
 import React from 'react';
-import {} from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 class QuoteItem extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class QuoteItem extends React.Component {
             <button  
                   className='refineButton'
                   onClick={(e) => this.props.onRefineClick(e)}>
-                  Refine V
+                  Refine <Icon name='angle down' />
             </button>
           </div>
 
