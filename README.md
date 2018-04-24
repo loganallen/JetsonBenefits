@@ -55,5 +55,5 @@ For **example** run `npm start` to start the dev server instead of remembering t
 	1. ``` npm install babel-loader@7.1.1 --save-dev ```
 
 ## Database changes
-1. `python manage.py makemigration app`
+1. `python manage.py makemigrations`
 2. `python migrate`
