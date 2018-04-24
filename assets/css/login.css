@@ -1,0 +1,95 @@
+/* Login Modal CSS */
+#modalWrapper {
+  display: flex;
+  align-items: stretch;
+  border-radius: 5%;
+}
+
+#modalImg {
+  display: inline-block;
+  width: 50%;
+  background-color: #3AAFA9;
+}
+#modalImg h1 {
+  display: block;
+  margin-top: 60%;
+  color: white;
+  text-align: center;
+}
+
+.loginHeader {
+  font-size: 2.5em;
+  color: #474747;
+}
+
+.loginSubheader {
+  font-size: 1.2em;
+  color: #474747;
+}
+
+.modalInput {
+  display: block;
+  width: 85%;
+  padding: 12px 20px;
+  margin-top: 12px; margin-bottom: 12px;
+  margin-left: auto; margin-right: auto;
+  border: 1px solid grey;
+  border-radius: 4px;
+  font-size: 1.2em;
+}
+
+.modalInput_half {
+  display: inline-block;
+  width: 40%;
+  padding: 12px 20px;
+  margin-top: 12px; margin-bottom: 0px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  font-size: 1.2em;
+}
+
+.modalInput_half.left {
+  margin-left: 7.5%;
+  margin-right: 2.5%;
+}
+
+.modalInput_half.right {
+  margin-left: 2.5%;
+  margin-right: 7.5%;
+}
+
+.modalButton {
+  display: block;
+  margin-left: auto; margin-right: auto;
+  margin-top: 35px;
+  margin-bottom: 20px; 
+  padding: 15px 20px;
+  border-radius: 5%;
+  color: white;
+  background-color: #3AAFA9;
+  font-size: 1.5em;
+}
+
+#modalContent {
+  display: inline-block;
+  width: 50%;
+  padding: 5%;
+}
+
+.typeSwitcher {
+  text-decoration: underline;
+}
+
+.modalFooter {
+  display: block;
+  margin-left: auto; margin-right: auto;
+  padding-bottom: 50px;
+  text-align: center;
+  color: #474747;
+  font-size: 1.2em;
+}
+
+.loginHeaderWrapper {
+  display: block;
+  margin-bottom: 20px;
+}
