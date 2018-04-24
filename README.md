@@ -22,6 +22,14 @@
 6. Install the django requirements: `pip install -r requirements.txt`
 7. Exit the virtual environment: `deactivate`
 
+### MYSQL Setup
+1. Configure your `.bash_profile` to have the necessary MySQL environmental variables
+* export MYSQL_HOST='localhost'
+* export MYSQL_USER={your_user(could be root)}
+* export MYSQL_PASSWORD={your_mysql_pswd}
+* export MYSQL_DB='jetson_database'
+2. Make sure your `mysql server` is running
+
 ## Development Process
 1. Make sure to `git pull` from remote master before implementing changes
 2. Run `npm install` to ensure all python packages are included
@@ -47,5 +55,5 @@ For **example** run `npm start` to start the dev server instead of remembering t
 	1. ``` npm install babel-loader@7.1.1 --save-dev ```
 
 ## Database changes
-1. `python manage.py makemigration app`
+1. `python manage.py makemigrations`
 2. `python migrate`
