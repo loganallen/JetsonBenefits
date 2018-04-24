@@ -3,6 +3,7 @@ import { isLoggedIn } from '../auth';
 
 const initialState = {
   menuTheme: "themeWhite",
+  deviceWidth: window.innerWidth,
   user: {
     name: '',
     isAuth: isLoggedIn()
@@ -25,6 +26,11 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionTypes.EMIT_DEVICE_WIDTH_UPDATE:
+      return {
+        ...state,
+        deviceWidth: action.data.deviceWidth
+      };
     case ActionTypes.CHANGE_MENU_THEME:
       return {
         ...state,

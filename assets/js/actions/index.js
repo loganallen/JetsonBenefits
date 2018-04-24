@@ -5,6 +5,13 @@ import Auth from '../auth';
 /*
  * App actions
  */
+const emitDeviceWidthUpdate = () => ({
+    type: ActionTypes.EMIT_DEVICE_WIDTH_UPDATE,
+    data: {
+        deviceWidth: window.innerWidth
+    }
+});
+
 const changeMenuTheme = (theme) => ({
     type: ActionTypes.CHANGE_MENU_THEME,
     data: {
@@ -265,6 +272,7 @@ const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
 
 
 export default {
+    emitDeviceWidthUpdate,
     changeMenuTheme,
     updateLoginModal,
     updateUserData,
