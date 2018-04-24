@@ -2,6 +2,8 @@ import keyMirror from "keymirror";
 
 const baseAPI = `http://${env.baseURL}/api`;
 
+const MOBILE_BREAKPOINT = 768;
+
 export const Endpoints = {
   SIGNUP: `${baseAPI}/signup`,
   LOGIN: `${baseAPI}/login`,
@@ -20,3 +22,5 @@ export const InsuranceTypes = keyMirror({
   LIFE: null,
   DISABILITY: null
 });
+
+export const is_mobile = (deviceWidth) => deviceWidth <= MOBILE_BREAKPOINT || env.is_mobile;
