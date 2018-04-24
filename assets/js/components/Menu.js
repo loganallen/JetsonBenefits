@@ -15,6 +15,8 @@ import Login from './Login';
 import Actions from '../actions';
 import { isLoggedIn } from '../auth';
 
+import '../../css/menu.css';
+
 class Menu extends React.Component {
   constructor(props) {
     super(props);

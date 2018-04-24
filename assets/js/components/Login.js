@@ -14,6 +14,8 @@ import {connect} from 'react-redux';
 import Actions from '../actions';
 import Auth from '../auth';
 
+import '../../css/login.css';
+
 class Login extends React.Component {
   
   constructor(props) {
