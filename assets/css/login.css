@@ -168,4 +168,11 @@
     padding-bottom: 50px;
     font-size: 2em;
   }
+
+  #mobileModalClose {
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
 }

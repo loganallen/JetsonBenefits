@@ -7,7 +7,7 @@ Controller filepath:
 */
 
 import React from 'react';
-import {Modal, Button} from 'semantic-ui-react';
+import {Modal, Button, Icon} from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import {connect} from 'react-redux';
@@ -241,6 +241,7 @@ class Login extends React.Component {
 
     return (
       <div id='modalWrapperMobile' className={classNames({ hidden: !this.props.isOpen })}>
+        <button id="mobileModalClose" onClick={this.props.onClose}><Icon name='close' size='huge' color='red' /></button>
         <div id="modalImg">
           <h1>jetsonbenefits</h1>
         </div>
