@@ -8,11 +8,12 @@ Controller filepath:
 
 import React from 'react';
 import {Modal, Button} from 'semantic-ui-react';
+import classNames from 'classnames';
 
 import {connect} from 'react-redux';
 
 import Actions from '../actions';
-import Auth from '../auth';
+import { is_mobile } from '../utils';
 
 import '../../css/login.css';
 
@@ -20,8 +21,8 @@ class Login extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = Auth.isLoggedIn() ? {} :
-    {
+    this.state =  {
+      is_mobile: is_mobile(this.props.deviceWidth), 
       loginEmail: '',
       loginPassword: '',
       signupFirstName: '',
@@ -62,7 +63,7 @@ class Login extends React.Component {
     this.setState(data);
   }
 
-  render() {
+  desktopRender = () => {
     const header = this.props.isLogin ? (
       <div className="loginHeaderWrapper">
         <h1 className="loginHeader">Sign In</h1>
@@ -162,11 +163,102 @@ class Login extends React.Component {
         </Modal>
       </div>
     );
+  };
+
+  mobileRender = () => {
+    const content = this.props.isLogin ? (
+      <div>
+        <input 
+          name="loginEmail"
+          value={this.state.loginEmail}
+          className="modalInput" 
+          type="email"
+          placeholder="email"
+          onChange={this.handleInputChange} 
+        />
+        <input
+          name="loginPassword"
+          value={this.state.loginPassword}
+          className="modalInput"
+          type="password"
+          placeholder="password"
+          onChange={this.handleInputChange}
+        />
+        <button id="login" name="login" className="modalButton" onClick={this.onLoginClick}>
+          Sign in
+        </button> 
+        <p className="modalFooter">
+          Dont have an account yet?
+          <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, false)}>
+            Sign Up
+          </button>
+        </p>
+      </div>
+    ) : (
+      <div>
+        <input
+          name="signupFirstName"
+          value={this.state.signupFirstName}
+          className="modalInput"
+          type="text"
+          placeholder="first name"
+          onChange={this.handleInputChange}
+        />
+        <input
+          name="signupLastName"
+          value={this.state.signupLastName}
+          className="modalInput"
+          type="text"
+          placeholder="last name"
+          onChange={this.handleInputChange}
+        />
+        <input
+          name="signupEmail"
+          value={this.state.signupEmail}
+          className="modalInput"
+          type="email"
+          placeholder="email"
+          onChange={this.handleInputChange}
+        />
+        <input
+          name="signupPassword"
+          value={this.state.signupPassword}
+          className="modalInput"
+          type="password"
+          placeholder="password"
+          onChange={this.handleInputChange}
+        />
+        <button id="signup" name="signup" className="modalButton" onClick={this.onSignupClick}>
+          Sign up
+         </button> 
+        <p className="modalFooter">Already have an account?
+          <button className='typeSwitcher' onClick={() => this.props.updateLoginModal(true, true)}>
+            Login
+          </button>
+        </p>
+      </div>
+    );
+
+    return (
+      <div id='modalWrapperMobile' className={classNames({ hidden: !this.props.isOpen })}>
+        <div id="modalImg">
+          <h1>jetsonbenefits</h1>
+        </div>
+        <div id="modalContent">
+          { content }
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    return this.state.is_mobile ? this.mobileRender() : this.desktopRender();
   }
 }
 
 const mapStateToProps = (state) => ({
-  ...state.app
+  ...state,
+  deviceWidth: state.app.deviceWidth
 });
 
 const mapDispatchToProps = (dispatch) => ({

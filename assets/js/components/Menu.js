@@ -43,6 +43,16 @@ class Menu extends React.Component {
     })
   }
 
+  openLoginModal = () => {
+    $('body').addClass('modal-open');
+    this.props.openLoginModal();
+  }
+
+  closeLoginModal = () => {
+    $('body').removeClass('modal-open');
+    this.props.closeLoginModal();
+  }
+
   desktopRender = () => {
     let loginButton = isLoggedIn() ?
       (<button type='button' className='menuButton' onClick={this.props.onLogoutClick}>LOGOUT</button>) :
@@ -57,7 +67,7 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>RESOURCES</button>
           {loginButton}
         </div>
-        <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
+        <Login isOpen={this.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
       </div>
     );
   }
@@ -72,13 +82,13 @@ class Menu extends React.Component {
               <Icon name='bars' size='huge' color='teal' />
             </button>
           </div>
-          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
+          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
         </div>
         <ReactMenu vertical size='massive' floated='right' className={classNames({ hidden: !this.state.mobileMenu })}>
               <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
               <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
               <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
-              <ReactMenu.Item onClick={this.props.openLoginModal}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>
+              <ReactMenu.Item onClick={this.openLoginModal}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>
         </ReactMenu>
       </div>
     );
