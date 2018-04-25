@@ -24,6 +24,7 @@ class Home extends React.Component {
     this.state = {
       isMobile: isMobile(this.props.deviceWidth)
     };
+    console.log(this.props);
   }
 
   componentWillMount() {

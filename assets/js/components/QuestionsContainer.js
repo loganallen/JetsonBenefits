@@ -19,13 +19,24 @@ class QuestionsContainer extends React.Component {
         this.state = {};
     }
 
+    showQuotesButtonDisabled = () => {
+      var disabled = false;
+      Object.keys(this.props.userData).forEach(key => {
+        if (key === 'spouseAge' && this.props.userData['maritalStatus'] === 'single') return;
+        else if (key === 'kidAges' && this.props.userData['numKids'] == 0) return;
+        else if (key === 'numKids' && this.props.userData[key] !== '') return;
+        disabled = this.props.userData[key] == false || disabled;
+      });
+      return disabled;
+    }
+
     onInputChange = (key, event) => {
       // TODO: Validate inputs
       this.props.updateUserData(key, event.target.value);
     }
 
     onDropdownChange = (value) => {
-      this.props.updateUserData('marriageStatus', value);
+      this.props.updateUserData('maritalStatus', value);
     }
 
     onKidAgeChange = (idx, event) => {
@@ -59,7 +70,7 @@ class QuestionsContainer extends React.Component {
       />
     );
 
-    marriageStatusDropdown = () => (
+    maritalStatusDropdown = () => (
       <Dropdown
         id='questionsDropdown'
         className='questionsInput'
@@ -68,7 +79,7 @@ class QuestionsContainer extends React.Component {
           { value: 'married', text: 'Married' },
         ]}
         onChange={(_, option) => this.onDropdownChange(option.value)}
-        value={this.props.userData.marriageStatus}
+        value={this.props.userData.maritalStatus}
         placeholder='Single'
       />
     );
@@ -166,11 +177,11 @@ class QuestionsContainer extends React.Component {
           <p>.</p>
           <br/>
           <p>I'm</p>
-          {this.marriageStatusDropdown()}
+          {this.maritalStatusDropdown()}
           <p>with</p>
           {this.numKidsInput()}
           <p>kids.</p>
-          {this.props.userData.marriageStatus == 'married' && (
+          {this.props.userData.maritalStatus == 'married' && (
             <div>
               <p>My spouse is </p>
               {this.spouseAgeInput()}
@@ -201,13 +212,14 @@ class QuestionsContainer extends React.Component {
     	const headerText = 'Let\'s find the best package for you. '+ 
     	 'Just tell us a bit about yourself.';
       return (
-          <div id="questions-container">
+          <div id="questionsWrapper">
             <h1 id="header-h1">{headerText}</h1>
             {this.questionContent()} 
             <button 
               id='quotesButton' 
               className='quotesButton'
               onClick={this.props.onShowQuotes}
+              disabled={this.showQuotesButtonDisabled()}
             >Show Quotes
             </button>
           </div>
