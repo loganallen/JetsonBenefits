@@ -14,70 +14,104 @@ import Actions from '../actions';
 import QuestionsContainer from './QuestionsContainer';
 import QuotesContainer from './QuotesContainer';
 import Sidebar from './sub_components/Sidebar';
+import { is_mobile } from '../utils';
+
 import '../../css/recommendation.css';
+
+/**
+ * this.state.stage: ['questions', 'recommendation', 'quotes']
+ */
 
 class Recommendation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            stage: 'questions'
+            stage: 'questions',
+            isMobile: is_mobile(this.props.deviceWidth)
         };
+        console.log(this.props);
     }
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
+        // TODO: Remove this action and put menu inside Recommendation component
     }
 
-    //Returns basic quote information (from the model)
-    // ***hard coded for now ***
-    getInsuraceInfo = () => {
-        return [
-            {title: 'Basic Health', value: 0, active: true},
-            {title: 'Term Life', value: 0, active: true},
-            {title: 'Disability', value: 0, active: true},
-            {title: 'Dental', value: 0, active: false},
-            {title: 'Vision', value: 0, active: false},
-            {title: 'Critical Illness', value: 0, active: false}
-        ];
+    onMobileNextClick = () => {
+        this.setState({
+            stage: 'recommendation'
+        });
     }
 
-    onShowQuotes = () => {
+    onShowQuotesClick = () => {
         this.setState({
             stage: 'quotes'
         });
     }
 
-    mainContent(stage) {
-        return (stage == 'questions') ?
-            <QuestionsContainer
-                className='questionsWrapper'
-                onShowQuotes={this.onShowQuotes}
+    questionsContent() {
+        console.log(this);
+        return (this.state.isMobile) ?
+            <QuestionsContainerMobile
+                onNextClick={this.onMobileNextClick}
                 userData={this.props.userData}
                 updateUserData={this.props.updateUserData}
+            /> :
+            <div>
+                <Sidebar/>
+                <QuestionsContainer
+                    onShowQuotes={this.onShowQuotesClick}
+                    userData={this.props.userData}
+                    updateUserData={this.props.updateUserData}
+                />
+            </div>; 
+    }
+
+    // Exclusively for mobile -- the stage in between the questions & quotes page
+    recommendationContent() {
+        return (
+            <RecommendationContainerMobile
+                
+            />
+        );
+    }
+
+    quotesContent() {
+        return (this.state.isMobile) ? 
+            <QuotesContainerMobile
+
             /> : 
-            <QuotesContainer 
+            <QuotesContainer
                 userData={this.props.userData}
                 updateUserData={this.props.updateUserData}
-            />;
+            />
     }
 
     render() {
+        let renderedContent = (stage => {
+            switch (stage) {
+                case 'questions':
+                    return this.questionsContent();
+                case 'recommendation':
+                    return this.recommendationContent();
+                case 'quotes':
+                    return this.quotesContent();
+                default:
+                    return this.questionsContent();
+            }
+        })(this.state.stage);
+
         return (
             <div id='rec'>
-                {(this.state.stage == 'questions') &&
-                    <Sidebar
-                        className='sidebar' 
-                        id='sidebar' 
-                        values={this.getInsuraceInfo()}
-                    />}
-                {this.mainContent(this.state.stage)}
+                {renderedContent}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    userData: state.app.userData
+    userData: state.app.userData,
+    deviceWidth: state.app.deviceWidth
 });
 
 const mapDispatchToProps = (dispatch) => ({

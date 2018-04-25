@@ -7,13 +7,20 @@ Controller filepath:
 */
 
 import React from 'react';
-import {List, Label, Icon} from 'semantic-ui-react';
+import { List, Label, Icon } from 'semantic-ui-react';
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      values: this.props.values
+      values: [
+        { title: 'Basic Health', value: 0, active: true },
+        { title: 'Term Life', value: 0, active: true },
+        { title: 'Disability', value: 0, active: true },
+        { title: 'Dental', value: 0, active: false },
+        { title: 'Vision', value: 0, active: false },
+        { title: 'Critical Illness', value: 0, active: false }
+      ]
     }
   }
 
@@ -25,7 +32,8 @@ class Sidebar extends React.Component {
           <div className={item.active == true ? 'activeText' : 'greyText'}>
             <Icon name='circle' className='sidebarIcon'/>
             <p className='sidebarTextLeft'>{item.title}</p>
-            <p className='sidebarTextRight'>${item.value}</p>
+            {/* <p className='sidebarTextRight'>${item.value}</p> */}
+            <br/>
           </div>
         </div>
       </List.Item>
@@ -38,14 +46,14 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <div id='sidebar' className='sidebar'>
+      <div id='sidebarWrapper'>
         <h1 id="sidebar-title">JETSON RECOMMENDS</h1>
       	<List>
           {this.listContent()}
         </List>
         <div className='sidebarSum'>
-          <p id="sum">${this.insuranceSum()}-${this.insuranceSum()}</p>
-          <p id="label">per month</p>
+          {/* <p id="sum">${this.insuranceSum()}-${this.insuranceSum()}</p>
+          <p id="label">per month</p> */}
         </div>
       </div>
     );

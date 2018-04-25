@@ -24,6 +24,7 @@ class Home extends React.Component {
     this.state = {
       is_mobile: is_mobile(this.props.deviceWidth)
     };
+    console.log(this.props);
   }
 
   componentWillMount() {
@@ -42,10 +43,6 @@ class Home extends React.Component {
   }
 
   onFindBenefitsClick = () => {
-    this.props.postUserInfo(
-      authToken(),
-      { age: this.props.age, zipcode: this.props.zipcode }
-    );
     this.props.history.push("/recommendation");
   }
 

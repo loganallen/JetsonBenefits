@@ -32,20 +32,22 @@ blue color: #3AAFA9;
   color: black;
 }
 
-#sidebar {
-  width: 35%;
+#sidebarWrapper {
+  width: 30%;
   text-align: left;
   font-size: 1.5em;
   font-weight: 200;
   background-color: #f0f0f0;
   padding-left: 15px; padding-right: 15px;
+  float: left;
 }
 
 #sidebar-title {
-  padding-top: 50px;
+  padding-top: 40px;
   padding-bottom: 20px;
+  padding-left: 15px;
   font-size: 1em;
-  font-weight: 200;
+  font-weight: 600;
 }
 
 .sidebar-item {
@@ -126,13 +128,13 @@ blue color: #3AAFA9;
   text-align: center;
 }
 #questionsContent p {
-  margin: 15px 5px;
+  margin: 10px 5px;
   font-size: 2em;
   font-weight: 200;
   display: inline-block;
 }
 .questionsInput {
-  margin: 15px 5px;
+  margin: 10px 5px;
   padding-bottom: 5px;
   background: transparent;
   outline: 0;
@@ -168,8 +170,8 @@ blue color: #3AAFA9;
   outline: 0;
   font-size: 2em;
   font-weight: 300;
-  margin-top: 50px;
-  margin-bottom: 100px;
+  margin-top: 40px;
+  margin-bottom: 60px;
   margin-left: auto; margin-right: auto;
   padding-top: 15px; padding-bottom: 15px;
   padding-left: 20px; padding-right: 20px;
@@ -180,4 +182,8 @@ blue color: #3AAFA9;
 #questionsDropdown .default.text {
   color: #3AAFA9;
   opacity: 0.5;
+}
+
+#healthConditionMenu {
+  margin-top: 20px;
 }
