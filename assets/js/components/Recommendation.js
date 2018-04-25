@@ -10,12 +10,14 @@ Controller filepath:
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Actions from '../actions';
 import QuestionsContainer from './QuestionsContainer';
-import QuotesContainer from './QuotesContainer';
+import QuestionsContainerMobile from './QuestionsContainerMobile';
 import Sidebar from './sub_components/Sidebar';
-import { is_mobile } from '../utils';
+import SidebarMobile from './sub_components/SidebarMobile';
+import QuotesContainer from './QuotesContainer';
 
+import Actions from '../actions';
+import { is_mobile } from '../utils';
 import '../../css/recommendation.css';
 
 /**
@@ -70,21 +72,19 @@ class Recommendation extends React.Component {
     // Exclusively for mobile -- the stage in between the questions & quotes page
     recommendationContent() {
         return (
-            <RecommendationContainerMobile
+            <SidebarMobile
                 
             />
         );
     }
 
     quotesContent() {
-        return (this.state.isMobile) ? 
-            <QuotesContainerMobile
-
-            /> : 
+        return (
             <QuotesContainer
                 userData={this.props.userData}
                 updateUserData={this.props.updateUserData}
             />
+        );
     }
 
     render() {
