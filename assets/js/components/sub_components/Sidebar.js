@@ -47,7 +47,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div id='sidebarWrapper'>
-        <h1 id="sidebar-title">JETSON RECOMMENDS</h1>
+        <h1 id="sidebarTitle">JETSON RECOMMENDS</h1>
       	<List>
           {this.listContent()}
         </List>
@@ -55,6 +55,12 @@ class Sidebar extends React.Component {
           {/* <p id="sum">${this.insuranceSum()}-${this.insuranceSum()}</p>
           <p id="label">per month</p> */}
         </div>
+        {this.props.isMobile && (
+          <button
+            id='sidebarNextButton'
+            onClick={this.props.onNextClick}
+          >Show Quotes</button>
+        )}
       </div>
     );
   }
