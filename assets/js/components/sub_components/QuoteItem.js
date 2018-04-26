@@ -6,12 +6,9 @@ component for the given area of insurance.
 
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
-<<<<<<< HEAD
 import classNames from 'classnames';
 
 import RefineQuoteItem from './RefineQuoteItem';
-=======
->>>>>>> master
 
 class QuoteItem extends React.Component {
   constructor(props) {
@@ -51,19 +48,11 @@ onRefineClick = (event) => {
 
           <div className='top'>
             <div className="insuranceType">{this.props.type} INSURANCE</div>
-<<<<<<< HEAD
             {this.state.insuranceType != 'disability' && <button  
               className='refineButton'
               onClick={(e) => this.onRefineClick(e)}>
               Refine <Icon name='angle down' />
             </button>}
-=======
-            <button  
-                  className='refineButton'
-                  onClick={(e) => this.props.onRefineClick(e)}>
-                  Refine <Icon name='angle down' />
-            </button>
->>>>>>> master
           </div>
 
           <div className='fields'>
