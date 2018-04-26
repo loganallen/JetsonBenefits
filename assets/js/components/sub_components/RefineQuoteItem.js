@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button, Dropdown } from 'semantic-ui-react';
+import { Grid, Button, Dropdown, Checkbox } from 'semantic-ui-react';
 
 class RefineQuoteItem extends React.Component {
   constructor(props) {
@@ -64,9 +64,7 @@ class RefineQuoteItem extends React.Component {
           />
           </Grid.Column>
           <Grid.Column>
-            <Button key={'button' + idx}>
-            O 
-            </Button>
+            <Checkbox defaultChecked key={'button' + idx} />
           </Grid.Column>
         </Grid.Row>)
       })
