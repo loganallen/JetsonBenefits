@@ -1,0 +1,179 @@
+/* Login Modal CSS */
+#modalWrapper {
+  display: flex;
+  align-items: stretch;
+  border-radius: 5%;
+}
+
+#modalImg {
+  background-color: #3AAFA9;
+}
+
+.loginHeader {
+  font-size: 2.5em;
+  color: #474747;
+}
+
+.loginSubheader {
+  font-size: 1.2em;
+  color: #474747;
+}
+
+.typeSwitcher {
+  text-decoration: underline;
+}
+
+.modalFooter {
+  display: block;
+  margin-left: auto; margin-right: auto;
+  text-align: center;
+  color: #474747;
+}
+
+.loginHeaderWrapper {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.typeSwitcher {
+  background: none;
+}
+
+/* Desktop Only Styles */
+@media screen and (min-device-width: 768px) {
+  #modalImg {
+    display: inline-block;
+    width: 50%;
+  }
+  #modalImg h1 {
+    display: block;
+    margin-top: 60%;
+    color: white;
+    text-align: center;
+  }
+
+  #modalContent {
+    display: inline-block;
+    width: 50%;
+    padding: 5%;
+  }
+
+  .modalInput {
+    display: block;
+    width: 85%;
+    padding: 12px 20px;
+    margin-top: 12px; margin-bottom: 12px;
+    margin-left: auto; margin-right: auto;
+    border: 1px solid grey;
+    border-radius: 4px;
+    font-size: 1.2em;
+  }
+  
+  .modalInput_half {
+    display: inline-block;
+    width: 40%;
+    padding: 12px 20px;
+    margin-top: 12px; margin-bottom: 0px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    font-size: 1.2em;
+  }
+  
+  .modalInput_half.left {
+    margin-left: 7.5%;
+    margin-right: 2.5%;
+  }
+  
+  .modalInput_half.right {
+    margin-left: 2.5%;
+    margin-right: 7.5%;
+  }
+  
+  .modalButton {
+    display: block;
+    margin-left: auto; margin-right: auto;
+    margin-top: 35px;
+    margin-bottom: 20px; 
+    padding: 15px 20px;
+    border-radius: 5%;
+    color: white;
+    background-color: #3AAFA9;
+    font-size: 1.5em;
+  }
+
+  .modalFooter {
+    padding-bottom: 50px;
+    font-size: 1.2em;
+  }
+}
+
+/* Mobile Only Styles */
+@media screen and (max-device-width: 768px) {
+  #modalWrapperMobile {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+  }
+  #modalWrapperMobile.hidden {
+    z-index: -1;
+  }
+
+  #modalImg {
+    display: block;
+    width: 100%;
+  }
+  #modalImg h1 {
+    display: block;
+    padding-top: 60%;
+    padding-bottom: 10%;
+    color: white;
+    text-align: center;
+    font-size: 6em;
+  }
+
+  #modalContent {
+    display: block;
+    width: 100%;
+    padding-top: 40px;
+  }
+
+  .modalInput {
+    display: block;
+    width: 65%;
+    padding: 20px 20px;
+    margin-top: 20px; margin-bottom: 20px;
+    margin-left: auto; margin-right: auto;
+    border: 2px solid grey;
+    border-radius: 4px;
+    font-size: 3em;
+  }
+  
+  .modalButton {
+    display: block;
+    margin-left: auto; margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 40px; 
+    padding: 15px 60px;
+    color: white;
+    background-color: #3AAFA9;
+    font-size: 4em;
+  }
+
+  .modalFooter {
+    padding-bottom: 50px;
+    font-size: 2em;
+  }
+
+  #mobileModalClose {
+    display: block;
+    position: absolute;
+    background: none;
+    top: 15px;
+    left: 15px;
+  }
+}
