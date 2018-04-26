@@ -12,12 +12,22 @@
     margin-bottom: 50px; 
 }
 
-.quoteItem {
-    display: flex;
+.quoteOuterWrapper {
+    display: block;
     width: 90%;
     margin-left: auto; margin-right: auto;
     margin-bottom: 50px;
     box-shadow: 1px 2px 1px 2px #bdbdbd;
+}
+
+.quoteItem{
+    display: flex;
+    width: 100%;
+}
+
+.quoteItem.refine-open {
+    box-shadow: 1px 2px 1px 2px #bdbdbd;
+    margin-bottom: 50px;
 }
 
 .quoteLeft {
@@ -90,4 +100,36 @@
     color: white;
     background-color: #3AAFA9;
     font-size: 1.2em;
+}
+
+/* Refine Styles */
+.refineWrapper {
+    padding-left: 10%; padding-right: 10%;
+    padding-bottom: 35px;
+}
+
+.refine-title {
+    text-align: center;
+    font-size: 1.4em;
+    margin-bottom: 25px;
+}
+
+.refine-question {
+    display: block;
+    width: 100%;
+}
+.refine-question p {
+    display: inline-block;
+    width: 70%;
+}
+.refine-question input {
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    border-top: none; border-right: none; border-left: none;
+    border-bottom: 2px solid black; 
+}
+.refine-question .dropdown {
+    display: inline-block;
+    width: 30%;
 }

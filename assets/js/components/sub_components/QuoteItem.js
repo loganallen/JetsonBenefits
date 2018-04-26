@@ -6,6 +6,7 @@ component for the given area of insurance.
 
 import React from 'react';
 import {} from 'semantic-ui-react';
+import classNames from 'classnames';
 
 import RefineQuoteItem from './RefineQuoteItem';
 
@@ -40,8 +41,8 @@ onRefineClick = (event) => {
 
   render() {
     return (
-      <div className='outerWrapper'>
-      <div className="quoteItem">
+      <div className='quoteOuterWrapper'>
+      <div className={classNames('quoteItem', { 'refine-open': this.state.refineOpen })}>
 
         <div className='quoteLeft'>
 

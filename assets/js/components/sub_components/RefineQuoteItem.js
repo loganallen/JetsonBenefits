@@ -27,7 +27,9 @@ class RefineQuoteItem extends React.Component {
 
   createDropdown = (answers, id) => (
       <Dropdown
+        selection
         id={`dropdown${id}`}
+        placeholder={`${answers[0].text}`}
         className={'questionDropdown'}
         key={`dropdown${id}`}
         options={answers}
@@ -72,63 +74,90 @@ class RefineQuoteItem extends React.Component {
 
   healthQuestions = () => (
     <div>
-    <div>
-      <p>Great! We just need a litle more information from you</p>
-    </div>
-    <div>
-    <p>Do you take prescription medications</p>
-    {this.createDropdown([
-      {value: 'yes', text: 'yes'},
-      {value: 'no', text: 'no'}], 0)}<br/>
-    <p>Do you have a chronic condition</p>
-    {this.createDropdown([
-      {value: 'yes', text: 'yes'},
-      {value: 'no', text: 'no'}], 1)}<br/>
-    <p>How likely are you to visit your doctor for your annual physical exam</p>
-    {this.createDropdown([
-      {value: '2', text: 'likely'},
-      {value: '1', text: 'somewhat likely'},
-      {value: '0', text: 'not likely'}], 2)}<br/>
-    <p>How many times do you visit your doctor each year</p>
-    <input
-        type='text'
-        id='doctorVisit'
-        className='doctorVisit'
-        onChange={(e) => this.onInputChange('doctorVisit', e)}
-        value={this.props.userData.doctorVisit}
-        placeholder='1'
-      /><br/>
-    <p>There's a cold going around and the office and you wake up with a sore throat. What do you do?</p> 
-    {this.createDropdown([{value: '0', text: 'Drink some tea, it\'ll pass'},
-       {value: '1', text: 'If I don\'t feel better in a few days, I\'m going to the doctor'}, 
-       {value: '2', text: 'Go to the doctor immediately'}], 4)}<br/>
-    <p>Your doctor asks you to come back for additional tests after your physical exam. What do you do?</p>
-      {this.createDropdown([{value: '0', text: 'Do nothing, I feel fine'},
-       {value: '1', text: 'Find out cost before booking appointment'},
-       {value: '2', text: 'Schedule right away'}], 5)}<br/>
-    <p>How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?</p>
-      {this.createDropdown([{value: '0', text: 'Not a lot'},
-       {value: '1', text: 'It crosses my mind sometimes'},
-       {value: '2', text: 'Huge worry'}], 6)}<br/>
-    <p>How much do you worry about the medical expenses associated with a serious accident?</p>
-      {this.createDropdown([{value: '0', text: 'Not a lot'},
-       {value: '1', text: 'It crosses my mind sometimes'},
-       {value: '2', text: 'Huge worry'}], 7)}<br/>
-    <p>How do you schedule your doctor's appointments?</p>
-      {this.createDropdown([{value: '0', text: 'I don\'t ...'},
-       {value: '1', text: 'Conveinent time with any doctor'},
-       {value: '2', text: 'I must see my doc'}], 8)}<br/>
-    <p>How likely are you to seek out advice from a specialist?</p>
-      {this.createDropdown([{value: '0', text: 'Not likely'},
-       {value: '1', text: 'If my doc says so'},
-       {value: '2', text: 'I love second opinions'}], 9)}
-    </div>
+      <p class='refine-title'>Great! We just need a litle more information from you</p>
+      <div>
+        <div class='refine-question'>
+          <p>Do you take prescription medications?</p>
+          {this.createDropdown([
+            {value: 'yes', text: 'yes'},
+            {value: 'no', text: 'no'}], 0)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>Do you have a chronic condition?</p>
+          {this.createDropdown([
+            {value: 'yes', text: 'yes'},
+            {value: 'no', text: 'no'}], 1)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>How likely are you to visit your doctor for your annual physical exam?</p>
+          {this.createDropdown([
+            {value: '2', text: 'likely'},
+            {value: '1', text: 'somewhat likely'},
+            {value: '0', text: 'not likely'}], 2)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>How many times do you visit your doctor each year?</p>
+          <input
+            type='text'
+            id='doctorVisit'
+            className='doctorVisit'
+            onChange={(e) => this.onInputChange('doctorVisit', e)}
+            value={this.props.userData.doctorVisit}
+            placeholder='1'
+          />
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>There's a cold going around and the office and you wake up with a sore throat. What do you do?</p> 
+          {this.createDropdown([{value: '0', text: 'Drink some tea, it\'ll pass'},
+            {value: '1', text: 'If I don\'t feel better in a few days, I\'m going to the doctor'}, 
+            {value: '2', text: 'Go to the doctor immediately'}], 4)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>Your doctor asks you to come back for additional tests after your physical exam. What do you do?</p>
+            {this.createDropdown([{value: '0', text: 'Do nothing, I feel fine'},
+            {value: '1', text: 'Find out cost before booking appointment'},
+            {value: '2', text: 'Schedule right away'}], 5)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?</p>
+            {this.createDropdown([{value: '0', text: 'Not a lot'},
+            {value: '1', text: 'It crosses my mind sometimes'},
+            {value: '2', text: 'Huge worry'}], 6)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>How much do you worry about the medical expenses associated with a serious accident?</p>
+            {this.createDropdown([{value: '0', text: 'Not a lot'},
+            {value: '1', text: 'It crosses my mind sometimes'},
+            {value: '2', text: 'Huge worry'}], 7)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>How do you schedule your doctor's appointments?</p>
+            {this.createDropdown([{value: '0', text: 'I don\'t ...'},
+            {value: '1', text: 'Conveinent time with any doctor'},
+            {value: '2', text: 'I must see my doc'}], 8)}
+        </div>
+        <br/>
+        <div class='refine-question'>
+          <p>How likely are you to seek out advice from a specialist?</p>
+            {this.createDropdown([{value: '0', text: 'Not likely'},
+            {value: '1', text: 'If my doc says so'},
+            {value: '2', text: 'I love second opinions'}], 9)}
+        </div>
+      </div>
     </div>
   )
 
   lifeQuestions = () => (
     <div>
-      <p>Great! We just need a litle more information from you</p>
+      <p class='refine-title'>Great! We just need a litle more information from you</p>
       {
         (this.props.userData.marriageStatus == 'married' || (this.props.userData.kidAges).length > 0)
         && <Grid columns={4}>
