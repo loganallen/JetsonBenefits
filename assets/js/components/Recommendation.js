@@ -15,7 +15,7 @@ import Sidebar from './sub_components/Sidebar';
 import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
-import { is_mobile } from '../utils';
+import { isMobile } from '../utils';
 import '../../css/recommendation.css';
 
 /**
@@ -27,7 +27,7 @@ class Recommendation extends React.Component {
         super(props);
         this.state = {
             stage: 'questions',
-            isMobile: is_mobile(this.props.deviceWidth)
+            isMobile: isMobile(this.props.deviceWidth)
         };
     }
 
