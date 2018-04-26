@@ -9,6 +9,9 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 
+from app.models import *
+import json
+
 def validateRequest(request, keys, method, response):
     """
         Validates that a request has the correct keys
@@ -136,10 +139,18 @@ def updateUserInfo(request):
     
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
+        user_id = user.id
+        print("here")
+        userData = json.loads(request.POST['userData'])
+        age = userData['age']
+        zipcode = userData['zipcode']
         # -- fetch from USER table here
         # -- update corresponding fields
         res['success'] = True
-    
+        
+        getAnswers = user_general_answers(user_id = user_id, age = age, zipcode = zipcode)
+        getAnswers.save()
+
     return JsonResponse(res)
 
 
@@ -296,9 +307,8 @@ def generateInsuranceQuotes(request):
     res = { 'success': False, 'error': '', data: None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
-        user = request.user
         # -- get data
         # -- add data to res['data']
         res['success'] = True
-    
+
     return JsonResponse(res)
