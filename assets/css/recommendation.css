@@ -34,6 +34,7 @@ blue color: #3AAFA9;
 
 #sidebarWrapper {
   width: 30%;
+  height: 100%;
   text-align: left;
   font-size: 1.5em;
   font-weight: 200;
@@ -113,7 +114,7 @@ blue color: #3AAFA9;
   border-radius: 6px;
 }
 
-/* 
+/** 
  * questions Page CSS
  */
 
@@ -123,7 +124,7 @@ blue color: #3AAFA9;
 }
 #questionsHeader {
   display: block;
-  margin-left: auto; margin-right: auto;
+  margin: auto;
   font-size: 2.6em;
   text-align: center;
   width: 65%;
@@ -207,16 +208,17 @@ blue color: #3AAFA9;
   #questionsHeader {
     font-size: 4em;
     width: 80%;
-    padding-top: 60px; 
+    padding: 80px;
   }
   #questionsContent {
-    padding: 40px 0px;
+    padding: 0px;
   }
   #questionsContent p {
-    font-size: 3.4em;
+    font-size: 3.5em;
+    margin: 20px 10px;
   }
   .questionsInput {
-    font-size: 3.4em;
+    font-size: 3.5em;
   }
   .questionsInputShort {
     width: 60px;
@@ -225,11 +227,12 @@ blue color: #3AAFA9;
     width: 180px;
   }
   .dropdownItem {
-    font-size: 2em;
+    font-size: 1em;
   }
   #nextButton {
-    font-size: 3.4em;
+    font-size: 3.5em;
     padding: 15px 30px;
+    margin-top: 100px;
   }
 
   #sidebarWrapper {
