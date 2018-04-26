@@ -63,4 +63,16 @@
     .mobileMenuButton {
         font-size: 1.5em;
     }
+
+    #mobileMenu {
+        position: absolute;
+        right: 0;
+        margin-top: 0;
+    }
+    .mobileMenuExpanded {
+        visibility: visible;
+    }
+    .mobileMenuCollapsed {
+        visibility: hidden;
+    }
 }
