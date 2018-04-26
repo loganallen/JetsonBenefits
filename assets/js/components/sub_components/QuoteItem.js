@@ -5,7 +5,7 @@ component for the given area of insurance.
 */
 
 import React from 'react';
-import {} from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import RefineQuoteItem from './RefineQuoteItem';
@@ -51,7 +51,7 @@ onRefineClick = (event) => {
             {this.state.insuranceType != 'disability' && <button  
               className='refineButton'
               onClick={(e) => this.onRefineClick(e)}>
-              Refine V
+              Refine <Icon name='angle down' />
             </button>}
           </div>
 

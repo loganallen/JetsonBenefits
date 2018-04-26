@@ -122,6 +122,7 @@
 .refine-question p {
     display: inline-block;
     width: 70%;
+    padding-right: 5%;
     font-size: 1.2em;
     font-weight: 300;
     color: #474747;
