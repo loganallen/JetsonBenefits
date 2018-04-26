@@ -103,7 +103,7 @@
 }
 
 /* Refine Styles */
-.refineWrapper {
+.refineWrapper.open {
     padding-left: 10%; padding-right: 10%;
     padding-bottom: 35px;
 }
@@ -112,6 +112,7 @@
     text-align: center;
     font-size: 1.4em;
     margin-bottom: 25px;
+    color: #474747;
 }
 
 .refine-question {
@@ -121,15 +122,46 @@
 .refine-question p {
     display: inline-block;
     width: 70%;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #474747;
 }
-.refine-question input {
+.refine-input {
     display: inline-block;
     text-align: center;
     width: 30%;
     border-top: none; border-right: none; border-left: none;
-    border-bottom: 2px solid black; 
+    border-bottom: 2px solid grey; 
+    color: #3AAFA9;
+    font-size: 1.2em;
 }
 .refine-question .dropdown {
     display: inline-block;
     width: 30%;
+    color: #474747;
+}
+
+.grid-wrapper {
+    display: block;
+    width: 80%;
+    margin-left: auto; margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.refine-input-grid {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-top: none; border-right: none; border-left: none;
+    border-bottom: 2px solid grey; 
+    color: #3AAFA9;
+    font-size: 1.2em;
+}
+
+.row > div:first-of-type {
+    font-style: italic;
+}
+.column {
+    font-weight: 300;
 }

@@ -43,13 +43,13 @@ class RefineQuoteItem extends React.Component {
       return (
       <Grid.Row key={'row'+idx}>
           <Grid.Column>
-          {'Child ' + idx}
+          {'Child ' + (idx + 1)}
           </Grid.Column>
           <Grid.Column>
           <input
             type='text'
             id={'kidName'+ idx}
-            className='kidName'
+            className='refine-input-grid'
             placeholder={''}
           />
           </Grid.Column>
@@ -57,7 +57,7 @@ class RefineQuoteItem extends React.Component {
           <input
             type='text'
             id={'kidAge'+ idx}
-            className='kidAge'
+            className='refine-input-grid'
             onChange={(e) => this.onKidAgeChange(idx,event)}
             value={age}
             placeholder={''}
@@ -101,9 +101,9 @@ class RefineQuoteItem extends React.Component {
         <div class='refine-question'>
           <p>How many times do you visit your doctor each year?</p>
           <input
-            type='text'
+            type='number'
             id='doctorVisit'
-            className='doctorVisit'
+            className='refine-input'
             onChange={(e) => this.onInputChange('doctorVisit', e)}
             value={this.props.userData.doctorVisit}
             placeholder='1'
@@ -158,6 +158,7 @@ class RefineQuoteItem extends React.Component {
   lifeQuestions = () => (
     <div>
       <p class='refine-title'>Great! We just need a litle more information from you</p>
+      <div class='grid-wrapper'>
       {
         (this.props.userData.marriageStatus == 'married' || (this.props.userData.kidAges).length > 0)
         && <Grid columns={4}>
@@ -166,10 +167,10 @@ class RefineQuoteItem extends React.Component {
           {/*the first column has a blank header*/}
           </Grid.Column>
           <Grid.Column>
-          Name
+          NAME
           </Grid.Column>
           <Grid.Column>
-          Age
+          AGE
           </Grid.Column>
           <Grid.Column 
             width={3}>
@@ -184,7 +185,7 @@ class RefineQuoteItem extends React.Component {
           <input
             type='text'
             id='spouseName'
-            className='spouseName'
+            className='refine-input-grid'
             onChange={(e) => this.onInputChange('spouseName', e)}
             value={this.props.userData.spouseName}
             placeholder=''
@@ -194,7 +195,7 @@ class RefineQuoteItem extends React.Component {
           <input
             type='text'
             id='spouseAge'
-            className='spouseAge'
+            className='refine-input-grid'
             onChange={(e) => this.onInputChange('spouseAge', e)}
             value={this.props.userData.spouseAge}
             placeholder=''
@@ -203,45 +204,46 @@ class RefineQuoteItem extends React.Component {
         </Grid.Row>}
         {this.generateChildRows(this.props.userData.kidAges)}
       </Grid>}
-      <div>
+      </div>
+      <div class='refine-question'>
         <p>What is the balance of your mortgage?</p>
         <input
-          type='text'
+          type='number'
           id='mortgageInput'
-          className='mortgageInput'
+          className='refine-input'
           onChange={(e) => this.onInputChange('mortgageBalance', e)}
           value={this.props.userData.mortgageBalance}
           placeholder='100,000'
         />
       </div>
-      <div>
+      <div class='refine-question'>
         <p>What is the balance of your other debts?</p>
         <input
-          type='text'
+          type='number'
           id='debtTotal'
-          className='debtTotal'
+          className='refine-input'
           onChange={(e) => this.onInputChange('debtTotal', e)}
           value={this.props.userData.debtTotal}
           placeholder='250,000'
         />
       </div>
-      <div>
-        <p>Do you have any existing life insurance (polciy value)?</p>
+      <div class='refine-question'>
+        <p>Do you have any existing life insurance (policy value)?</p>
         <input
-           type='text'
+           type='number'
            id='existingLifeInsurance'
-           className='existingLifeInsurance'
+           className='refine-input'
            onChange={(e) => this.onInputChange('existingLifeInsurance', e)}
            value={this.props.userData.existingLifeInsurance}
            placeholder='1,000,000'
           />
       </div>
-      <div>
+      <div class='refine-question'>
         <p>What is the total current balance of your investments and savings?</p>
         <input
-           type='text'
+           type='number'
            id='investments'
-           className='investments'
+           className='refine-input'
            onChange={(e) => this.onInputChange('investments', e)}
            value={this.props.userData.investments}
            placeholder='60,000'

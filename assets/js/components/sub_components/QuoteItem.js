@@ -88,7 +88,7 @@ onRefineClick = (event) => {
 
         </div>
       </div>
-      <div className='refineWrapper'>
+      <div className={classNames('refineWrapper', { open: this.state.refineOpen })}>
         {this.state.refineOpen && this.getRefineComponent(this.state.type)}
       </div>
       </div>
