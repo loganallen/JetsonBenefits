@@ -152,6 +152,9 @@ class RefineQuoteItem extends React.Component {
             {value: '2', text: 'I love second opinions'}], 9)}
         </div>
       </div>
+      <div class='update-button-wrapper'>
+        <button class='update-button'>UPDATE</button>
+      </div>
     </div>
   )
 
@@ -248,7 +251,10 @@ class RefineQuoteItem extends React.Component {
            value={this.props.userData.investments}
            placeholder='60,000'
           />
-      </div>  
+      </div>
+      <div class='update-button-wrapper'>
+        <button class='update-button'>UPDATE</button>
+      </div>
     </div>
   )
 
