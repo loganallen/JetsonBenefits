@@ -10,6 +10,7 @@ Controller filepath:
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, Menu } from 'semantic-ui-react';
+import classNames from 'classnames';
 
 import Sidebar from './sub_components/Sidebar';
 
@@ -19,7 +20,7 @@ class QuestionsContainer extends React.Component {
         this.state = {};
     }
 
-    showQuotesButtonDisabled = () => {
+    isButtonDisabled = () => {
       var disabled = false;
       Object.keys(this.props.userData).forEach(key => {
         if (key === 'spouseAge' && this.props.userData['maritalStatus'] === 'single') return;
@@ -27,6 +28,7 @@ class QuestionsContainer extends React.Component {
         else if (key === 'numKids' && this.props.userData[key] !== '') return;
         disabled = this.props.userData[key] == false || disabled;
       });
+      console.log(this.props.userData);
       return disabled;
     }
 
@@ -36,6 +38,7 @@ class QuestionsContainer extends React.Component {
     }
 
     onDropdownChange = (value) => {
+      console.log(value);
       this.props.updateUserData('maritalStatus', value);
     }
 
@@ -51,8 +54,7 @@ class QuestionsContainer extends React.Component {
     ageInput = () => (
       <input
         type='text'
-        id='questionsInput1'
-        className='questionsInput'
+        className='questionsInput questionsInputShort'
         onChange={(e) => this.onInputChange('age', e)}
         value={this.props.userData.age}
         placeholder='30'
@@ -62,8 +64,7 @@ class QuestionsContainer extends React.Component {
     zipcodeInput = () => (
       <input
         type='text'
-        id='questionsInput2'
-        className='questionsInput'
+        className='questionsInput questionsInputLong'
         onChange={(e) => this.onInputChange('zipcode', e)}
         value={this.props.userData.zipcode}
         placeholder='60601'
@@ -75,8 +76,8 @@ class QuestionsContainer extends React.Component {
         id='questionsDropdown'
         className='questionsInput'
         options={[
-          { value: 'single', text: 'Single' },
-          { value: 'married', text: 'Married' },
+          { value: 'single', text: 'Single', content: <p className='dropdownItem'>Single</p> },
+          { value: 'married', text: 'Married', content: <p className='dropdownItem'>Married</p> },
         ]}
         onChange={(_, option) => this.onDropdownChange(option.value)}
         value={this.props.userData.maritalStatus}
@@ -87,8 +88,7 @@ class QuestionsContainer extends React.Component {
     spouseAgeInput = () => (
       <input
         type='text'
-        id='questionsInput1'
-        className='questionsInput'
+        className='questionsInput questionsInputShort'
         onChange={(e) => this.onInputChange('spouseAge', e)}
         value={this.props.userData.spouseAge}
         placeholder='30'
@@ -98,8 +98,7 @@ class QuestionsContainer extends React.Component {
     numKidsInput = () => (
       <input
         type='text'
-        id='questionsInput1'
-        className='questionsInput'
+        className='questionsInput questionsInputShort'
         onChange={(e) => this.onInputChange('numKids', e)}
         value={this.props.userData.numKids}
         placeholder='0'
@@ -112,9 +111,8 @@ class QuestionsContainer extends React.Component {
         inputs.push(
           <input
             type='text'
-            id='questionsInput1'
             key={`kid${k+1}`}
-            className='questionsInput'
+            className='questionsInput questionsInputShort'
             onChange={(e) => this.onKidAgeChange(k, e)}
             value={this.props.userData.kidAges[k]}
             placeholder='0'
@@ -133,8 +131,7 @@ class QuestionsContainer extends React.Component {
     incomeInput = () => (
       <input
         type='text'
-        id='questionsInput2'
-        className='questionsInput'
+        className='questionsInput questionsInputLong'
         onChange={(e) => this.onInputChange('income', e)}
         value={this.props.userData.income}
         placeholder='550000'
@@ -149,6 +146,9 @@ class QuestionsContainer extends React.Component {
           <Menu.Item
             key={el.toLowerCase()}
             name={el.toLowerCase()}
+            className={classNames({
+              'healthConditionMobileItem': this.props.isMobile
+            })}
             color={isActive ? 'teal' : 'grey'}
             active={isActive}
             onClick={this.onConditionItemClick}
@@ -168,7 +168,6 @@ class QuestionsContainer extends React.Component {
     //Main question page content
     questionContent() {
     	return (
-      <div id='questions'>
         <div id='questionsContent'>
           <p>I'm</p>
           {this.ageInput()}
@@ -204,35 +203,26 @@ class QuestionsContainer extends React.Component {
           {this.healthConditionMenu()}
           <br/>
         </div>
-      </div>
-    );
+      );
     }
 
     render() {
     	const headerText = 'Let\'s find the best package for you. '+ 
-    	 'Just tell us a bit about yourself.';
+       'Just tell us a bit about yourself.';
+  
       return (
           <div id="questionsWrapper">
-            <h1 id="header-h1">{headerText}</h1>
+            <h1 id="questionsHeader">{headerText}</h1>
             {this.questionContent()} 
-            <button 
-              id='quotesButton' 
-              className='quotesButton'
-              onClick={this.props.onShowQuotes}
-              disabled={this.showQuotesButtonDisabled()}
-            >Show Quotes
+            <button
+              id='nextButton'
+              onClick={this.props.onNextClick}
+              // disabled={this.isButtonDisabled()}
+            >{(this.props.isMobile) ? 'Next' : 'Show Quotes'}
             </button>
           </div>
       );
     }
 }
 
-const mapStateToProps = (state) => ({
-  userData: state.app.userData
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  
-});
-
-export default connect(mapStateToProps, null)(QuestionsContainer);
+export default QuestionsContainer;

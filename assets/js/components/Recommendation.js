@@ -11,9 +11,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import QuestionsContainer from './QuestionsContainer';
-import QuestionsContainerMobile from './QuestionsContainerMobile';
 import Sidebar from './sub_components/Sidebar';
-import SidebarMobile from './sub_components/SidebarMobile';
 import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
@@ -31,7 +29,6 @@ class Recommendation extends React.Component {
             stage: 'questions',
             isMobile: is_mobile(this.props.deviceWidth)
         };
-        console.log(this.props);
     }
 
     componentWillMount() {
@@ -52,28 +49,25 @@ class Recommendation extends React.Component {
     }
 
     questionsContent() {
-        console.log(this);
-        return (this.state.isMobile) ?
-            <QuestionsContainerMobile
-                onNextClick={this.onMobileNextClick}
-                userData={this.props.userData}
-                updateUserData={this.props.updateUserData}
-            /> :
+        return (
             <div>
-                <Sidebar/>
+                {(!this.state.isMobile) && <Sidebar/>}
                 <QuestionsContainer
-                    onShowQuotes={this.onShowQuotesClick}
+                    onNextClick={(this.state.isMobile) ? this.onMobileNextClick : this.onShowQuotesClick}
                     userData={this.props.userData}
                     updateUserData={this.props.updateUserData}
+                    isMobile={this.state.isMobile}
                 />
-            </div>; 
+            </div>
+        );
     }
 
     // Exclusively for mobile -- the stage in between the questions & quotes page
     recommendationContent() {
         return (
-            <SidebarMobile
-                
+            <Sidebar
+                isMobile={this.state.isMobile}
+                onNextClick={this.onShowQuotesClick}
             />
         );
     }
