@@ -134,21 +134,24 @@ def updateUserInfo(request):
         :return JsonResponse
             { success: bool, error: string }
     """
+
     requiredKeys = ['userData']
     res = { 'success': False, 'error': '' }
-    
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
         user_id = user.id
-        print("here")
         userData = json.loads(request.POST['userData'])
         age = userData['age']
         zipcode = userData['zipcode']
+        num_kids = userData['num_kids']
+        marital_status = userData['marital_status']
+        spouse_annual_income = userData['spouse_annual_income']
+        annual_income = userData['annual_income']
         # -- fetch from USER table here
         # -- update corresponding fields
         res['success'] = True
         
-        getAnswers = user_general_answers(user_id = user_id, age = age, zipcode = zipcode)
+        getAnswers = user_general_answers(user_id = user, age = age, zipcode = zipcode, num_kids = num_kids, marital_status = marital_status, spouse_annual_income = spouse_annual_income, annual_income = annual_income)
         getAnswers.save()
 
     return JsonResponse(res)

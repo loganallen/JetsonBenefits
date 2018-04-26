@@ -34,12 +34,12 @@ class user_general_answers(models.Model):
 			primary_key = True,
 		)
 	marital_status = models.CharField(max_length = 8, choices = status_options)
-	zipcode = models.IntegerField()
-	num_kids = models.IntegerField()
-	annual_income = models.IntegerField()
-	spouse_annual_income = models.IntegerField()
+	zipcode = models.IntegerField(default = 0)
+	num_kids = models.IntegerField(default = 0)
+	annual_income = models.IntegerField(default = 0)
+	spouse_annual_income = models.IntegerField(default = 0)
 	health = models.CharField(max_length = 9, choices = health_options)
-	age = models.IntegerField()
+	age = models.IntegerField(default = 0)
 
 class user_life_answers(models.Model):
 	mortgage_balance = models.IntegerField()

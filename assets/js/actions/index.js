@@ -118,6 +118,7 @@ const logoutUser = () => (dispatch, getState) => {
  *  @param {Object} data { key: value }
  */ 
 const postUserInfo = (token, data) => (dispatch, getState) => {
+	console.log("hi hi hi");
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_USER_INFO,
