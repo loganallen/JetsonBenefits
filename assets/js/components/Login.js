@@ -34,7 +34,7 @@ class Login extends React.Component {
 
   onLoginClick = () => {
   if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
-      this.props.onLogin(username, password);
+      this.props.onLogin(this.state.loginEmail, this.state.loginPassword);
     }
   }
 
