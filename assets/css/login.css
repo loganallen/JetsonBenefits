@@ -172,6 +172,7 @@
   #mobileModalClose {
     display: block;
     position: absolute;
+    background: none;
     top: 15px;
     left: 15px;
   }
