@@ -7,6 +7,6 @@ def main(request):
         'env': {
             'baseURL': request.META['HTTP_HOST'],
             'device': request.user_agent.device.family,
-            'is_mobile': request.user_agent.is_mobile
+            'isMobile': request.user_agent.is_mobile
         }
     })
