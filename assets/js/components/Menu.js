@@ -9,23 +9,51 @@ Controller filepath:
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Button } from 'semantic-ui-react';
+import { Header, Button, Icon, Menu as ReactMenu } from 'semantic-ui-react';
+import classNames from 'classnames';
 
 import Login from './Login';
 import Actions from '../actions';
 import { isLoggedIn } from '../auth';
+import { isMobile } from '../utils';
+
+import '../../css/menu.css';
 
 class Menu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isMobile: isMobile(this.props.deviceWidth),
+      mobileMenu: false
+    };
   }
 
   onHomeClick = () => {
     // TODO
   }
 
-  render() {
+  fakeClick = () => {
+    console.log('menu item clicked');
+  }
+
+  updateMobileMenu = () => {
+    this.setState({
+      isMobile: this.state.isMobile,
+      mobileMenu: !this.state.mobileMenu
+    })
+  }
+
+  openLoginModal = () => {
+    $('body').addClass('modal-open');
+    this.props.openLoginModal();
+  }
+
+  closeLoginModal = () => {
+    $('body').removeClass('modal-open');
+    this.props.closeLoginModal();
+  }
+
+  desktopRender = () => {
     let loginButton = isLoggedIn() ?
       (<button type='button' className='menuButton' onClick={this.props.onLogoutClick}>LOGOUT</button>) :
       (<button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>);
@@ -39,9 +67,35 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>RESOURCES</button>
           {loginButton}
         </div>
-        <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
+        <Login isOpen={this.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
       </div>
     );
+  }
+
+  mobileRender = () => {
+    return (
+      <div>
+        <div id='menuWrapper' className={this.props.menuTheme}>
+          <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
+          <div id='icon-wrapper'>
+            <button onClick={this.updateMobileMenu}>
+              <Icon name='bars' size='huge' color='teal' />
+            </button>
+          </div>
+          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
+        </div>
+        <ReactMenu vertical size='massive' floated='right' className={classNames({ hidden: !this.state.mobileMenu })}>
+              <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
+              <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
+              <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
+              <ReactMenu.Item onClick={this.openLoginModal}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>
+        </ReactMenu>
+      </div>
+    );
+  }
+
+  render() {
+    return this.state.isMobile ? this.mobileRender() : this.desktopRender();
   }
 }
 
@@ -49,7 +103,8 @@ const mapStateToProps = (state) => ({
   ...state,
   menuTheme: state.app.menuTheme,
   loginModalOpen: state.app.loginModal.isOpen,
-  loginModalType: state.app.loginModal.isLogin
+  loginModalType: state.app.loginModal.isLogin,
+  deviceWidth: state.app.deviceWidth
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,0 +1,178 @@
+/* 
+ * Home Page CSS
+ */
+
+ #homeS1 {
+  background-image: url('/static/img/home_img_1.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 700px;
+}
+#homeS1Content {
+  padding: 30px;
+  color: #ffffff;
+  font-size: 4.5em;
+  width: 33%;
+}
+#homeS1Content span {
+  font-weight: bold;
+}
+#homeS1Content p {
+  padding: 0px;
+  margin: 0px;
+  font-weight: 200;
+}
+#homeS2 {
+  padding: 75px 0px;
+}
+#homeS2Content {
+  margin: auto;
+  text-align: center;
+  color: #ffffff;
+}
+#homeS2Content p {
+  font-weight: 200;
+  display: inline-block;
+}
+.homeS2Input {
+  background: transparent;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  font-weight: 400;
+  color: #e2e2e2;
+  text-align: center;
+}
+.homeS2Input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #e2e2e2;
+  opacity: 0.5; /* Firefox */
+}
+.homeS2Input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #e2e2e2;
+  opacity: 0.5; /* Firefox */
+}
+.homeS2Input::-ms-input-placeholder { /* Microsoft Edge */
+  color: #e2e2e2;
+  opacity: 0.5; /* Firefox */
+}
+
+#homeS2B1 {
+  background-color: #ffffff;
+  color: #55b2ae;
+  outline: 0;
+  border: none;
+  font-weight: 300;
+}
+#homeS2B2 {
+  background: transparent;
+  outline: 0;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  font-size: 1em;
+  font-weight: 200;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+#homeS3 {
+  background-image: url('/static/img/home_img_2.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 520px;
+}
+#homeS3Content {
+  padding-top: 50px;
+  text-align: center;
+}
+#homeS3Content p {
+  margin: auto;
+  padding: 0px;
+  color: #000000;
+  font-size: 3em;
+  width: 60%;
+}
+
+#homeS4 {
+  padding-left: 0px; padding-right: 0px;
+  padding-top: 50px; padding-bottom: 150px;
+  text-align: center;
+  color: #ffffff;
+}
+#homeS4 h3 {
+  font-weight: bold;
+}
+#homeS4 p {
+  margin: auto;
+  font-weight: 200;
+  width: 66%;
+}
+
+/* Desktop Only Styles */
+@media screen and (min-device-width: 768px) {
+  #homeS2Content p {
+    margin: 15px 5px;
+    font-size: 2.5em;
+  }
+  .homeS2Input {
+    margin: 15px 5px;
+    padding-bottom: 5px;
+    font-size: 2.4em;
+  }
+
+  #homeS2Input1 {
+    width: 80px;
+  }
+  #homeS2Input2 {
+    width: 120px;
+  }
+
+  #homeS2B1 {
+    font-size: 2em;
+    margin-top: 50px;
+    padding-top: 15px; padding-bottom: 15px;
+    padding-left: 20px; padding-right: 20px;
+    border-radius: 6px;
+  }
+
+  #homeS4 h3 {
+    font-size: 3em;
+  }
+  #homeS4 p {
+    font-size: 1.6em;
+  }
+}
+
+/* Mobile Only Styles */
+@media screen and (max-device-width: 768px) {
+  #homeS2Content p {
+    margin: 15px 5px;
+    font-size: 4em;
+  }
+  .homeS2Input {
+    margin: 15px 5px;
+    padding-bottom: 5px;
+    font-size: 4.2em;
+  }
+
+  #homeS2Input1 {
+    width: 140px;
+  }
+  #homeS2Input2 {
+    width: 240px;
+  }
+
+  #homeS2B1 {
+    font-size: 3em;
+    margin-top: 20px;
+    padding-top: 15px; padding-bottom: 15px;
+    padding-left: 100px; padding-right: 100px;
+    border-radius: 6px;
+  }
+
+  #homeS4 h3 {
+    font-size: 3.5em;
+  }
+  #homeS4 p {
+    font-size: 2.4em;
+  }
+}
