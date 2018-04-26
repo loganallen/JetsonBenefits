@@ -26,22 +26,22 @@ class RefineQuoteItem extends React.Component {
     }
 
   createDropdown = (answers, id) => (
-      <Dropdown
-        selection
-        id={`dropdown${id}`}
-        placeholder={`${answers[0].text}`}
-        className={'questionDropdown'}
-        key={`dropdown${id}`}
-        options={answers}
-        value={this.props.userData[`dropdown${id}`]}
-        onChange={(_, option) => this.onDropdownChange(option.value, id)}
-      />
-    );
+    <Dropdown
+      selection
+      id={`dropdown${id}`}
+      placeholder={`${answers[0].text}`}
+      className={'questionDropdown'}
+      key={`dropdown${id}`}
+      options={answers}
+      value={this.props.userData[`dropdown${id}`]}
+      onChange={(_, option) => this.onDropdownChange(option.value, id)}
+    />
+  );
 
   generateChildRows = (kidAges) => {
     return kidAges.map((age, idx) => {
       return (
-      <Grid.Row key={'row'+idx}>
+        <Grid.Row key={'row'+idx}>
           <Grid.Column>
           {'Child ' + (idx + 1)}
           </Grid.Column>
@@ -66,8 +66,9 @@ class RefineQuoteItem extends React.Component {
           <Grid.Column>
             <Checkbox defaultChecked key={'button' + idx} />
           </Grid.Column>
-        </Grid.Row>)
-      })
+        </Grid.Row>
+      );
+    });
   }
 
   healthQuestions = () => (
@@ -208,47 +209,59 @@ class RefineQuoteItem extends React.Component {
       </div>
       <div class='refine-question'>
         <p>What is the balance of your mortgage?</p>
-        <input
-          type='number'
-          id='mortgageInput'
-          className='refine-input'
-          onChange={(e) => this.onInputChange('mortgageBalance', e)}
-          value={this.props.userData.mortgageBalance}
-          placeholder='100,000'
-        />
+        <div class='refine-input-currency-wrapper'>
+          <p>$</p>
+          <input
+            type='number'
+            id='mortgageInput'
+            className='refine-input-currency'
+            onChange={(e) => this.onInputChange('mortgageBalance', e)}
+            value={this.props.userData.mortgageBalance}
+            placeholder='100,000'
+          />
+        </div>
       </div>
       <div class='refine-question'>
         <p>What is the balance of your other debts?</p>
-        <input
-          type='number'
-          id='debtTotal'
-          className='refine-input'
-          onChange={(e) => this.onInputChange('debtTotal', e)}
-          value={this.props.userData.debtTotal}
-          placeholder='250,000'
-        />
+        <div class='refine-input-currency-wrapper'>
+          <p>$</p>
+          <input
+            type='number'
+            id='debtTotal'
+            className='refine-input-currency'
+            onChange={(e) => this.onInputChange('debtTotal', e)}
+            value={this.props.userData.debtTotal}
+            placeholder='250,000'
+            />
+        </div>
       </div>
       <div class='refine-question'>
         <p>Do you have any existing life insurance (policy value)?</p>
-        <input
-           type='number'
-           id='existingLifeInsurance'
-           className='refine-input'
-           onChange={(e) => this.onInputChange('existingLifeInsurance', e)}
-           value={this.props.userData.existingLifeInsurance}
-           placeholder='1,000,000'
-          />
+        <div class='refine-input-currency-wrapper'>
+          <p>$</p>
+          <input
+            type='number'
+            id='existingLifeInsurance'
+            className='refine-input-currency'
+            onChange={(e) => this.onInputChange('existingLifeInsurance', e)}
+            value={this.props.userData.existingLifeInsurance}
+            placeholder='1,000,000'
+            />
+        </div>
       </div>
       <div class='refine-question'>
         <p>What is the total current balance of your investments and savings?</p>
-        <input
-           type='number'
-           id='investments'
-           className='refine-input'
-           onChange={(e) => this.onInputChange('investments', e)}
-           value={this.props.userData.investments}
-           placeholder='60,000'
-          />
+        <div class='refine-input-currency-wrapper'>
+          <p>$</p>
+          <input
+            type='number'
+            id='investments'
+            className='refine-input-currency'
+            onChange={(e) => this.onInputChange('investments', e)}
+            value={this.props.userData.investments}
+            placeholder='60,000'
+            />
+        </div>
       </div>
       <div class='update-button-wrapper'>
         <button class='update-button'>UPDATE</button>

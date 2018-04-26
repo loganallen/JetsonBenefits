@@ -141,6 +141,28 @@
     width: 30%;
     color: #474747;
 }
+.refine-input-currency-wrapper {
+    display: inline-block;
+    width: 30%;
+}
+.refine-input-currency-wrapper p {
+    display: inline-block;
+    width: 10%;
+    padding-right: 0px;
+    text-align: right;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: black;
+}
+.refine-input-currency {
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+    border-top: none; border-right: none; border-left: none;
+    border-bottom: 2px solid grey; 
+    color: #3AAFA9;
+    font-size: 1.2em;
+}
 
 .grid-wrapper {
     display: block;
