@@ -36,10 +36,6 @@ class Home extends React.Component {
   }
 
   onFindBenefitsClick = () => {
-    this.props.postUserInfo(
-      authToken(),
-      { age: this.props.age, zipcode: this.props.zipcode }
-    );
     this.props.history.push("/recommendation");
   }
 
