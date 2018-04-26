@@ -23,4 +23,4 @@ export const InsuranceTypes = keyMirror({
   DISABILITY: null
 });
 
-export const is_mobile = (deviceWidth) => deviceWidth <= MOBILE_BREAKPOINT || env.is_mobile;
+export const isMobile = (deviceWidth) => deviceWidth <= MOBILE_BREAKPOINT || env.is_mobile;

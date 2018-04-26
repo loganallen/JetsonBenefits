@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import Login from './Login';
 import Actions from '../actions';
 import { isLoggedIn } from '../auth';
-import { is_mobile } from '../utils';
+import { isMobile } from '../utils';
 
 import '../../css/menu.css';
 
@@ -23,7 +23,7 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      is_mobile: is_mobile(this.props.deviceWidth),
+      isMobile: isMobile(this.props.deviceWidth),
       mobileMenu: false
     };
   }
@@ -38,7 +38,7 @@ class Menu extends React.Component {
 
   updateMobileMenu = () => {
     this.setState({
-      is_mobile: this.state.is_mobile,
+      isMobile: this.state.isMobile,
       mobileMenu: !this.state.mobileMenu
     })
   }
@@ -95,7 +95,7 @@ class Menu extends React.Component {
   }
 
   render() {
-    return this.state.is_mobile ? this.mobileRender() : this.desktopRender();
+    return this.state.isMobile ? this.mobileRender() : this.desktopRender();
   }
 }
 

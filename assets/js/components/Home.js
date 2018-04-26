@@ -14,7 +14,7 @@ import classNames from 'classnames';
 
 import Actions from '../actions';
 import { authToken } from '../auth';
-import { is_mobile } from '../utils';
+import { isMobile } from '../utils';
 
 import '../../css/home.css';
 
@@ -22,7 +22,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      is_mobile: is_mobile(this.props.deviceWidth)
+      isMobile: isMobile(this.props.deviceWidth)
     };
   }
 
@@ -53,7 +53,7 @@ class Home extends React.Component {
     return (
       <div id='homeS1'>
         <div id='homeS1Content'
-          className={ classNames({ hidden: this.state.is_mobile}) }>
+          className={ classNames({ hidden: this.state.isMobile }) }>
           <p><span>Benefits</span> that fit your life.</p>
         </div>
       </div>
@@ -61,7 +61,7 @@ class Home extends React.Component {
   }
 
   section2() {
-    if (this.state.is_mobile) {
+    if (this.state.isMobile) {
       return (
         <div id='homeS2'>
           <div id='homeS2Content'>

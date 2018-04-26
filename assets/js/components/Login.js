@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import {connect} from 'react-redux';
 
 import Actions from '../actions';
-import { is_mobile } from '../utils';
+import { isMobile } from '../utils';
 
 import '../../css/login.css';
 
@@ -22,7 +22,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state =  {
-      is_mobile: is_mobile(this.props.deviceWidth), 
+      isMobile: isMobile(this.props.deviceWidth), 
       loginEmail: '',
       loginPassword: '',
       signupFirstName: '',
@@ -58,9 +58,8 @@ class Login extends React.Component {
    * @param {Object} event: js event
    */
   handleInputChange = event => {
-    const data = this.state;
-    data[event.target.name] = event.target.value;
-    this.setState(data);
+    this.state[event.target.name] = event.target.value;
+    this.setState(this.state);
   }
 
   desktopRender = () => {
@@ -253,7 +252,7 @@ class Login extends React.Component {
   }
 
   render() {
-    return this.state.is_mobile ? this.mobileRender() : this.desktopRender();
+    return this.state.isMobile ? this.mobileRender() : this.desktopRender();
   }
 }
 
