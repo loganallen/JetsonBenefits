@@ -24,7 +24,7 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       isMobile: isMobile(this.props.deviceWidth),
-      mobileMenu: false
+      mobileMenuShowing: false
     };
   }
 
@@ -39,7 +39,7 @@ class Menu extends React.Component {
   updateMobileMenu = () => {
     this.setState({
       isMobile: this.state.isMobile,
-      mobileMenu: !this.state.mobileMenu
+      mobileMenuShowing: !this.state.mobileMenuShowing
     })
   }
 
@@ -88,11 +88,17 @@ class Menu extends React.Component {
           </div>
           <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
         </div>
-        <ReactMenu vertical size='massive' floated='right' className={classNames({ hidden: !this.state.mobileMenu })}>
-              <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
-              <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
-              <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
-              <ReactMenu.Item onClick={this.openLoginModal}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>
+        <ReactMenu
+          vertical
+          size='massive'
+          id='mobileMenu'
+          className={classNames({
+            hidden: !this.state.mobileMenuShowing
+        })}>
+          <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
+          <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
+          <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
+          <ReactMenu.Item onClick={this.openLoginModal}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>
         </ReactMenu>
       </div>
     );
