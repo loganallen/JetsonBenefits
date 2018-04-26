@@ -152,6 +152,7 @@ class Login extends React.Component {
         <Modal size={'large'} open={this.props.isOpen} onClose={this.props.onClose}>
           <div id="modalWrapper">
             <div id="modalImg">
+              <img src='static/img/login_modal_img.png' />
               <h1>jetsonbenefits</h1>
             </div>
             <div id="modalContent">
@@ -242,6 +243,7 @@ class Login extends React.Component {
       <div id='modalWrapperMobile' className={classNames({ hidden: !this.props.isOpen })}>
         <button id="mobileModalClose" onClick={this.props.onClose}><Icon name='close' size='huge' color='red' /></button>
         <div id="modalImg">
+          <img src='static/img/login_modal_img.png' />
           <h1>jetsonbenefits</h1>
         </div>
         <div id="modalContent">

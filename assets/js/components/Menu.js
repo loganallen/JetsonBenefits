@@ -79,7 +79,11 @@ class Menu extends React.Component {
           <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
           <div id='icon-wrapper'>
             <button onClick={this.updateMobileMenu}>
-              <Icon name='bars' size='huge' color='teal' />
+              {this.props.menuTheme === 'themeWhite' ? (
+                <Icon name='bars' size='huge' color='teal' />
+              ) : (
+                <Icon name='bars' size='huge' inverted />
+              )}
             </button>
           </div>
           <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
