@@ -89,8 +89,7 @@ class Menu extends React.Component {
           size='massive'
           id='mobileMenu'
           className={classNames({
-            mobileMenuExpanded: this.state.mobileMenuShowing,
-            mobileMenuCollapsed: !this.state.mobileMenuShowing
+            hidden: !this.state.mobileMenuShowing
         })}>
           <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
           <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>

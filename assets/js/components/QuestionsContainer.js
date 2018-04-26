@@ -28,7 +28,7 @@ class QuestionsContainer extends React.Component {
         else if (key === 'numKids' && this.props.userData[key] !== '') return;
         disabled = this.props.userData[key] == false || disabled;
       });
-      console.log(this.props.userData);
+
       return disabled;
     }
 
@@ -38,7 +38,6 @@ class QuestionsContainer extends React.Component {
     }
 
     onDropdownChange = (value) => {
-      console.log(value);
       this.props.updateUserData('maritalStatus', value);
     }
 
