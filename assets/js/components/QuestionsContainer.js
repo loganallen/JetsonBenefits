@@ -19,9 +19,11 @@ class QuestionsContainer extends React.Component {
         this.state = {};
     }
 
-    onInputChange = (key, event) => {
-      // TODO: Validate inputs
-      this.props.updateUserData(key, event.target.value);
+    onInputChange = (key, event, type='string') => {
+      let typecheck = (type=='string') == isNaN(event.target.value);
+      if(typecheck || event.target.value==''){
+        this.props.updateUserData(key, event.target.value);
+      }
     }
 
     onDropdownChange = (value) => {
@@ -30,6 +32,7 @@ class QuestionsContainer extends React.Component {
 
     onKidAgeChange = (idx, event) => {
       let age = event.target.value;
+      let typecheck = isNaN(age);
       this.props.updateUserData('kidAges', { idx: idx, age: age });
     }
 
@@ -42,7 +45,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         id='questionsInput1'
         className='questionsInput'
-        onChange={(e) => this.onInputChange('age', e)}
+        onChange={(e) => this.onInputChange('age', e, 'int')}
         value={this.props.userData.age}
         placeholder='30'
       />
@@ -53,7 +56,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         id='questionsInput2'
         className='questionsInput'
-        onChange={(e) => this.onInputChange('zipcode', e)}
+        onChange={(e) => this.onInputChange('zipcode', e, 'int')}
         value={this.props.userData.zipcode}
         placeholder='60601'
       />
@@ -78,7 +81,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         id='questionsInput1'
         className='questionsInput'
-        onChange={(e) => this.onInputChange('spouseAge', e)}
+        onChange={(e) => this.onInputChange('spouseAge', e, 'int')}
         value={this.props.userData.spouseAge}
         placeholder='30'
       />
@@ -89,7 +92,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         id='questionsInput1'
         className='questionsInput'
-        onChange={(e) => this.onInputChange('numKids', e)}
+        onChange={(e) => this.onInputChange('numKids', e, 'int')}
         value={this.props.userData.numKids}
         placeholder='0'
       />
@@ -124,7 +127,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         id='questionsInput2'
         className='questionsInput'
-        onChange={(e) => this.onInputChange('income', e)}
+        onChange={(e) => this.onInputChange('income', e, 'int')}
         value={this.props.userData.income}
         placeholder='550000'
       />
