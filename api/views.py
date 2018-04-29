@@ -147,12 +147,10 @@ def updateUserInfo(request):
         marital_status = userData['marital_status']
         spouse_annual_income = userData['spouse_annual_income']
         annual_income = userData['annual_income']
-        # -- fetch from USER table here
-        # -- update corresponding fields
-        res['success'] = True
         
         getAnswers = user_general_answers(user_id = user, age = age, zipcode = zipcode, num_kids = num_kids, marital_status = marital_status, spouse_annual_income = spouse_annual_income, annual_income = annual_income)
         getAnswers.save()
+        res['success'] = True
 
     return JsonResponse(res)
 
@@ -173,8 +171,8 @@ def getUserInfo(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        # -- retrieve fields
-        #-- add data to res['data']
+        data = list(user_general_answers.objects.filter(user_id=user.id).values())
+        res['data'] = data
         res['success'] = True
 
     return JsonResponse(res)
@@ -191,13 +189,46 @@ def updateInsuranceInfo(request):
         :return JsonResponse
             { success: bool, error: string }
     """
-    requiredKeys = []
+    requiredKeys = ['insuranceType', 'insuranceData']
     res = { 'success': False, 'error': '' }
 
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
-        # -- get information from POST request
-        # -- make updates
+        user_id = user.id
+        insuranceData = json.loads(request.POST['insuranceData'])
+        insuranceType = request.POST['insuranceType']
+
+        if (insuranceType == "Health"):
+            q_1 = userData['q_1']
+            q_2 = userData['q_2']
+            q_3 = userData['q_3']
+            q_4 = userData['q_4']
+            q_5 = userData['q_5']
+            q_6 = userData['q_6']
+            q_7 = userData['q_7']
+            q_8 = userData['q_8']
+            q_9 = userData['q_9']
+            q_10 = userData['q_10']
+            q_11 = userData['q_11']
+            q_12 = userData['q_12']
+
+            healthRecord = user_health_questions_answer(q_1=q_1, q_2=q_2, q_3=q_3, q_4=q_4, q_5=q_5, 
+                q_6=q_6, q_7=q_7, q_8=q_8, q_9=q_9, q_10=q_10, q_11=q_11, q_12=q_12)
+            healthRecord.save()
+
+        elif (insuranceType == "Life"):
+            mortgage_balance = userData["mortgage_balance"]
+            other_debts_balance = userData["other_debts_balance"]
+            existing_life_insurance = userData["existing_life_insurance"]
+            balance_investings_savings = userData["balance_investings_savings"]
+
+            lifeRecord = user_life_answers(mortgage_balance=mortgage_balance, other_debts_balance=other_debts_balance,
+                existing_life_insurance=existing_life_insurance, balance_investings_savings=balance_investings_savings)
+            lifeRecord.save()
+
+        else:
+            #disability data already stored
+
         res['success'] = True
     
     return JsonResponse(res)
@@ -214,13 +245,21 @@ def getInsuranceInfo(request):
         :return JsonResponse
             { success: bool, error: string, data: object }
     """
-    requiredKeys = []
+    requiredKeys = ['insuranceType']
     res = { 'success': False, 'error': '', data: None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        # -- get data
-        # -- add data to res['data']
+        user_id = user.id
+        insuranceType = request.POST['insuranceType']
+
+        if (insuranceType == "Health"):
+            data = list(user_health_questions_answer.objects.filter(user_id=user.id).values())
+        elif (insuranceType == "Life"):
+            data = list(user_life_answers.objects.filter(user_id=user.id).values())
+        else:
+            data = list(user_general_answers.objects.filter(user_id=user.id).values('annual_income'))
+        res['data'] = data
         res['success'] = True
     
     return JsonResponse(res)
