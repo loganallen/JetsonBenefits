@@ -24,75 +24,124 @@ class QuoteItem extends React.Component {
     };
   }
 
-
-getRefineComponent = (insuranceType) => (
-  <RefineQuoteItem 
-    insuranceType={insuranceType}
-    userData={this.props.userData}
-    updateUserData={this.props.updateUserData}
+  getRefineComponent = (insuranceType) => (
+    <RefineQuoteItem 
+      insuranceType={insuranceType}
+      userData={this.props.userData}
+      updateUserData={this.props.updateUserData}
     />
-)
+  )
 
-onRefineClick = (event) => {
-  this.setState({
-    refineOpen: !this.state.refineOpen
-  })
-}
+  onRefineClick = (event) => {
+    this.setState({
+      refineOpen: !this.state.refineOpen
+    });
+  }
 
-  render() {
+  desktopRender() {
     return (
       <div className='quoteOuterWrapper'>
-      <div className={classNames('quoteItem', { 'refine-open': this.state.refineOpen })}>
+        <div className={classNames('quoteItem', { 'refine-open': this.state.refineOpen })}>
+          <div className='quoteLeft'>
 
-        <div className='quoteLeft'>
+            <div className='top'>
+              <div className="insuranceType">{this.props.type} INSURANCE</div>
+              {this.state.insuranceType != 'disability' && <button
+                className='refineButton'
+                onClick={(e) => this.onRefineClick(e)}>
+                Refine <Icon name={classNames('angle', {
+                  up: this.state.refineOpen,
+                  down: !this.state.refineOpen
+                })} />
+              </button>}
+            </div>
+
+            <div className='fields'>
+              <div className='field'>
+                <p className='headerText'> {this.state.field1.header} </p>
+                <p className='subheaderText'> {this.state.field1.subheader} </p>
+              </div>
+              <div className='field'>
+                <p className='headerText'> {this.state.field2.header} </p>
+                <p className='subheaderText'> {this.state.field2.subheader} </p>
+              </div>
+              <div className='field'>
+                <p className='logo'> LOGO </p>
+                <p className='subheaderText'> {this.state.field3.carrier} </p>
+              </div>
+            </div>
+
+          </div>
+          <div className='quoteRight'>
+
+            <div className='permonth'>
+              <p className='estimatedLabel'>estimated</p>
+              <p className='headerText'>${this.state.permonth}</p>
+              <p className='permonthLabel'>PER MONTH</p>
+            </div>
+
+            <button
+              className='getCoveredButton'
+              onClick={() => this.props.onCoverageClick(this.state.quoteid)}
+            >GET COVERED
+            </button>
+
+          </div>
+        </div>
+
+        {this.state.refineOpen &&
+          <div className={classNames('refineWrapper', { open: this.state.refineOpen })}>
+            {this.getRefineComponent(this.state.type)}
+          </div>}
+      </div>
+    );
+  }
+
+  mobileRender() {
+    return (
+      <div className='quoteOuterWrapper'>
+        <div className='quoteItem'>
 
           <div className='top'>
             <div className="insuranceType">{this.props.type} INSURANCE</div>
-            {this.state.insuranceType != 'disability' && <button  
+            {this.state.insuranceType != 'disability' && <button
               className='refineButton'
               onClick={(e) => this.onRefineClick(e)}>
-              Refine <Icon name='angle down' />
+              Refine <Icon name={classNames('angle', {
+                up: this.state.refineOpen,
+                down: !this.state.refineOpen
+              })} />
             </button>}
           </div>
 
           <div className='fields'>
             <div className='field'>
-              <p className='headerText'> {this.state.field1.header} </p>
               <p className='subheaderText'> {this.state.field1.subheader} </p>
+              <p className='headerText'> {this.state.field1.header} </p>
             </div>
             <div className='field'>
-              <p className='headerText'> {this.state.field2.header} </p>
               <p className='subheaderText'> {this.state.field2.subheader} </p>
+              <p className='headerText'> {this.state.field2.header} </p>
             </div>
             <div className='field'>
-              <p className='logo'> LOGO </p>
               <p className='subheaderText'> {this.state.field3.carrier} </p>
+              <p className='logo'> LOGO </p>
             </div>
           </div>
 
-        </div>
-
-        <div className='quoteRight'>
-
-          <div className='permonth'>
-            <p className='estimatedLabel'>estimated</p>
-            <p className='headerText'>${this.state.permonth}</p>
-            <p className='permonthLabel'>PER MONTH</p>
-          </div>
-
-          <button 
+          <button
             className='getCoveredButton'
-            onClick={() => this.props.onCoverageClick(this.state.quoteid)}>
-            GET COVERED
+            onClick={() => this.props.onCoverageClick(this.state.quoteid)}
+          >GET COVERED
           </button>
 
         </div>
       </div>
-      <div className={classNames('refineWrapper', { open: this.state.refineOpen })}>
-        {this.state.refineOpen && this.getRefineComponent(this.state.type)}
-      </div>
-      </div>
     );
+  }
+
+  render() {
+    return this.props.isMobile ? this.mobileRender() : this.desktopRender();
   }
 }
 

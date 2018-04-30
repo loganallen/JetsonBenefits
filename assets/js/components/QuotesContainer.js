@@ -39,7 +39,8 @@ class QuotesContainer extends React.Component {
     }
 
     mapQuoteToQuoteItem = (quote) => {
-    	return <QuoteItem
+    	return (
+			<QuoteItem
                 key={quote.type}
     			type={quote.type}
     			field1={quote.field1}
@@ -48,8 +49,10 @@ class QuotesContainer extends React.Component {
     			permonth={quote.permonth}
     			quoteid={quote.quoteid}
                 userData={this.props.userData}
-                updateUserData={this.props.updateUserData}
-    			/>
+				updateUserData={this.props.updateUserData}
+				isMobile={this.props.isMobile}
+			/>
+		);
     }
 
     getQuoteItems = (quoteInfo) => {

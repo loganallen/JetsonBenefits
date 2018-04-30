@@ -77,6 +77,7 @@ class Recommendation extends React.Component {
             <QuotesContainer
                 userData={this.props.userData}
                 updateUserData={this.props.updateUserData}
+                isMobile={this.state.isMobile}
             />
         );
     }

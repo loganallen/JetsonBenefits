@@ -63,11 +63,11 @@
     display: inline-block;
     width: 33%;
 }
-.field .headerText, .field .logo { /* TODO: .field .logo is only temporary */
+.headerText, .logo{ /* TODO: .field .logo is only temporary */
     font-size: 2.4em;
     margin-bottom: 15px;
 }
-.field .subheaderText {
+.subheaderText {
     font-size: 1em;
     font-weight: 400;
 }
@@ -81,6 +81,9 @@
     text-align: center;
     padding-top: 15px;
     margin-bottom: 0px;
+}
+.permonth {
+    visibility: hidden;
 }
 .permonth .headerText{
     font-size: 2.5em;
@@ -200,4 +203,67 @@
     background-color: #3AAFA9;
     color: white;
     border-radius: 5px;
+}
+
+
+/* Mobile Only Styles */
+@media screen and (max-device-width: 768px) {
+    .quoteOuterWrapper {
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .quoteItem {
+        display: block;
+    }
+    #quotesTitle {
+        font-size: 3.5em;
+        margin: 50px auto;
+        text-align: center;
+    }
+    .insuranceType {
+        width: 80%;
+        background: linear-gradient(295deg, transparent 35px, #3AAFA9 0);
+        padding: 40px;
+        font-size: 2.8em;
+        font-weight: 500;
+    }
+    .refineButton {
+        width: 20%;
+        font-size: 2.8em;
+    }
+    .top {
+        display: block;
+        width: 100%;
+    }
+    .content {
+        display: block;
+        width: 100%;
+        padding: 10% 20%;
+    }
+    .fields {
+        padding: 5%;
+        text-align: left;
+    }
+    .field {
+        display: block;
+        width: 80%;
+        margin: 2% auto;
+    }
+    .headerText, .logo {
+        display: inline-block;
+        width: 40%;
+        font-size: 3.3em;
+    }
+    .subheaderText {
+        display: inline-block;
+        width: 60%;
+        font-size: 2.5em;
+    }
+    .getCoveredButton {
+        padding: 1em;
+        font-size: 2.2em;
+        margin: auto;
+        margin-bottom: 5%;
+    }
 }
