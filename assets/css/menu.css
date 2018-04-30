@@ -1,0 +1,72 @@
+/* 
+ * Navigation Menu CSS
+ */
+#menuWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+}
+#menuWrapper.themeWhite {
+    background-color: #ffffff;
+}
+#menuWrapper.themeBlue {
+    background-color: #3AAFA9;
+}
+#menuTitle {
+    display: inline-block;
+    margin-top: 0; margin-left: 0; margin-right: 0;
+    margin-bottom: 1px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.themeWhite #menuTitle {
+    color: #3AAFA9;
+}
+.themeBlue #menuTitle {
+    color: white;
+}
+#menuButtonWrapper {
+    float: right;
+}
+.menuButton {
+    display: inline-block;
+    margin-left: 30px;
+    border: none;
+    font-size: 1.2em;
+    font-weight: 200;
+    background: none;
+}
+
+/* Desktop Only Styles */
+@media screen and (min-device-width: 768px) {
+    #menuTitle {
+        font-size: 2em;
+    }
+}
+
+/* Mobile Only Styles */
+@media screen and (max-device-width: 768px) {
+    #menuTitle {
+        font-size: 4em;
+    }
+
+    #icon-wrapper {
+        display: block;
+        width: 100%;
+    }
+    #icon-wrapper button {
+        float: right;
+        background: none;
+    }
+
+    .mobileMenuButton {
+        font-size: 1.5em;
+    }
+
+    #mobileMenu {
+        position: absolute;
+        right: 0;
+        margin-top: 0;
+    }
+}

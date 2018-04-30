@@ -3,10 +3,12 @@
 # ignored js and python dependencies handled by npm and pip
 node_modules/
 env/
+package-lock.json
 
 # django autocreated folders and compiled pyc to ignored
 **/__pycache__
 *.pyc
+migrations/
 
 
 # webpack compiled js files

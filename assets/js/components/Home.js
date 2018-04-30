@@ -8,48 +8,48 @@ Controller filepath:
 */
 
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import classNames from 'classnames';
 
 import Actions from '../actions';
+import { authToken } from '../auth';
+import { isMobile } from '../utils';
+
+import '../../css/home.css';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      age: '',
-      zipcode: '',
-      loginModalOpen: true
+      isMobile: isMobile(this.props.deviceWidth)
     };
   }
 
+  componentWillMount() {
+    this.props.changeMenuTheme('themeWhite');
+  }
+
   onInputChange = (id, event) => {
-    console.log(`${id} change...`);
     let value = parseInt(event.target.value);
 
     // TODO: Validate user input
     if (id == 'age') {
-      this.setState({
-        age: value
-      });
-    } else if (id == 'zip') {
-      this.setState({
-        zipcode: value
-      });
+      this.props.updateUserData('age', value);
+    } else if (id == 'zipcode') {
+      this.props.updateUserData('zipcode', value);
     }
   }
 
   onFindBenefitsClick = () => {
-
-  }
-
-  onSignUpClick = () => {
-    this.setState({ loginModalOpen: true });
+    this.props.history.push("/recommendation");
   }
 
   section1() {
     return (
       <div id='homeS1'>
-        <div id='homeS1Content'>
+        <div id='homeS1Content'
+          className={ classNames({ hidden: this.state.isMobile }) }>
           <p><span>Benefits</span> that fit your life.</p>
         </div>
       </div>
@@ -57,35 +57,74 @@ class Home extends React.Component {
   }
 
   section2() {
-    return (
-      <div id='homeS2'>
-        <div id='homeS2Content'>
-          <p>I'm</p>
-          <input
-            type='text'
-            className='homeS2Input'
-            id='homeS2Input1'
-            onChange={(e) => this.onInputChange('age', e)}
-            placeholder='30'
-          />
-          <p>years old and I live in</p>
-          <input
-            type='text'
-            className='homeS2Input'
-            id='homeS2Input2'
-            onChange={(e) => this.onInputChange('zip', e)}
-            placeholder='60601'
-          />
-          <p>.</p><br/>
-          <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
-            Find My Benefits
-          </button><br/>
-          <button type='button' id='homeS2B2' onClick={() => this.props.toggleLoginModal(false)}>
-            or Sign Up
-          </button>
+    if (this.state.isMobile) {
+      return (
+        <div id='homeS2'>
+          <div id='homeS2Content'>
+            <div id="part-one">
+              <p>I'm</p>
+              <input
+                type='number'
+                className='homeS2Input'
+                id='homeS2Input1'
+                onChange={(e) => this.onInputChange('age', e)}
+                placeholder='30'
+                value={this.props.age}
+              />
+              <p>years old</p>
+            </div>
+            <div id='part-two'>
+              <p> and I live in</p>
+              <input
+                type='number'
+                className='homeS2Input'
+                id='homeS2Input2'
+                onChange={(e) => this.onInputChange('zipcode', e)}
+                placeholder='60601'
+                value={this.props.zipcode}
+              />
+              <p>.</p>
+            </div>
+            <br/>
+            <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
+              FIND MY BENEFITS
+            </button><br/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div id='homeS2'>
+          <div id='homeS2Content'>
+            <p>I'm</p>
+            <input
+              type='text'
+              className='homeS2Input'
+              id='homeS2Input1'
+              onChange={(e) => this.onInputChange('age', e)}
+              placeholder='30'
+              value={this.props.age}
+            />
+            <p>years old and I live in</p>
+            <input
+              type='text'
+              className='homeS2Input'
+              id='homeS2Input2'
+              onChange={(e) => this.onInputChange('zipcode', e)}
+              placeholder='60601'
+              value={this.props.zipcode}
+            />
+            <p>.</p><br/>
+            <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
+              FIND MY BENEFITS
+            </button><br/>
+            <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
+              or Sign Up
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 
   section3() {
@@ -120,12 +159,16 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
-  loginModalOpen: state.mainState.loginModalOpen
+  age: state.app.userData.age,
+  zipcode: state.app.userData.zipcode,
+  deviceWidth: state.app.deviceWidth
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleLoginModal: (isOpen) => dispatch(Actions.toggleLoginModal(isOpen))
+  changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
+  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
+  postUserInfo: (token, data) => dispatch(Actions.postUserInfo(token, data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

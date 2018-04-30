@@ -14,6 +14,9 @@ const config = {
         path: path.resolve('./static/js/'),
         filename: '[name].bundle.min.js'
     },
+    devServer: {
+        historyApiFallback: true
+    },
     plugins: [
         new BundlerTracker({filename: './webpack-stats.json'}),
         new webpack.ProvidePlugin({

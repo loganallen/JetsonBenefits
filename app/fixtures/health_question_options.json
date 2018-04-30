@@ -1,0 +1,448 @@
+[{
+"model": "app.health_question_options",
+"pk":1,
+"fields":{
+    "question":"Do you take prescription medications?", 
+    "health_question_id":1,
+    "option":"Yes",
+    "high_deductible":0.5,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0.5,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":2,
+"fields":{
+    "question":"Do you take prescription medications?", 
+    "health_question_id":1,
+    "option":"No",
+    "high_deductible":1,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":3,
+"fields":{
+    "question":"Do you have a chronic condition?", 
+    "health_question_id":2,
+    "option":"Yes",
+    "high_deductible":0,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":4,
+"fields":{
+    "question":"Do you have a chronic condition?", 
+    "health_question_id":2,
+    "option":"No",
+    "high_deductible":1,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":5,
+"fields":{
+    "question":"How likely are you visit your doctor for you annual physical exam?", 
+    "health_question_id":5,
+    "option":"No chance",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":1
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":6,
+"fields":{
+    "question":"How likely are you visit your doctor for you annual physical exam?", 
+    "health_question_id":5,
+    "option":"Might go",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":1,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":7,
+"fields":{
+    "question":"How likely are you visit your doctor for you annual physical exam?", 
+    "health_question_id":5,
+    "option":"I'll definetely go",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":8,
+"fields":{
+    "question":"How many times are you likely to visit the doctor each year?", 
+    "health_question_id":6,
+    "option":"Never or just for my annual physical",
+    "high_deductible":1,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":1
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":9,
+"fields":{
+    "question":"How many times are you likely to visit the doctor each year?", 
+    "health_question_id":6,
+    "option":"1-3 times besides my physical exam",
+    "high_deductible":1,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":10,
+"fields":{
+    "question":"How many times are you likely to visit the doctor each year?", 
+    "health_question_id":6,
+    "option":"More than 3 times a year",
+    "high_deductible":0,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":11,
+"fields":{
+    "question":"There's a cold going around the office and you wake up with a sore throat. What do you do?", 
+    "health_question_id":7,
+    "option":"Drink some tea, it'll pass",
+    "high_deductible":0.5,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0.5
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":12,
+"fields":{
+    "question":"There's a cold going around the office and you wake up with a sore throat. What do you do?", 
+    "health_question_id":7,
+    "option":"If I don't feel better in a few days, I'm going to the doctor",
+    "high_deductible":0.5,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0.5,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":13,
+"fields":{
+    "question":"There's a cold going around the office and you wake up with a sore throat. What do you do?", 
+    "health_question_id":7,
+    "option":"Go to the doctor immediately",
+    "high_deductible":0,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":14,
+"fields":{
+    "question":"Your doctor asks you to come back for additional tests after you physical exam. What do you do?", 
+    "health_question_id":8,
+    "option":"Do nothing, I feel fine",
+    "high_deductible":1,
+     "low_deductible":0, 
+    "HMO":1,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":15,
+"fields":{
+    "question":"Your doctor asks you to come back for additional tests after you physical exam. What do you do?", 
+    "health_question_id":8,
+    "option":"Find out cost before booking appt",
+    "high_deductible":0.5,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":1,
+    "HSA":0.5,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":16,
+"fields":{
+    "question":"Your doctor asks you to come back for additional tests after you physical exam. What do you do?", 
+    "health_question_id":8,
+    "option":"Schedule right away",
+    "high_deductible":0,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":1,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":17,
+"fields":{
+    "question":"How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?", 
+    "health_question_id":9,
+    "option":"Not a lot.",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":18,
+"fields":{
+    "question":"How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?", 
+    "health_question_id":9,
+    "option":"It crosses my mind sometimes.",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":1
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":19,
+"fields":{
+    "question":"How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?", 
+    "health_question_id":9,
+    "option":"Huge worry",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":3
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":20,
+"fields":{
+    "question":"How much do you worry about the medical expenses associated with a serious accident?", 
+    "health_question_id":10,
+    "option":"Not a lot.",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":21,
+"fields":{
+    "question":"How much do you worry about the medical expenses associated with a serious accident?", 
+    "health_question_id":10,
+    "option":"It crosses my mind sometimes.",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":1
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":22,
+"fields":{
+    "question":"How much do you worry about the medical expenses associated with a serious accident?", 
+    "health_question_id":10,
+    "option":"Huge worry",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":3
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":23,
+"fields":{
+    "question":"How do you schedule your doctor's appointments?", 
+    "health_question_id":11,
+    "option":"I don't...",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":1
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":24,
+"fields":{
+    "question":"How do you schedule your doctor's appointments?", 
+    "health_question_id":11,
+    "option":"Convenient time with any doctor",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":0,
+     "PPO":1,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":25,
+"fields":{
+    "question":"How do you schedule your doctor's appointments?", 
+    "health_question_id":11,
+    "option":"Must see my doc",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":1,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":26,
+"fields":{
+    "question":"How likely are you to seek out advice from a specialist?", 
+    "health_question_id":12,
+    "option":"Not likely",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":1,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":27,
+"fields":{
+    "question":"How likely are you to seek out advice from a specialist?", 
+    "health_question_id":12,
+    "option":"If my doc says so",
+    "high_deductible":0,
+     "low_deductible":0, 
+    "HMO":1,
+     "PPO":0,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+,
+{
+"model": "app.health_question_options",
+"pk":28,
+"fields":{
+    "question":"How likely are you to seek out advice from a specialist?", 
+    "health_question_id":12,
+    "option":"I love second opinions",
+    "high_deductible":0,
+     "low_deductible":1, 
+    "HMO":0,
+     "PPO":1,
+    "HSA":0,
+    "critical_illness":0
+    }
+}
+]

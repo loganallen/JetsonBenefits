@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "python manage.py runserver",
+    "start-test": "python manage.py runserver 0.0.0.0:8000",
     "build": "./node_modules/.bin/webpack --config webpack.config.js",
     "autobuild": "./node_modules/.bin/webpack --config webpack.config.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,16 +23,20 @@
     "css-loader": "^0.28.10",
     "eslint": "^4.18.2",
     "file-loader": "^1.1.11",
+    "history": "^4.7.2",
     "jquery": "^3.3.1",
     "keymirror": "^0.1.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.76.0",
     "style-loader": "^0.20.2",
-    "webpack": "^2.7.0",
+    "webpack": "^2.1.0-beta.22",
     "webpack-bundle-tracker": "^0.2.1"
   },
   "dependencies": {

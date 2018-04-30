@@ -25,7 +25,7 @@ SECRET_KEY = 'avd_77$9)10h3x!zzgfund*6vt8g#j+8i&)s60*9g$&sbr#hk8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'webpack_loader'
+    'rest_framework.authtoken',
+    'webpack_loader',
+    'django_user_agents'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
 ROOT_URLCONF = 'jetson.urls'
@@ -70,6 +73,15 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
 WSGI_APPLICATION = 'jetson.wsgi.application'
 
 
@@ -80,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ['MYSQL_DB'],
-        'USERNAME': os.environ['MYSQL_USER'],
+        'USER': os.environ['MYSQL_USER'],
         'PASSWORD': os.environ['MYSQL_PASSWORD']
     }
 }
@@ -126,7 +138,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     #This lets Django's collectstatic store our bundles
-    os.path.join(BASE_DIR, 'static'), 
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 WEBPACK_LOADER = {

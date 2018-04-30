@@ -105,7 +105,8 @@ class disability_plan_costs(models.Model):
 		('45', '35 year old office worker ')
 	)
 	disability_plan_id = models.IntegerField(primary_key = True)
-	benefit_amount = models.IntegerField()
+	benefit_amount = models.CharField(max_length = 10)
+	salary = models.IntegerField() 
 	age = models.CharField(max_length = 20, choices = age_options)
 	gender = models.CharField(max_length = 30, choices = gender_options)
 	monthly = models.CharField(max_length = 200)
@@ -129,6 +130,10 @@ class user_recommendation(models.Model):
 		on_delete = models.CASCADE
 	)
 
+class life_questions(models.Model):
+	life_question_id = models.IntegerField(primary_key = True)
+	question = models.CharField(max_length = 500)
+
 class health_questions(models.Model):
 	health_question_id = models.IntegerField(primary_key = True)
 	question = models.CharField(max_length = 500)
@@ -141,10 +146,11 @@ class health_questions(models.Model):
 
 class health_question_options(models.Model):
 	health_question_option_id = models.IntegerField(primary_key = True)
-	question_id = models.ForeignKey(
+	health_question_id = models.ForeignKey(
 		health_questions,
 		on_delete = models.CASCADE
 	)
+	question = models.CharField(max_length = 500, default="")
 	option = models.CharField(max_length = 500)
 	high_deductible = models.FloatField()
 	low_deductible = models.FloatField()

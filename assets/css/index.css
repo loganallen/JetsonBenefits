@@ -1,14 +1,14 @@
+/* Base Page Styles */
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica Neue';
-  background-color: #3AAFA9;
 }
 
-.container {
-  margin: auto;
-  max-width: 1024px;
-  padding: 0px;
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
 }
 
 button {
@@ -17,163 +17,30 @@ button {
   outline: 0;
 }
 
-
-/* 
- * Navigation Menu CSS
- */
-
-#menuWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 30px;
-}
-#menuTitle {
-  display: inline-block;
-  width: 200px;
-  margin-top: 0; margin-left: 0; margin-right: 0;
-  margin-bottom: 1px;
-  color: #3AAFA9;
-  font-size: 2em;
-  font-weight: bold;
-}
-#menuButtonWrapper {
-  float: right;
-}
-.menuButton {
-  display: inline-block;
-  margin-left: 30px;
-  border: none;
-  font-size: 1.2em;
-  font-weight: 200;
+#containerWrapper.themeWhite {
+  background-color: #3AAFA9;
 }
 
-
-/* 
- * Home Page CSS
- */
-
-#homeS1 {
-  background-image: url('/static/img/home_img_1.png');
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 700px;
-}
-#homeS1Content {
-  padding: 30px;
-  color: #ffffff;
-  font-size: 4.5em;
-  width: 33%;
-}
-#homeS1Content span {
-  font-weight: bold;
-}
-#homeS1Content p {
-  padding: 0px;
-  margin: 0px;
-  font-weight: 200;
+#containerWrapper.themeBlue {
+  background-color: white;
 }
 
-#homeS2 {
-  padding: 75px 0px;
-}
-#homeS2Content {
-  margin: auto;
-  text-align: center;
-  color: #ffffff;
-}
-#homeS2Content p {
-  margin: 15px 5px;
-  font-size: 2.5em;
-  font-weight: 200;
-  display: inline-block;
-}
-.homeS2Input {
-  margin: 15px 5px;
-  padding-bottom: 5px;
-  background: transparent;
-  outline: 0;
-  border: none;
-  border-bottom: 2px solid #ffffff;
-  font-size: 2.4em;
-  font-weight: 400;
-  color: #e2e2e2;
-  text-align: center;
-}
-.homeS2Input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #e2e2e2;
-  opacity: 0.5; /* Firefox */
-}
-.homeS2Input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #e2e2e2;
-  opacity: 0.5; /* Firefox */
-}
-.homeS2Input::-ms-input-placeholder { /* Microsoft Edge */
-  color: #e2e2e2;
-  opacity: 0.5; /* Firefox */
-}
-#homeS2Input1 {
-  width: 80px;
-}
-#homeS2Input2 {
-  width: 120px;
+.hidden {
+  display: none !important;
 }
 
-#homeS2B1 {
-  background-color: #ffffff;
-  color: #55b2ae;
-  outline: 0;
-  font-size: 2em;
-  font-weight: 300;
-  margin-top: 50px;
-  padding-top: 15px; padding-bottom: 15px;
-  padding-left: 20px; padding-right: 20px;
-  border: none;
-  border-radius: 6px;
-}
-#homeS2B2 {
-  background: transparent;
-  outline: 0;
-  border: none;
-  border-bottom: 1px solid #ffffff;
-  font-size: 1em;
-  font-weight: 200;
-  margin-top: 20px;
-  color: #ffffff;
+/* Desktop Only Styles */
+@media screen and (min-device-width: 768px) {
+  .container {
+    max-width: 1024px;
+    margin: auto;
+    padding: 0px;
+  }
 }
 
-#homeS3 {
-  background-image: url('/static/img/home_img_2.png');
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 520px;
-}
-#homeS3Content {
-  padding-top: 50px;
-  text-align: center;
-}
-#homeS3Content p {
-  margin: auto;
-  padding: 0px;
-  color: #000000;
-  font-size: 3em;
-  width: 60%;
-}
-
-#homeS4 {
-  padding-left: 0px; padding-right: 0px;
-  padding-top: 50px; padding-bottom: 150px;
-  text-align: center;
-  color: #ffffff;
-}
-#homeS4 h3 {
-  font-weight: bold;
-  font-size: 3em;
-}
-#homeS4 p {
-  margin: auto;
-  font-weight: 200;
-  font-size: 1.6em;
-  width: 66%;
+/* Mobile Only Styles */
+@media screen and (max-device-width: 768px) {
+  .container {
+    width: 100%;
+  }
 }

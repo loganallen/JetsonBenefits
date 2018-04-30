@@ -1,31 +1,71 @@
-import ActionTypes from '../actions/actionTypes'
+import ActionTypes from '../actions/actionTypes';
+import { isLoggedIn } from '../auth';
 
 const initialState = {
-  data: "hello",
-  user: null,
+  menuTheme: "themeWhite",
+  deviceWidth: window.innerWidth,
+  user: {
+    name: '',
+    isAuth: isLoggedIn()
+  },
+  userData: {
+    age: '',
+    zipcode: '',
+    maritalStatus: '',
+    spouseAge: '',
+    numKids: '',
+    kidAges: [],
+    income: '',
+    healthCondition: ''
+  },
   loginModal: {
     isOpen: false,
-    type: true
+    isLogin: true
   }
 };
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.TOGGLE_LOGIN_MODAL:
+    case ActionTypes.EMIT_DEVICE_WIDTH_UPDATE:
       return {
         ...state,
-        loginModal: {
-          isOpen: !state.loginModal.isOpen,
-          type: action.data.type
+        deviceWidth: action.data.deviceWidth
+      };
+    case ActionTypes.CHANGE_MENU_THEME:
+      return {
+        ...state,
+        menuTheme: action.data.menuTheme
+      };
+    case ActionTypes.UPDATE_LOGIN_MODAL:
+      return {
+        ...state,
+        loginModal: action.data
+      };
+    case ActionTypes.UPDATE_USER_DATA:
+      var updatedValue = action.data.value;
+      if (action.data.key === 'kidAges') {
+        // TODO: This yields warning but not sure why
+        updatedValue = [ ...state.userData.kidAges ];
+        updatedValue[action.data.value.idx] = action.data.value.age;
+      }
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          [action.data.key]: updatedValue
         }
       };
-    case ActionTypes.TOGGLE_LOGIN_MODAL_TYPE:
+    case ActionTypes.UPDATE_BULK_USER_DATA:
+      let updatedUserData = { ...state.userData };
+      // TODO: Walk through action.data and update each key/value pair
       return {
         ...state,
-        loginModal: {
-          isOpen: state.loginModal.isOpen,
-          type: !state.loginModal.type
-        }
+        userData: updatedUserData
+      };
+    case ActionTypes.UPDATE_USER_AUTH:
+      return {
+        ...state,
+        user: action.data
       }
     default:
       return state;

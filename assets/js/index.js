@@ -1,26 +1,26 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-
+import { Router } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import configureStore from './store/configureStore';
+import routes from './routes';
 import '../css/index.css';
-import Container from './components/Container';
-import Home from './components/Home';
-import reducers from './reducers';
 
-// Create redux store
-const store = createStore(
-  reducers,
-  applyMiddleware(thunkMiddleware)
+import App from './components/App';
+import Home from './components/Home';
+
+const store = configureStore();
+
+const root = (
+  <Provider store={store}>
+    <App>
+      {routes}
+    </App>
+  </Provider>
 );
 
-// Render the root element
 render(
-  <Provider store={store}>
-    <Container>
-      <Home />
-    </Container>
-  </Provider>,
+  root,
   document.getElementById('root')
 );

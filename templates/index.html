@@ -11,6 +11,14 @@
 
     <body>
         <div id="root"></div>
+        <script>
+            var env = {
+                'csrf_token': "{{csrf_token}}",
+                'baseURL': "{{env.baseURL}}",
+                'device': "{{env.device}}",
+                'isMobile': "{{env.isMobile}}" === 'True' ? true : false
+            };
+        </script>
         {% render_bundle 'common' %}
         {% render_bundle 'index' %}
     </body>
