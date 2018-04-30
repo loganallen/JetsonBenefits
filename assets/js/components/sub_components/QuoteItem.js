@@ -29,8 +29,14 @@ class QuoteItem extends React.Component {
       insuranceType={insuranceType}
       userData={this.props.userData}
       updateUserData={this.props.updateUserData}
+      onUpdateQuoteClicked={this.onUpdateQuoteClicked}
     />
-  )
+  );
+
+  onUpdateQuoteClicked = () => {
+    this.onRefineClick();
+    // TODO: backend call
+  }
 
   onRefineClick = (event) => {
     this.setState({
@@ -90,7 +96,7 @@ class QuoteItem extends React.Component {
         </div>
 
         {this.state.refineOpen &&
-          <div className={classNames('refineWrapper', { open: this.state.refineOpen })}>
+          <div className='refineWrapper'>
             {this.getRefineComponent(this.state.type)}
           </div>}
       </div>
@@ -134,6 +140,11 @@ class QuoteItem extends React.Component {
             onClick={() => this.props.onCoverageClick(this.state.quoteid)}
           >GET COVERED
           </button>
+
+          {this.state.refineOpen &&
+            <div className='refineWrapper'>
+              {this.getRefineComponent(this.state.type)}
+            </div>}
 
         </div>
       </div>

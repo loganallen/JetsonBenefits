@@ -106,7 +106,7 @@
 }
 
 /* Refine Styles */
-.refineWrapper.open {
+.refineWrapper {
     padding-left: 10%; padding-right: 10%;
     padding-bottom: 35px;
 }
@@ -222,15 +222,15 @@
         text-align: center;
     }
     .insuranceType {
-        width: 80%;
-        background: linear-gradient(295deg, transparent 35px, #3AAFA9 0);
+        width: 75%;
+        background: linear-gradient(295deg, transparent 40px, #3AAFA9 0);
         padding: 40px;
-        font-size: 2.8em;
+        font-size: 3.2em;
         font-weight: 500;
     }
     .refineButton {
-        width: 20%;
-        font-size: 2.8em;
+        width: 25%;
+        font-size: 3.2em;
     }
     .top {
         display: block;
@@ -253,17 +253,65 @@
     .headerText, .logo {
         display: inline-block;
         width: 40%;
-        font-size: 3.3em;
+        font-size: 3.5em;
     }
     .subheaderText {
         display: inline-block;
         width: 60%;
-        font-size: 2.5em;
+        font-size: 3em;
     }
     .getCoveredButton {
         padding: 1em;
-        font-size: 2.2em;
+        font-size: 2.5em;
         margin: auto;
         margin-bottom: 5%;
+    }
+
+    .refineWrapper {
+        padding: 0% 10%;
+    }
+    .refine-title {
+        font-size: 3.2em;
+        margin-bottom: 1em;
+        font-weight: 500;
+    }
+    .refine-question p {
+        font-size: 3em;
+        display: block;
+        width: 100%;
+    }
+    .refine-question .dropdown {
+        width: 60%;
+    }
+    .ui.selection.dropdown {
+        min-width: 0;
+        font-size: 3em;
+    }
+    .ui.selection.dropdown .menu>.item {
+        font-size: 1em;
+    }
+    .refine-input {
+        font-size: 3em;
+    }
+    .update-button {
+        padding: 1em;
+        font-size: 2.5em;
+        float: right;
+        margin-bottom: 10%;
+    }
+
+    .refine-input-currency-wrapper {
+        display: block;
+        width: 100%;
+    }
+    .refine-input-currency-wrapper p {
+        display: inline-block;
+        font-size: 3em;
+        width: 40px;
+        text-align: center;
+    }
+    .refine-input-currency {
+        font-size: 3em;
+        width: 60%;
     }
 }

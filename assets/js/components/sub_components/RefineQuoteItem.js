@@ -22,8 +22,8 @@ class RefineQuoteItem extends React.Component {
   onDropdownChange = (value, id) => {
     console.log(id);
     console.log(this.props.userData[`dropdown${id}`]);
-      this.props.updateUserData(`dropdown${id}`, value);
-    }
+    this.props.updateUserData(`dropdown${id}`, value);
+  }
 
   createDropdown = (answers, id) => (
     <Dropdown
@@ -73,23 +73,23 @@ class RefineQuoteItem extends React.Component {
 
   healthQuestions = () => (
     <div>
-      <p class='refine-title'>Great! We just need a litle more information from you</p>
+      <p className='refine-title'>Great! We just need a litle more information from you</p>
       <div>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>Do you take prescription medications?</p>
           {this.createDropdown([
             {value: 'yes', text: 'yes'},
             {value: 'no', text: 'no'}], 0)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>Do you have a chronic condition?</p>
           {this.createDropdown([
             {value: 'yes', text: 'yes'},
             {value: 'no', text: 'no'}], 1)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>How likely are you to visit your doctor for your annual physical exam?</p>
           {this.createDropdown([
             {value: '2', text: 'likely'},
@@ -97,7 +97,7 @@ class RefineQuoteItem extends React.Component {
             {value: '0', text: 'not likely'}], 2)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>How many times do you visit your doctor each year?</p>
           <input
             type='number'
@@ -109,58 +109,58 @@ class RefineQuoteItem extends React.Component {
           />
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>There's a cold going around and the office and you wake up with a sore throat. What do you do?</p> 
           {this.createDropdown([{value: '0', text: 'Drink some tea, it\'ll pass'},
             {value: '1', text: 'If I don\'t feel better in a few days, I\'m going to the doctor'}, 
             {value: '2', text: 'Go to the doctor immediately'}], 4)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>Your doctor asks you to come back for additional tests after your physical exam. What do you do?</p>
             {this.createDropdown([{value: '0', text: 'Do nothing, I feel fine'},
             {value: '1', text: 'Find out cost before booking appointment'},
             {value: '2', text: 'Schedule right away'}], 5)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?</p>
             {this.createDropdown([{value: '0', text: 'Not a lot'},
             {value: '1', text: 'It crosses my mind sometimes'},
             {value: '2', text: 'Huge worry'}], 6)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>How much do you worry about the medical expenses associated with a serious accident?</p>
             {this.createDropdown([{value: '0', text: 'Not a lot'},
             {value: '1', text: 'It crosses my mind sometimes'},
             {value: '2', text: 'Huge worry'}], 7)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>How do you schedule your doctor's appointments?</p>
             {this.createDropdown([{value: '0', text: 'I don\'t ...'},
             {value: '1', text: 'Conveinent time with any doctor'},
             {value: '2', text: 'I must see my doc'}], 8)}
         </div>
         <br/>
-        <div class='refine-question'>
+        <div className='refine-question'>
           <p>How likely are you to seek out advice from a specialist?</p>
             {this.createDropdown([{value: '0', text: 'Not likely'},
             {value: '1', text: 'If my doc says so'},
             {value: '2', text: 'I love second opinions'}], 9)}
         </div>
       </div>
-      <div class='update-button-wrapper'>
-        <button class='update-button'>UPDATE</button>
+      <div className='update-button-wrapper'>
+        <button className='update-button' onClick={this.props.onUpdateQuoteClicked}>UPDATE</button>
       </div>
     </div>
   )
 
   lifeQuestions = () => (
     <div>
-      <p class='refine-title'>Great! We just need a litle more information from you</p>
-      <div class='grid-wrapper'>
+      <p className='refine-title'>Great! We just need a litle more information from you</p>
+      <div className='grid-wrapper'>
       {
         (this.props.userData.marriageStatus == 'married' || (this.props.userData.kidAges).length > 0)
         && <Grid columns={4}>
@@ -207,9 +207,9 @@ class RefineQuoteItem extends React.Component {
         {this.generateChildRows(this.props.userData.kidAges)}
       </Grid>}
       </div>
-      <div class='refine-question'>
+      <div className='refine-question'>
         <p>What is the balance of your mortgage?</p>
-        <div class='refine-input-currency-wrapper'>
+        <div className='refine-input-currency-wrapper'>
           <p>$</p>
           <input
             type='number'
@@ -221,9 +221,9 @@ class RefineQuoteItem extends React.Component {
           />
         </div>
       </div>
-      <div class='refine-question'>
+      <div className='refine-question'>
         <p>What is the balance of your other debts?</p>
-        <div class='refine-input-currency-wrapper'>
+        <div className='refine-input-currency-wrapper'>
           <p>$</p>
           <input
             type='number'
@@ -235,9 +235,9 @@ class RefineQuoteItem extends React.Component {
             />
         </div>
       </div>
-      <div class='refine-question'>
+      <div className='refine-question'>
         <p>Do you have any existing life insurance (policy value)?</p>
-        <div class='refine-input-currency-wrapper'>
+        <div className='refine-input-currency-wrapper'>
           <p>$</p>
           <input
             type='number'
@@ -249,9 +249,9 @@ class RefineQuoteItem extends React.Component {
             />
         </div>
       </div>
-      <div class='refine-question'>
+      <div className='refine-question'>
         <p>What is the total current balance of your investments and savings?</p>
-        <div class='refine-input-currency-wrapper'>
+        <div className='refine-input-currency-wrapper'>
           <p>$</p>
           <input
             type='number'
@@ -263,8 +263,8 @@ class RefineQuoteItem extends React.Component {
             />
         </div>
       </div>
-      <div class='update-button-wrapper'>
-        <button class='update-button'>UPDATE</button>
+      <div className='update-button-wrapper'>
+        <button className='update-button' onClick={this.props.onUpdateQuoteClicked}>UPDATE</button>
       </div>
     </div>
   )
