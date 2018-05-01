@@ -29,9 +29,15 @@ class QuestionsContainer extends React.Component {
       return disabled;
     }
 
-    onInputChange = (key, event, type='string') => {
-      let typecheck = (type=='string') == isNaN(event.target.value);
-      if(typecheck || event.target.value==''){
+    onInputChange = (key, event, type='string', bounds=[0,0]) => {
+      let input = event.target.value;
+      let isInt = !isNaN(input);
+      let typecheck = (type=='string') == !isInt;
+      if(typecheck || input==''){
+        //additional bounds checking for ints
+        if((isInt && input!='') && (input <= bounds[0] || input >= bounds[1])){
+          return;
+        }
         this.props.updateUserData(key, event.target.value);
       }
     }
@@ -42,8 +48,11 @@ class QuestionsContainer extends React.Component {
 
     onKidAgeChange = (idx, event) => {
       let age = event.target.value;
-      let typecheck = isNaN(age);
-      this.props.updateUserData('kidAges', { idx: idx, age: age });
+      let typecheck = !isNaN(age);
+      if((typecheck && (age >= 0 && age <= 120)) || age==''){
+        console.log('we made it');
+        this.props.updateUserData('kidAges', { idx: idx, age: age });
+      }
     }
 
     onConditionItemClick = (event, { name }) => {
@@ -55,7 +64,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         className='questionsInput questionsInputShort'
         id='questionsInput1'
-        onChange={(e) => this.onInputChange('age', e, 'int')}
+        onChange={(e) => this.onInputChange('age', e, 'int', [0,120])}
         value={this.props.userData.age}
         placeholder='30'
       />
@@ -66,7 +75,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         className='questionsInput questionsInputLong'
         id='questionsInput2'
-        onChange={(e) => this.onInputChange('zipcode', e, 'int')}
+        onChange={(e) => this.onInputChange('zipcode', e, 'int', [0,99999])}
         value={this.props.userData.zipcode}
         placeholder='60601'
       />
@@ -91,7 +100,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         className='questionsInput questionsInputShort'
         id='questionsInput1'
-        onChange={(e) => this.onInputChange('spouseAge', e, 'int')}
+        onChange={(e) => this.onInputChange('spouseAge', e, 'int', [0,120])}
         value={this.props.userData.spouseAge}
         placeholder='30'
       />
@@ -102,7 +111,7 @@ class QuestionsContainer extends React.Component {
         type='text'
         className='questionsInput questionsInputShort'
         id='questionsInput1'
-        onChange={(e) => this.onInputChange('numKids', e, 'int')}
+        onChange={(e) => this.onInputChange('numKids', e, 'int', [0,25])}
         value={this.props.userData.numKids}
         placeholder='0'
       />
@@ -136,9 +145,9 @@ class QuestionsContainer extends React.Component {
         type='text'
         className='questionsInput questionsInputLong'
         id='questionsInput2'
-        onChange={(e) => this.onInputChange('income', e, 'int')}
+        onChange={(e) => this.onInputChange('income', e, 'int', [0,Number.MAX_SAFE_INTEGER])}
         value={this.props.userData.income}
-        placeholder='550000'
+        placeholder='55000'
       />
     );
 
