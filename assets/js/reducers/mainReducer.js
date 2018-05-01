@@ -11,7 +11,7 @@ const initialState = {
   userData: {
     age: '',
     zipcode: '',
-    marriageStatus: '',
+    maritalStatus: '',
     spouseAge: '',
     numKids: '',
     kidAges: [],

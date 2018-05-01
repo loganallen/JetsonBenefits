@@ -240,7 +240,7 @@ class Login extends React.Component {
 
     return (
       <div id='modalWrapperMobile' className={classNames({ hidden: !this.props.isOpen })}>
-        <button id="mobileModalClose" onClick={this.props.onClose}><Icon name='close' size='huge' color='red' /></button>
+        <button id="mobileModalClose" onClick={this.props.onClose}><Icon name='close' size='huge' color='black' /></button>
         <div id="modalImg">
           <h1>jetsonbenefits</h1>
         </div>
