@@ -25,10 +25,26 @@ import '../../css/recommendation.css';
 class Recommendation extends React.Component {
     constructor(props) {
         super(props);
+        this.onUnload = this.onUnload.bind(this); // if you need to bind callback to this
         this.state = {
             stage: 'questions',
             isMobile: isMobile(this.props.deviceWidth)
         };
+    }
+
+    onUnload(event) { // the method that will be used for both add and remove event
+        let message = "Nope";
+        event.returnValue = message;
+        return message;
+
+    }
+
+    componentDidMount() {
+       window.addEventListener("beforeunload", this.onUnload)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.onUnload)
     }
 
     componentWillMount() {

@@ -91,11 +91,20 @@ WSGI_APPLICATION = 'jetson.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['MYSQL_DB'],
-        'USER': os.environ['MYSQL_USER'],
-        'PASSWORD': os.environ['MYSQL_PASSWORD']
+        'NAME': 'jetson_benefits',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.environ['MYSQL_DB'],
+#         'USER': os.environ['MYSQL_USER'],
+#         'PASSWORD': os.environ['MYSQL_PASSWORD']
+#     }
+# }
 
 
 # Password validation
