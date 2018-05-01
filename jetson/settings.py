@@ -88,14 +88,14 @@ WSGI_APPLICATION = 'jetson.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
- DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.mysql',
-         'NAME': os.environ['MYSQL_DB'],
-         'USER': os.environ['MYSQL_USER'],
-         'PASSWORD': os.environ['MYSQL_PASSWORD']
-     }
- }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['MYSQL_DB'],
+        'USER': os.environ['MYSQL_USER'],
+        'PASSWORD': os.environ['MYSQL_PASSWORD']
+    }
+}
 
 
 # Password validation
