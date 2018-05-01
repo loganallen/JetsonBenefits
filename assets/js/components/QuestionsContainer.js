@@ -23,7 +23,7 @@ class QuestionsContainer extends React.Component {
         if (key === 'spouseAge' && this.props.userData['maritalStatus'] === 'single') return;
         else if (key === 'kidAges' && this.props.userData['numKids'] == 0) return;
         else if (key === 'numKids' && this.props.userData[key] !== '') return;
-        disabled = this.props.userData[key] == false || disabled;
+        disabled = this.proops.userData[key] == false || disabled;
       });
 
       return disabled;
