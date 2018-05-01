@@ -14,7 +14,6 @@ import classNames from 'classnames';
 
 import Login from './Login';
 import Actions from '../actions';
-import { isLoggedIn } from '../auth';
 import { isMobile } from '../utils';
 
 import '../../css/menu.css';
@@ -43,18 +42,18 @@ class Menu extends React.Component {
     })
   }
 
-  openLoginModal = () => {
+  openLoginModalMobile = () => {
     $('body').addClass('modal-open');
     this.props.openLoginModal();
   }
 
-  closeLoginModal = () => {
+  closeLoginModalMobile = () => {
     $('body').removeClass('modal-open');
     this.props.closeLoginModal();
   }
 
   desktopRender = () => {
-    let loginButton = isLoggedIn() ?
+    let loginButton = this.props.isLoggedIn ?
       (<button type='button' className='menuButton' onClick={this.props.onLogoutClick}>LOGOUT</button>) :
       (<button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>);
 
@@ -67,22 +66,34 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>RESOURCES</button>
           {loginButton}
         </div>
-        <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
+        { this.props.isLoggedIn ? '' : (
+          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
+        )}
       </div>
     );
   }
 
   mobileRender = () => {
+    let loginButton = this.props.isLoggedIn ?
+      (<ReactMenu.Item onClick={this.openLoginModalMobile}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>) :
+      (<ReactMenu.Item onClick={this.props.onLogoutClick}><p className='mobileMenuButton'>LOGOUT</p></ReactMenu.Item>);
+    
     return (
       <div>
         <div id='menuWrapper' className={this.props.menuTheme}>
           <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
           <div id='icon-wrapper'>
             <button onClick={this.updateMobileMenu}>
-              <Icon name='bars' size='huge' color='teal' />
+              {this.props.menuTheme === 'themeWhite' ? (
+                <Icon name='bars' size='huge' color='teal' />
+              ) : (
+                <Icon name='bars' size='huge' inverted />
+              )}
             </button>
           </div>
-          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
+          { this.props.isLoggedIn ? '' : (
+            <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModalMobile} />
+          )}
         </div>
         <ReactMenu
           vertical
@@ -94,7 +105,7 @@ class Menu extends React.Component {
           <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
           <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
           <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
-          <ReactMenu.Item onClick={this.openLoginModal}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>
+          {loginButton}
         </ReactMenu>
       </div>
     );
@@ -110,7 +121,9 @@ const mapStateToProps = (state) => ({
   menuTheme: state.app.menuTheme,
   loginModalOpen: state.app.loginModal.isOpen,
   loginModalType: state.app.loginModal.isLogin,
-  deviceWidth: state.app.deviceWidth
+  deviceWidth: state.app.deviceWidth,
+  isLoggedIn: state.app.user.isAuth,
+  userName: state.app.user.name
 });
 
 const mapDispatchToProps = (dispatch) => ({
