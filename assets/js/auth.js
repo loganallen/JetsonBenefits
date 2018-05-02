@@ -1,8 +1,12 @@
-// frontent authentication module
+/**
+ * auth.js: a module for front-end authentication
+ */
+
 import { Endpoints } from './utils';
 
 /**
  * login: attempts to login with given username and password
+ * Stores the token in sessionStorage if it exists, will be deleted on browser close
  * @param {String} username
  * @param {String} password
  * @param {Function} callback
