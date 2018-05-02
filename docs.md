@@ -5,7 +5,7 @@
 * [Architecture](#Architecture-overview)
 * [Frontend](#frontend-and-react)
 * [Backend](#backend-and-django)
-* [Style Guide](#style-guide)
+* [Next Steps](#next-steps)
 * [Contact Us](#contact-us)
 
 ## Architecture Overview
@@ -44,16 +44,25 @@
 
   #### How it Works
 
-## Style Guide
+## Next Steps
+
+  While the MVP for this project is more or less complete, there are a few steps that should be taken to convert this a production ready site.  The front-end portion of this project is easy to change and easy to deploy in its current form.  These suggestions for deployment considerations are exclusively for the back-end of this project.  The Django documentation has good advice and will go into more detail about these issues.
+
+  #### Security
+  For a production ready deployment of this application, you will most likely want a custom domain name.  While this is not a security issue, you want to configure your domain to use HTTPS.  This will allow end-to-end encryption of any web traffic that is sent from a users browser to the server.  You do not want your new users' passwords sent in plaintext to the backend when they are signing up.  Refer to [here](https://docs.djangoproject.com/en/2.0/topics/security/) for more detail on ths topic.  Note that at this stage of our application, we leveraged Django's built in security tools.  We have taken steps to combat cross-site scripting and sql injections.
+
+  #### Hosting
+  Refer [here](https://docs.djangoproject.com/en/2.0/howto/deployment/) for deploying this Django application to a live server.
 
 ## Contact Us
 
   At the conclusion of our project, if you have any further questions about the codebase, feel free to reach out.  Below is a list of team  members you can reach out to.  If you have any questions about a specific part of the codebase, reach out to a team member who worked on that part.
 
-  * Andrew Grossfeld (Frontend, API, Authentication)
-    * Cornell Email: amg445@cornell.edu, Personal Email: grossfeld.andrew@gmail.com
-  * Logan Allen (Frontend, API)
-    * Cornell Email: lga24@cornell.edu
-  * Justin Parrat (Frontend)
-
-  TODO: fill in the rest
+  * Andrew Grossfeld (Frontend, API, Authentication): amg445@cornell.edu
+  * Logan Allen (Frontend, API): lga24@cornell.edu
+  * Justin Parratt (Frontend)
+  * Liza Mansbach (UI, UX, User Testing)
+  * Alison Molchadsky (Backend, Database)
+  * Sabah Qazi (Backend, Database)
+  * Nicolas Ferretti (Backend, Database)
+  * Ruzeb Chowdhury (Backend, Database)
