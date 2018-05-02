@@ -3,9 +3,6 @@ The [QuotesContainer] component displays the recommended quotes for a given user
 and serves up to three [QuoteItem] compenents which each correspond to an optional
 [RefineQuoteItem] component. This component is contained within the [Recommendation]
 component.
-
-Model filepath:
-Controller filepath:
 */
 
 import React from 'react';
@@ -42,14 +39,20 @@ class QuotesContainer extends React.Component {
     }
 
     mapQuoteToQuoteItem = (quote) => {
-    	return <QuoteItem
+    	return (
+			<QuoteItem
+                key={quote.type}
     			type={quote.type}
     			field1={quote.field1}
     			field2={quote.field2}
     			field3={quote.field3}
     			permonth={quote.permonth}
     			quoteid={quote.quoteid}
-    			/>
+                userData={this.props.userData}
+				updateUserData={this.props.updateUserData}
+				isMobile={this.props.isMobile}
+			/>
+		);
     }
 
     getQuoteItems = (quoteInfo) => {

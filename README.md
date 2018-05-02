@@ -40,6 +40,7 @@
 
 The file `package.json` is a npm file that holds the specifcs about our javascript environment. It makes available the following commands:
 * `npm start`: starts the django server: short for `python manage.py runserver`
+* `npm run start-test`: start server so you can access from a different device in network - use command `ipconfig getifaddr en0` to get your computer's ip
 * `npm run autobuild`: re-compiles our javascript files everytime there is an update, will run and listen until terminated
 * `npm run build`: compiles our javascript files just once
 
