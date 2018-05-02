@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from app.models import *
 import json
 from app.scripts.recommendation_logic import *
+from django.forms.models import model_to_dict
 
 def validateRequest(request, keys, method, response):
     """
@@ -353,42 +354,41 @@ def getAllInsuranceQuotes(request):
         if (user_general_answers.objects.filter(user_id = user).exists()):
             general_answers = user_general_answers.objects.get(user_id = user)
         if (user_kids.objects.filter(user_id = user).exists()):
-            user_kids_age = user_kids.objects.get(user_id = user).values("kid_age")
+            user_kids_age = user_kids.objects.values_list('kid_age').filter(user_id = user)
 
         health_totals = health_questions.objects.all()
         
         need_insurance, coverage_amount, term = life_insurance(life_insurance_answers, general_answers, user_kids_age)
         plan_type, deductible, critical_illness = health_insurance(health_totals, health_insurance_answers)
-        benefit_amount_d, duration_h, monthly_h = disability_rec(general_answers)
+        benefit_amount_d, duration_d, monthly_d = disability_rec(general_answers)
 
-        is_just_me= False
-        is_me_spouse = False
-        is_me_spouse_kid = False
-        is_me_spouse_two_kids = False
-        if (general_answers.num_kids<1 and general_answers.marital_status == 'single'):
-            is_just_me= True
-        elif (general_answers.marital_status=='married' and general_answers.num_kids<1):
-            is_me_spouse = True
-        elif(general_answers.marital_status=='married' and general_answers.num_kids==1):
-            is_me_spouse_kid = True
-        elif(general_answers.marital_status=='married' and general_answers.num_kids>=1):
-            is_me_spouse_two_kids = True
-        
-        life_quotes = list(life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = life_insurance_answers.gender, age = general_answers.age).values())
-        health_quotes = list(health_plan_costs.objects.filter(plan_type= plan_type, deductible = deductible, gender = general_answers.gender, age = general_answers.age, is_just_me = is_just_me, is_me_spouse = is_me_spouse, is_me_spouse_kid = is_me_spouse_kid, is_me_spouse_two_kids
-            = is_me_spouse_two_kids).values())
+        is_married= False
+        num_kids = general_answers.num_kids
 
+        if (general_answers.marital_status == 'single'):
+            is_married= True
+        if (general_answers.num_kids>2):
+            num_kids = 2
+        age = str(min([25, 35], key=lambda x:abs(x-general_answers.age)))
+        health_quotes = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)
+        health_quote = health_quotes[0]
+        # print(health_quotes)
+        life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'male', age = age)
+        life_quote = life_quotes[0]
+        # disability_quotes = list(disability_plan_costs.objects.filter(age= age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = 'male').values())
         if (life_insurance_answers is not None):
-            disability_quotes = list(disability_plan_costs.objects.filter(age= general_answers.age, benefit_amount = benefit_amount, monthly = monthly, gender = general_answers.gender).values())
-        else:
-            disability_quotes = list(disability_plan_costs.objects.filter(age= general_answers.age, benefit_amount = benefit_amount, monthly = monthly, gender = 'male').values())
+            life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = life_insurance_answers.gender, age = age).values()
+            # disability_quotes = disability_plan_costs.objects.filter(age = age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = general_answers.gender).values()
+        disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
 
-        user_rec = user_recommendation(user_id = user, health_plan_id = health_quotes.health_plan_id, life_plan_id = life_quotes.life_plan_id, disability_plan_id = disability_quotes.disability_plan_id)
+        user_rec = user_recommendation(user_id = user, health_plan_id = health_quotes[0], life_plan_id = life_quotes[0], disability_plan_id = None)
         user_rec.save()
 
+        data = {'Life': model_to_dict(life_quote), 'Health': model_to_dict(health_quote), 'Disability': disability_quote}
 
         # -- add data to res['data']
         res['success'] = True
+        res['data'] = data
     
     return JsonResponse(res)
 

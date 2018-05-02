@@ -80,10 +80,12 @@ class health_plan_costs(models.Model):
 	monthly_premium = models.IntegerField()
 	deductible = models.IntegerField()
 	deductible_level = models.CharField(max_length = 8, choices = level_options)
-	is_just_me = models.BooleanField(default = True)
-	is_me_spouse = models.BooleanField(default = False)
-	is_me_spouse_kid = models.BooleanField(default = False)
-	is_me_spouse_two_kids = models.BooleanField(default = False)
+	# is_just_me = models.BooleanField(default = True)
+	# is_me_spouse = models.BooleanField(default = False)
+	# is_me_spouse_kid = models.BooleanField(default = False)
+	# is_me_spouse_two_kids = models.BooleanField(default = False)
+	has_spouse = models.BooleanField(default = False);
+	num_kids = models.IntegerField(default = 0)
 
 class life_plan_costs(models.Model):
 	age_options = (
@@ -112,9 +114,9 @@ class disability_plan_costs(models.Model):
 	monthly = models.CharField(max_length = 200)
 
 class user_recommendation(models.Model):
-	recommendation_id = models.IntegerField(primary_key = True)
 	user_id = models.OneToOneField(
 		User,
+		primary_key = True,
 		on_delete = models.CASCADE,
 	)
 	health_plan_id = models.OneToOneField(
@@ -123,7 +125,8 @@ class user_recommendation(models.Model):
 	)
 	disability_plan_id = models.OneToOneField(
 		disability_plan_costs,
-		on_delete = models.CASCADE
+		on_delete = models.CASCADE,
+		null = True
 	)
 	life_plan_id = models.OneToOneField(
 		life_plan_costs,

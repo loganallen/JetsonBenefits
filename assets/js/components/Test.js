@@ -35,7 +35,7 @@ class Test extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
-  testFunc: (token, data) => dispatch(Actions.postUserInfo(token, data))
+  testFunc: (token, data) => dispatch(Actions.fetchAllInsuranceQuotes(token))
 });
 
 export default connect(state => state.app, mapDispatchToProps)(Test);

@@ -15,6 +15,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 	term = 20
 	default = True
 	need_insurance = False
+	list_of_coverage_amount = [250000, 300000, 350000, 400000, 450000, 500000, 600000,700000]
 	if (general_questions_dict.marital_status =='married' or general_questions_dict.num_kids >0):
 		need_insurance = True
 
@@ -34,7 +35,8 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		estimate_college_expenses = 50000
 		coverage_amount = annual_income*(22-min_age)*.03 + other_debts_balance+estimate_college_expenses*4*num_kids-(existing_life_insurance-balance_investings_savings)
 			#term
-	return need_insurance, coverage_amount, term
+	coverage_amount_final = min(list_of_coverage_amount, key=lambda x:abs(x-coverage_amount))
+	return need_insurance, coverage_amount_final, term
 
 def health_insurance_totals(health_insurance_total):
 	HMO_denom = 0.0
