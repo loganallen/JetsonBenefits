@@ -54,7 +54,7 @@ class user_life_answers(models.Model):
 
 class user_kids(models.Model):
 	user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-	kid = models.IntegerField(primary_key = True)
+	kid = models.AutoField(primary_key = True)
 	kid_age = models.IntegerField()
 	will_pay_for_college = models.CharField(max_length = 8, choices = yes_no)
 
@@ -106,7 +106,7 @@ class disability_plan_costs(models.Model):
 	)
 	disability_plan_id = models.IntegerField(primary_key = True)
 	benefit_amount = models.CharField(max_length = 10)
-	salary = models.IntegerField() 
+	salary = models.IntegerField(default = 0) 
 	age = models.CharField(max_length = 20, choices = age_options)
 	gender = models.CharField(max_length = 30, choices = gender_options)
 	monthly = models.CharField(max_length = 200)
