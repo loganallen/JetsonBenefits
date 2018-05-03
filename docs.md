@@ -43,6 +43,18 @@
   #### Database
 
   #### How it Works
+  Our back-end Django application can be separated out into three parts: configuration, file serving, and API.
+
+  The configuration of our application lives in the `jetson/` directory.  In this directory there is a file named `settings.py`, which details the configuration of our server.  A lot of code in this file is boilerplate, however we have specified some specific additional `INSTALLED_APPS` that make our program work.
+  * rest_framework & rest_framework.authtoken are used to with some of our API functionality.
+  * webpack_loader is used to serve our pre-built Reactjs bundles
+  * django_user_agents is used to determine user devices
+
+  The other important configuration file in `jetson/` is `urls.py` which specifies the root URL patterns for our application.  This serves to match url paths to their corresponding view functions.
+
+  The file serving part our application lives in `app/`, `static/`, and `templates/`.  The static files that are served to the front-end are in `static/`.  Our application has one view route, which is just the root path `/`.  When this url is accessed, the templating engine calls the corresponding funciton in `app/views.py` which uses the templating engine to render `templates/index.html` to create a package to pass the the browser.
+
+  Finally, the API portion of our Django application is in the `api/` directory.  The `api/urls.py` file specifies the defined api urls that can be accessed.  The `api/views.py` holds all the implementation logic for our api functions.  These functions have built in user authentication using token authentication.
 
 ## Next Steps
 
