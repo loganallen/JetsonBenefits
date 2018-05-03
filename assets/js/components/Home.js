@@ -13,6 +13,7 @@ import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
 import Actions from '../actions';
+import Menu from './Menu';
 import { authToken } from '../auth';
 import { isMobile } from '../utils';
 
@@ -149,6 +150,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <Menu history={this.props.history} />
         {this.section1()}
         {this.section2()}
         {this.section3()}

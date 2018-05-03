@@ -205,6 +205,10 @@
     border-radius: 5px;
 }
 
+.refineButton { 
+    background: none;
+}
+
 
 /* Mobile Only Styles */
 @media screen and (max-device-width: 768px) {

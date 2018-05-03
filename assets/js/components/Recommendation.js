@@ -15,6 +15,7 @@ import Sidebar from './sub_components/Sidebar';
 import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
+import Menu from './Menu';
 import { isMobile } from '../utils';
 import '../../css/recommendation.css';
 
@@ -97,8 +98,11 @@ class Recommendation extends React.Component {
         })(this.state.stage);
 
         return (
-            <div id='rec'>
-                {renderedContent}
+            <div>
+                <Menu history={this.props.history} />
+                <div id='rec'>
+                    {renderedContent}
+                </div>
             </div>
         );
     }
