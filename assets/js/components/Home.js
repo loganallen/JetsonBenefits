@@ -29,9 +29,6 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
-    if (isLoggedIn()) {
-      this.props.loadUserInfo(authToken());
-    }
   }
 
   onInputChange = (id, event) => {
@@ -175,7 +172,6 @@ const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
   updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
-  loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token)),
   postUserInfo: (token, data) => dispatch(Actions.postUserInfo(token, data))
 });
 
