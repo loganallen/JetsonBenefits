@@ -155,6 +155,7 @@ def updateUserInfo(request):
         spouse_annual_income = userData['spouse_annual_income']
         annual_income = userData['annual_income']
         kid_ages = userData['kid_ages']
+        spouse_age = userData['spouse_age']
         
         getAnswers = user_general_answers(user_id = user, age = age, zipcode = zipcode, num_kids = num_kids, marital_status = marital_status, spouse_annual_income = spouse_annual_income, annual_income = annual_income)
         getAnswers.save()
