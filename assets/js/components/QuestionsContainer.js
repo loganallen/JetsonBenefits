@@ -130,8 +130,18 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputLong'
-        onChange={(e) => this.onInputChange('income', e)}
-        value={this.props.userData.income}
+        onChange={(e) => this.onInputChange('annualIncome', e)}
+        value={this.props.userData.annualIncome}
+        placeholder='550000'
+      />
+    );
+
+    spouseIncomeInput = () => (
+      <input
+        type='text'
+        className='questionsInput questionsInputLong'
+        onChange={(e) => this.onInputChange('spouseAnnualIncome', e)}
+        value={this.props.userData.spouseAnnualIncome}
         placeholder='550000'
       />
     );
@@ -196,6 +206,13 @@ class QuestionsContainer extends React.Component {
           <p>I make $</p>
           {this.incomeInput()}
           <p>per year.</p>
+          {this.props.userData.maritalStatus == 'married' && (
+            <div>
+              <p>My spouse makes $</p>
+                {this.spouseIncomeInput()}
+              <p>per year.</p>
+            </div>
+          )}
           <br/>
           <p>Generally I would say my health is</p><br/>
           {this.healthConditionMenu()}

@@ -18,7 +18,7 @@ class Test extends React.Component {
     // Pass in the correct function arguments here
     this.props.testFunc(
       // authToken,
-      {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
+      // {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
     );
   }
 
