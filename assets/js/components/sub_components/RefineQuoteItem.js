@@ -29,8 +29,8 @@ class RefineQuoteItem extends React.Component {
     <Dropdown
       selection
       id={`dropdown${id}`}
-      placeholder={`${answers[0].text}`}
-      className={'questionDropdown'}
+      placeholder={answers[0].text}
+      className='questionDropdown'
       key={`dropdown${id}`}
       options={answers}
       value={this.props.userData[`dropdown${id}`]}
@@ -274,6 +274,7 @@ class RefineQuoteItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.userData);
     return (
       <div>
       {this.state.insuranceType == 'HEALTH' && this.healthQuestions()}

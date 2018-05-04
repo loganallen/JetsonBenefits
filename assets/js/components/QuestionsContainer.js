@@ -34,13 +34,13 @@ class QuestionsContainer extends React.Component {
       this.props.updateUserData(key, event.target.value);
     }
 
-    onDropdownChange = (value) => {
+    onMaritalStatusChange = (value) => {
       this.props.updateUserData('marital_status', value);
     }
 
     onKidAgeChange = (idx, event) => {
       let age = event.target.value;
-      this.props.updateUserData('kidAges', { idx: idx, age: age });
+      this.props.updateUserData('kid_ages', { idx: idx, age: age });
     }
 
     onConditionItemClick = (event, { name }) => {
@@ -77,7 +77,7 @@ class QuestionsContainer extends React.Component {
           { value: 'divorced', text: 'Divorced', content: <span className='dropdownItem'>Divorced</span> },
           { value: 'widowed', text: 'Widowed', content: <span className='dropdownItem'>Widowed</span> }
         ]}
-        onChange={(_, option) => this.onDropdownChange(option.value)}
+        onChange={(_, option) => this.onMaritalStatusChange(option.value)}
         value={this.props.userData.marital_status}
         placeholder='Single'
       />
@@ -106,13 +106,15 @@ class QuestionsContainer extends React.Component {
     kidAgesInputs = () => {
       let inputs = [];
       for (let k=0; k<this.props.userData.num_kids; k++) {
+        let value = this.props.userData.kid_ages[k];
+        value = (value == undefined) ? '' : value;
         inputs.push(
           <input
             type='text'
             key={`kid${k+1}`}
             className='questionsInput questionsInputShort'
             onChange={(e) => this.onKidAgeChange(k, e)}
-            value={this.props.userData.kid_ages[k]}
+            value={value}
             placeholder='0'
           />
         );

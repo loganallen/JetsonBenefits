@@ -15,7 +15,10 @@ import Sidebar from './sub_components/Sidebar';
 import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
+import Menu from './Menu';
 import { isMobile } from '../utils';
+import { isLoggedIn, authToken } from '../auth';
+
 import '../../css/recommendation.css';
 
 /**
@@ -33,7 +36,6 @@ class Recommendation extends React.Component {
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
-        // TODO: Remove this action and put menu inside Recommendation component
     }
 
     onMobileNextClick = () => {
@@ -43,6 +45,10 @@ class Recommendation extends React.Component {
     }
 
     onShowQuotesClick = () => {
+        if (isLoggedIn()) {
+            // Save userData to the backend
+            this.props.saveUserData(authToken(), this.props.userData);
+        }
         this.setState({
             stage: 'quotes'
         });
@@ -56,6 +62,7 @@ class Recommendation extends React.Component {
                     onNextClick={(this.state.isMobile) ? this.onMobileNextClick : this.onShowQuotesClick}
                     userData={this.props.userData}
                     updateUserData={this.props.updateUserData}
+                    updateBulkUserData={this.props.updateBulkUserData}
                     isMobile={this.state.isMobile}
                 />
             </div>
@@ -95,10 +102,13 @@ class Recommendation extends React.Component {
                     return this.questionsContent();
             }
         })(this.state.stage);
-
+        
         return (
-            <div id='rec'>
-                {renderedContent}
+            <div>
+                <Menu history={this.props.history} />
+                <div id='rec'>
+                    {renderedContent}
+                </div>
             </div>
         );
     }
@@ -111,7 +121,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
-    updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value))
+    updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
+    updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
+    saveUserData: (token, data) => dispatch(Actions.postUserInfo(token, data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);
