@@ -20,9 +20,9 @@ class QuestionsContainer extends React.Component {
     isButtonDisabled = () => {
       var disabled = false;
       Object.keys(this.props.userData).forEach(key => {
-        if (key === 'spouseAge' && this.props.userData['maritalStatus'] === 'single') return;
-        else if (key === 'kidAges' && this.props.userData['numKids'] == 0) return;
-        else if (key === 'numKids' && this.props.userData[key] !== '') return;
+        if (key === 'spouse_age' && this.props.userData['marital_status'] === 'single') return;
+        else if (key === 'kid_ages' && this.props.userData['num_kids'] == 0) return;
+        else if (key === 'num_kids' && this.props.userData[key] !== '') return;
         disabled = this.props.userData[key] == false || disabled;
       });
 
@@ -35,7 +35,7 @@ class QuestionsContainer extends React.Component {
     }
 
     onDropdownChange = (value) => {
-      this.props.updateUserData('maritalStatus', value);
+      this.props.updateUserData('marital_status', value);
     }
 
     onKidAgeChange = (idx, event) => {
@@ -44,7 +44,7 @@ class QuestionsContainer extends React.Component {
     }
 
     onConditionItemClick = (event, { name }) => {
-      this.props.updateUserData('healthCondition', name);
+      this.props.updateUserData('health_condition', name);
     }
 
     ageInput = () => (
@@ -78,7 +78,7 @@ class QuestionsContainer extends React.Component {
           { value: 'widowed', text: 'Widowed', content: <span className='dropdownItem'>Widowed</span> }
         ]}
         onChange={(_, option) => this.onDropdownChange(option.value)}
-        value={this.props.userData.maritalStatus}
+        value={this.props.userData.marital_status}
         placeholder='Single'
       />
     );
@@ -87,8 +87,8 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputShort'
-        onChange={(e) => this.onInputChange('spouseAge', e)}
-        value={this.props.userData.spouseAge}
+        onChange={(e) => this.onInputChange('spouse_age', e)}
+        value={this.props.userData.spouse_age}
         placeholder='30'
       />
     );
@@ -97,28 +97,28 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputShort'
-        onChange={(e) => this.onInputChange('numKids', e)}
-        value={this.props.userData.numKids}
+        onChange={(e) => this.onInputChange('num_kids', e)}
+        value={this.props.userData.num_kids}
         placeholder='0'
       />
     );
     
     kidAgesInputs = () => {
       let inputs = [];
-      for (let k=0; k<this.props.userData.numKids; k++) {
+      for (let k=0; k<this.props.userData.num_kids; k++) {
         inputs.push(
           <input
             type='text'
             key={`kid${k+1}`}
             className='questionsInput questionsInputShort'
             onChange={(e) => this.onKidAgeChange(k, e)}
-            value={this.props.userData.kidAges[k]}
+            value={this.props.userData.kid_ages[k]}
             placeholder='0'
           />
         );
-        if (k < this.props.userData.numKids-2) {
+        if (k < this.props.userData.num_kids-2) {
           inputs.push(<p key={`p${k+1}`}>, </p>);
-        } else if (k == this.props.userData.numKids-2) {
+        } else if (k == this.props.userData.num_kids-2) {
           inputs.push(<p key='and'>and</p>);
         }
       }
@@ -130,8 +130,8 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputLong'
-        onChange={(e) => this.onInputChange('annualIncome', e)}
-        value={this.props.userData.annualIncome}
+        onChange={(e) => this.onInputChange('annual_income', e)}
+        value={this.props.userData.annual_income}
         placeholder='550000'
       />
     );
@@ -140,27 +140,27 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputLong'
-        onChange={(e) => this.onInputChange('spouseAnnualIncome', e)}
-        value={this.props.userData.spouseAnnualIncome}
+        onChange={(e) => this.onInputChange('spouse_annual_income', e)}
+        value={this.props.userData.spouse_annual_income}
         placeholder='550000'
       />
     );
 
     healthConditionMenu() {
-      let options = ['Poor', 'Meh', 'Good', 'Excellent'];
-      let menuItems = options.map(el => {
-        let isActive = this.props.userData.healthCondition === el.toLowerCase();
+      let conditions = ['poor', 'meh', 'good', 'excellent'];
+      let menuItems = conditions.map(el => {
+        let isActive = this.props.userData.health_condition === el;
         return (
           <Menu.Item
-            key={el.toLowerCase()}
-            name={el.toLowerCase()}
+            key={el}
+            name={el}
             className={classNames({
               'healthConditionMobileItem': this.props.isMobile
             })}
             color={isActive ? 'teal' : 'grey'}
             active={isActive}
             onClick={this.onConditionItemClick}
-          >{el}</Menu.Item>
+          >{el.charAt(0).toUpperCase() + el.substr(1)}</Menu.Item>
         );
       });
 
@@ -188,14 +188,14 @@ class QuestionsContainer extends React.Component {
           <p>with</p>
           {this.numKidsInput()}
           <p>kids.</p>
-          {this.props.userData.maritalStatus == 'married' && (
+          {this.props.userData.marital_status == 'married' && (
             <div>
               <p>My spouse is </p>
               {this.spouseAgeInput()}
               <p>years old.</p>
             </div>
           )}
-          {this.props.userData.numKids > 0 && (
+          {this.props.userData.num_kids > 0 && (
             <div>
               <p>and my kids are </p>
               {this.kidAgesInputs()}
@@ -206,7 +206,7 @@ class QuestionsContainer extends React.Component {
           <p>I make $</p>
           {this.incomeInput()}
           <p>per year.</p>
-          {this.props.userData.maritalStatus == 'married' && (
+          {this.props.userData.marital_status == 'married' && (
             <div>
               <p>My spouse makes $</p>
                 {this.spouseIncomeInput()}

@@ -16,7 +16,7 @@ class RefineQuoteItem extends React.Component {
 
   onKidAgeChange = (idx, event) => {
       let age = event.target.value;
-      this.props.updateUserData('kidAges', { idx: idx, age: age });
+      this.props.updateUserData('kid_ages', { idx: idx, age: age });
     }
 
   onDropdownChange = (value, id) => {
@@ -162,7 +162,7 @@ class RefineQuoteItem extends React.Component {
       <p className='refine-title'>Great! We just need a litle more information from you</p>
       <div className='grid-wrapper'>
       {
-        (this.props.userData.marritalStatus == 'married' || (this.props.userData.kidAges).length > 0)
+        (this.props.userData.marital_status == 'married' || (this.props.userData.kid_ages).length > 0)
         && <Grid columns={4}>
         <Grid.Row>
           <Grid.Column>
@@ -179,7 +179,7 @@ class RefineQuoteItem extends React.Component {
           <p>Will you pay for college</p>
           </Grid.Column>
         </Grid.Row>
-        {this.props.userData.marritalStatus == 'married' && <Grid.Row>
+        {this.props.userData.marital_status == 'married' && <Grid.Row>
           <Grid.Column>
           Spouse
           </Grid.Column>
@@ -196,15 +196,15 @@ class RefineQuoteItem extends React.Component {
           <Grid.Column>
           <input
             type='text'
-            id='spouseAge'
+            id='spouse_age'
             className='refine-input-grid'
-            onChange={(e) => this.onInputChange('spouseAge', e)}
-            value={this.props.userData.spouseAge}
+            onChange={(e) => this.onInputChange('spouse_age', e)}
+            value={this.props.userData.spouse_ge}
             placeholder=''
           />
           </Grid.Column>
         </Grid.Row>}
-        {this.generateChildRows(this.props.userData.kidAges)}
+        {this.generateChildRows(this.props.userData.kid_ages)}
       </Grid>}
       </div>
       <div className='refine-question'>

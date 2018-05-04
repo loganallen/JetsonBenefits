@@ -11,13 +11,13 @@ const initialState = {
   userData: {
     age: '',
     zipcode: '',
-    maritalStatus: '',
-    spouseAge: '',
-    spouseAnnualIncome: '',
-    numKids: '',
-    kidAges: [],
-    annualIncome: '',
-    healthCondition: ''
+    marital_status: '',
+    spouse_age: '',
+    spouse_annual_income: '',
+    num_kids: '',
+    kid_ages: [],
+    annual_income: '',
+    health_condition: ''
   },
   loginModal: {
     isOpen: false,
@@ -44,9 +44,9 @@ const mainReducer = (state = initialState, action) => {
       };
     case ActionTypes.UPDATE_USER_DATA:
       var updatedValue = action.data.value;
-      if (action.data.key === 'kidAges') {
+      if (action.data.key === 'kid_ages') {
         // TODO: This yields warning but not sure why
-        updatedValue = [ ...state.userData.kidAges ];
+        updatedValue = [ ...state.userData.kid_ages ];
         updatedValue[action.data.value.idx] = action.data.value.age;
       }
       return {
