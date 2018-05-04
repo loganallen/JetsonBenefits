@@ -118,7 +118,6 @@ const logoutUser = () => (dispatch, getState) => {
  *  @param {Object} data { key: value }
  */ 
 const postUserInfo = (token, data) => (dispatch, getState) => {
-	console.log("hi hi hi");
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_USER_INFO,
@@ -251,7 +250,7 @@ const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
 }
 
 /**
- * fetchAllInsuranceQuote: get all insurance quote info for the active auth user
+ * fetchAllInsuranceQuotes: get all insurance quote info for the active auth user
  * @param {String} token
  */
 const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
@@ -263,6 +262,25 @@ const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
         },
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
+        }
+    }).done(res => {
+        console.log(res);
+    }).fail(err => {
+        console.log(err);
+    });
+}
+
+/**
+ * generateAllInsuranceQuotes: get all insurance quote info for the anonymous user
+ * @param {Object} data: {key: value}
+ */
+const generateAllInsuranceQuotes = (data) => (dispatch, getState) => {
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GENERATE_INSURANCE_QUOTES,
+        data: {
+            csrfmiddlewaretoken: env.csrf_token,
+            userData: JSON.stringify(data)
         }
     }).done(res => {
         console.log(res);
@@ -286,5 +304,6 @@ export default {
     fetchInsuranceInfo,
     fetchAllInsuranceInfo,
     fetchInsuranceQuote,
-    fetchAllInsuranceQuotes
+    fetchAllInsuranceQuotes,
+    generateAllInsuranceQuotes
 };
