@@ -162,7 +162,7 @@ class RefineQuoteItem extends React.Component {
       <p className='refine-title'>Great! We just need a litle more information from you</p>
       <div className='grid-wrapper'>
       {
-        (this.props.userData.marriageStatus == 'married' || (this.props.userData.kidAges).length > 0)
+        (this.props.userData.marritalStatus == 'married' || (this.props.userData.kidAges).length > 0)
         && <Grid columns={4}>
         <Grid.Row>
           <Grid.Column>
@@ -179,7 +179,7 @@ class RefineQuoteItem extends React.Component {
           <p>Will you pay for college</p>
           </Grid.Column>
         </Grid.Row>
-        {this.props.userData.marriageStatus == 'married' && <Grid.Row>
+        {this.props.userData.marritalStatus == 'married' && <Grid.Row>
           <Grid.Column>
           Spouse
           </Grid.Column>

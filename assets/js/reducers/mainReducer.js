@@ -13,9 +13,10 @@ const initialState = {
     zipcode: '',
     maritalStatus: '',
     spouseAge: '',
+    spouseAnnualIncome: '',
     numKids: '',
     kidAges: [],
-    income: '',
+    annualIncome: '',
     healthCondition: ''
   },
   loginModal: {
