@@ -6,7 +6,8 @@ const ActionTypes = keyMirror({
     UPDATE_LOGIN_MODAL: null,
     UPDATE_USER_DATA: null,
     UPDATE_BULK_USER_DATA: null,
-    UPDATE_USER_AUTH: null
+    UPDATE_USER_AUTH: null,
+    CLEAR_USER_DATA: null,
 });
 
 export default ActionTypes;

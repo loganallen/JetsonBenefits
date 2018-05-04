@@ -49,6 +49,11 @@ const updateUserAuth = (hasAuthToken, name='') => ({
     }
 });
 
+const clearUserData = () => ({
+    type: ActionTypes.CLEAR_USER_DATA,
+    data: {}
+});
+
 /**
  * Thunks for API requests
  */
@@ -68,6 +73,7 @@ const loginUser = (username, password) => (dispatch, getState) => {
             if (res.success) {
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
+                dispatch(fetchUserInfo(Auth.authToken()));
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
@@ -110,6 +116,7 @@ const signupUser = (userData) => (dispatch, getState) => {
 const logoutUser = () => (dispatch, getState) => {
     Auth.logout();
     dispatch(updateUserAuth(false));
+    dispatch(clearUserData());
 }
 
 /**

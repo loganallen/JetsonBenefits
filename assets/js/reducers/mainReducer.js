@@ -68,6 +68,11 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         user: action.data
       }
+    case ActionTypes.CLEAR_USER_DATA:
+      return {
+        ...state,
+        userData: initialState.userData
+      }
     default:
       return state;
   }
