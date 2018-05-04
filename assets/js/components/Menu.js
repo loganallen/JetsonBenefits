@@ -28,7 +28,7 @@ class Menu extends React.Component {
   }
 
   onHomeClick = () => {
-    // TODO
+    this.props.history.push('/home');
   }
 
   fakeClick = () => {

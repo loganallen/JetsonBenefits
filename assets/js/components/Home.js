@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
+import Menu from './Menu';
 import Actions from '../actions';
 import { isLoggedIn, authToken } from '../auth';
 import { isMobile } from '../utils';
@@ -154,6 +155,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <Menu history={this.props.history} />
         {this.section1()}
         {this.section2()}
         {this.section3()}

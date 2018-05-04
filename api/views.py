@@ -202,6 +202,7 @@ def getUserInfo(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
+        # TODO: What if the user_general_answers doesn't contain this user yet???
         userData = list(user_general_answers.objects.filter(user_id=user.id).values())[0]
         # TODO: Grab kid's ages from table and insert as array in userData['kid_ages']
         res['data'] = userData
