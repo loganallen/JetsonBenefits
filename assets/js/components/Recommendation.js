@@ -16,6 +16,8 @@ import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
 import { isMobile } from '../utils';
+import { isLoggedIn, authToken } from '../auth';
+
 import '../../css/recommendation.css';
 
 /**
@@ -33,7 +35,6 @@ class Recommendation extends React.Component {
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
-        // TODO: Remove this action and put menu inside Recommendation component
     }
 
     onMobileNextClick = () => {
@@ -43,6 +44,7 @@ class Recommendation extends React.Component {
     }
 
     onShowQuotesClick = () => {
+        
         this.setState({
             stage: 'quotes'
         });

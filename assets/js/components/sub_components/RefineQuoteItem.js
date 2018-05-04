@@ -274,6 +274,7 @@ class RefineQuoteItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.userData);
     return (
       <div>
       {this.state.insuranceType == 'HEALTH' && this.healthQuestions()}
