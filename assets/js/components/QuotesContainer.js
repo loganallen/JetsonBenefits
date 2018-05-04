@@ -7,13 +7,13 @@ component.
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { } from 'semantic-ui-react';	
+import { Breadcrumb } from 'semantic-ui-react';	
 import QuoteItem from './sub_components/QuoteItem'
 import '../../css/quotes.css';
 
 class QuotesContainer extends React.Component {
     constructor(props) {
-        super(props);
+		super(props);
     }
 
     //currently hard coded but will eventually pull from the db
@@ -57,11 +57,30 @@ class QuotesContainer extends React.Component {
 
     getQuoteItems = (quoteInfo) => {
     	return quoteInfo.map(this.mapQuoteToQuoteItem);
-    }
+	}
+	
+	breadcrumbs = () => {
+		return this.props.isMobile ? (
+			<Breadcrumb>
+				<Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
+				<Breadcrumb.Divider>/</Breadcrumb.Divider>
+				<Breadcrumb.Section link onClick={() => this.props.updateStage('recommendation')}>Recommendations</Breadcrumb.Section>
+				<Breadcrumb.Divider>/</Breadcrumb.Divider>
+				<Breadcrumb.Section active link>Quotes</Breadcrumb.Section>
+			</Breadcrumb>
+		) : (
+			<Breadcrumb>
+				<Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
+				<Breadcrumb.Divider>/</Breadcrumb.Divider>
+				<Breadcrumb.Section active link>Quotes</Breadcrumb.Section>
+			</Breadcrumb>
+		);
+	}
 
     render() {
         return (
             <div id="quotesContainer">
+				{ this.breadcrumbs()}
 				<h1 id="quotesTitle">YOUR BENEFITS</h1>
             	{this.getQuoteItems(this.getQuotes())}
             </div>

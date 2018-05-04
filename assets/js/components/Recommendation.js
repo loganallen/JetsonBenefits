@@ -44,6 +44,12 @@ class Recommendation extends React.Component {
         });
     }
 
+    updateStage = (stage) => {
+        this.setState(
+            { stage: stage }
+        )
+    }
+
     onShowQuotesClick = () => {
         if (isLoggedIn()) {
             // Save userData to the backend
@@ -64,6 +70,7 @@ class Recommendation extends React.Component {
                     updateUserData={this.props.updateUserData}
                     updateBulkUserData={this.props.updateBulkUserData}
                     isMobile={this.state.isMobile}
+                    updateStage={this.updateStage}
                 />
             </div>
         );
@@ -75,6 +82,7 @@ class Recommendation extends React.Component {
             <Sidebar
                 isMobile={this.state.isMobile}
                 onNextClick={this.onShowQuotesClick}
+                updateStage={this.updateStage}
             />
         );
     }
@@ -85,6 +93,7 @@ class Recommendation extends React.Component {
                 userData={this.props.userData}
                 updateUserData={this.props.updateUserData}
                 isMobile={this.state.isMobile}
+                updateStage={this.updateStage}
             />
         );
     }
