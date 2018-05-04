@@ -8,7 +8,7 @@
 
 #quotesTitle {
     font-size: 1.5em;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 50px; 
 }
 
@@ -209,6 +209,12 @@
     background: none;
 }
 
+#breadcrumbWrapper {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
 
 /* Mobile Only Styles */
 @media screen and (max-device-width: 768px) {
@@ -317,5 +323,12 @@
     .refine-input-currency {
         font-size: 3em;
         width: 60%;
+    }
+
+    #breadcrumbWrapper {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        margin-left: 2%;
     }
 }

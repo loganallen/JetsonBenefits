@@ -46,12 +46,13 @@ class Sidebar extends React.Component {
 
   breadcrumbs = () => {
 		return this.props.isMobile && (
-			<Breadcrumb>
-				<Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
-				<Breadcrumb.Divider>/</Breadcrumb.Divider>
-				<Breadcrumb.Section link active>Recommendations</Breadcrumb.Section>
-				<Breadcrumb.Divider>/</Breadcrumb.Divider>
-			</Breadcrumb>
+      <div id="breadcrumbWrapper">
+        <Breadcrumb size='massive'>
+          <Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
+          <Breadcrumb.Divider>/</Breadcrumb.Divider>
+          <Breadcrumb.Section link active>Recommendations</Breadcrumb.Section>
+        </Breadcrumb>
+      </div>
 		);
 	}
 

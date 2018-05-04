@@ -61,7 +61,7 @@ class QuotesContainer extends React.Component {
 	
 	breadcrumbs = () => {
 		return this.props.isMobile ? (
-			<Breadcrumb>
+			<Breadcrumb size='massive'>
 				<Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
 				<Breadcrumb.Divider>/</Breadcrumb.Divider>
 				<Breadcrumb.Section link onClick={() => this.props.updateStage('recommendation')}>Recommendations</Breadcrumb.Section>
@@ -80,7 +80,9 @@ class QuotesContainer extends React.Component {
     render() {
         return (
             <div id="quotesContainer">
-				{ this.breadcrumbs()}
+				<div id="breadcrumbWrapper">
+					{this.breadcrumbs()}
+				</div>
 				<h1 id="quotesTitle">YOUR BENEFITS</h1>
             	{this.getQuoteItems(this.getQuotes())}
             </div>
