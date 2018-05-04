@@ -33,12 +33,12 @@ class QuestionsContainer extends React.Component {
       let input = event.target.value;
       let isInt = !isNaN(input);
       let typecheck = (type=='string') == !isInt;
-      if(typecheck || input==''){
+      if (typecheck || input == ''){
         //additional bounds checking for ints
-        if((isInt && input!='') && (input <= bounds[0] || input >= bounds[1])){
+        if((isInt && input!='') && (input < bounds[0] || input > bounds[1])){
           return;
         }
-        this.props.updateUserData(key, event.target.value);
+        this.props.updateUserData(key, input);
       }
     }
 
@@ -49,8 +49,7 @@ class QuestionsContainer extends React.Component {
     onKidAgeChange = (idx, event) => {
       let age = event.target.value;
       let typecheck = !isNaN(age);
-      if((typecheck && (age >= 0 && age <= 120)) || age==''){
-        console.log('we made it');
+      if ((typecheck && (age >= 0 && age <= 120)) || age == ''){
         this.props.updateUserData('kidAges', { idx: idx, age: age });
       }
     }
