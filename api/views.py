@@ -289,12 +289,22 @@ def getAllInsuranceInfo(request):
             { success: bool, error: string, data: object }
     """
     requiredKeys = []
-    res = { 'success': False, 'error': '', data: None }
+    res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         # -- get data
+        health_info = {}
+        life_info = {}
+        disability_info = {}
+        if (user_health_questions_answer.objects.filter(user_id = user.id).exists()):
+            health_info = user_health_questions_answer.objects.filter(user_id = user.id).values()[0]
+        if (user_life_answers.objects.filter(user_id = user.id).exists()):
+            life_info = user_life_answers.objects.filter(user_id = user.id).values()[0]
+        if (user_general_answers.objects.filter(user_id=user.id).exists()):
+            disability_info = user_general_answers.objects.filter(user_id=user.id).values('annual_income')[0]
         # -- add data to res['data']
+        res['data'] = {"health": health_info, "life":life_info, "disability":disability_info}
         res['success'] = True
     
     return JsonResponse(res)
@@ -312,13 +322,74 @@ def getInsuranceQuote(request):
             { success: bool, error: string, data: object }
     """
     requiredKeys = []
-    res = { 'success': False, 'error': '', data: None }
+    res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        # -- get data
-        # -- add data to res['data']
-        res['success'] = True
+        # -- get user recommendation
+        gen_answers = user_general_answers.objects.filter(user_id=user.id)[0]
+        print(gen_answers.marital_status)
+
+        if (user_health_questions_answer.objects.filter(user_id = user.id).exists()):
+            health_info = user_health_questions_answer.objects.filter(user_id = user.id)[0]
+        if (user_life_answers.objects.filter(user_id = user.id).exists()):
+            life_info = user_life_answers.objects.filter(user_id = user.id)[0]
+        if (user_general_answers.objects.filter(user_id=user.id).exists()):
+            disability_info = user_general_answers.objects.filter(user_id=user.id).values('annual_income')[0]
+
+        if (gen_answers.marital_status == 'single'):
+            is_married= True
+        if (gen_answers.num_kids>2):
+            num_kids = 2
+        age = str(min([25, 35], key=lambda x:abs(x-gen_answers.age)))
+
+        #insurance_type = json.loads(request.GET['insuranceType'])
+        insurance_type = "health"
+        if (insurance_type == 'health'):
+            # get data
+            health_totals = health_questions.objects.all()
+            plan_type, deductible, critical_illness = health_insurance(health_totals, health_answers)
+
+            health_quotes = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).values()[0]
+            health_quote = health_quotes[0]
+
+            user_rec = user_recommendation.objects.filter(user_id=user.id)
+            user_rec.health_plan_id = health_quote.health_plan_id
+            user_rec.save()
+
+            # -- add data to res['data']
+            print("hi")
+            res['data'] = list(health_quote)
+            res['success'] = True
+        elif (insurance_type == 'life'):
+            # get data
+            need_insurance, coverage_amount, term = life_insurance(life_insurance_answers, general_answers, user_kids_age)
+
+            life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'male', age = age)
+            life_quote = life_quotes[0]
+
+            user_rec = user_recommendation.objects.filter(user_id=user.id)
+            user_rec.health_plan_id = life_quote.life_plan_id
+            user_rec.save()
+
+            # -- add data to res['data']
+            res['data'] = life_quote
+            res['success'] = True
+        elif (insurance_type == 'disability'):
+            # get data
+            benefit_amount_d, duration_h, monthly_h = disability_rec(general_answers)
+
+            disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
+
+            user_rec = user_recommendation.objects.filter(user_id=user.id)
+            user_rec.disabililty_plan_id = None
+            user_rec.save()
+
+            # -- add data to res['data']
+            res['data'] = quote
+            res['success'] = True
+        else:
+            res['error'] = 'invalid insurance type'
     
     return JsonResponse(res)
 
