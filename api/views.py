@@ -335,7 +335,6 @@ def getInsuranceQuote(request):
         user = request.user
         # -- get user recommendation
         gen_answers = user_general_answers.objects.filter(user_id=user.id)[0]
-        print(gen_answers.marital_status)
 
         health_info = None
         life_info = None
@@ -356,8 +355,8 @@ def getInsuranceQuote(request):
             num_kids = 2
         age = str(min([25, 35], key=lambda x:abs(x-gen_answers.age)))
 
-        insurance_type = json.loads(request.GET['insuranceType'])
-
+        #insurance_type = json.loads(request.GET['insuranceType'])
+        insurance_type = "health"
         if (insurance_type == 'health'):
             # get data
             health_totals = health_questions.objects.all()
@@ -369,10 +368,8 @@ def getInsuranceQuote(request):
                 user_rec = user_recommendation.objects.filter(user_id=user.id)
                 user_rec.health_plan_id = health_quote.health_plan_id
                 user_rec.save()
-            #health_quote = health_quotes[0]
 
             # -- add data to res['data']
-            print("hi")
             res['data'] = health_quote
             res['success'] = True
         elif (insurance_type == 'life'):
