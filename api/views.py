@@ -425,7 +425,7 @@ def getAllInsuranceQuotes(request):
         :return JsonResponse
             { success: bool, error: string, data: object }
     """
-    requiredKeys = []
+    requiredKeys = ['userData']
     res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):

@@ -72,8 +72,10 @@ class QuestionsContainer extends React.Component {
         id='questionsDropdown'
         className='questionsInput'
         options={[
-          { value: 'single', text: 'Single', content: <p className='dropdownItem'>Single</p> },
-          { value: 'married', text: 'Married', content: <p className='dropdownItem'>Married</p> },
+          { value: 'single', text: 'Single', content: <span className='dropdownItem'>Single</span> },
+          { value: 'married', text: 'Married', content: <span className='dropdownItem'>Married</span> },
+          { value: 'divorced', text: 'Divorced', content: <span className='dropdownItem'>Divorced</span> },
+          { value: 'widowed', text: 'Widowed', content: <span className='dropdownItem'>Widowed</span> }
         ]}
         onChange={(_, option) => this.onDropdownChange(option.value)}
         value={this.props.userData.maritalStatus}
