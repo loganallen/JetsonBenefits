@@ -47,6 +47,9 @@ def validateRequest(request, keys, method, response):
 
     return result
 
+def asInt(value):
+    return 0 if value == '' else int(value)
+
 
 @require_POST
 def signup(request):
@@ -148,25 +151,35 @@ def updateUserInfo(request):
         user = request.user
         user_id = user.id
         userData = json.loads(request.POST['userData'])
-        age = userData['age']
-        zipcode = userData['zipcode']
-        num_kids = userData['num_kids']
+        age = asInt(userData['age'])
+        zipcode = asInt(userData['zipcode'])
+        num_kids = asInt(userData['num_kids'])
         marital_status = userData['marital_status']
-        spouse_annual_income = userData['spouse_annual_income']
-        annual_income = userData['annual_income']
+        spouse_annual_income = asInt(userData['spouse_annual_income'])
+        annual_income = asInt(userData['annual_income'])
         kid_ages = userData['kid_ages']
-        spouse_age = userData['spouse_age']
-        health = userData['health_condition']
+        spouse_age = asInt(userData['spouse_age'])
+        health_condition = userData['health_condition']
         
-        getAnswers = user_general_answers(user_id = user, age = age, zipcode = zipcode, num_kids = num_kids, marital_status = marital_status, spouse_annual_income = spouse_annual_income, annual_income = annual_income, spouse_age = spouse_age, health = health)
+        getAnswers = user_general_answers(
+            user_id = user,
+            age = age,
+            zipcode = zipcode,
+            num_kids = num_kids,
+            marital_status = marital_status,
+            spouse_annual_income = spouse_annual_income,
+            annual_income = annual_income,
+            spouse_age = spouse_age,
+            health_condition = health_condition
+        )
+        # getAnswers = user_general_answers(user_id=user, age=age, zipcode=zipcode)
         getAnswers.save()
 
         i = 0
         while(i<len(kid_ages)):
-            age = user_kids(user_id = user, kid_age = kid_ages[i], will_pay_for_college = 'yes')
+            age = user_kids(user_id = user, kid_age = asInt(kid_ages[i]), will_pay_for_college = 'yes')
             age.save()
             i = i+1
-
 
         res['success'] = True
 
@@ -270,7 +283,7 @@ def getInsuranceInfo(request):
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
         user_id = user.id
-        insuranceType = request.POST['insuranceType']
+        insuranceType = json.loads(request.POST['insuranceType'])
 
         if (insuranceType == 'HEALTH'):
             data = list(user_health_questions_answer.objects.filter(user_id=user.id).values())
@@ -355,9 +368,7 @@ def getInsuranceQuote(request):
             num_kids = 2
         age = str(min([25, 35], key=lambda x:abs(x-gen_answers.age)))
 
-        # TODO: Error?????
-        # insurance_type = json.loads(request.GET['insuranceType'])
-        insurance_type = 'HEALTH'
+        insurance_type = json.loads(request.GET['insuranceType'])
         if (insurance_type == 'HEALTH'):
             # get data
             health_totals = health_questions.objects.all()
@@ -370,7 +381,6 @@ def getInsuranceQuote(request):
                 user_rec.health_plan_id = health_quote.health_plan_id
                 user_rec.save()
 
-            # -- add data to res['data']
             res['data'] = health_quote
             res['success'] = True
         elif (insurance_type == 'LIFE'):
@@ -384,7 +394,6 @@ def getInsuranceQuote(request):
                 user_rec.health_plan_id = life_quote.life_plan_id
                 user_rec.save()
 
-            # -- add data to res['data']
             res['data'] = life_quote
             res['success'] = True
         elif (insurance_type == 'DISABILITY'):
@@ -397,7 +406,6 @@ def getInsuranceQuote(request):
             user_rec.disabililty_plan_id = None
             user_rec.update()
 
-            # -- add data to res['data']
             res['data'] = disability_quote
             res['success'] = True
         else:
@@ -455,7 +463,6 @@ def getAllInsuranceQuotes(request):
         age = str(min([25, 35], key=lambda x:abs(x-general_answers.age)))
         health_quotes = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)
         health_quote = health_quotes[0]
-        # print(health_quotes)
         life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'male', age = age)
         # disability_quotes = list(disability_plan_costs.objects.filter(age= age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = 'male').values())
         if (life_insurance_answers is not None):
@@ -469,16 +476,11 @@ def getAllInsuranceQuotes(request):
 
         data = {'LIFE': model_to_dict(life_quote), 'HEALTH': model_to_dict(health_quote), 'DISABILITY': disability_quote}
 
-        # -- add data to res['data']
         res['success'] = True
         res['data'] = data
     
     return JsonResponse(res)
 
-
-# @api_view(['GET']) #TODO: not sure if this is get or post
-# @authentication_classes((TokenAuthentication,))
-# @permission_classes((IsAuthenticated,))
 @require_GET
 def generateInsuranceQuotes(request):
     """
@@ -488,11 +490,10 @@ def generateInsuranceQuotes(request):
         :return JsonResponse
             { success: bool, error: string, data: object }
     """
-    requiredKeys = []
+    requiredKeys = ['userData']
     res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
-        # -- get data
         userData = json.loads(request.GET['userData'])
 
         general_post = userData['GENERAL']
