@@ -198,12 +198,13 @@ def getUserInfo(request):
             { success: bool, error: string, data: object }
     """
     requiredKeys = []
-    res = { 'success': False, 'error': '', data: None }
+    res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        data = list(user_general_answers.objects.filter(user_id=user.id).values())
-        res['data'] = data
+        userData = list(user_general_answers.objects.filter(user_id=user.id).values())[0]
+        # TODO: Grab kid's ages from table and insert as array in userData['kid_ages']
+        res['data'] = userData
         res['success'] = True
 
     return JsonResponse(res)

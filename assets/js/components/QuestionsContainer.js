@@ -34,7 +34,7 @@ class QuestionsContainer extends React.Component {
       this.props.updateUserData(key, event.target.value);
     }
 
-    onDropdownChange = (value) => {
+    onMaritalStatusChange = (value) => {
       this.props.updateUserData('marital_status', value);
     }
 
@@ -77,7 +77,7 @@ class QuestionsContainer extends React.Component {
           { value: 'divorced', text: 'Divorced', content: <span className='dropdownItem'>Divorced</span> },
           { value: 'widowed', text: 'Widowed', content: <span className='dropdownItem'>Widowed</span> }
         ]}
-        onChange={(_, option) => this.onDropdownChange(option.value)}
+        onChange={(_, option) => this.onMaritalStatusChange(option.value)}
         value={this.props.userData.marital_status}
         placeholder='Single'
       />

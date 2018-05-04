@@ -151,7 +151,7 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log(res);
-        // dispatch(updateBulkUserData(res.data));
+        dispatch(updateBulkUserData(res.data));
     }).fail(err => {
         console.log(err);
     });
@@ -295,6 +295,7 @@ export default {
     changeMenuTheme,
     updateLoginModal,
     updateUserData,
+    updateBulkUserData,
     loginUser,
     signupUser,
     logoutUser,
