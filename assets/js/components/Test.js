@@ -17,8 +17,8 @@ class Test extends React.Component {
 
     // Pass in the correct function arguments here
     this.props.testFunc(
-      authToken,
-      { age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }
+      // authToken,
+      {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
     );
   }
 
@@ -35,7 +35,7 @@ class Test extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
-  testFunc: (token, data) => dispatch(Actions.fetchAllInsuranceQuotes(token))
+  testFunc: (data) => dispatch(Actions.generateInsuranceQuotes(data))
 });
 
 export default connect(state => state.app, mapDispatchToProps)(Test);

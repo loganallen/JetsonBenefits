@@ -16,22 +16,23 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 	default = True
 	need_insurance = False
 	list_of_coverage_amount = [250000, 300000, 350000, 400000, 450000, 500000, 600000,700000]
-	if (general_questions_dict.marital_status =='married' or general_questions_dict.num_kids >0):
+	if (general_questions_dict.marital_status =='married' or int(general_questions_dict.num_kids) >0):
 		need_insurance = True
 
 	if life_insurance_dict is not None:
 		default = False
 
 	if default:
-		coverage_amount = 10*general_questions_dict.annual_income
+		print("DEAFILT")
+		coverage_amount = 10*int(general_questions_dict.annual_income)
 
 	else:
-		min_age = min(user_kids_age)
-		other_debts_balance  = life_insurance_dict.other_debts_balance
-		existing_life_insurance = life_insurance_dict.existing_life_insurance
-		num_kids = general_questions_dict.num_kids
-		balance_investings_savings = life_insurance_dict.balance_investings_savings
-		general_questions_dict.annual_income
+		min_age = min(map(int, user_kids_age))
+		other_debts_balance  = int(life_insurance_dict.other_debts_balance)
+		existing_life_insurance = int(life_insurance_dict.existing_life_insurance)
+		num_kids = int(general_questions_dict.num_kids)
+		balance_investings_savings = int(life_insurance_dict.balance_investings_savings)
+		annual_income = int(general_questions_dict.annual_income)
 		estimate_college_expenses = 50000
 		coverage_amount = annual_income*(22-min_age)*.03 + other_debts_balance+estimate_college_expenses*4*num_kids-(existing_life_insurance-balance_investings_savings)
 			#term
@@ -89,12 +90,12 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		denom_dict = health_insurance_totals(health_insurance_total)
 
 		for key in health_insurance_dict:
-			HMO_TOTAL = HMO_TOTAL+health_insurance_dict[key].HMO
-			PPO_TOTAL = HMO_TOTAL+health_insurance_dict[key].PPO
-			HSA_TOTAL = HMO_TOTAL+health_insurance_dict[key].HSA
-			high_deductible_total = high_deductible_total+ health_insurance_dict[key].high_deductible_total
-			low_deductible_total = low_deductible_total+ health_insurance_dict[key].low_deductible_total
-			critical_illness = critical_illness + health_insurance_dict[key].critical_illness
+			HMO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HMO)
+			PPO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].PPO)
+			HSA_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HSA)
+			high_deductible_total = high_deductible_total+ float(health_insurance_dict[key].high_deductible_total)
+			low_deductible_total = low_deductible_total+ float(health_insurance_dict[key].low_deductible_total)
+			critical_illness = critical_illness + float(health_insurance_dict[key].critical_illness)
 
 
 		HMO_ratio = float(HMO_TOTAL)/ float(denom_dict['HMO_denom'])
@@ -133,7 +134,7 @@ def disability_rec(general_questions_dict):
 	benefit_amount = 0
 	duration = 65
 
-	benefit_amount = general_questions_dict.annual_income * .6
+	benefit_amount = int(general_questions_dict.annual_income) * .6
 	monthly = float(benefit_amount) / float(12)
 
 	return benefit_amount, duration, monthly

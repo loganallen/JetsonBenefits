@@ -271,10 +271,10 @@ const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
 }
 
 /**
- * generateAllInsuranceQuotes: get all insurance quote info for the anonymous user
+ * generateInsuranceQuotes: get all insurance quote info for the anonymous user
  * @param {Object} data: {key: value}
  */
-const generateAllInsuranceQuotes = (data) => (dispatch, getState) => {
+const generateInsuranceQuotes = (data) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GENERATE_INSURANCE_QUOTES,
@@ -305,5 +305,5 @@ export default {
     fetchAllInsuranceInfo,
     fetchInsuranceQuote,
     fetchAllInsuranceQuotes,
-    generateAllInsuranceQuotes
+    generateInsuranceQuotes
 };

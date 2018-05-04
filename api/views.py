@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
-
+from django.views.decorators.http import require_GET
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from django.core import serializers
+
+
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 
 from app.models import *
 import json
@@ -374,11 +379,11 @@ def getAllInsuranceQuotes(request):
         health_quote = health_quotes[0]
         # print(health_quotes)
         life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'male', age = age)
-        life_quote = life_quotes[0]
         # disability_quotes = list(disability_plan_costs.objects.filter(age= age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = 'male').values())
         if (life_insurance_answers is not None):
-            life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = life_insurance_answers.gender, age = age).values()
+            life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = life_insurance_answers.gender, age = age)
             # disability_quotes = disability_plan_costs.objects.filter(age = age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = general_answers.gender).values()
+        life_quote = life_quotes[0]
         disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
 
         user_rec = user_recommendation(user_id = user, health_plan_id = health_quotes[0], life_plan_id = life_quotes[0], disability_plan_id = None)
@@ -393,9 +398,10 @@ def getAllInsuranceQuotes(request):
     return JsonResponse(res)
 
 
-@api_view(['GET', 'POST']) #TODO: not sure if this is get or post
-@authentication_classes((TokenAuthentication,))
-@permission_classes((IsAuthenticated,))
+# @api_view(['GET']) #TODO: not sure if this is get or post
+# @authentication_classes((TokenAuthentication,))
+# @permission_classes((IsAuthenticated,))
+@require_GET
 def generateInsuranceQuotes(request):
     """
         Generates insurance quotes for a user
@@ -405,11 +411,59 @@ def generateInsuranceQuotes(request):
             { success: bool, error: string, data: object }
     """
     requiredKeys = []
-    res = { 'success': False, 'error': '', data: None }
+    res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         # -- get data
+        userData = json.loads(request.GET['userData'])
+
+        general_post = userData["General"]
+        life_post = userData["Life"]
+        health_post = userData["Health"]
+
+        life_obj = None
+        health_obj = None
+        user_kids_ages = general_post["kid_ages"]
+        del general_post["kid_ages"]
+        general_post["user_id"] = User()
+
+        general_obj = user_general_answers(**general_post)
+        if (life_post != {}):
+            life_post["user_id"] = User()
+            life_obj = user_life_answers(**life_post)
+        if (health_post != {}):
+            health_post["user_id"] = User()
+            health_obj = user_health_questions_answer(**health_post)
+        # -- add data to res['data']
+        health_totals = health_questions.objects.all()
+
+        need_insurance, coverage_amount, term = life_insurance(life_obj, general_obj, user_kids_ages)
+        plan_type, deductible, critical_illness = health_insurance(health_totals, health_obj)
+        benefit_amount_d, duration_d, monthly_d = disability_rec(general_obj)
+
+        is_married= False
+        num_kids = general_post["num_kids"]
+
+        if (general_obj.marital_status == 'single'):
+            is_married= True
+        if (int(general_obj.num_kids)>2):
+            num_kids = 2
+        age = str(min([25, 35], key=lambda x:abs(x-int(general_obj.age))))
+        health_quotes = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)
+        health_quote = health_quotes[0]
+        # print(health_quotes)
+        life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'male', age = age)
+        # disability_quotes = list(disability_plan_costs.objects.filter(age= age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = 'male').values())
+        if (life_obj is not None):
+            life_quotes = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = life_obj.gender, age = age)
+            # disability_quotes = disability_plan_costs.objects.filter(age = age, benefit_amount = benefit_amount_d, monthly = monthly_d, gender = general_answers.gender).values()
+        life_quote = life_quotes[0]
+        disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
+             
+        data = {'Life': model_to_dict(life_quote), 'Health': model_to_dict(health_quote), 'Disability': disability_quote}
+
         # -- add data to res['data']
         res['success'] = True
+        res['data'] = data
 
     return JsonResponse(res)
