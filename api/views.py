@@ -156,7 +156,7 @@ def updateUserInfo(request):
         annual_income = userData['annual_income']
         kid_ages = userData['kid_ages']
         spouse_age = userData['spouse_age']
-        health = userData["health_condition"]
+        health = userData['health_condition']
         
         getAnswers = user_general_answers(user_id = user, age = age, zipcode = zipcode, num_kids = num_kids, marital_status = marital_status, spouse_annual_income = spouse_annual_income, annual_income = annual_income, spouse_age = spouse_age, health = health)
         getAnswers.save()
@@ -216,7 +216,7 @@ def updateInsuranceInfo(request):
         insuranceData = json.loads(request.POST['insuranceData'])
         insuranceType = request.POST['insuranceType']
 
-        if (insuranceType == "Health"):
+        if (insuranceType == 'HEALTH'):
             q_1 = userData['q_1']
             q_2 = userData['q_2']
             q_3 = userData['q_3']
@@ -234,11 +234,11 @@ def updateInsuranceInfo(request):
                 q_6=q_6, q_7=q_7, q_8=q_8, q_9=q_9, q_10=q_10, q_11=q_11, q_12=q_12)
             healthRecord.save()
 
-        elif (insuranceType == "Life"):
-            mortgage_balance = userData["mortgage_balance"]
-            other_debts_balance = userData["other_debts_balance"]
-            existing_life_insurance = userData["existing_life_insurance"]
-            balance_investings_savings = userData["balance_investings_savings"]
+        elif (insuranceType == 'LIFE'):
+            mortgage_balance = userData['mortgage_balance']
+            other_debts_balance = userData['other_debts_balance']
+            existing_life_insurance = userData['existing_life_insurance']
+            balance_investings_savings = userData['balance_investings_savings']
 
             lifeRecord = user_life_answers(mortgage_balance=mortgage_balance, other_debts_balance=other_debts_balance,
                 existing_life_insurance=existing_life_insurance, balance_investings_savings=balance_investings_savings)
@@ -272,9 +272,9 @@ def getInsuranceInfo(request):
         user_id = user.id
         insuranceType = request.POST['insuranceType']
 
-        if (insuranceType == "Health"):
+        if (insuranceType == 'HEALTH'):
             data = list(user_health_questions_answer.objects.filter(user_id=user.id).values())
-        elif (insuranceType == "Life"):
+        elif (insuranceType == 'LIFE'):
             data = list(user_life_answers.objects.filter(user_id=user.id).values())
         else:
             data = list(user_general_answers.objects.filter(user_id=user.id).values('annual_income'))
@@ -311,7 +311,7 @@ def getAllInsuranceInfo(request):
         if (user_general_answers.objects.filter(user_id=user.id).exists()):
             disability_info = user_general_answers.objects.filter(user_id=user.id).values('annual_income')[0]
         # -- add data to res['data']
-        res['data'] = {"health": health_info, "life":life_info, "disability":disability_info}
+        res['data'] = {'HEALTH': health_info, 'LIFE': life_info, 'DISABILITY': disability_info}
         res['success'] = True
     
     return JsonResponse(res)
@@ -355,9 +355,10 @@ def getInsuranceQuote(request):
             num_kids = 2
         age = str(min([25, 35], key=lambda x:abs(x-gen_answers.age)))
 
-        #insurance_type = json.loads(request.GET['insuranceType'])
-        insurance_type = "health"
-        if (insurance_type == 'health'):
+        # TODO: Error?????
+        # insurance_type = json.loads(request.GET['insuranceType'])
+        insurance_type = 'HEALTH'
+        if (insurance_type == 'HEALTH'):
             # get data
             health_totals = health_questions.objects.all()
             plan_type, deductible, critical_illness = health_insurance(health_totals, health_info)
@@ -372,7 +373,7 @@ def getInsuranceQuote(request):
             # -- add data to res['data']
             res['data'] = health_quote
             res['success'] = True
-        elif (insurance_type == 'life'):
+        elif (insurance_type == 'LIFE'):
             # get data
             need_insurance, coverage_amount, term = life_insurance(life_info, gen_answers, user_kids_age)
 
@@ -386,7 +387,7 @@ def getInsuranceQuote(request):
             # -- add data to res['data']
             res['data'] = life_quote
             res['success'] = True
-        elif (insurance_type == 'disability'):
+        elif (insurance_type == 'DISABILITY'):
             # get data
             benefit_amount_d, duration_d, monthly_d = disability_rec(gen_answers)
 
@@ -466,7 +467,7 @@ def getAllInsuranceQuotes(request):
         user_rec = user_recommendation(user_id = user, health_plan_id = health_quotes[0], life_plan_id = life_quotes[0], disability_plan_id = None)
         user_rec.save()
 
-        data = {'Life': model_to_dict(life_quote), 'Health': model_to_dict(health_quote), 'Disability': disability_quote}
+        data = {'LIFE': model_to_dict(life_quote), 'HEALTH': model_to_dict(health_quote), 'DISABILITY': disability_quote}
 
         # -- add data to res['data']
         res['success'] = True
@@ -494,22 +495,22 @@ def generateInsuranceQuotes(request):
         # -- get data
         userData = json.loads(request.GET['userData'])
 
-        general_post = userData["General"]
-        life_post = userData["Life"]
-        health_post = userData["Health"]
+        general_post = userData['GENERAL']
+        life_post = userData['LIFE']
+        health_post = userData['HEALTH']
 
         life_obj = None
         health_obj = None
-        user_kids_ages = general_post["kid_ages"]
-        del general_post["kid_ages"]
-        general_post["user_id"] = User()
+        user_kids_ages = general_post['kid_ages']
+        del general_post['kid_ages']
+        general_post['user_id'] = User()
 
         general_obj = user_general_answers(**general_post)
         if (life_post != {}):
-            life_post["user_id"] = User()
+            life_post['user_id'] = User()
             life_obj = user_life_answers(**life_post)
         if (health_post != {}):
-            health_post["user_id"] = User()
+            health_post['user_id'] = User()
             health_obj = user_health_questions_answer(**health_post)
         # -- add data to res['data']
         health_totals = health_questions.objects.all()
@@ -519,7 +520,7 @@ def generateInsuranceQuotes(request):
         benefit_amount_d, duration_d, monthly_d = disability_rec(general_obj)
 
         is_married= False
-        num_kids = general_post["num_kids"]
+        num_kids = general_post['num_kids']
 
         if (general_obj.marital_status == 'single'):
             is_married= True
@@ -537,7 +538,7 @@ def generateInsuranceQuotes(request):
         life_quote = life_quotes[0]
         disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
              
-        data = {'Life': model_to_dict(life_quote), 'Health': model_to_dict(health_quote), 'Disability': disability_quote}
+        data = {'LIFE': model_to_dict(life_quote), 'HEALTH': model_to_dict(health_quote), 'DISABILITY': disability_quote}
 
         # -- add data to res['data']
         res['success'] = True
