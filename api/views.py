@@ -172,9 +172,9 @@ def updateUserInfo(request):
             spouse_age = spouse_age,
             health_condition = health_condition
         )
-        # getAnswers = user_general_answers(user_id=user, age=age, zipcode=zipcode)
         getAnswers.save()
-
+        # TODO: Won't we want to delete kids if the user changes from > 0 kids back to 0 kids, or do we let the
+        # recommendation logic take care of that and it will ignore the tables
         i = 0
         while(i<len(kid_ages)):
             age = user_kids(user_id = user, kid_age = asInt(kid_ages[i]), will_pay_for_college = 'yes')
@@ -204,7 +204,7 @@ def getUserInfo(request):
         user = request.user
         # TODO: What if the user_general_answers doesn't contain this user yet???
         userData = list(user_general_answers.objects.filter(user_id=user.id).values())[0]
-        # TODO: Grab kid's ages from table and insert as array in userData['kid_ages']
+        # TODO: Need to grab kid's ages from table and insert as array in userData['kid_ages']
         res['data'] = userData
         res['success'] = True
 
@@ -231,6 +231,7 @@ def updateInsuranceInfo(request):
         insuranceData = json.loads(request.POST['insuranceData'])
         insuranceType = request.POST['insuranceType']
 
+        # TODO: Not all fields may be present in the payload
         if (insuranceType == 'HEALTH'):
             q_1 = userData['q_1']
             q_2 = userData['q_2']
@@ -315,17 +316,17 @@ def getAllInsuranceInfo(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        # -- get data
         health_info = {}
         life_info = {}
         disability_info = {}
+
         if (user_health_questions_answer.objects.filter(user_id = user.id).exists()):
             health_info = user_health_questions_answer.objects.filter(user_id = user.id).values()[0]
         if (user_life_answers.objects.filter(user_id = user.id).exists()):
             life_info = user_life_answers.objects.filter(user_id = user.id).values()[0]
         if (user_general_answers.objects.filter(user_id=user.id).exists()):
             disability_info = user_general_answers.objects.filter(user_id=user.id).values('annual_income')[0]
-        # -- add data to res['data']
+
         res['data'] = {'HEALTH': health_info, 'LIFE': life_info, 'DISABILITY': disability_info}
         res['success'] = True
     
@@ -348,7 +349,7 @@ def getInsuranceQuote(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        # -- get user recommendation
+        # TODO: What if the user doesn't exist yet in this table
         gen_answers = user_general_answers.objects.filter(user_id=user.id)[0]
 
         health_info = None
