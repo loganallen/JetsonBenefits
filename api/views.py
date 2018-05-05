@@ -428,11 +428,11 @@ def getAllInsuranceQuotes(request):
         :return JsonResponse
             { success: bool, error: string, data: object }
     """
-    requiredKeys = ['userData']
+    requiredKeys = []
     res = { 'success': False, 'error': '', 'data': None }
 
+    # TODO: Needs testing.. didn't work with a valid use who has data in userInfo table
     if (validateRequest(request, requiredKeys, 'GET', res)):
-        # -- get data
         user = request.user
 
         life_insurance_answers = None
@@ -456,11 +456,11 @@ def getAllInsuranceQuotes(request):
         plan_type, deductible, critical_illness = health_insurance(health_totals, health_insurance_answers)
         benefit_amount_d, duration_d, monthly_d = disability_rec(general_answers)
 
-        is_married= False
+        is_married = False
         num_kids = general_answers.num_kids
 
         if (general_answers.marital_status == 'single'):
-            is_married= True
+            is_married = True # TODO: ??????? Huh
         if (general_answers.num_kids>2):
             num_kids = 2
         age = str(min([25, 35], key=lambda x:abs(x-general_answers.age)))
@@ -516,7 +516,6 @@ def generateInsuranceQuotes(request):
         if (health_post != {}):
             health_post['user_id'] = User()
             health_obj = user_health_questions_answer(**health_post)
-        # -- add data to res['data']
         health_totals = health_questions.objects.all()
 
         need_insurance, coverage_amount, term = life_insurance(life_obj, general_obj, user_kids_ages)
@@ -544,7 +543,6 @@ def generateInsuranceQuotes(request):
              
         data = {'LIFE': model_to_dict(life_quote), 'HEALTH': model_to_dict(health_quote), 'DISABILITY': disability_quote}
 
-        # -- add data to res['data']
         res['success'] = True
         res['data'] = data
 
