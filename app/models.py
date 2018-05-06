@@ -171,8 +171,6 @@ class user_health_questions_answer(models.Model):
 	)
 	q_1 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
 	q_2 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_3 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_4 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
 	q_5 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
 	q_6 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
 	q_7 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
