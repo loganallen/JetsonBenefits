@@ -140,6 +140,22 @@ def updateUserInfo(request):
         Update a users information
         :param request
             { POST: { userData: object } }
+            userData = {
+                age:  
+                zipcode:  
+                marital_status: 
+                health: 
+                annual_income:  
+                spouse_annual_income:  
+                spouse_age: 
+                num_kids:  
+                kid_ages:
+            }
+
+            kid_ages is an array of ints
+            marital status is 'single', 'married', 'divorced' or 'divorced'
+            health is 'Excellent', Good', Meh', or Poor'
+
 
         :return JsonResponse
             { success: bool, error: string }
@@ -196,6 +212,18 @@ def getUserInfo(request):
         
         :return JsonResponse
             { success: bool, error: string, data: object }
+            data = {
+                age:,
+                annual_income:,
+                health_condition:,
+                kid_ages: [],
+                marital_status:
+                num_kids:, 
+                spouse_age:,
+                spouse_annual_income:,
+                user_id_id:
+                zipcode:
+            }
     """
     requiredKeys = []
     res = { 'success': False, 'error': '', 'data': None }
@@ -231,6 +259,38 @@ def updateInsuranceInfo(request):
     """
         Update insurance info for a user
         :param request:
+        insuranceType is 'HEALTH', 'LIFE' or 'DISABILITY'
+        if insuranceType is HEALTH
+        insuranceData = {
+                q_1: 'No', 
+                q_2: 'No', 
+                q_5: 'Might go',
+                q_6: 'Never or just for my annual physical', 
+                q_7: "Drink some tea, it'll pass", 
+                q_8: 'Find out cost before booking appt', 
+                q_9: 'It crosses my mind sometimes.', 
+                q_10: 'It crosses my mind sometimes.',
+                q_11: 'Convenient time with any doctor',
+                q_12: 'If my doc says so'
+            }
+            q_1 is 'Yes' or 'No'
+            q_2 is 'Yes' or 'No'
+            q_5 is 'No chance', 'Might go', 'I'll definitely go'
+            q_6 is '1-3 times besides my physical exam', 'Never or just for my annual physical', or 'More than 3 times a year'
+            q_7 is 'More than 3 times a year', 'If I don't feel better in a few days, I'm going to the doctor', or 'Go to the doctor immediately'
+            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Find out cost before booking appt'
+            q_9 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
+            q_10 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
+            q_11 is 'I don't...', 'Convenient time with any doctor', or 'Must see my doc'
+            q_12 is 'If my doc says so', 'Not likely', or 'I love second opinions'
+
+        if insuranceType is LIFE
+        insuranceData = {
+            mortgage_balance: 20000,
+            other_debts_balance: 500,
+            existing_life_insurance:0,
+            balance_investings_savings: 1000,
+        }
 
         :return JsonResponse
             { success: bool, error: string }
@@ -274,7 +334,7 @@ def updateInsuranceInfo(request):
                 existing_life_insurance=existing_life_insurance, balance_investings_savings=balance_investings_savings)
             lifeRecord.save()
 
-        else:
+        elif (insuranceType == 'DISABILITY'):
             #disability data already stored
             a = 1
 
@@ -294,6 +354,37 @@ def getInsuranceInfo(request):
 
         :return JsonResponse
             { success: bool, error: string, data: object }
+            If insuranceType is HEALTH
+            data = {
+                q_1:, 
+                q_2:, 
+                q_5:,
+                q_6:, 
+                q_7:, 
+                q_8:, 
+                q_9:, 
+                q_10:,
+                q_11:,
+                q_12:
+            }
+            q_1 is 'Yes' or 'No'
+            q_2 is 'Yes' or 'No'
+            q_5 is 'No chance', 'Might go', 'I'll definitely go'
+            q_6 is '1-3 times besides my physical exam', 'Never or just for my annual physical', or 'More than 3 times a year'
+            q_7 is 'More than 3 times a year', 'If I don't feel better in a few days, I'm going to the doctor', or 'Go to the doctor immediately'
+            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Find out cost before booking appt'
+            q_9 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
+            q_10 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
+            q_11 is 'I don't...', 'Convenient time with any doctor', or 'Must see my doc'
+            q_12 is 'If my doc says so', 'Not likely', or 'I love second opinions'
+
+            if insuranceType is LIFE
+            data = {
+                mortgage_balance:,
+                other_debts_balance:,
+                existing_life_insurance:,
+                balance_investings_savings:,
+            }
     """
     requiredKeys = ['insuranceType']
     res = { 'success': False, 'error': '', 'data': None }
@@ -319,6 +410,8 @@ def getInsuranceInfo(request):
                 data['q_12'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_12_id']).option
         elif (insuranceType == 'LIFE'):
             data = list(user_life_answers.objects.filter(user_id=user.id).values())
+            if len(data)>0:
+                data = list(user_life_answers.objects.filter(user_id=user.id).values())[0]
         else:
             data = list(user_general_answers.objects.filter(user_id=user.id).values('annual_income'))
         res['data'] = data
@@ -337,6 +430,30 @@ def getAllInsuranceInfo(request):
 
         :return JsonResponse
             { success: bool, error: string, data: object }
+
+        data = { 
+            HEALTH: {
+                q_1:, 
+                q_2:, 
+                q_5:,
+                q_6:, 
+                q_7:, 
+                q_8:, 
+                q_9:, 
+                q_10:,
+                q_11:,
+                q_12:
+            },
+            LIFE: {
+                mortgage_balance:,
+                other_debts_balance:,
+                existing_life_insurance:,
+                balance_investings_savings:,
+            },
+            DISABILITY: {
+                annual_income: 10000
+            }
+        }        
     """
     requiredKeys = []
     res = { 'success': False, 'error': '', 'data': None }

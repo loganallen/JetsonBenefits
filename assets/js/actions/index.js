@@ -141,7 +141,6 @@ const postUserInfo = (token, data) => (dispatch, getState) => {
         console.log(err);
     });
 }
-
 /**
  * fetchUserInfo: get user info for the active auth user
  * @param {String} token
@@ -188,7 +187,6 @@ const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) =
         console.log(err);
     });
 }
-
 /**
  * fetchInsuranceInfo: get specific insurance info for the active auth user
  * @param {String} token

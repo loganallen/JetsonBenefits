@@ -20,9 +20,9 @@ class Test extends React.Component {
       authToken,
       // {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
       // {age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '0', num_kids: '0', kid_ages: [1,2,3] }
-      // 'LIFE',
+      // 'HEALTH',
       // {
-      //   q_1: 'Yes', 
+      //   q_1: 'No', 
       //   q_2: 'No', 
       //   q_5: 'Might go',
       //   q_6: 'Never or just for my annual physical', 
@@ -55,8 +55,8 @@ class Test extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
-  // testFunc: (token, type, data) => dispatch(Actions.postInsuranceInfo(token, type, data))
   testFunc: (token) => dispatch(Actions.fetchAllInsuranceInfo(token))
+
 });
 
 export default connect(state => state.app, mapDispatchToProps)(Test);
