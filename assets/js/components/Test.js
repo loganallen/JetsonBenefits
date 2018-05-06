@@ -8,6 +8,7 @@ the console. You must be an authenticated user to test the API calls (i.e. logge
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Menu from './Menu';
 import Actions from '../actions';
 import Auth from '../auth';
 
@@ -45,6 +46,7 @@ class Test extends React.Component {
   render() {
     return (
       <div>
+        <Menu history={this.props.history} />
         <h1>API Test Componenet</h1>
         <button onClick={this.handleAPIclick}>Make API Call</button>
         <br/><br/>
@@ -56,7 +58,6 @@ class Test extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
   testFunc: (token) => dispatch(Actions.fetchAllInsuranceInfo(token))
-
 });
 
 export default connect(state => state.app, mapDispatchToProps)(Test);

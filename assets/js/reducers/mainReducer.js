@@ -1,5 +1,6 @@
 import ActionTypes from '../actions/actionTypes';
 import { isLoggedIn } from '../auth';
+import { InsuranceTypes } from '../utils';
 
 const initialState = {
   menuTheme: "themeWhite",
@@ -18,6 +19,16 @@ const initialState = {
     kid_ages: [],
     annual_income: '',
     health_condition: ''
+  },
+  insuranceData: {
+    [InsuranceTypes.HEALTH]: {},
+    [InsuranceTypes.LIFE]: {},
+    [InsuranceTypes.DISABILITY]: {}
+  },
+  insuranceQuotes: {
+    [InsuranceTypes.HEALTH]: {},
+    [InsuranceTypes.LIFE]: {},
+    [InsuranceTypes.DISABILITY]: {}
   },
   loginModal: {
     isOpen: false,

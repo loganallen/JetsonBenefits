@@ -20,7 +20,8 @@ export const Endpoints = {
 export const InsuranceTypes = keyMirror({
   HEALTH: null,
   LIFE: null,
-  DISABILITY: null
+  DISABILITY: null,
+  GENERAL: null
 });
 
 export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || env.isMobile);
