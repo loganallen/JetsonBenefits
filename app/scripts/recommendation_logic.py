@@ -28,6 +28,8 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 
 	else:
 		min_age = min(map(int, user_kids_age))
+		if len(user_kids_age)<1:
+			min_age = 0
 		other_debts_balance  = int(life_insurance_dict.other_debts_balance)
 		existing_life_insurance = int(life_insurance_dict.existing_life_insurance)
 		num_kids = int(general_questions_dict.num_kids)
@@ -90,12 +92,13 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		denom_dict = health_insurance_totals(health_insurance_total)
 
 		for key in health_insurance_dict:
-			HMO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HMO)
-			PPO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].PPO)
-			HSA_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HSA)
-			high_deductible_total = high_deductible_total+ float(health_insurance_dict[key].high_deductible_total)
-			low_deductible_total = low_deductible_total+ float(health_insurance_dict[key].low_deductible_total)
-			critical_illness = critical_illness + float(health_insurance_dict[key].critical_illness)
+			if (health_insurance_total[key] is not None):
+				HMO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HMO)
+				PPO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].PPO)
+				HSA_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HSA)
+				high_deductible_total = high_deductible_total+ float(health_insurance_dict[key].high_deductible_total)
+				low_deductible_total = low_deductible_total+ float(health_insurance_dict[key].low_deductible_total)
+				critical_illness = critical_illness + float(health_insurance_dict[key].critical_illness)
 
 
 		HMO_ratio = float(HMO_TOTAL)/ float(denom_dict['HMO_denom'])

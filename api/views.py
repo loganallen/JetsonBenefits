@@ -307,31 +307,22 @@ def updateInsuranceInfo(request):
 
         # TODO: Not all fields may be present in the payload
         if (insuranceType == 'HEALTH'):
-            q_1 = health_question_options.objects.get(option = insuranceData['q_1'], health_question_id = 1)
-            q_2 = health_question_options.objects.get(option = insuranceData['q_2'], health_question_id = 2)
-            # q_3 = insuranceData['q_3']
-            # q_4 = insuranceData['q_4']
-            q_5 = health_question_options.objects.get(option = insuranceData['q_5'], health_question_id = 5)
-            q_6 = health_question_options.objects.get(option = insuranceData['q_6'], health_question_id = 6)
-            q_7 = health_question_options.objects.get(option = insuranceData['q_7'], health_question_id = 7)
-            q_8 = health_question_options.objects.get(option = insuranceData['q_8'], health_question_id = 8)
-            q_9 = health_question_options.objects.get(option = insuranceData['q_9'], health_question_id = 9)
-            q_10 = health_question_options.objects.get(option = insuranceData['q_10'], health_question_id = 10)
-            q_11 = health_question_options.objects.get(option = insuranceData['q_11'], health_question_id = 11)
-            q_12 = health_question_options.objects.get(option = insuranceData['q_12'], health_question_id = 12)
+            healthRecord = user_health_questions_answer(user_id = user)
+            
+            health_dict = {'user_id': user}
+            for key in insuranceData:
+                num = int(key[key.find('_')+1:]) #get id number
+                q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
+                health_dict[key] = q
 
-            healthRecord = user_health_questions_answer(user_id = user, q_1=q_1, q_2=q_2, q_5=q_5, 
-                q_6=q_6, q_7=q_7, q_8=q_8, q_9=q_9, q_10=q_10, q_11=q_11, q_12=q_12)
+            healthRecord = user_health_questions_answer(**health_dict)
             healthRecord.save()
 
         elif (insuranceType == 'LIFE'):
-            mortgage_balance = insuranceData['mortgage_balance']
-            other_debts_balance = insuranceData['other_debts_balance']
-            existing_life_insurance = insuranceData['existing_life_insurance']
-            balance_investings_savings = insuranceData['balance_investings_savings']
 
-            lifeRecord = user_life_answers(user_id = user, mortgage_balance=mortgage_balance, other_debts_balance=other_debts_balance,
-                existing_life_insurance=existing_life_insurance, balance_investings_savings=balance_investings_savings)
+            insuranceData['user_id'] = user
+
+            lifeRecord = user_life_answers(**insuranceData)
             lifeRecord.save()
 
         elif (insuranceType == 'DISABILITY'):
@@ -535,7 +526,7 @@ def getInsuranceQuote(request):
             health_quote = None
             if (health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).exists()):
                 health_quote = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).values()[0]
-                user_rec = user_recommendation.objects.filter(user_id=user.id)
+                user_rec = user_recommendation.objects.filter(user_id=user)
                 user_rec.health_plan_id = health_quote.health_plan_id
                 user_rec.save()
 

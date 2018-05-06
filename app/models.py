@@ -43,10 +43,10 @@ class user_general_answers(models.Model):
 	health_condition = models.CharField(max_length = 9, choices = health_options)
 
 class user_life_answers(models.Model):
-	mortgage_balance = models.IntegerField()
-	other_debts_balance = models.IntegerField()
-	existing_life_insurance = models.IntegerField()
-	balance_investings_savings = models.IntegerField()
+	mortgage_balance = models.IntegerField(default = 0)
+	other_debts_balance = models.IntegerField(default = 0)
+	existing_life_insurance = models.IntegerField(default = 0)
+	balance_investings_savings = models.IntegerField(default = 0)
 	user_id = models.OneToOneField(
 			User,
 			on_delete = models.CASCADE,
@@ -169,16 +169,16 @@ class user_health_questions_answer(models.Model):
 		on_delete = models.CASCADE,
 		primary_key = True
 	)
-	q_1 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_2 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_5 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_6 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_7 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_8 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_9 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_10 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_11 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
-	q_12 = models.OneToOneField(health_question_options, related_name = '+', default = None, on_delete = models.CASCADE)
+	q_1 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_2 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_5 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_6 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_7 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_8 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_9 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_10 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_11 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
+	q_12 = models.OneToOneField(health_question_options, related_name = '+', null = True, on_delete = models.CASCADE)
 
 
 
