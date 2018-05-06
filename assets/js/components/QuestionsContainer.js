@@ -29,9 +29,17 @@ class QuestionsContainer extends React.Component {
       return disabled;
     }
 
-    onInputChange = (key, event) => {
-      // TODO: Validate inputs
-      this.props.updateUserData(key, event.target.value);
+    onInputChange = (key, event, type='string', bounds=[0,0]) => {
+      let input = event.target.value;
+      let isInt = !isNaN(input);
+      let typecheck = (type=='string') == !isInt;
+      if (typecheck || input == ''){
+        //additional bounds checking for ints
+        if((isInt && input!='') && (input < bounds[0] || input > bounds[1])){
+          return;
+        }
+        this.props.updateUserData(key, input);
+      }
     }
 
     onDropdownChange = (value) => {
@@ -40,7 +48,10 @@ class QuestionsContainer extends React.Component {
 
     onKidAgeChange = (idx, event) => {
       let age = event.target.value;
-      this.props.updateUserData('kidAges', { idx: idx, age: age });
+      let typecheck = !isNaN(age);
+      if ((typecheck && (age >= 0 && age <= 120)) || age == ''){
+        this.props.updateUserData('kidAges', { idx: idx, age: age });
+      }
     }
 
     onConditionItemClick = (event, { name }) => {
@@ -51,7 +62,8 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputShort'
-        onChange={(e) => this.onInputChange('age', e)}
+        id='questionsInput1'
+        onChange={(e) => this.onInputChange('age', e, 'int', [0,120])}
         value={this.props.userData.age}
         placeholder='30'
       />
@@ -61,7 +73,8 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputLong'
-        onChange={(e) => this.onInputChange('zipcode', e)}
+        id='questionsInput2'
+        onChange={(e) => this.onInputChange('zipcode', e, 'int', [0,99999])}
         value={this.props.userData.zipcode}
         placeholder='60601'
       />
@@ -85,7 +98,8 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputShort'
-        onChange={(e) => this.onInputChange('spouseAge', e)}
+        id='questionsInput1'
+        onChange={(e) => this.onInputChange('spouseAge', e, 'int', [0,120])}
         value={this.props.userData.spouseAge}
         placeholder='30'
       />
@@ -95,7 +109,8 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputShort'
-        onChange={(e) => this.onInputChange('numKids', e)}
+        id='questionsInput1'
+        onChange={(e) => this.onInputChange('numKids', e, 'int', [0,25])}
         value={this.props.userData.numKids}
         placeholder='0'
       />
@@ -128,9 +143,10 @@ class QuestionsContainer extends React.Component {
       <input
         type='text'
         className='questionsInput questionsInputLong'
-        onChange={(e) => this.onInputChange('income', e)}
+        id='questionsInput2'
+        onChange={(e) => this.onInputChange('income', e, 'int', [0,Number.MAX_SAFE_INTEGER])}
         value={this.props.userData.income}
-        placeholder='550000'
+        placeholder='55000'
       />
     );
 
