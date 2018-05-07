@@ -175,7 +175,7 @@ def updateUserInfo(request):
         annual_income = asInt(userData['annual_income'])
         kid_ages = userData['kid_ages']
         spouse_age = asInt(userData['spouse_age'])
-        health_condition = userData['health']
+        health_condition = userData['health_condition']
         gender = userData['gender']
 
         
