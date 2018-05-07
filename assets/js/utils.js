@@ -24,4 +24,13 @@ export const InsuranceTypes = keyMirror({
   GENERAL: null
 });
 
+export const HealthConditions = ['poor', 'meh', 'good', 'excellent'];
+
+export const MaritalStatus = keyMirror({
+  single: null,
+  married: null,
+  divorced: null,
+  widowed: null
+});
+
 export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || env.isMobile);

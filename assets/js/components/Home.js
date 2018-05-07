@@ -29,6 +29,21 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
+    if (isLoggedIn()) {
+      this.props.loadUserInfo(authToken());
+    } else {
+      // Grab from localStorage to update redux store with cached data
+      // let userData = localStrorage.getItem("userData");
+      // if (userData) {
+      //   this.props.updateBulkUserData(JSON.parse(userData));
+      // }
+    }
+  }
+
+  componentWillUnmount() {
+    // if (!isLoggedIn()) {
+    //   localStorage.setItem(JSON.stringify(this.props.userData));
+    // }
   }
 
   onInputChange = (id, event) => {
@@ -172,7 +187,8 @@ const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
   updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
-  postUserInfo: (token, data) => dispatch(Actions.postUserInfo(token, data))
+  updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
+  loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

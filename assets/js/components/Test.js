@@ -10,15 +10,19 @@ import { connect } from 'react-redux';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import Auth from '../auth';
+import { isLoggedIn, authToken } from '../auth';
 
 class Test extends React.Component {
-  handleAPIclick = () => {
-    let authToken = Auth.authToken();
+  componentWillMount() {
+    if (isLoggedIn()) {
+      this.props.loadUserData(authToken());
+    }
+  }
 
+  handleAPIclick = () => {
     // Pass in the correct function arguments here
     this.props.testFunc(
-      authToken,
+      authToken(),
       // {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
       // {age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '0', num_kids: '0', kid_ages: [1,2,3] }
       // 'LIFE',
@@ -44,6 +48,7 @@ class Test extends React.Component {
   }
 
   render() {
+    console.log(this.props.insuranceQuotes);
     return (
       <div>
         <Menu history={this.props.history} />
@@ -57,7 +62,8 @@ class Test extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
-  testFunc: (token) => dispatch(Actions.fetchAllInsuranceInfo(token))
+  loadUserData: (token) => dispatch(Actions.fetchUserInfo(token)),
+  testFunc: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
 });
 
 export default connect(state => state.app, mapDispatchToProps)(Test);

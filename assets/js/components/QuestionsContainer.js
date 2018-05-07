@@ -10,6 +10,7 @@ import { Dropdown, Menu } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import Sidebar from './sub_components/Sidebar';
+import { HealthConditions, MaritalStatus } from '../utils';
 
 class QuestionsContainer extends React.Component {
     constructor(props) {
@@ -72,10 +73,10 @@ class QuestionsContainer extends React.Component {
         id='questionsDropdown'
         className='questionsInput'
         options={[
-          { value: 'single', text: 'Single', content: <span className='dropdownItem'>Single</span> },
-          { value: 'married', text: 'Married', content: <span className='dropdownItem'>Married</span> },
-          { value: 'divorced', text: 'Divorced', content: <span className='dropdownItem'>Divorced</span> },
-          { value: 'widowed', text: 'Widowed', content: <span className='dropdownItem'>Widowed</span> }
+          { value: MaritalStatus.single, text: 'Single', content: <span className='dropdownItem'>Single</span> },
+          { value: MaritalStatus.married, text: 'Married', content: <span className='dropdownItem'>Married</span> },
+          { value: MaritalStatus.divorced, text: 'Divorced', content: <span className='dropdownItem'>Divorced</span> },
+          { value: MaritalStatus.widowed, text: 'Widowed', content: <span className='dropdownItem'>Widowed</span> }
         ]}
         onChange={(_, option) => this.onMaritalStatusChange(option.value)}
         value={this.props.userData.marital_status}
@@ -149,8 +150,7 @@ class QuestionsContainer extends React.Component {
     );
 
     healthConditionMenu() {
-      let conditions = ['poor', 'meh', 'good', 'excellent'];
-      let menuItems = conditions.map(el => {
+      let menuItems = HealthConditions.map(el => {
         let isActive = this.props.userData.health_condition === el;
         return (
           <Menu.Item
@@ -190,7 +190,7 @@ class QuestionsContainer extends React.Component {
           <p>with</p>
           {this.numKidsInput()}
           <p>kids.</p>
-          {this.props.userData.marital_status == 'married' && (
+          {this.props.userData.marital_status == MaritalStatus.married && (
             <div>
               <p>My spouse is </p>
               {this.spouseAgeInput()}
@@ -208,7 +208,7 @@ class QuestionsContainer extends React.Component {
           <p>I make $</p>
           {this.incomeInput()}
           <p>per year.</p>
-          {this.props.userData.marital_status == 'married' && (
+          {this.props.userData.marital_status == MaritalStatus.married && (
             <div>
               <p>My spouse makes $</p>
                 {this.spouseIncomeInput()}

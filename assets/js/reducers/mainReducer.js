@@ -12,6 +12,7 @@ const initialState = {
   userData: {
     age: '',
     zipcode: '',
+    gender: '',
     marital_status: '',
     spouse_age: '',
     spouse_annual_income: '',
@@ -26,9 +27,32 @@ const initialState = {
     [InsuranceTypes.DISABILITY]: {}
   },
   insuranceQuotes: {
-    [InsuranceTypes.HEALTH]: {},
-    [InsuranceTypes.LIFE]: {},
-    [InsuranceTypes.DISABILITY]: {}
+    [InsuranceTypes.HEALTH]: {
+      carrier: '',
+      deductible: '',
+      deductible_level: '',
+      has_spouse: '',
+      health_plan_id: '',
+      medal: '',
+      monthly_premium: '',
+      num_kids: '',
+      plan_name: '',
+      plan_type: ''
+    },
+    [InsuranceTypes.LIFE]: {
+      age: '',
+      carrier: '',
+      gender: '',
+      life_plan_id: '',
+      monthly: '',
+      policy_amount: '',
+      policy_term: ''
+    },
+    [InsuranceTypes.DISABILITY]: {
+      benefit_amount: '',
+      duration: '',
+      monthly: ''
+    }
   },
   loginModal: {
     isOpen: false,
@@ -83,7 +107,7 @@ const mainReducer = (state = initialState, action) => {
           updatedUserData[key] = action.data[key];
         }
       });
-      console.log('Update bulk', updatedUserData);
+      // console.log('Update bulk', updatedUserData);
       return {
         ...state,
         userData: updatedUserData
@@ -94,6 +118,16 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         user: action.data
       }
+    case ActionTypes.UPDATE_INSURANCE_QUOTE: {
+      let insuranceType = action.data.type;
+      return {
+        ...state,
+        insuranceQuotes: {
+          ...state.insuranceQuotes,
+          [insuranceType]: action.data.quote
+        }
+      }
+    }
     case ActionTypes.CLEAR_USER_DATA:
       return {
         ...state,

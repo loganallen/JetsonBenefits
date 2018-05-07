@@ -36,6 +36,21 @@ class Recommendation extends React.Component {
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
+        if (isLoggedIn()) {
+            this.props.loadUserData(authToken());
+        } else {
+            // Grab from localStorage to update redux store with cached data
+            // let userData = localStrorage.getItem("userData");
+            // if (userData) {
+            //   this.props.updateBulkUserData(JSON.parse(userData));
+            // }
+        }
+    }
+
+    componentWillUnmount() {
+        // if (!isLoggedIn()) {
+        //   localStorage.setItem(JSON.stringify(this.props.userData));
+        // }
     }
 
     onMobileNextClick = () => {
@@ -132,7 +147,8 @@ const mapDispatchToProps = (dispatch) => ({
     changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
     updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
     updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
-    saveUserData: (token, data) => dispatch(Actions.postUserInfo(token, data))
+    saveUserData: (token, data) => dispatch(Actions.postUserInfo(token, data)),
+    loadUserData: (token) => dispatch(Actions.fetchUserInfo(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);
