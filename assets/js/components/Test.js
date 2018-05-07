@@ -22,9 +22,39 @@ class Test extends React.Component {
   handleAPIclick = () => {
     // Pass in the correct function arguments here
     this.props.testFunc(
-      authToken(),
-      // {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
-      // {age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '0', num_kids: '0', kid_ages: [1,2,3] }
+      // authToken(),
+      {
+        GENERAL:{ 
+          age: 27, 
+          zipcode: '14850', 
+          marital_status: 'married', 
+          health: 'good', 
+          annual_income: '10000', 
+          spouse_annual_income: '0', 
+          num_kids: '3', 
+          kid_ages: [1,2,3],
+          gender: 'female' 
+        },
+        HEALTH: {
+          q_1: 'No',
+          q_2: 'No', 
+          q_5: 'Might go',
+          q_6: 'Never or just for my annual physical', 
+          q_7: "Drink some tea, it'll pass", 
+          q_8: 'Find out cost before booking appt', 
+          q_9: 'It crosses my mind sometimes.', 
+          q_10: 'It crosses my mind sometimes.',
+          q_11: 'Convenient time with any doctor',
+          q_12: 'If my doc says so'
+        }, 
+        LIFE: {
+          mortgage_balance: 20000,
+          other_debts_balance: 500,
+          existing_life_insurance:100,
+          balance_investings_savings: 1000,
+        }
+      }
+      // {age: 27, zipcode: '14850', marital_status: 'married', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '25', num_kids: '3', gender: 'female', kid_ages: [1,2,3] }
       // 'LIFE',
       // {
       //   q_1: 'No',
@@ -64,7 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
 
   loadUserData: (token) => dispatch(Actions.fetchUserInfo(token)),
-  testFunc: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
+  testFunc: (data) => dispatch(Actions.generateInsuranceQuotes(data))
 
 });
 

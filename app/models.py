@@ -23,10 +23,10 @@ class user_general_answers(models.Model):
 	)
 
 	health_options = (
-		('Excellent', 'Excellent'),
-		('Good', 'Good'),
-		('Meh', 'Meh'),
-		('Poor', 'Poor')
+		('excellent', 'excellent'),
+		('good', 'good'),
+		('meh', 'meh'),
+		('poor', 'poor')
 	)
 
 	user_id = models.OneToOneField(
@@ -36,12 +36,12 @@ class user_general_answers(models.Model):
 		)
 	age = models.IntegerField(default = 0)
 	zipcode = models.IntegerField(default = 0)
-	marital_status = models.CharField(max_length = 8, choices = status_options)
+	marital_status = models.CharField(max_length = 8, choices = status_options, default='single')
 	spouse_age = models.IntegerField(default = 0)
 	num_kids = models.IntegerField(default = 0)
 	annual_income = models.IntegerField(default = 0)
 	spouse_annual_income = models.IntegerField(default = 0)
-	health_condition = models.CharField(max_length = 9, choices = health_options)
+	health_condition = models.CharField(max_length = 9, choices = health_options, default='good')
 	gender = models.CharField(max_length = 20, choices = gender_options, null = True)
 
 class user_life_answers(models.Model):
