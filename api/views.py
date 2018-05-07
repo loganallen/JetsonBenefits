@@ -146,7 +146,7 @@ def updateUserInfo(request):
                 age:  
                 zipcode:  
                 marital_status: 
-                health_condition: 
+                health: 
                 annual_income:  
                 spouse_annual_income:  
                 spouse_age: 
@@ -162,40 +162,21 @@ def updateUserInfo(request):
         :return JsonResponse
             { success: bool, error: string }
     """
-    #TODO: user kids constantly added when this method is called
+
     requiredKeys = ['userData']
     res = { 'success': False, 'error': '' }
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
         user_id = user.id
         userData = json.loads(request.POST['userData'])
-        age = asInt(userData['age'])
-        zipcode = asInt(userData['zipcode'])
-        num_kids = asInt(userData['num_kids'])
-        marital_status = userData['marital_status']
-        spouse_annual_income = asInt(userData['spouse_annual_income'])
-        annual_income = asInt(userData['annual_income'])
+        userData["user_id"] = user
         kid_ages = userData['kid_ages']
-        spouse_age = asInt(userData['spouse_age'])
-        health_condition = userData['health']
-        gender = userData['gender']
-
+        del userData['kid_ages']
         
-        getAnswers = user_general_answers(
-            user_id = user,
-            age = age,
-            zipcode = zipcode,
-            num_kids = num_kids,
-            marital_status = marital_status,
-            spouse_annual_income = spouse_annual_income,
-            annual_income = annual_income,
-            spouse_age = spouse_age,
-            health_condition = health_condition,
-            gender = gender
-        )
+        getAnswers = user_general_answers(**userData)
         getAnswers.save()
-        # TODO: Won't we want to delete kids if the user changes from > 0 kids back to 0 kids, or do we let the
-        # recommendation logic take care of that and it will ignore the tables
+
+        user_kids.objects.filter(user_id=user).delete()
         i = 0
         while(i<len(kid_ages)):
             age = user_kids(user_id = user, kid_age = asInt(kid_ages[i]), will_pay_for_college = 'yes')
@@ -220,7 +201,7 @@ def getUserInfo(request):
             data = {
                 age:,
                 annual_income:,
-                health_condition:,
+                health:,
                 kid_ages: [],
                 marital_status:
                 num_kids:, 
@@ -307,7 +288,7 @@ def updateInsuranceInfo(request):
         insuranceType = request.POST['insuranceType']
         insuranceData = json.loads(request.POST['insuranceData'])
 
-        # TODO: Not all fields may be present in the payload
+
         if (insuranceType == 'HEALTH'):
             healthRecord = user_health_questions_answer(user_id = user)
             
@@ -372,6 +353,7 @@ def getInsuranceInfo(request):
             q_11 is 'I don't...', 'Convenient time with any doctor', or 'Must see my doc'
             q_12 is 'If my doc says so', 'Not likely', or 'I love second opinions'
 
+            if a user hasnt answered a question, the value will be ''
             if insuranceType is LIFE
             data = {
                 mortgage_balance:,
@@ -387,30 +369,13 @@ def getInsuranceInfo(request):
         user = request.user
         user_id = user
         insuranceType = request.GET['insuranceType']
-
-        if (insuranceType == 'HEALTH'):
-            answers_to_options = list(user_health_questions_answer.objects.filter(user_id=user.id).values())
-            data = {}
-            #TODO: What if they haven't answered a question
-            if len(answers_to_options)>0:
-                data['q_1'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_1_id']).option
-                data['q_2'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_2_id']).option
-                data['q_5'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_5_id']).option
-                data['q_6'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_6_id']).option
-                data['q_7'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_7_id']).option
-                data['q_8'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_8_id']).option
-                data['q_9'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_9_id']).option
-                data['q_10'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_10_id']).option
-                data['q_11'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_11_id']).option
-                data['q_12'] = health_question_options.objects.get(health_question_option_id = answers_to_options[0]['q_12_id']).option
-        elif (insuranceType == 'LIFE'):
-            data = list(user_life_answers.objects.filter(user_id=user).values())
-            if len(data)>0:
-                data = list(user_life_answers.objects.filter(user_id=user).values())[0]
+        
+        if (insuranceType == 'HEALTH' or insuranceType == 'LIFE' or insuranceType == 'DISABILITY'):
+            data = getInsuranceInfoHelper(user, insuranceType)
+            res['data'] = data
+            res['success'] = True
         else:
-            data = list(user_general_answers.objects.filter(user_id=user).values('annual_income'))
-        res['data'] = data
-        res['success'] = True
+            res['error'] = 'invalid insurance type'
     
     return JsonResponse(res)
 
@@ -459,23 +424,9 @@ def getAllInsuranceInfo(request):
         life_info = {}
         disability_info = {}
 
-        if (user_health_questions_answer.objects.filter(user_id = user).exists()):
-            health_ans = user_health_questions_answer.objects.filter(user_id = user).values()[0]
-            #TODO: What if they haven't answered a question
-            health_info ['q_1'] = health_question_options.objects.get(health_question_option_id = health_ans['q_1_id']).option
-            health_info ['q_2'] = health_question_options.objects.get(health_question_option_id = health_ans['q_2_id']).option
-            health_info ['q_5'] = health_question_options.objects.get(health_question_option_id = health_ans['q_5_id']).option
-            health_info ['q_6'] = health_question_options.objects.get(health_question_option_id = health_ans['q_6_id']).option
-            health_info ['q_7'] = health_question_options.objects.get(health_question_option_id = health_ans['q_7_id']).option
-            health_info ['q_8'] = health_question_options.objects.get(health_question_option_id = health_ans['q_8_id']).option
-            health_info ['q_9'] = health_question_options.objects.get(health_question_option_id = health_ans['q_9_id']).option
-            health_info ['q_10'] = health_question_options.objects.get(health_question_option_id = health_ans['q_10_id']).option
-            health_info ['q_11'] = health_question_options.objects.get(health_question_option_id = health_ans['q_11_id']).option
-            health_info ['q_12'] = health_question_options.objects.get(health_question_option_id = health_ans['q_12_id']).option
-        if (user_life_answers.objects.filter(user_id = user).exists()):
-            life_info = user_life_answers.objects.filter(user_id = user).values()[0]
-        if (user_general_answers.objects.filter(user_id=user).exists()):
-            disability_info = user_general_answers.objects.filter(user_id=user).values('annual_income')[0]
+        health_info = getInsuranceInfoHelper(user, 'HEALTH')
+        life_info = getInsuranceInfoHelper(user, 'LIFE')
+        disability_info = getInsuranceInfoHelper(user, 'DISABILITY')
         # -- add data to res['data']
 
         res['data'] = {'HEALTH': health_info, 'LIFE': life_info, 'DISABILITY': disability_info}
@@ -695,8 +646,8 @@ def generateInsuranceQuotes(request):
             user_kids_ages = general_post['kid_ages']
             del general_post['kid_ages']
 
-            general_post['health_condition'] = general_post['health']
-            del general_post['health']
+            # general_post['health_condition'] = general_post['health']
+            # del general_post['health']
             
             num_kids = general_post['num_kids']
             num_kids = min(int(num_kids), 2)
@@ -709,17 +660,11 @@ def generateInsuranceQuotes(request):
         
         if (health_post != {}):
             health_post['user_id'] = User()
-            #TODO make this iterative
-            health_post ['q_1'] = health_question_options.objects.get(health_question_id = 1, option = health_post['q_1'])
-            health_post ['q_2'] = health_question_options.objects.get(health_question_id = 2, option = health_post['q_2'])
-            health_post ['q_5'] = health_question_options.objects.get(health_question_id = 5, option = health_post['q_5'])
-            health_post ['q_6'] = health_question_options.objects.get(health_question_id = 6, option = health_post['q_6'])
-            health_post ['q_7'] = health_question_options.objects.get(health_question_id = 7, option = health_post['q_7'])
-            health_post ['q_8'] = health_question_options.objects.get(health_question_id = 8, option = health_post['q_8'])
-            health_post ['q_9'] = health_question_options.objects.get(health_question_id = 9, option = health_post['q_9'])
-            health_post ['q_10'] = health_question_options.objects.get(health_question_id = 10, option = health_post['q_10'])
-            health_post ['q_11'] = health_question_options.objects.get(health_question_id = 11, option = health_post['q_11'])
-            health_post ['q_12'] = health_question_options.objects.get(health_question_id = 12, option = health_post['q_12'])
+
+            for key in health_post:
+                if (key != 'user_id'):
+                    num = int(key[key.find('_')+1:])
+                    health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
 
             health_obj = user_health_questions_answer(**health_post)
         
@@ -881,3 +826,31 @@ def getQuoteHelper(user, insurance_type):
         data = disability_quote
     
     return data    
+
+def getInsuranceInfoHelper(user, insuranceType):
+
+    data = {}
+    if (insuranceType == 'HEALTH'):
+        answers_to_options = user_health_questions_answer.objects.get(user_id=user)
+        data = {}
+
+        if (answers_to_options is not None):
+            fields = user_health_questions_answer._meta.get_fields()
+            for field in fields:
+                value = getattr(answers_to_options, field.name)       
+                if (value != None and isinstance(value, health_question_options)):
+                    data[field.name] = value.option
+                elif (value == None):
+                    data[field.name] = ""
+
+    elif (insuranceType == 'LIFE'):
+        data = list(user_life_answers.objects.filter(user_id=user).values())
+        if len(data)>0:
+            data = data[0]
+    
+    elif (insuranceType == 'DISABILITY'):
+        data = list(user_general_answers.objects.filter(user_id=user).values('annual_income'))
+        if len(data)>0:
+            data = data[0]
+
+    return data

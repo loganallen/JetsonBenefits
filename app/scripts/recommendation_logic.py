@@ -3,11 +3,6 @@ from django.forms.models import model_to_dict
 from app.models import *
 from django.db import models
 
-# class recommendation:
-# 	"""docstring for ClassName"""
-# 	def __init__(self):
-# 		# super(recommendation, self).__init__()
-# 		pass
 
 	
 
@@ -18,6 +13,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 	default = True
 	need_insurance = False
 	list_of_coverage_amount = [250000, 300000, 350000, 400000, 450000, 500000, 600000,700000]
+	
 	if (general_questions_dict.marital_status == 'married' or int(general_questions_dict.num_kids) >0):
 		need_insurance = True
 

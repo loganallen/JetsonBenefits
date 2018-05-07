@@ -54,7 +54,7 @@ class Test extends React.Component {
           balance_investings_savings: 1000,
         }
       }
-      // {age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '0', num_kids: '0', kid_ages: [1,2,3] }
+      // {age: 27, zipcode: '14850', marital_status: 'married', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '25', num_kids: '3', gender: 'female', kid_ages: [1,2,3] }
       // 'LIFE',
       // {
       //   q_1: 'No',

@@ -41,7 +41,7 @@ class user_general_answers(models.Model):
 	num_kids = models.IntegerField(default = 0)
 	annual_income = models.IntegerField(default = 0)
 	spouse_annual_income = models.IntegerField(default = 0)
-	health_condition = models.CharField(max_length = 9, choices = health_options)
+	health = models.CharField(max_length = 9, choices = health_options)
 	gender = models.CharField(max_length = 20, choices = gender_options, null = True)
 
 class user_life_answers(models.Model):
