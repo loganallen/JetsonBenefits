@@ -144,7 +144,7 @@ def updateUserInfo(request):
                 age:  
                 zipcode:  
                 marital_status: 
-                health: 
+                health_condition: 
                 annual_income:  
                 spouse_annual_income:  
                 spouse_age: 
@@ -153,7 +153,7 @@ def updateUserInfo(request):
             }
 
             kid_ages is an array of ints
-            marital status is 'single', 'married', 'divorced' or 'divorced'
+            marital status is 'single', 'married', 'divorced' or 'widowed'
             health is 'Excellent', Good', Meh', or Poor'
 
 
@@ -177,6 +177,7 @@ def updateUserInfo(request):
         spouse_age = asInt(userData['spouse_age'])
         health_condition = userData['health']
         gender = userData['gender']
+
         
         getAnswers = user_general_answers(
             user_id = user,
@@ -258,7 +259,8 @@ def updateInsuranceInfo(request):
     """
         Update insurance info for a user
         :param request:
-        insuranceType is 'HEALTH', 'LIFE' or 'DISABILITY'
+            insuranceType = 'HEALTH' | 'LIFE' | 'DISABILITY'
+
         if insuranceType is HEALTH
         insuranceData = {
                 q_1: 'No', 
@@ -300,9 +302,8 @@ def updateInsuranceInfo(request):
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
         user_id = user
-        insuranceData = json.loads(request.POST['insuranceData'])
-
         insuranceType = request.POST['insuranceType']
+        insuranceData = json.loads(request.POST['insuranceData'])
 
         # TODO: Not all fields may be present in the payload
         if (insuranceType == 'HEALTH'):
@@ -341,6 +342,7 @@ def getInsuranceInfo(request):
     """
         Gets insurance info for a user
         :param request:
+            insuranceType = 'HEALTH' | 'LIFE' | 'DISABILITY'
 
         :return JsonResponse
             { success: bool, error: string, data: object }
@@ -487,6 +489,7 @@ def getInsuranceQuote(request):
     """
         Get insurance quote for a user
         :param request:
+            insuranceType = 'HEALTH' | 'LIFE' | 'DISABILITY'
 
         :return JsonResponse
             { success: bool, error: string, data: object }
@@ -522,11 +525,12 @@ def getInsuranceQuote(request):
             monthly: 
         }
     """
-    requiredKeys = []
+    requiredKeys = ['insuranceType']
     res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
+
         insurance_type = request.GET['insuranceType']
         if (insurance_type == 'HEALTH' or insurance_type == 'LIFE' or insurance_type == 'DISABILITY'):
 

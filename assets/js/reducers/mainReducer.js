@@ -1,5 +1,6 @@
 import ActionTypes from '../actions/actionTypes';
 import { isLoggedIn } from '../auth';
+import { InsuranceTypes, MaritalStatus } from '../utils';
 
 const initialState = {
   menuTheme: "themeWhite",
@@ -11,6 +12,7 @@ const initialState = {
   userData: {
     age: '',
     zipcode: '',
+    gender: '',
     marital_status: '',
     spouse_age: '',
     spouse_annual_income: '',
@@ -18,6 +20,39 @@ const initialState = {
     kid_ages: [],
     annual_income: '',
     health_condition: ''
+  },
+  insuranceData: {
+    [InsuranceTypes.HEALTH]: {},
+    [InsuranceTypes.LIFE]: {},
+    [InsuranceTypes.DISABILITY]: {}
+  },
+  insuranceQuotes: {
+    [InsuranceTypes.HEALTH]: {
+      carrier: '',
+      deductible: '',
+      deductible_level: '',
+      has_spouse: '',
+      health_plan_id: '',
+      medal: '',
+      monthly_premium: '',
+      num_kids: '',
+      plan_name: '',
+      plan_type: ''
+    },
+    [InsuranceTypes.LIFE]: {
+      age: '',
+      carrier: '',
+      gender: '',
+      life_plan_id: '',
+      monthly: '',
+      policy_amount: '',
+      policy_term: ''
+    },
+    [InsuranceTypes.DISABILITY]: {
+      benefit_amount: '',
+      duration: '',
+      monthly: ''
+    }
   },
   loginModal: {
     isOpen: false,
@@ -54,7 +89,7 @@ const mainReducer = (state = initialState, action) => {
         ages[action.data.value.idx] = action.data.value.age;
         updatedValue = ages;
       }
-      else if (action.data.key === 'marital_status' && action.data.value !== 'married') {
+      else if (action.data.key === 'marital_status' && action.data.value !== MaritalStatus.married) {
         // Clear spouse data since not married
         updatedUserData['spouse_age'] = '';
         updatedUserData['spouse_annual_income'] = '';
@@ -72,7 +107,7 @@ const mainReducer = (state = initialState, action) => {
           updatedUserData[key] = action.data[key];
         }
       });
-      console.log('Update bulk', updatedUserData);
+      // console.log('Update bulk', updatedUserData);
       return {
         ...state,
         userData: updatedUserData
@@ -83,6 +118,16 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         user: action.data
       }
+    case ActionTypes.UPDATE_INSURANCE_QUOTE: {
+      let insuranceType = action.data.type;
+      return {
+        ...state,
+        insuranceQuotes: {
+          ...state.insuranceQuotes,
+          [insuranceType]: action.data.quote
+        }
+      }
+    }
     case ActionTypes.CLEAR_USER_DATA:
       return {
         ...state,

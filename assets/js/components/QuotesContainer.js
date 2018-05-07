@@ -13,7 +13,7 @@ import '../../css/quotes.css';
 
 class QuotesContainer extends React.Component {
     constructor(props) {
-		super(props);
+			super(props);
     }
 
     //currently hard coded but will eventually pull from the db
@@ -41,16 +41,16 @@ class QuotesContainer extends React.Component {
     mapQuoteToQuoteItem = (quote) => {
     	return (
 			<QuoteItem
-                key={quote.type}
+          key={quote.type}
     			type={quote.type}
     			field1={quote.field1}
     			field2={quote.field2}
     			field3={quote.field3}
     			permonth={quote.permonth}
     			quoteid={quote.quoteid}
-                userData={this.props.userData}
-				updateUserData={this.props.updateUserData}
-				isMobile={this.props.isMobile}
+          userData={this.props.userData}
+					updateUserData={this.props.updateUserData}
+					isMobile={this.props.isMobile}
 			/>
 		);
     }
@@ -91,6 +91,8 @@ class QuotesContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+	quotes: state.app.insuranceQuotes,
+	insuranceData: state.app.insuranceData
 });
 
 const mapDispatchToProps = (dispatch) => ({

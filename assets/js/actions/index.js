@@ -1,5 +1,5 @@
 import ActionTypes from './actionTypes';
-import { Endpoints } from '../utils';
+import { Endpoints, InsuranceTypes } from '../utils';
 import Auth from '../auth';
 
 /*
@@ -48,6 +48,14 @@ const updateUserAuth = (hasAuthToken, name='') => ({
         isAuth: hasAuthToken
     }
 });
+
+const updateInsuranceQuote = (insuranceType, quote) => ({
+    type: ActionTypes.UPDATE_INSURANCE_QUOTE,
+    data: {
+        type: insuranceType,
+        quote: quote
+    }
+})
 
 const clearUserData = () => ({
     type: ActionTypes.CLEAR_USER_DATA,
@@ -270,6 +278,11 @@ const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log(res);
+        Object.keys(res.data).forEach(key => {
+            if (Object.keys(InsuranceTypes).includes(key)) {
+                dispatch(updateInsuranceQuote(key, res.data[key]));
+            }
+        });
     }).fail(err => {
         console.log(err);
     });
@@ -301,6 +314,7 @@ export default {
     updateLoginModal,
     updateUserData,
     updateBulkUserData,
+    updateInsuranceQuote,
     loginUser,
     signupUser,
     logoutUser,
