@@ -21,7 +21,7 @@ class QuestionsContainer extends React.Component {
     isButtonDisabled = () => {
       var disabled = false;
       Object.keys(this.props.userData).forEach(key => {
-        if (key === 'spouse_age' && this.props.userData['marital_status'] === 'single') return;
+        if (key === 'spouse_age' && this.props.userData['marital_status'] === MaritalStatus.single) return;
         else if (key === 'kid_ages' && this.props.userData['num_kids'] == 0) return;
         else if (key === 'num_kids' && this.props.userData[key] !== '') return;
         disabled = this.props.userData[key] == false || disabled;
@@ -190,7 +190,7 @@ class QuestionsContainer extends React.Component {
           <p>with</p>
           {this.numKidsInput()}
           <p>kids.</p>
-          {this.props.userData.marital_status == MaritalStatus.married && (
+          {this.props.userData.marital_status === MaritalStatus.married && (
             <div>
               <p>My spouse is </p>
               {this.spouseAgeInput()}
@@ -208,7 +208,7 @@ class QuestionsContainer extends React.Component {
           <p>I make $</p>
           {this.incomeInput()}
           <p>per year.</p>
-          {this.props.userData.marital_status == MaritalStatus.married && (
+          {this.props.userData.marital_status === MaritalStatus.married && (
             <div>
               <p>My spouse makes $</p>
                 {this.spouseIncomeInput()}

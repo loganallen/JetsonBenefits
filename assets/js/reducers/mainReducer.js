@@ -1,6 +1,6 @@
 import ActionTypes from '../actions/actionTypes';
 import { isLoggedIn } from '../auth';
-import { InsuranceTypes } from '../utils';
+import { InsuranceTypes, MaritalStatus } from '../utils';
 
 const initialState = {
   menuTheme: "themeWhite",
@@ -89,7 +89,7 @@ const mainReducer = (state = initialState, action) => {
         ages[action.data.value.idx] = action.data.value.age;
         updatedValue = ages;
       }
-      else if (action.data.key === 'marital_status' && action.data.value !== 'married') {
+      else if (action.data.key === 'marital_status' && action.data.value !== MaritalStatus.married) {
         // Clear spouse data since not married
         updatedUserData['spouse_age'] = '';
         updatedUserData['spouse_annual_income'] = '';
