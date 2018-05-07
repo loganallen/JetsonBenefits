@@ -9,8 +9,9 @@ yes_no = (
 )
 
 gender_options = (
-	('m', 'male'),
-	('f', 'female')
+	('male', 'male'),
+	('female', 'female'),
+	('none', 'none')
 )
 
 class user_general_answers(models.Model):
@@ -41,6 +42,7 @@ class user_general_answers(models.Model):
 	annual_income = models.IntegerField(default = 0)
 	spouse_annual_income = models.IntegerField(default = 0)
 	health_condition = models.CharField(max_length = 9, choices = health_options)
+	gender = models.CharField(max_length = 20, choices = gender_options, null = True)
 
 class user_life_answers(models.Model):
 	mortgage_balance = models.IntegerField(default = 0)
@@ -122,7 +124,8 @@ class user_recommendation(models.Model):
 	)
 	health_plan_id = models.OneToOneField(
 		health_plan_costs,
-		on_delete = models.CASCADE
+		on_delete = models.CASCADE,
+		null = True
 	)
 	disability_plan_id = models.OneToOneField(
 		disability_plan_costs,
@@ -131,7 +134,8 @@ class user_recommendation(models.Model):
 	)
 	life_plan_id = models.OneToOneField(
 		life_plan_costs,
-		on_delete = models.CASCADE
+		on_delete = models.CASCADE,
+		null = True
 	)
 
 class life_questions(models.Model):
@@ -139,14 +143,14 @@ class life_questions(models.Model):
 	question = models.CharField(max_length = 500)
 
 class health_questions(models.Model):
-	health_question_id = models.IntegerField(primary_key = True)
+	health_question_id = models.FloatField(primary_key = True)
 	question = models.CharField(max_length = 500)
-	high_deductible_total = models.IntegerField()
-	low_deductible_total = models.IntegerField()
-	HMO_total = models.IntegerField()
-	PPO_total = models.IntegerField()
-	HSA_total = models.IntegerField()
-	critical_illness_accident_policy_total = models.IntegerField()
+	high_deductible_total = models.FloatField()
+	low_deductible_total = models.FloatField()
+	HMO_total = models.FloatField()
+	PPO_total = models.FloatField()
+	HSA_total = models.FloatField()
+	critical_illness_accident_policy_total = models.FloatField()
 
 class health_question_options(models.Model):
 	health_question_option_id = models.IntegerField(primary_key = True)

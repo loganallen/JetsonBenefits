@@ -1,5 +1,7 @@
 from django.core import serializers
 from django.forms.models import model_to_dict
+from app.models import *
+from django.db import models
 
 # class recommendation:
 # 	"""docstring for ClassName"""
@@ -27,7 +29,8 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		coverage_amount = 10*int(general_questions_dict.annual_income)
 
 	else:
-		min_age = min(map(int, user_kids_age))
+		print(user_kids_age)
+		min_age = min(list(map(int, user_kids_age)))
 		if len(user_kids_age)<1:
 			min_age = 0
 		other_debts_balance  = int(life_insurance_dict.other_debts_balance)
@@ -52,12 +55,12 @@ def health_insurance_totals(health_insurance_total):
 	denom_dict = {}
 
 	for key in health_insurance_total:
-		HMO_denom = HMO_denom + key.HMO
-		PPO_denom = HMO_denom + key.PPO
-		HSA_denom = HMO_denom + key.HSA
-		high_deduct_denom = high_deduct_denom + key.high_deductible_total
-		low_deductible_denom = low_deduct_denom + key.low_deductible_total
-		critical_illness_denom = critical_illness_denom + key.critical_illness
+		HMO_denom = float(HMO_denom) + float(key.HMO_total)
+		PPO_denom = float(HMO_denom) + float(key.PPO_total)
+		HSA_denom = float(HSA_denom) + float(key.HSA_total)
+		high_deduct_denom = float(high_deduct_denom) + float(key.high_deductible_total)
+		low_deduct_denom = float(low_deduct_denom) + float(key.low_deductible_total)
+		critical_illness_denom = float(critical_illness_denom) + float(key.critical_illness_accident_policy_total)
 		
 	denom_dict['HMO_denom'] = HMO_denom
 	denom_dict['PPO_denom'] = PPO_denom
@@ -80,25 +83,28 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 
 		
 	if default == False:
-		HMO_total =0.0
+		HMO_TOTAL =0.0
 		high_deductible_total = 0.0
 		low_deductible_total = 0.0
-		PPO_total = 0.0
-		HSA_total = 0.0
+		PPO_TOTAL = 0.0
+		HSA_TOTAL = 0.0
 		critical_illness = 0.0
-			
+		
+		fields = user_health_questions_answer._meta.get_fields()
 		health_insurance_dict = model_to_dict(health_insurance_obj)
 
 		denom_dict = health_insurance_totals(health_insurance_total)
+		print(denom_dict)
 
-		for key in health_insurance_dict:
-			if (health_insurance_total[key] is not None):
-				HMO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HMO)
-				PPO_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].PPO)
-				HSA_TOTAL = HMO_TOTAL+float(health_insurance_dict[key].HSA)
-				high_deductible_total = high_deductible_total+ float(health_insurance_dict[key].high_deductible_total)
-				low_deductible_total = low_deductible_total+ float(health_insurance_dict[key].low_deductible_total)
-				critical_illness = critical_illness + float(health_insurance_dict[key].critical_illness)
+		for field in fields:
+			value = getattr(health_insurance_obj, field.name)		
+			if (value != None and isinstance(value, health_question_options)):
+				HMO_TOTAL = HMO_TOTAL+float(value.HMO)
+				PPO_TOTAL = HMO_TOTAL+float(value.PPO)
+				HSA_TOTAL = HSA_TOTAL+float(value.HSA)
+				high_deductible_total = high_deductible_total+ float(value.high_deductible)
+				low_deductible_total = low_deductible_total+ float(value.low_deductible)
+				critical_illness = critical_illness + float(value.critical_illness)
 
 
 		HMO_ratio = float(HMO_TOTAL)/ float(denom_dict['HMO_denom'])
@@ -122,13 +128,13 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		if (critical_illness_ratio>=0.33):
 			critical_illness = True
 
-		if (health_insurance_dict['q_5'].option == 'No chance' and health_insurance_dict['q_6'].option == 'Never or just for my annual physical' and health_insurance_dict['q_7'].option == 'Drink some tea, it will pass'):
+		if (health_insurance_obj.q_5.option == 'No chance' and health_insurance_dict.q_6.option == 'Never or just for my annual physical' and health_insurance_dict.q_7.option == 'Drink some tea, it will pass'):
 			plan_type = 'HMO'
 
-		if (health_insurance_dict['q_2'].option == 'Yes'):
+		if (health_insurance_obj.q_2.option == 'Yes'):
 			deductible = 'Low'
 
-		if (health_insurance_dict['q_11'].option == 'Convenient time with any doctor' or health_insurance_dict['q_11'].option == 'I love second opinions'):
+		if (health_insurance_obj.q_11.option == 'Convenient time with any doctor' or health_insurance_obj.q_11.option == 'I love second opinions'):
 			plan_type = 'PPO'
 
 	return plan_type, deductible, critical_illness

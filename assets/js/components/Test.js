@@ -20,7 +20,7 @@ class Test extends React.Component {
       authToken,
       // {General:{ age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', num_kids: '0', kid_ages: [1,2,3] }, Life: {}, Health: {} }
       // {age: 27, zipcode: '14850', marital_status: 'single', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '0', num_kids: '0', kid_ages: [1,2,3] }
-      'LIFE',
+      // 'LIFE',
       // {
       //   q_1: 'No',
       //   q_2: 'No', 
@@ -33,12 +33,12 @@ class Test extends React.Component {
       //   q_11: 'Convenient time with any doctor',
       //   q_12: 'If my doc says so'
       // }
-      {
-        mortgage_balance: 20000,
-        other_debts_balance: 500,
-        existing_life_insurance:100,
-        balance_investings_savings: 1000,
-      }
+      // {
+      //   mortgage_balance: 20000,
+      //   other_debts_balance: 500,
+      //   existing_life_insurance:100,
+      //   balance_investings_savings: 1000,
+      // }
     );
   }
 
@@ -55,7 +55,7 @@ class Test extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
-  testFunc: (token, type, data) => dispatch(Actions.postInsuranceInfo(token, type, data))
+  testFunc: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
 
 });
 
