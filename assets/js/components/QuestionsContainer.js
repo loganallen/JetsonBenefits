@@ -10,7 +10,7 @@ import { Dropdown, Menu } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import Sidebar from './sub_components/Sidebar';
-import { HealthConditions, MaritalStatus } from '../utils';
+import { HealthConditions, MaritalStatus, Gender } from '../utils';
 
 class QuestionsContainer extends React.Component {
     constructor(props) {
@@ -39,6 +39,10 @@ class QuestionsContainer extends React.Component {
       this.props.updateUserData('marital_status', value);
     }
 
+    onGenderChange = (value) => {
+      this.props.updateUserData('gender', value);
+    }
+
     onKidAgeChange = (idx, event) => {
       let age = event.target.value;
       this.props.updateUserData('kid_ages', { idx: idx, age: age });
@@ -65,6 +69,21 @@ class QuestionsContainer extends React.Component {
         onChange={(e) => this.onInputChange('zipcode', e)}
         value={this.props.userData.zipcode}
         placeholder='60601'
+      />
+    );
+
+    genderDropdown = () => (
+      <Dropdown
+        id='questionsDropdown'
+        className='questionsInput'
+        options={[
+          { value: Gender.male, text: 'Male', content: <span className='dropdownItem'>Male</span> },
+          { value: Gender.female, text: 'Female', content: <span className='dropdownItem'>Female</span> },
+          { value: Gender.none, text: 'Prefer not to say', content: <span className='dropdownItem'>Prefer not to say</span> },
+        ]}
+        onChange={(_, option) => this.onGenderChange(option.value)}
+        value={this.props.userData.gender}
+        placeholder='Gender'
       />
     );
 
@@ -183,6 +202,10 @@ class QuestionsContainer extends React.Component {
           {this.ageInput()}
           <p>years old and I live in</p>
           {this.zipcodeInput()}
+          <p>.</p>
+          <br/>
+          <p>I identify as a</p>
+          {this.genderDropdown()}
           <p>.</p>
           <br/>
           <p>I'm</p>

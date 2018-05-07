@@ -33,4 +33,10 @@ export const MaritalStatus = keyMirror({
   widowed: null
 });
 
+export const Gender = keyMirror({
+  male: null,
+  female: null,
+  none: null
+});
+
 export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || env.isMobile);
