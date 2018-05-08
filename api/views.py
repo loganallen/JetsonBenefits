@@ -699,8 +699,9 @@ def generateInsuranceQuotes(request):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
         else: #return default value since no match found
-            need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = general_obj, user_kids_age = user_kids_ages)  
-            life_quote = {'policy_amount': coverage_amount, 'policy_term': term}
+            need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = general_obj, user_kids_age = user_kids_ages) 
+            life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0] 
+            life_quote = model_to_dict(life_quote)
 
         disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
              
@@ -811,8 +812,11 @@ def getQuoteHelper(user, insurance_type):
             user_rec.save()
             data = model_to_dict(life_quote)
         else: #return default value since no match found
-            need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = gen_answers, user_kids_age = user_kids_age)  
-            data = {'policy_amount': coverage_amount, 'policy_term': term}
+            need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = gen_answers, user_kids_age = user_kids_age) 
+            life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0]
+            user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
+            user_rec.save()
+            data = model_to_dict(life_quote)
 
     elif (insurance_type == 'DISABILITY'):
             # get data
