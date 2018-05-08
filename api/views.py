@@ -169,7 +169,7 @@ def updateUserInfo(request):
         user = request.user
         user_id = user.id
         userData = json.loads(request.POST['userData'])
-        userData["user_id"] = user
+        userData['user_id'] = user
         kid_ages = userData['kid_ages']
         del userData['kid_ages']
         
@@ -428,7 +428,6 @@ def getAllInsuranceInfo(request):
         health_info = getInsuranceInfoHelper(user, 'HEALTH')
         life_info = getInsuranceInfoHelper(user, 'LIFE')
         disability_info = getInsuranceInfoHelper(user, 'DISABILITY')
-        # -- add data to res['data']
 
         res['data'] = {'HEALTH': health_info, 'LIFE': life_info, 'DISABILITY': disability_info}
         res['success'] = True
@@ -647,10 +646,10 @@ def generateInsuranceQuotes(request):
             user_kids_ages = general_post['kid_ages']
             del general_post['kid_ages']
 
-            # general_post['health_condition'] = general_post['health']
-            # del general_post['health']
+            # general_post['health_condition'] = general_post['health_condition']
+            # del general_post['health_condition']
             
-            num_kids = general_post['num_kids']
+            num_kids = asInt(general_post['num_kids'])
             num_kids = min(int(num_kids), 2)
 
             general_obj = user_general_answers(**general_post)
