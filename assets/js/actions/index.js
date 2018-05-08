@@ -52,7 +52,10 @@ const updateInsuranceData = (type, key, value) => ({
 
 const updateBulkInsuranceData = (type, data) => ({
     type: ActionTypes.UPDATE_BULK_INSURANCE_DATA,
-    data: data
+    data: {
+        type: type,
+        data: data
+    }
 });
 
 const updateUserAuth = (hasAuthToken, name='') => ({

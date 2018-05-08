@@ -40,7 +40,9 @@ class RefineQuoteItem extends React.Component {
     this.props.updateInsuranceData(this.state.insuranceType, id, value);
   }
 
-  createDropdown = (id, options) => (
+  createDropdown = (id, options) => {
+    console.log(this.props.insuranceData)
+    return (
     <Dropdown
       selection
       id={id}
@@ -51,7 +53,7 @@ class RefineQuoteItem extends React.Component {
       value={this.props.insuranceData[id]}
       onChange={(_, option) => this.onDropdownChange(id, option.value)}
     />
-  );
+  )};
 
   // TODO: Styling for mobile needs fixing
   generateChildRows = (kidAges) => {

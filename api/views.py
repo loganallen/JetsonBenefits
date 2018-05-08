@@ -313,7 +313,7 @@ def updateInsuranceInfo(request):
 
             for attr, value in health_dict.items():
                 setattr(healthRecord, attr, value)
-            healthRecord.save()
+                healthRecord.save()
 
         elif (insuranceType == 'LIFE'):
 
