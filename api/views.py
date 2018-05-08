@@ -784,7 +784,7 @@ def getQuoteHelper(user, insurance_type):
         plan_type, deductible, critical_illness = health_insurance(health_totals, health_info)
         num_kids = min(num_kids, 2)
 
-        health_quote = None
+        health_quote = {}
         if (health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).exists()):
             health_quote = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)[0]
             user_rec = user_recommendation(user_id=user, health_plan_id = health_quote)
@@ -796,7 +796,7 @@ def getQuoteHelper(user, insurance_type):
             # get data
         need_insurance, coverage_amount, term = life_insurance(life_info, gen_answers, user_kids_age)
 
-        life_quote = None
+        life_quote = {}
         gender = 'male'
             
         if (gen_answers is not None):
