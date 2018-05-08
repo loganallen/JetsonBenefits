@@ -296,17 +296,23 @@ def updateInsuranceInfo(request):
         insuranceType = request.POST['insuranceType']
         insuranceData = json.loads(request.POST['insuranceData'])
 
+        print(insuranceData)
+
 
         if (insuranceType == 'HEALTH'):
             healthRecord = user_health_questions_answer(user_id = user)
             
-            health_dict = {'user_id': user}
+            health_dict = {}
             for key in insuranceData:
-                num = int(key[key.find('_')+1:]) #get id number
-                q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
-                health_dict[key] = q
+                if insuranceData[key] == '':
+                    continue
+                else:
+                    num = int(key[key.find('_')+1:]) #get id number
+                    q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
+                    health_dict[key] = q
 
-            healthRecord = user_health_questions_answer(**health_dict)
+            for attr, value in health_dict.items():
+                setattr(healthRecord, attr, value)
             healthRecord.save()
 
         elif (insuranceType == 'LIFE'):

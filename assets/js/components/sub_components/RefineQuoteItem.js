@@ -96,7 +96,7 @@ class RefineQuoteItem extends React.Component {
           <p>Do you take prescription medications?</p>
           {this.createDropdown('q_1', [
             { value: 'Yes', text: 'Yes' },
-            { value: 'Yo', text: 'No' }])}
+            { value: 'No', text: 'No' }])}
         </div>
         <br/>
         <div className='refine-question'>
