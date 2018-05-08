@@ -173,6 +173,12 @@ def updateUserInfo(request):
         userData['user_id'] = user
         kid_ages = userData['kid_ages']
         del userData['kid_ages']
+
+        # loop through keys that map to numbers and cast correctly
+        numberkeys = ['spouse_annual_income', 'annual_income', 'age', 'num_kids', 'zipcode', 'spouse_age']
+        for key in numberkeys:
+            if not type(userData[key]) in [int, float]:
+                userData[key] = asInt(userData[key])
         
         getAnswers = user_general_answers(**userData)
         getAnswers.save()
