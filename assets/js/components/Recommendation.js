@@ -17,7 +17,7 @@ import QuotesContainer from './QuotesContainer';
 import Actions from '../actions';
 import Menu from './Menu';
 import { isMobile } from '../utils';
-import { isLoggedIn } from '../auth';
+import { isAuthenticated } from '../auth';
 
 import '../../css/recommendation.css';
 
@@ -36,7 +36,7 @@ class Recommendation extends React.Component {
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
-        if (isLoggedIn()) {
+        if (isAuthenticated()) {
             this.props.loadUserData();
         } else {
             // Grab from localStorage to update redux store with cached data
@@ -48,7 +48,7 @@ class Recommendation extends React.Component {
     }
 
     componentWillUnmount() {
-        // if (!isLoggedIn()) {
+        // if (!isAuthenticated()) {
         //   localStorage.setItem(JSON.stringify(this.props.userData));
         // }
     }
@@ -66,7 +66,7 @@ class Recommendation extends React.Component {
     }
 
     onShowQuotesClick = () => {
-        if (isLoggedIn()) {
+        if (isAuthenticated()) {
             // Save userData to the backend
             this.props.saveUserData();
         }

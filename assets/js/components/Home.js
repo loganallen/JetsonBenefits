@@ -14,7 +14,7 @@ import classNames from 'classnames';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import { isLoggedIn } from '../auth';
+import { isAuthenticated } from '../auth';
 import { isMobile } from '../utils';
 
 import '../../css/home.css';
@@ -29,7 +29,7 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
-    if (isLoggedIn()) {
+    if (isAuthenticated()) {
       this.props.loadUserData();
     } else {
       // Grab from localStorage to update redux store with cached data
@@ -41,7 +41,7 @@ class Home extends React.Component {
   }
 
   componentWillUnmount() {
-    // if (!isLoggedIn()) {
+    // if (!isAuthenticated()) {
     //   localStorage.setItem(JSON.stringify(this.props.userData));
     // }
   }
@@ -134,7 +134,7 @@ class Home extends React.Component {
             <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
               FIND MY BENEFITS
             </button><br/>
-            {!isLoggedIn() && (
+            {!isAuthenticated() && (
               <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
                 or Sign Up
             </button>

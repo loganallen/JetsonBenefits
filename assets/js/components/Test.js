@@ -10,11 +10,11 @@ import { connect } from 'react-redux';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import { isLoggedIn } from '../auth';
+import { isAuthenticated } from '../auth';
 
 class Test extends React.Component {
   componentWillMount() {
-    if (isLoggedIn()) {
+    if (isAuthenticated()) {
       this.props.loadUserData();
     }
   }

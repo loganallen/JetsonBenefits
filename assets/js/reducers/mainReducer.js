@@ -1,5 +1,5 @@
 import ActionTypes from '../actions/actionTypes';
-import { isLoggedIn } from '../auth';
+import { isAuthenticated } from '../auth';
 import { InsuranceTypes, MaritalStatus } from '../utils';
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
   deviceWidth: window.innerWidth,
   user: {
     name: '',
-    isAuth: isLoggedIn()
+    isAuth: isAuthenticated()
   },
   userData: {
     age: '',

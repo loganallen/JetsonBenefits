@@ -41,7 +41,6 @@ class RefineQuoteItem extends React.Component {
   }
 
   createDropdown = (id, options) => {
-    console.log(this.props.insuranceData)
     return (
     <Dropdown
       selection

@@ -11,7 +11,7 @@ import { Breadcrumb } from 'semantic-ui-react';
 
 import QuoteItem from './sub_components/QuoteItem';
 import Actions from '../actions';
-import { isLoggedIn } from '../auth';
+import { isAuthenticated } from '../auth';
 
 import '../../css/quotes.css';
 
@@ -21,7 +21,7 @@ class QuotesContainer extends React.Component {
 		}
 		
 		componentWillMount() {
-			if (isLoggedIn()) {
+			if (isAuthenticated()) {
 				this.props.loadAllInsuranceQuotes();
 				this.props.loadAllInsuranceData();
 			} else {
