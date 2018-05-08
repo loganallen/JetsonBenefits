@@ -17,7 +17,7 @@ import { isMobile } from '../utils';
 
 import '../../css/login.css';
 
-class Login extends React.Component {
+class LoginModal extends React.Component {
   
   constructor(props) {
     super(props);
@@ -33,8 +33,12 @@ class Login extends React.Component {
   }
 
   onLoginClick = () => {
-  if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
-      this.props.onLogin(this.state.loginEmail, this.state.loginPassword);
+    let callback = (success) => {
+      // Route to recommendation page upon login
+      if (success) { this.props.history.push('/recommendation'); }
+    }
+    if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
+      this.props.onLogin(this.state.loginEmail, this.state.loginPassword, callback);
     }
   }
 
@@ -265,8 +269,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
-  onLogin: (username, password) => dispatch(Actions.loginUser(username, password)),
+  onLogin: (username, password, cb) => dispatch(Actions.loginUser(username, password)),
   onSignup: (userData) => dispatch(Actions.signupUser(userData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

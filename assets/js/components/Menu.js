@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { Header, Button, Icon, Menu as ReactMenu } from 'semantic-ui-react';
 import classNames from 'classnames';
 
-import Login from './Login';
+import LoginModal from './LoginModal';
 import Actions from '../actions';
 import { isMobile } from '../utils';
 
@@ -66,8 +66,13 @@ class Menu extends React.Component {
           <button type='button' className='menuButton'>RESOURCES</button>
           {loginButton}
         </div>
-        { this.props.isLoggedIn ? '' : (
-          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
+        { this.props.isLoggedIn && (
+          <LoginModal
+            isOpen={this.props.loginModalOpen}
+            isLogin={this.props.loginModalType}
+            onClose={this.props.closeLoginModal}
+            history={this.props.history}
+          />
         )}
       </div>
     );
@@ -91,8 +96,13 @@ class Menu extends React.Component {
               )}
             </button>
           </div>
-          { this.props.isLoggedIn ? '' : (
-            <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModalMobile} />
+          { this.props.isLoggedIn && (
+            <LoginModal
+              isOpen={this.props.loginModalOpen}
+              isLogin={this.props.loginModalType}
+              onClose={this.closeLoginModalMobile}
+              history={this.props.history}
+            />
           )}
         </div>
         <ReactMenu

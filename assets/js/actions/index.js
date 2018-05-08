@@ -94,7 +94,6 @@ const loginUser = (username, password) => (dispatch, getState) => {
 
     if (valid) {
         Auth.login(username, password, (res) => {
-            console.log(res);
             if (res.success) {
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
@@ -102,6 +101,7 @@ const loginUser = (username, password) => (dispatch, getState) => {
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
+                console.log('loginUser FAILURE', res.error);
                 console.log(res.error);
             }
         });
