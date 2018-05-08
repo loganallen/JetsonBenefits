@@ -664,8 +664,11 @@ def generateInsuranceQuotes(request):
 
             for key in health_post:
                 if (key != 'user_id'):
-                    num = int(key[key.find('_')+1:])
-                    health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
+                    if (len(health_post[key]) > 0):
+                        num = int(key[key.find('_')+1:])
+                        health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
+                    else:
+                        health_post[key] = None
 
             health_obj = user_health_questions_answer(**health_post)
         

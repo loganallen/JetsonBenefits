@@ -124,14 +124,17 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		if (critical_illness_ratio >= 0.33):
 			critical_illness = True
 
-		if (health_insurance_obj.q_5.option == 'No chance' and health_insurance_dict.q_6.option == 'Never or just for my annual physical' and health_insurance_dict.q_7.option == 'Drink some tea, it will pass'):
-			plan_type = 'HMO'
+		if (health_insurance_obj.q_5 is not None and health_insurance_dict.q_6 is not None and health_insurance_dict.q_7 is not None):
+			if (health_insurance_obj.q_5.option == 'No chance' and health_insurance_dict.q_6.option == 'Never or just for my annual physical' and health_insurance_dict.q_7.option == 'Drink some tea, it will pass'):
+				plan_type = 'HMO'
 
-		if (health_insurance_obj.q_2.option == 'Yes'):
-			deductible = 'Low'
+		if (health_insurance_obj.q_2 is not None):
+			if (health_insurance_obj.q_2.option == 'Yes'):
+				deductible = 'Low'
 
-		if (health_insurance_obj.q_11.option == 'Convenient time with any doctor' or health_insurance_obj.q_11.option == 'I love second opinions'):
-			plan_type = 'PPO'
+		if (health_insurance_obj.q_11 is not None):
+			if (health_insurance_obj.q_11.option == 'Convenient time with any doctor' or health_insurance_obj.q_11.option == 'I love second opinions'):
+				plan_type = 'PPO'
 
 	return plan_type, deductible, critical_illness
 
