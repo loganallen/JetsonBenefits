@@ -121,8 +121,13 @@ const signupUser = (userData) => (dispatch, getState) => {
     if (valid) {
         Auth.signup(userData, (res) => {
             if (res.success) {
+                let state = getState().app;
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
+                dispatch(postUserInfo(Auth.authToken(), state.userData));
+                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.HEALTH));
+                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.LIFE));
+                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.DISABILITY));
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
