@@ -146,7 +146,7 @@ def updateUserInfo(request):
                 age:  
                 zipcode:  
                 marital_status: 
-                health: 
+                health_condition: 
                 annual_income:  
                 spouse_annual_income:  
                 spouse_age: 
@@ -176,6 +176,7 @@ def updateUserInfo(request):
         getAnswers = user_general_answers(**userData)
         getAnswers.save()
 
+        # Delete kids and add new ones instead if any exist
         user_kids.objects.filter(user_id=user).delete()
         i = 0
         while(i<len(kid_ages)):

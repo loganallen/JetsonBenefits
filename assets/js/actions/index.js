@@ -157,9 +157,7 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_USER_INFO,
-        data: {
-            csrfmiddlewaretoken: env.csrf_token
-        },
+        data: {},
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
@@ -205,7 +203,6 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_INSURANCE_INFO,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
             insuranceType: insuranceType
         },
         beforeSend: (xhr) => {
@@ -226,9 +223,7 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_INFO,
-        data: {
-            csrfmiddlewaretoken: env.csrf_token
-        },
+        data: {},
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
@@ -249,7 +244,6 @@ const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_INSURANCE_QUOTE,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
             insuranceType: insuranceType
         },
         beforeSend: (xhr) => {
@@ -270,9 +264,7 @@ const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_QUOTES,
-        data: {
-            csrfmiddlewaretoken: env.csrf_token
-        },
+        data: {},
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
@@ -297,7 +289,6 @@ const generateInsuranceQuotes = (data) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GENERATE_INSURANCE_QUOTES,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
             userData: JSON.stringify(data)
         }
     }).done(res => {
