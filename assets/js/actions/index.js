@@ -144,11 +144,13 @@ const signupUser = (userData) => (dispatch, getState) => {
 
 /**
  * logoutUser: logouts the active auth user
+ * @param {Function} callback
  */
-const logoutUser = () => (dispatch, getState) => {
+const logoutUser = (callback) => (dispatch, getState) => {
     Auth.logout();
     dispatch(updateUserAuth(false));
     dispatch(clearAllUserInfo());
+    if (callback) { callback(true); }
 }
 
 /**

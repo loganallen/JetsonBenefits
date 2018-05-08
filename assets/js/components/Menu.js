@@ -43,6 +43,13 @@ class Menu extends React.Component {
     // TODO: Navigate to Resources page
   }
 
+  onLogoutClick = () => {
+    let callback = (success) => {
+      if (success) { this.props.history.push('/home'); }
+    }
+    this.props.logout(callback);
+  }
+
   updateMobileMenu = () => {
     this.setState({
       isMobile: this.state.isMobile,
@@ -62,7 +69,7 @@ class Menu extends React.Component {
 
   desktopRender = () => {
     let loginButton = this.props.isLoggedIn ?
-      (<button type='button' className='menuButton' onClick={this.props.onLogoutClick}>LOGOUT</button>) :
+      (<button type='button' className='menuButton' onClick={this.onLogoutClick}>LOGOUT</button>) :
       (<button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>);
 
     return (
@@ -89,7 +96,7 @@ class Menu extends React.Component {
   mobileRender = () => {
     let loginButton = this.props.isLoggedIn ?
       (<ReactMenu.Item onClick={this.openLoginModalMobile}><p className='mobileMenuButton'>LOGIN</p></ReactMenu.Item>) :
-      (<ReactMenu.Item onClick={this.props.onLogoutClick}><p className='mobileMenuButton'>LOGOUT</p></ReactMenu.Item>);
+      (<ReactMenu.Item onClick={this.onLogoutClick}><p className='mobileMenuButton'>LOGOUT</p></ReactMenu.Item>);
     
     return (
       <div>
@@ -144,7 +151,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   openLoginModal: () => dispatch(Actions.updateLoginModal(true)),
   closeLoginModal: () => dispatch(Actions.updateLoginModal(false)),
-  onLogoutClick: () => dispatch(Actions.logoutUser())
+  logout: (cb) => dispatch(Actions.logoutUser(cb))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
