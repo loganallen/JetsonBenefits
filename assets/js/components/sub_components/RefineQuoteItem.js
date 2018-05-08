@@ -28,7 +28,7 @@ class RefineQuoteItem extends React.Component {
 
   onInsuranceDataInputChange = (key, event) => {
     // TODO: Validate inputs
-    this.props.updateInsuranceData(insuranceType, key, event.target.value);
+    this.props.updateInsuranceData(this.state.insuranceType, key, event.target.value);
   }
 
   onKidAgeChange = (idx, event) => {
@@ -37,7 +37,7 @@ class RefineQuoteItem extends React.Component {
   }
 
   onDropdownChange = (id, value) => {
-    this.props.updateInsuranceData(insuranceType, id, value);
+    this.props.updateInsuranceData(this.state.insuranceType, id, value);
   }
 
   createDropdown = (id, options) => (
@@ -72,7 +72,7 @@ class RefineQuoteItem extends React.Component {
           <Grid.Column>
           <input
             type='text'
-              id={`kidAge_${idx}`}
+            id={`kidAge_${idx}`}
             className='refine-input-grid'
             onChange={(e) => this.onKidAgeChange(idx, event)}
             value={age}
@@ -117,10 +117,10 @@ class RefineQuoteItem extends React.Component {
           <p>How many times do you visit your doctor each year?</p>
           <input
             type='number'
-            id='doctorVisit'
+            id='q_6'
             className='refine-input'
             onChange={(e) => this.onInsuranceDataInputChange('q_6', e)}
-            value={this.props.insuranceData.q_4}
+            value={this.props.insuranceData.q_6}
             placeholder='1'
           />
         </div>
@@ -258,8 +258,8 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='existingLifeInsurance'
             className='refine-input-currency'
-            onChange={(e) => this.onInsuranceDataInputChange('existing_life_Insurance', e)}
-            value={this.props.insuranceData.existing_life_Insurance}
+            onChange={(e) => this.onInsuranceDataInputChange('existing_life_insurance', e)}
+            value={this.props.insuranceData.existing_life_insurance}
             placeholder='1,000,000'
             />
         </div>

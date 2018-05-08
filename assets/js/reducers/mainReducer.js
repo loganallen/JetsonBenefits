@@ -133,7 +133,10 @@ const mainReducer = (state = initialState, action) => {
       updatedInsuranceItem[action.data.key] = action.data.value;
       return {
         ...state,
-        [action.data.type]: updatedInsuranceItem
+        insuranceData: {
+          ...state.insuranceData,
+          [action.data.type]: updatedInsuranceItem
+        }
       };
     case ActionTypes.UPDATE_USER_AUTH:
       return {

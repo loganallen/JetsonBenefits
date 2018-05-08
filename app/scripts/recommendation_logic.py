@@ -28,7 +28,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		if (len(user_kids_age) < 1):
 			min_age = 0
 		else:
-			min_age = min(list(map(int, user_kids_age)))
+			min_age = min(list(map(asInt, user_kids_age)))
 		other_debts_balance  = asInt(life_insurance_dict.other_debts_balance)
 		existing_life_insurance = asInt(life_insurance_dict.existing_life_insurance)
 		num_kids = asInt(general_questions_dict.num_kids)
