@@ -138,6 +138,18 @@ const mainReducer = (state = initialState, action) => {
           [action.data.type]: updatedInsuranceItem
         }
       };
+    case ActionTypes.UPDATE_BULK_INSURANCE_DATA: {
+      let updatedInsuranceData = { ...state.insuranceData };
+      Object.keys(action.data).forEach(key => {
+        if (Object.keys(state.insuranceData).includes(key)) { 
+          updatedInsuranceData[key] = action.data[key];
+        }
+      });
+      return {
+        ...state,
+        insuranceData: updatedInsuranceData
+      }
+    }
     case ActionTypes.UPDATE_USER_AUTH:
       return {
         ...state,
