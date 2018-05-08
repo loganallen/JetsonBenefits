@@ -19,6 +19,8 @@ import json
 from app.scripts.recommendation_logic import *
 from django.forms.models import model_to_dict
 
+from api.formatting import *
+
 #TODO: what to output if nothing returned from generating quotes
 
 def validateRequest(request, keys, method, response):
@@ -706,6 +708,7 @@ def generateInsuranceQuotes(request):
         if (life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age).exists()):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
+            
         else: #return default value since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = general_obj, user_kids_age = user_kids_ages) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0] 
@@ -802,6 +805,7 @@ def getQuoteHelper(user, insurance_type):
             user_rec.save()
 
             data = model_to_dict(health_quote)
+            data['deductible'] = num_to_usd(data['deductible'])
         
     elif (insurance_type == 'LIFE'):
             # get data
@@ -819,18 +823,20 @@ def getQuoteHelper(user, insurance_type):
             user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
             user_rec.save()
             data = model_to_dict(life_quote)
+            data['policy_amount'] = abbrev_num_to_usd(data['policy_amount'])
         else: #return default value since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = gen_answers, user_kids_age = user_kids_age) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0]
             user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
             user_rec.save()
             data = model_to_dict(life_quote)
+            data['policy_amount'] = abbrev_num_to_usd(data['policy_amount'])
 
     elif (insurance_type == 'DISABILITY'):
             # get data
         benefit_amount_d, duration_d, monthly_d = disability_rec(gen_answers)
 
-        disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
+        disability_quote = {'benefit_amount': num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
 
         # TODO: What to do with disability quotes
         # user_rec = user_recommendation.objects.filter(user_id=user)
