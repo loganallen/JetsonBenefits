@@ -107,7 +107,7 @@ class RefineQuoteItem extends React.Component {
         <br/>
         <div className='refine-question'>
           <p>How likely are you to visit your doctor for your annual physical exam?</p>
-          {this.createDropdown('q_3', [
+          {this.createDropdown('q_5', [
             {value: '2', text: 'likely'},
             {value: '1', text: 'somewhat likely'},
             {value: '0', text: 'not likely'}])}

@@ -649,7 +649,7 @@ def generateInsuranceQuotes(request):
             # del general_post['health_condition']
             
             num_kids = asInt(general_post['num_kids'])
-            num_kids = min(int(num_kids), 2)
+            num_kids = min(num_kids, 2)
 
             general_obj = user_general_answers(**general_post)
         
@@ -667,10 +667,9 @@ def generateInsuranceQuotes(request):
                         health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
                     else:
                         health_post[key] = None
-
+            print(health_post)
             health_obj = user_health_questions_answer(**health_post)
-        
-
+            print(health_obj)
         
         if (general_obj is not None):
             if (general_obj.marital_status == 'married'):

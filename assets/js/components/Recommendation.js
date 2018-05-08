@@ -105,8 +105,6 @@ class Recommendation extends React.Component {
     quotesContent() {
         return (
             <QuotesContainer
-                userData={this.props.userData}
-                updateUserData={this.props.updateUserData}
                 isMobile={this.state.isMobile}
                 updateStage={this.updateStage}
             />
