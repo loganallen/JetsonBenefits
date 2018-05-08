@@ -72,7 +72,7 @@ class QuoteItem extends React.Component {
           <p className='subheaderText'>Plan Type</p>
         </div>
         <div className='field'>
-          <p className='headerText'>{`$${this.props.quote.deductible}`}</p>
+          <p className='headerText'>{`${this.props.quote.deductible}`}</p>
           <p className='subheaderText'>Deductible</p>
         </div>
         <div className='field-carrier'>
@@ -87,7 +87,7 @@ class QuoteItem extends React.Component {
     return (
       <div className='fields'>
         <div className='field'>
-          <p className='headerText'>{`$${this.props.quote.policy_amount}`}</p>
+          <p className='headerText'>{`${this.props.quote.policy_amount}`}</p>
           <p className='subheaderText'>Policy Amount</p>
         </div>
         <div className='field'>
@@ -106,7 +106,7 @@ class QuoteItem extends React.Component {
     return (
       <div className='fields'>
         <div className='field'>
-          <p className='headerText'>{`$${this.props.quote.benefit_amount}`}</p>
+          <p className='headerText'>{`${this.props.quote.benefit_amount}`}</p>
           <p className='subheaderText'>Benefit Amount</p>
         </div>
         <div className='field'>
@@ -114,7 +114,7 @@ class QuoteItem extends React.Component {
           <p className='subheaderText'>Duration</p>
         </div>
         <div className='field-carrier'>
-          <p className='logo'>{`$${this.props.quote.monthly}`}</p>
+          <p className='logo'>{`${this.props.quote.monthly}`}</p>
           <p className='subheaderText'>Monthly Cost</p>
         </div>
       </div>
