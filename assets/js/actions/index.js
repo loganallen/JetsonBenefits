@@ -300,6 +300,11 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('generateInsuranceQuotes SUCCESS', res);
+        Object.keys(res.data).forEach(key => {
+            if (Object.keys(InsuranceTypes).includes(key)) {
+                dispatch(updateInsuranceQuote(key, res.data[key]));
+            }
+        });
     }).fail(err => {
         console.log('generateInsuranceQuotes FAILURE', err);
     });
