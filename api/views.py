@@ -317,10 +317,10 @@ def updateInsuranceInfo(request):
 
         elif (insuranceType == 'LIFE'):
 
-            insuranceData['user_id'] = user
-
-            lifeRecord = user_life_answers(**insuranceData)
-            lifeRecord.save()
+            lifeRecord = user_life_answers(user_id = user)
+            for key in insuranceData:
+                setattr(lifeRecord, key, val)
+                lifeRecord.save()
 
         elif (insuranceType == 'DISABILITY'):
             #disability data already stored
@@ -710,17 +710,19 @@ def generateInsuranceQuotes(request):
         if (health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).exists()):
             health_quote = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)[0]
             health_quote = model_to_dict(health_quote)
+            health_quote['deductible'] = num_to_usd(health_quote['deductible'])
         
         if (life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age).exists()):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
+            life_quote['policy_amount'] = abbrev_num_to_usd(life_quote['policy_amount'])
             
         else: #return default value since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = general_obj, user_kids_age = user_kids_ages) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0] 
             life_quote = model_to_dict(life_quote)
 
-        disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
+        disability_quote = {'benefit_amount': abbrev_num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
              
         data = {'LIFE': life_quote, 'HEALTH': health_quote, 'DISABILITY': disability_quote}
 
