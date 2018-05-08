@@ -41,6 +41,23 @@ const updateBulkUserData = (data) => ({
     data: data
 });
 
+const updateInsuranceData = (type, key, value) => ({
+    type: ActionTypes.UPDATE_INSURANCE_DATA,
+    data: {
+        type: type,
+        key: key,
+        value: value
+    }
+});
+
+const updateBulkInsuranceData = (type, data) => ({
+    type: ActionTypes.UPDATE_BULK_INSURANCE_DATA,
+    data: {
+        type: type,
+        data: data
+    }
+});
+
 const updateUserAuth = (hasAuthToken, name='') => ({
     type: ActionTypes.UPDATE_USER_AUTH,
     data: {
@@ -104,8 +121,13 @@ const signupUser = (userData) => (dispatch, getState) => {
     if (valid) {
         Auth.signup(userData, (res) => {
             if (res.success) {
+                let state = getState().app;
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
+                dispatch(postUserInfo(Auth.authToken(), state.userData));
+                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.HEALTH));
+                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.LIFE));
+                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.DISABILITY));
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
@@ -130,9 +152,10 @@ const logoutUser = () => (dispatch, getState) => {
 /**
  *  postUserInfo: update user info for the active auth user
  *  @param {String} token
- *  @param {Object} data { key: value }
  */ 
-const postUserInfo = (token, data) => (dispatch, getState) => {
+const postUserInfo = (token) => (dispatch, getState) => {
+    let data = getState().app.userData;
+
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_USER_INFO,
@@ -172,9 +195,9 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
  * postInsuranceInfo: update insurance info for the active auth user
  * @param {String} token
  * @param {String} insuranceType
- * @param {Object} data: { key: value }
  */
-const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) => {
+const postInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
+    let data = getState().app.insuranceData[insuranceType];
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_INSURANCE_INFO,
@@ -209,6 +232,7 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('fetchInsuranceInfo SUCCESS', res);
+        dispatch(updateBulkInsuranceData(insuranceType, res.data));
     }).fail(err => {
         console.log('fetchInsuranceInfo FAILURE', err);
     });
@@ -228,6 +252,11 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('fetchAllInsuranceInfo SUCCESS', res);
+        Object.keys(res.data).forEach(key => {
+            if (Object.keys(InsuranceTypes).includes(key)) {
+                dispatch(updateBulkInsuranceData(key, res.data[key]));
+            }
+        });
     }).fail(err => {
         console.log('fetchAllInsuranceInfo FAILURE', err);
     });
@@ -291,7 +320,7 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
         LIFE: state.insuranceData[InsuranceTypes.LIFE],
         DISABILITY: state.insuranceData[InsuranceTypes.DISABILITY],
     }
-    
+    console.log('here', data);
     $.ajax({
         type: 'GET',
         url: Endpoints.GENERATE_INSURANCE_QUOTES,
@@ -317,6 +346,7 @@ export default {
     updateLoginModal,
     updateUserData,
     updateBulkUserData,
+    updateInsuranceData,
     updateInsuranceQuote,
     loginUser,
     signupUser,

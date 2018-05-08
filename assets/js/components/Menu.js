@@ -67,7 +67,7 @@ class Menu extends React.Component {
           {loginButton}
         </div>
         { this.props.isLoggedIn ? '' : (
-          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.closeLoginModal} />
+          <Login isOpen={this.props.loginModalOpen} isLogin={this.props.loginModalType} onClose={this.props.closeLoginModal} />
         )}
       </div>
     );

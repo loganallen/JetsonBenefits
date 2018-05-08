@@ -19,6 +19,8 @@ import json
 from app.scripts.recommendation_logic import *
 from django.forms.models import model_to_dict
 
+from api.formatting import *
+
 #TODO: what to output if nothing returned from generating quotes
 
 def validateRequest(request, keys, method, response):
@@ -171,6 +173,12 @@ def updateUserInfo(request):
         userData['user_id'] = user
         kid_ages = userData['kid_ages']
         del userData['kid_ages']
+
+        # loop through keys that map to numbers and cast correctly
+        numberkeys = ['spouse_annual_income', 'annual_income', 'age', 'num_kids', 'zipcode', 'spouse_age']
+        for key in numberkeys:
+            if not type(userData[key]) in [int, float]:
+                userData[key] = asInt(userData[key])
         
         getAnswers = user_general_answers(**userData)
         getAnswers.save()
@@ -262,7 +270,7 @@ def updateInsuranceInfo(request):
             q_5 is 'No chance', 'Might go', 'I'll definitely go'
             q_6 is '1-3 times besides my physical exam', 'Never or just for my annual physical', or 'More than 3 times a year'
             q_7 is 'More than 3 times a year', 'If I don't feel better in a few days, I'm going to the doctor', or 'Go to the doctor immediately'
-            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Find out cost before booking appt'
+            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Schedule right away'
             q_9 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
             q_10 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
             q_11 is 'I don't...', 'Convenient time with any doctor', or 'Must see my doc'
@@ -288,25 +296,31 @@ def updateInsuranceInfo(request):
         insuranceType = request.POST['insuranceType']
         insuranceData = json.loads(request.POST['insuranceData'])
 
+        print(insuranceData)
+
 
         if (insuranceType == 'HEALTH'):
             healthRecord = user_health_questions_answer(user_id = user)
             
-            health_dict = {'user_id': user}
+            health_dict = {}
             for key in insuranceData:
-                num = int(key[key.find('_')+1:]) #get id number
-                q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
-                health_dict[key] = q
+                if insuranceData[key] == '':
+                    continue
+                else:
+                    num = int(key[key.find('_')+1:]) #get id number
+                    q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
+                    health_dict[key] = q
 
-            healthRecord = user_health_questions_answer(**health_dict)
-            healthRecord.save()
+            for attr, value in health_dict.items():
+                setattr(healthRecord, attr, value)
+                healthRecord.save()
 
         elif (insuranceType == 'LIFE'):
 
-            insuranceData['user_id'] = user
-
-            lifeRecord = user_life_answers(**insuranceData)
-            lifeRecord.save()
+            lifeRecord = user_life_answers(user_id = user)
+            for key in insuranceData:
+                setattr(lifeRecord, key, val)
+                lifeRecord.save()
 
         elif (insuranceType == 'DISABILITY'):
             #disability data already stored
@@ -643,13 +657,14 @@ def generateInsuranceQuotes(request):
             general_post['user_id'] = User()
             
             user_kids_ages = general_post['kid_ages']
+            print(user_kids_ages)
             del general_post['kid_ages']
 
             # general_post['health_condition'] = general_post['health_condition']
             # del general_post['health_condition']
             
             num_kids = asInt(general_post['num_kids'])
-            num_kids = min(int(num_kids), 2)
+            num_kids = min(num_kids, 2)
 
             general_obj = user_general_answers(**general_post)
         
@@ -664,13 +679,13 @@ def generateInsuranceQuotes(request):
                 if (key != 'user_id'):
                     if (len(health_post[key]) > 0):
                         num = int(key[key.find('_')+1:])
+                        # TODO: Make the value of health_post[q_#] be an int [0...2] and index into string array instead of passing
+                        # that long string value from the frontend
                         health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
                     else:
                         health_post[key] = None
-
+                        
             health_obj = user_health_questions_answer(**health_post)
-        
-
         
         if (general_obj is not None):
             if (general_obj.marital_status == 'married'):
@@ -695,16 +710,19 @@ def generateInsuranceQuotes(request):
         if (health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).exists()):
             health_quote = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)[0]
             health_quote = model_to_dict(health_quote)
+            health_quote['deductible'] = num_to_usd(health_quote['deductible'])
         
         if (life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age).exists()):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
+            life_quote['policy_amount'] = abbrev_num_to_usd(life_quote['policy_amount'])
+            
         else: #return default value since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = general_obj, user_kids_age = user_kids_ages) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0] 
             life_quote = model_to_dict(life_quote)
 
-        disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
+        disability_quote = {'benefit_amount': abbrev_num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
              
         data = {'LIFE': life_quote, 'HEALTH': health_quote, 'DISABILITY': disability_quote}
 
@@ -795,6 +813,7 @@ def getQuoteHelper(user, insurance_type):
             user_rec.save()
 
             data = model_to_dict(health_quote)
+            data['deductible'] = num_to_usd(data['deductible'])
         
     elif (insurance_type == 'LIFE'):
             # get data
@@ -812,18 +831,20 @@ def getQuoteHelper(user, insurance_type):
             user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
             user_rec.save()
             data = model_to_dict(life_quote)
+            data['policy_amount'] = abbrev_num_to_usd(data['policy_amount'])
         else: #return default value since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = gen_answers, user_kids_age = user_kids_age) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0]
             user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
             user_rec.save()
             data = model_to_dict(life_quote)
+            data['policy_amount'] = abbrev_num_to_usd(data['policy_amount'])
 
     elif (insurance_type == 'DISABILITY'):
             # get data
         benefit_amount_d, duration_d, monthly_d = disability_rec(gen_answers)
 
-        disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
+        disability_quote = {'benefit_amount': abbrev_num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
 
         # TODO: What to do with disability quotes
         # user_rec = user_recommendation.objects.filter(user_id=user)
