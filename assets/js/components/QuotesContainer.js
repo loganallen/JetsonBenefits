@@ -34,7 +34,6 @@ class QuotesContainer extends React.Component {
 		}
 
     quoteItems = () => {
-			console.log(this.props.quotes);
 			let quotes = Object.keys(this.props.quotes).map(insuranceType => (
 				<QuoteItem
 					key={insuranceType}
