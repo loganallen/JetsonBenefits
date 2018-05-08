@@ -68,7 +68,7 @@ class Recommendation extends React.Component {
     onShowQuotesClick = () => {
         if (isLoggedIn()) {
             // Save userData to the backend
-            this.props.saveUserData(authToken(), this.props.userData);
+            this.props.saveUserData(authToken());
         }
         this.setState({
             stage: 'quotes'
@@ -147,7 +147,7 @@ const mapDispatchToProps = (dispatch) => ({
     changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
     updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
     updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
-    saveUserData: (token, data) => dispatch(Actions.postUserInfo(token, data)),
+    saveUserData: (token) => dispatch(Actions.postUserInfo(token)),
     loadUserData: (token) => dispatch(Actions.fetchUserInfo(token))
 });
 

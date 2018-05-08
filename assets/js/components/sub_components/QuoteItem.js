@@ -9,15 +9,22 @@ import { Icon } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import RefineQuoteItem from './RefineQuoteItem';
+import { isLoggedIn, authToken } from '../../auth';
 import { InsuranceTypes } from '../../utils';
 
 /**
  * props: {
  *   insuranceType,
+ *   insuranceData,
  *   quote,
  *   userData,
- *   updateUserData
- *   isMobile
+ *   isMobile,
+ *   updateUserData,
+ *   updateInsuranceData,
+ *   saveInsuranceInfo,
+ *   loadInsuranceQuote,
+ *   generateInsuranceQuotes,
+ *   onCoverageClick
  * }
  */
 
@@ -32,15 +39,23 @@ class QuoteItem extends React.Component {
   getRefineComponent = () => (
     <RefineQuoteItem 
       insuranceType={this.props.insuranceType}
+      insuranceData={this.props.insuranceData}
       userData={this.props.userData}
       updateUserData={this.props.updateUserData}
+      updateInsuranceData={this.props.updateInsuranceData}
       onUpdateQuoteClicked={this.onUpdateQuoteClicked}
     />
   );
 
   onUpdateQuoteClicked = () => {
+    if (isLoggedIn()) {
+      // Save insurance info and load new insurance quotes
+      this.props.saveInsuranceInfo(authToken(), this.props.insuranceType);
+      this.props.loadInsuranceQuote(authToken(), this.props.insuranceType);
+    } else {
+      this.props.generateInsuranceQuotes();
+    }
     this.onRefineClick();
-    // TODO: backend call
   }
 
   onRefineClick = (event) => {
@@ -146,7 +161,7 @@ class QuoteItem extends React.Component {
           <div className='quoteRight'>
             <div className='permonth'>
               <p className='estimatedLabel'>estimated</p>
-              <p className='headerText'>${this.state.permonth}</p>
+              <p className='headerText'>'TODO'</p>
               <p className='permonthLabel'>PER MONTH</p>
             </div>
             <button
@@ -166,7 +181,6 @@ class QuoteItem extends React.Component {
     );
   }
 
-  // TODO: FIX
   mobileRender() {
     return (
       <div className='quoteOuterWrapper'>
@@ -188,7 +202,7 @@ class QuoteItem extends React.Component {
 
           <button
             className='getCoveredButton'
-            onClick={() => this.props.onCoverageClick(this.state.quoteid)}
+            onClick={() => this.props.onCoverageClick(null)}
           >GET COVERED
           </button>
 

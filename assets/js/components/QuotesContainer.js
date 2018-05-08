@@ -22,11 +22,15 @@ class QuotesContainer extends React.Component {
 		
 		componentWillMount() {
 			if (isLoggedIn()) {
-				this.props.loadInsuranceQuotes(authToken());
+				this.props.loadAllInsuranceQuotes(authToken());
 			} else {
-				// TODO: Generate insurance quotes
 				this.props.generateInsuranceQuotes();
 			}
+		}
+
+		onCoverageClick = (data) => {
+			// TODO: Link to insurance carrier
+			console.log('Linking to insurance carrier for this quote...');
 		}
 
     quoteItems = () => {
@@ -34,10 +38,16 @@ class QuotesContainer extends React.Component {
 				<QuoteItem
 					key={insuranceType}
 					insuranceType={insuranceType}
+					insuranceData={this.props.insuranceData[insuranceType]}
 					quote={this.props.quotes[insuranceType]}
 					userData={this.props.userData}
-					updateUserData={this.props.updateUserData}
 					isMobile={this.props.isMobile}
+					updateUserData={this.props.updateUserData}
+					updateInsuranceData={this.props.updateInsuranceData}
+					saveInsuranceInfo={this.props.saveInsuranceInfo}
+					loadInsuranceQuote={this.props.loadInsuranceQuote}
+					generateInsuranceQuotes={this.props.generateInsuranceQuotes}
+					onCoverageClick={this.onCoverageClick}
 				/>
 			));
 
@@ -75,11 +85,16 @@ class QuotesContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
 	quotes: state.app.insuranceQuotes,
+	userData: state.app.userData,
 	insuranceData: state.app.insuranceData
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	loadInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token)),
+	updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
+	updateInsuranceData: (type, key, value) => dispatch(Actions.updateInsuranceData(type, key, value)),
+	saveInsuranceInfo: (token) => dispatch(Actions.postInsuranceInfo(token)),
+	loadInsuranceQuote: (token, type) => dispatch(Actions.fetchInsuranceQuote(token, type)),
+	loadAllInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token)),
 	generateInsuranceQuotes: () => dispatch(Actions.generateInsuranceQuotes())
 });
 

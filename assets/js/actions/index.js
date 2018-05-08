@@ -41,6 +41,15 @@ const updateBulkUserData = (data) => ({
     data: data
 });
 
+const updateInsuranceData = (type, key, value) => ({
+    type: ActionTypes.UPDATE_INSURANCE_DATA,
+    data: {
+        type: type,
+        key: key,
+        value: value
+    }
+})
+
 const updateUserAuth = (hasAuthToken, name='') => ({
     type: ActionTypes.UPDATE_USER_AUTH,
     data: {
@@ -130,9 +139,10 @@ const logoutUser = () => (dispatch, getState) => {
 /**
  *  postUserInfo: update user info for the active auth user
  *  @param {String} token
- *  @param {Object} data { key: value }
  */ 
-const postUserInfo = (token, data) => (dispatch, getState) => {
+const postUserInfo = (token) => (dispatch, getState) => {
+    let data = getState().app.userData;
+
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_USER_INFO,
@@ -172,9 +182,11 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
  * postInsuranceInfo: update insurance info for the active auth user
  * @param {String} token
  * @param {String} insuranceType
- * @param {Object} data: { key: value }
  */
-const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) => {
+const postInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
+    let data = getState().app.insuranceData[insuranceType];
+    console.log(data);
+    return;
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_INSURANCE_INFO,
@@ -317,6 +329,7 @@ export default {
     updateLoginModal,
     updateUserData,
     updateBulkUserData,
+    updateInsuranceData,
     updateInsuranceQuote,
     loginUser,
     signupUser,

@@ -2,6 +2,17 @@ import React from 'react';
 import { Grid, Button, Dropdown, Checkbox } from 'semantic-ui-react';
 import { MaritalStatus, InsuranceTypes } from '../../utils';
 
+/**
+ * props: {
+ *  insuranceType,
+ *  insuranceData,
+ *  userData,
+ *  updateUserData,
+ *  updateInsuranceData,
+ *  onUpdateQuoteClicked
+ * }
+ */
+
 class RefineQuoteItem extends React.Component {
   constructor(props) {
     super(props);
@@ -10,9 +21,14 @@ class RefineQuoteItem extends React.Component {
     };
   }
 
-  onInputChange = (key, event) => {
+  onUserDataInputChange = (key, event) => {
     // TODO: Validate inputs
     this.props.updateUserData(key, event.target.value);
+  }
+
+  onInsuranceDataInputChange = (key, event) => {
+    // TODO: Validate inputs
+    this.props.updateInsuranceData(insuranceType, key, event.target.value);
   }
 
   onKidAgeChange = (idx, event) => {
@@ -20,20 +36,20 @@ class RefineQuoteItem extends React.Component {
     this.props.updateUserData('kid_ages', { idx: idx, age: age });
   }
 
-  onDropdownChange = (value, id) => {
-    this.props.updateUserData(`dropdown${id}`, value);
+  onDropdownChange = (id, value) => {
+    this.props.updateInsuranceData(insuranceType, id, value);
   }
 
-  createDropdown = (options, id) => (
+  createDropdown = (id, options) => (
     <Dropdown
       selection
-      id={`dropdown${id}`}
+      id={id}
       placeholder={options[0].text}
       className='questionDropdown'
-      key={`dropdown${id}`}
+      key={id}
       options={options}
-      value={this.props.userData[`dropdown${id}`]}
-      onChange={(_, option) => this.onDropdownChange(option.value, id)}
+      value={this.props.insuranceData[id]}
+      onChange={(_, option) => this.onDropdownChange(id, option.value)}
     />
   );
 
@@ -48,23 +64,23 @@ class RefineQuoteItem extends React.Component {
           <Grid.Column>
           <input
             type='text'
-            id={'kidName'+ idx}
+            id={`kidName_${idx}`}
             className='refine-input-grid'
-            placeholder={''}
+            placeholder='John'
           />
           </Grid.Column>
           <Grid.Column>
           <input
             type='text'
-            id={'kidAge'+ idx}
+              id={`kidAge_${idx}`}
             className='refine-input-grid'
-            onChange={(e) => this.onKidAgeChange(idx,event)}
+            onChange={(e) => this.onKidAgeChange(idx, event)}
             value={age}
-            placeholder={''}
+            placeholder='12'
           />
           </Grid.Column>
           <Grid.Column>
-            <Checkbox defaultChecked key={'button' + idx} />
+            <Checkbox defaultChecked key={`button${idx}`} />
           </Grid.Column>
         </Grid.Row>
       );
@@ -77,24 +93,24 @@ class RefineQuoteItem extends React.Component {
       <div>
         <div className='refine-question'>
           <p>Do you take prescription medications?</p>
-          {this.createDropdown([
+          {this.createDropdown('q_1', [
             {value: 'yes', text: 'yes'},
-            {value: 'no', text: 'no'}], 0)}
+            {value: 'no', text: 'no'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>Do you have a chronic condition?</p>
-          {this.createDropdown([
+          {this.createDropdown('q_2', [
             {value: 'yes', text: 'yes'},
-            {value: 'no', text: 'no'}], 1)}
+            {value: 'no', text: 'no'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>How likely are you to visit your doctor for your annual physical exam?</p>
-          {this.createDropdown([
+          {this.createDropdown('q_3', [
             {value: '2', text: 'likely'},
             {value: '1', text: 'somewhat likely'},
-            {value: '0', text: 'not likely'}], 2)}
+            {value: '0', text: 'not likely'}])}
         </div>
         <br/>
         <div className='refine-question'>
@@ -103,52 +119,52 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='doctorVisit'
             className='refine-input'
-            onChange={(e) => this.onInputChange('doctorVisit', e)}
-            value={this.props.userData.doctorVisit}
+            onChange={(e) => this.onInsuranceDataInputChange('q_6', e)}
+            value={this.props.insuranceData.q_4}
             placeholder='1'
           />
         </div>
         <br/>
         <div className='refine-question'>
           <p>There's a cold going around and the office and you wake up with a sore throat. What do you do?</p> 
-          {this.createDropdown([{value: '0', text: 'Drink some tea, it\'ll pass'},
+          {this.createDropdown('q_7', [{value: '0', text: 'Drink some tea, it\'ll pass'},
             {value: '1', text: 'If I don\'t feel better in a few days, I\'m going to the doctor'}, 
-            {value: '2', text: 'Go to the doctor immediately'}], 4)}
+            {value: '2', text: 'Go to the doctor immediately'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>Your doctor asks you to come back for additional tests after your physical exam. What do you do?</p>
-            {this.createDropdown([{value: '0', text: 'Do nothing, I feel fine'},
+            {this.createDropdown('q_8', [{value: '0', text: 'Do nothing, I feel fine'},
             {value: '1', text: 'Find out cost before booking appointment'},
-            {value: '2', text: 'Schedule right away'}], 5)}
+            {value: '2', text: 'Schedule right away'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>How much do you worry about being diagnosed with a serious medical condition and having huge medical expenses?</p>
-            {this.createDropdown([{value: '0', text: 'Not a lot'},
+            {this.createDropdown('q_9', [{value: '0', text: 'Not a lot'},
             {value: '1', text: 'It crosses my mind sometimes'},
-            {value: '2', text: 'Huge worry'}], 6)}
+            {value: '2', text: 'Huge worry'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>How much do you worry about the medical expenses associated with a serious accident?</p>
-            {this.createDropdown([{value: '0', text: 'Not a lot'},
+            {this.createDropdown('q_10', [{value: '0', text: 'Not a lot'},
             {value: '1', text: 'It crosses my mind sometimes'},
-            {value: '2', text: 'Huge worry'}], 7)}
+            {value: '2', text: 'Huge worry'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>How do you schedule your doctor's appointments?</p>
-            {this.createDropdown([{value: '0', text: 'I don\'t ...'},
-            {value: '1', text: 'Conveinent time with any doctor'},
-            {value: '2', text: 'I must see my doc'}], 8)}
+            {this.createDropdown('q_11', [{value: '0', text: 'I don\'t ...'},
+            {value: '1', text: 'Convenient time with any doctor'},
+            {value: '2', text: 'I must see my doc'}])}
         </div>
         <br/>
         <div className='refine-question'>
           <p>How likely are you to seek out advice from a specialist?</p>
-            {this.createDropdown([{value: '0', text: 'Not likely'},
+            {this.createDropdown('q_12', [{value: '0', text: 'Not likely'},
             {value: '1', text: 'If my doc says so'},
-            {value: '2', text: 'I love second opinions'}], 9)}
+            {value: '2', text: 'I love second opinions'}])}
         </div>
       </div>
       <div className='update-button-wrapper'>
@@ -161,51 +177,50 @@ class RefineQuoteItem extends React.Component {
     <div>
       <p className='refine-title'>Great! We just need a litle more information from you</p>
       <div className='grid-wrapper'>
-      {
-        (this.props.userData.marital_status === MaritalStatus.married || (this.props.userData.kid_ages).length > 0)
-        && <Grid columns={4}>
-        <Grid.Row>
-          <Grid.Column>
-          {/*the first column has a blank header*/}
-          </Grid.Column>
-          <Grid.Column>
-          NAME
-          </Grid.Column>
-          <Grid.Column>
-          AGE
-          </Grid.Column>
-          <Grid.Column 
-            width={3}>
-          <p>Will you pay for college</p>
-          </Grid.Column>
-        </Grid.Row>
-        {this.props.userData.marital_status === MaritalStatus.married && <Grid.Row>
-          <Grid.Column>
-          Spouse
-          </Grid.Column>
-          <Grid.Column>
-          <input
-            type='text'
-            id='spouseName'
-            className='refine-input-grid'
-            onChange={(e) => this.onInputChange('spouseName', e)}
-            value={this.props.userData.spouseName}
-            placeholder=''
-          />
-          </Grid.Column>
-          <Grid.Column>
-          <input
-            type='text'
-            id='spouse_age'
-            className='refine-input-grid'
-            onChange={(e) => this.onInputChange('spouse_age', e)}
-            value={this.props.userData.spouse_ge}
-            placeholder=''
-          />
-          </Grid.Column>
-        </Grid.Row>}
-        {this.generateChildRows(this.props.userData.kid_ages)}
-      </Grid>}
+        {(this.props.userData.marital_status === MaritalStatus.married || (this.props.userData.kid_ages).length > 0) &&
+          <Grid columns={4}>
+            <Grid.Row>
+              <Grid.Column>
+                {/*the first column has a blank header*/}
+              </Grid.Column>
+              <Grid.Column>
+                NAME
+              </Grid.Column>
+              <Grid.Column>
+                AGE
+              </Grid.Column>
+              <Grid.Column width={3}>
+                <p>Will you pay for college</p>
+              </Grid.Column>
+            </Grid.Row>
+            {this.props.userData.marital_status === MaritalStatus.married &&
+            <Grid.Row>
+              <Grid.Column>
+                Spouse
+              </Grid.Column>
+              <Grid.Column>
+                <input
+                  type='text'
+                  id='spouseName'
+                  className='refine-input-grid'
+                  // onChange={(e) => this.onUserDataInputChange('spouse_name', e)}
+                  // value={this.props.userData.spouse_name}
+                  placeholder=''
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <input
+                  type='text'
+                  id='spouse_age'
+                  className='refine-input-grid'
+                  onChange={(e) => this.onUserDataInputChange('spouse_age', e)}
+                  value={this.props.userData.spouse_age}
+                  placeholder='25'
+                />
+              </Grid.Column>
+            </Grid.Row>}
+          {this.generateChildRows(this.props.userData.kid_ages)}
+        </Grid>}
       </div>
       <div className='refine-question'>
         <p>What is the balance of your mortgage?</p>
@@ -215,8 +230,8 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='mortgageInput'
             className='refine-input-currency'
-            onChange={(e) => this.onInputChange('mortgageBalance', e)}
-            value={this.props.userData.mortgageBalance}
+            onChange={(e) => this.onInsuranceDataInputChange('mortgage_balance', e)}
+            value={this.props.insuranceData.mortgage_balance}
             placeholder='100,000'
           />
         </div>
@@ -229,8 +244,8 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='debtTotal'
             className='refine-input-currency'
-            onChange={(e) => this.onInputChange('debtTotal', e)}
-            value={this.props.userData.debtTotal}
+            onChange={(e) => this.onInsuranceDataInputChange('other_debts_balance', e)}
+            value={this.props.insuranceData.other_debts_balance}
             placeholder='250,000'
             />
         </div>
@@ -243,8 +258,8 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='existingLifeInsurance'
             className='refine-input-currency'
-            onChange={(e) => this.onInputChange('existingLifeInsurance', e)}
-            value={this.props.userData.existingLifeInsurance}
+            onChange={(e) => this.onInsuranceDataInputChange('existing_life_Insurance', e)}
+            value={this.props.insuranceData.existing_life_Insurance}
             placeholder='1,000,000'
             />
         </div>
@@ -257,8 +272,8 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='investments'
             className='refine-input-currency'
-            onChange={(e) => this.onInputChange('investments', e)}
-            value={this.props.userData.investments}
+            onChange={(e) => this.onInsuranceDataInputChange('balance_investings_savings', e)}
+            value={this.props.insuranceData.balance_investings_savings}
             placeholder='60,000'
             />
         </div>
@@ -270,7 +285,7 @@ class RefineQuoteItem extends React.Component {
   )
 
   disabilityQuestions = () =>{
-    /* nothing */
+    // TODO: Disability refine questions
   }
 
   render() {
