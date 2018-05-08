@@ -52,7 +52,6 @@ def validateRequest(request, keys, method, response):
 def asInt(value):
     return 0 if value == '' else int(value)
 
-
 @require_POST
 def signup(request):
     """

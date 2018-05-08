@@ -291,7 +291,7 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
         LIFE: state.insuranceData[InsuranceTypes.LIFE],
         DISABILITY: state.insuranceData[InsuranceTypes.DISABILITY],
     }
-    console.log(data);
+    
     $.ajax({
         type: 'GET',
         url: Endpoints.GENERATE_INSURANCE_QUOTES,

@@ -3,10 +3,10 @@ from django.forms.models import model_to_dict
 from app.models import *
 from django.db import models
 
+def asInt(value):
+	return 0 if value == '' else int(value)
 
-	
-
-	# """Outputs """
+# """Outputs """
 def life_insurance(life_insurance_dict = None, general_questions_dict = None, user_kids_age = None):
 	coverage_amount = 0
 	term = 20
@@ -14,14 +14,14 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 	need_insurance = False
 	list_of_coverage_amount = [250000, 300000, 350000, 400000, 450000, 500000, 600000,700000]
 	
-	if (general_questions_dict.marital_status == 'married' or int(general_questions_dict.num_kids) >0):
+	if (general_questions_dict.marital_status == 'married' or asInt(general_questions_dict.num_kids) >0):
 		need_insurance = True
 
 	if life_insurance_dict is not None:
 		default = False
 
 	if default:
-		coverage_amount = 10*int(general_questions_dict.annual_income)
+		coverage_amount = 10 * asInt(general_questions_dict.annual_income)
 
 	else:
 		print(user_kids_age)
@@ -29,13 +29,13 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 			min_age = 0
 		else:
 			min_age = min(list(map(int, user_kids_age)))
-		other_debts_balance  = int(life_insurance_dict.other_debts_balance)
-		existing_life_insurance = int(life_insurance_dict.existing_life_insurance)
-		num_kids = int(general_questions_dict.num_kids)
-		balance_investings_savings = int(life_insurance_dict.balance_investings_savings)
-		annual_income = int(general_questions_dict.annual_income)
+		other_debts_balance  = asInt(life_insurance_dict.other_debts_balance)
+		existing_life_insurance = asInt(life_insurance_dict.existing_life_insurance)
+		num_kids = asInt(general_questions_dict.num_kids)
+		balance_investings_savings = asInt(life_insurance_dict.balance_investings_savings)
+		annual_income = asInt(general_questions_dict.annual_income)
 		estimate_college_expenses = 50000
-		coverage_amount = annual_income*(22-min_age)*.03 + other_debts_balance+estimate_college_expenses*4*num_kids-(existing_life_insurance-balance_investings_savings)
+		coverage_amount = annual_income * (22-min_age) * .03 + other_debts_balance+estimate_college_expenses*4*num_kids-(existing_life_insurance-balance_investings_savings)
 			#term
 	coverage_amount_final = min(list_of_coverage_amount, key=lambda x:abs(x-coverage_amount))
 	return need_insurance, coverage_amount_final, term
@@ -142,12 +142,7 @@ def disability_rec(general_questions_dict):
 	benefit_amount = 0
 	duration = 65
 
-	benefit_amount = int(general_questions_dict.annual_income) * .6
+	benefit_amount = asInt(general_questions_dict.annual_income) * .6
 	monthly = float(benefit_amount) / float(12)
 
 	return benefit_amount, duration, monthly
-
-
-
-
-
