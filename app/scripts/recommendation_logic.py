@@ -26,7 +26,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 
 	else:
 		print(user_kids_age)
-		if (len(user_kids_ages) < 1):
+		if (len(user_kids_age) < 1):
 			min_age = 0
 		else:
 			min_age = min(list(map(int, user_kids_age)))

@@ -699,8 +699,6 @@ def generateInsuranceQuotes(request):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
 
-        print(health_quote)
-        print(life_quote)
         disability_quote = {'benefit_amount': benefit_amount_d, 'duration': duration_d, 'monthly': monthly_d}
              
         data = {'LIFE': life_quote, 'HEALTH': health_quote, 'DISABILITY': disability_quote}
@@ -757,7 +755,8 @@ def getQuoteHelper(user, insurance_type):
     num_kids = 0
     age = 0
     user_kids_age = []
-    data = None
+
+    data = {}
 
     if (user_general_answers.objects.filter(user_id = user).exists()):
         gen_answers = user_general_answers.objects.get(user_id = user)
@@ -785,7 +784,6 @@ def getQuoteHelper(user, insurance_type):
         plan_type, deductible, critical_illness = health_insurance(health_totals, health_info)
         num_kids = min(num_kids, 2)
 
-        health_quote = {}
         if (health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).exists()):
             health_quote = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)[0]
             user_rec = user_recommendation(user_id=user, health_plan_id = health_quote)
@@ -797,7 +795,6 @@ def getQuoteHelper(user, insurance_type):
             # get data
         need_insurance, coverage_amount, term = life_insurance(life_info, gen_answers, user_kids_age)
 
-        life_quote = {}
         gender = 'male'
             
         if (gen_answers is not None):
@@ -809,8 +806,7 @@ def getQuoteHelper(user, insurance_type):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
             user_rec.save()
-
-        data = model_to_dict(life_quote)
+            data = model_to_dict(life_quote)
 
 
     elif (insurance_type == 'DISABILITY'):
