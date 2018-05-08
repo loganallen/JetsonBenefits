@@ -268,7 +268,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
-  onLogin: (username, password, cb) => dispatch(Actions.loginUser(username, password)),
+  onLogin: (username, password, cb) => dispatch(Actions.loginUser(username, password, cb)),
   onSignup: (userData) => dispatch(Actions.signupUser(userData))
 });
 

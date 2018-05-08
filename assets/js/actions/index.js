@@ -85,10 +85,11 @@ const clearAllUserInfo = () => ({
 
 /**
  * loginUser: attempt to login the user (generates auth token stored in sessionStorage.token)
- * @param {String} username 
- * @param {String} password 
+ * @param {String}   username 
+ * @param {String}   password 
+ * @param {Function} callback
  */
-const loginUser = (username, password) => (dispatch, getState) => {
+const loginUser = (username, password, callback) => (dispatch, getState) => {
     // TODO: Validate username (email) w/ regex?
     let valid = true;
 
@@ -97,7 +98,8 @@ const loginUser = (username, password) => (dispatch, getState) => {
             if (res.success) {
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
-                dispatch(fetchUserInfo(Auth.authToken()));
+                dispatch(fetchUserInfo());
+                if (callback) { callback(true); }
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
@@ -124,10 +126,10 @@ const signupUser = (userData) => (dispatch, getState) => {
                 let state = getState().app;
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
-                dispatch(postUserInfo(Auth.authToken(), state.userData));
-                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.HEALTH));
-                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.LIFE));
-                dispatch(postInsuranceInfo(Auth.authToken(), InsuranceTypes.DISABILITY));
+                dispatch(postUserInfo(state.userData));
+                dispatch(postInsuranceInfo(InsuranceTypes.HEALTH));
+                dispatch(postInsuranceInfo(InsuranceTypes.LIFE));
+                dispatch(postInsuranceInfo(InsuranceTypes.DISABILITY));
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
