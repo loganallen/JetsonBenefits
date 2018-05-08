@@ -10,19 +10,19 @@ import { connect } from 'react-redux';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import { isLoggedIn, authToken } from '../auth';
+import { isLoggedIn } from '../auth';
 
 class Test extends React.Component {
   componentWillMount() {
     if (isLoggedIn()) {
-      this.props.loadUserData(authToken());
+      this.props.loadUserData();
     }
   }
 
   handleAPIclick = () => {
     // Pass in the correct function arguments here
     this.props.testFunc(
-      authToken()
+
     );
   }
 
@@ -40,9 +40,9 @@ class Test extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  loadUserData: (token) => dispatch(Actions.fetchUserInfo(token)),
+  loadUserData: () => dispatch(Actions.fetchUserInfo()),
   // Choose which API function to test here
-  testFunc: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
+  testFunc: () => dispatch(Actions.fetchAllInsuranceInfo())
 });
 
 export default connect(state => state.app, mapDispatchToProps)(Test);

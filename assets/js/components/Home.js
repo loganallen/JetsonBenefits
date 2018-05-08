@@ -14,7 +14,7 @@ import classNames from 'classnames';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import { isLoggedIn, authToken } from '../auth';
+import { isLoggedIn } from '../auth';
 import { isMobile } from '../utils';
 
 import '../../css/home.css';
@@ -30,7 +30,7 @@ class Home extends React.Component {
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
     if (isLoggedIn()) {
-      this.props.loadUserInfo(authToken());
+      this.props.loadUserData();
     } else {
       // Grab from localStorage to update redux store with cached data
       // let userData = localStrorage.getItem("userData");
@@ -188,7 +188,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
   updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
-  loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token))
+  loadUserData: () => dispatch(Actions.fetchUserInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

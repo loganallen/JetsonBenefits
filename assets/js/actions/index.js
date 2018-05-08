@@ -151,9 +151,9 @@ const logoutUser = () => (dispatch, getState) => {
 
 /**
  *  postUserInfo: update user info for the active auth user
- *  @param {String} token
  */ 
-const postUserInfo = (token) => (dispatch, getState) => {
+const postUserInfo = () => (dispatch, getState) => {
+    let token = Auth.authToken();
     let data = getState().app.userData;
 
     $.ajax({
@@ -174,9 +174,10 @@ const postUserInfo = (token) => (dispatch, getState) => {
 }
 /**
  * fetchUserInfo: get user info for the active auth user
- * @param {String} token
  */
-const fetchUserInfo = (token) => (dispatch, getState) => {
+const fetchUserInfo = () => (dispatch, getState) => {
+    let token = Auth.authToken();
+
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_USER_INFO,
@@ -193,11 +194,12 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
 
 /**
  * postInsuranceInfo: update insurance info for the active auth user
- * @param {String} token
  * @param {String} insuranceType
  */
-const postInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
+const postInsuranceInfo = (insuranceType) => (dispatch, getState) => {
+    let token = Auth.authToken();
     let data = getState().app.insuranceData[insuranceType];
+    
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_INSURANCE_INFO,
@@ -217,10 +219,11 @@ const postInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
 }
 /**
  * fetchInsuranceInfo: get specific insurance info for the active auth user
- * @param {String} token
  * @param {String} insuranceType
  */
-const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
+const fetchInsuranceInfo = (insuranceType) => (dispatch, getState) => {
+    let token = Auth.authToken();
+
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_INSURANCE_INFO,
@@ -240,9 +243,10 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
 
 /**
  * fetchAllInsuranceInfo: get all insurance info for the active auth user
- * @param {String} token
  */
-const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
+const fetchAllInsuranceInfo = () => (dispatch, getState) => {
+    let token = Auth.authToken();
+
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_INFO,
@@ -252,10 +256,9 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('fetchAllInsuranceInfo SUCCESS', res);
-        Object.keys(res.data).forEach(key => {
-            if (Object.keys(InsuranceTypes).includes(key)) {
-                dispatch(updateBulkInsuranceData(key, res.data[key]));
-            }
+        // Update the data in state.app.insuranceData for each insuranceType
+        Object.keys(res.data).forEach(insuranceType => {
+            dispatch(updateBulkInsuranceData(insuranceType, res.data[insuranceType]));
         });
     }).fail(err => {
         console.log('fetchAllInsuranceInfo FAILURE', err);
@@ -264,10 +267,11 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
 
 /**
  * fetchInsuranceQuote: get specific insurance quote info for the active auth user
- * @param {String} token
  * @param {String} insuranceType
  */
-const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
+const fetchInsuranceQuote = (insuranceType) => (dispatch, getState) => {
+    let token = Auth.authToken();
+
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_INSURANCE_QUOTE,
@@ -287,9 +291,10 @@ const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
 
 /**
  * fetchAllInsuranceQuotes: get all insurance quote info for the active auth user
- * @param {String} token
  */
-const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
+const fetchAllInsuranceQuotes = () => (dispatch, getState) => {
+    let token = Auth.authToken();
+
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_QUOTES,
@@ -299,10 +304,9 @@ const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('fetchAllInsuranceQuotes SUCCESS', res);
-        Object.keys(res.data).forEach(key => {
-            if (Object.keys(InsuranceTypes).includes(key)) {
-                dispatch(updateInsuranceQuote(key, res.data[key]));
-            }
+        // Update the quote in state.app.insuranceQuotes for each insuranceType
+        Object.keys(res.data).forEach(insuranceType => {
+            dispatch(updateInsuranceQuote(insuranceType, res.data[insuranceType]));
         });
     }).fail(err => {
         console.log('fetchAllInsuranceQuote FAILURE', err);
@@ -320,7 +324,7 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
         LIFE: state.insuranceData[InsuranceTypes.LIFE],
         DISABILITY: state.insuranceData[InsuranceTypes.DISABILITY],
     }
-    console.log('here', data);
+    
     $.ajax({
         type: 'GET',
         url: Endpoints.GENERATE_INSURANCE_QUOTES,
@@ -329,10 +333,9 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('generateInsuranceQuotes SUCCESS', res);
-        Object.keys(res.data).forEach(key => {
-            if (Object.keys(InsuranceTypes).includes(key)) {
-                dispatch(updateInsuranceQuote(key, res.data[key]));
-            }
+        // Update the quote in state.app.insuranceQuotes for each insuranceType
+        Object.keys(res.data).forEach(insuranceType => {
+            dispatch(updateInsuranceQuote(insuranceType, res.data[insuranceType]));
         });
     }).fail(err => {
         console.log('generateInsuranceQuotes FAILURE', err);
