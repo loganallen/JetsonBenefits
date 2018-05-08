@@ -22,8 +22,24 @@ const initialState = {
     health_condition: ''
   },
   insuranceData: {
-    [InsuranceTypes.HEALTH]: {},
-    [InsuranceTypes.LIFE]: {},
+    [InsuranceTypes.HEALTH]: {
+      q_1: '',
+      q_2: '',
+      q_5: '',
+      q_6: '',
+      q_7: '',
+      q_8: '',
+      q_9: '',
+      q_10: '',
+      q_11: '',
+      q_12: ''
+    },
+    [InsuranceTypes.LIFE]: {
+      mortgage_balance: '',
+      other_debts_balance: '',
+      existing_life_insurance: '',
+      balance_investings_savings: '',
+    },
     [InsuranceTypes.DISABILITY]: {}
   },
   insuranceQuotes: {
@@ -128,10 +144,12 @@ const mainReducer = (state = initialState, action) => {
         }
       }
     }
-    case ActionTypes.CLEAR_USER_DATA:
+    case ActionTypes.CLEAR_ALL_USER_INFO:
       return {
         ...state,
-        userData: initialState.userData
+        userData: initialState.userData,
+        insuranceData: initialState.insuranceData,
+        insuranceQuotes: initialState.insuranceQuotes
       }
     default:
       return state;

@@ -25,7 +25,7 @@ class QuotesContainer extends React.Component {
 				this.props.loadInsuranceQuotes(authToken());
 			} else {
 				// TODO: Generate insurance quotes
-				// this.props.generateInsuranceQuotes({...});
+				this.props.generateInsuranceQuotes();
 			}
 		}
 
@@ -79,7 +79,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	loadInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
+	loadInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token)),
+	generateInsuranceQuotes: () => dispatch(Actions.generateInsuranceQuotes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuotesContainer);
