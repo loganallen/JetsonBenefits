@@ -851,4 +851,3 @@ def getInsuranceInfoHelper(user, insuranceType):
             data = data[0]
 
     return data
-
