@@ -21,7 +21,6 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		default = False
 
 	if default:
-		print("DEAFILT")
 		coverage_amount = 10*int(general_questions_dict.annual_income)
 
 	else:
