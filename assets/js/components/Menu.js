@@ -134,10 +134,9 @@ class Menu extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
   menuTheme: state.app.menuTheme,
   loginModalOpen: state.app.loginModal.isOpen,
-  loginModalType: state.app.loginModal.isLogin,
+  loginModalType: state.app.loginModal.isTypeLogin,
   deviceWidth: state.app.deviceWidth,
   isLoggedIn: state.app.user.isAuth
 });

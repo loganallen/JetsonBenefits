@@ -263,7 +263,6 @@ class LoginModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
   deviceWidth: state.app.deviceWidth
 });
 
