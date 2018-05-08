@@ -22,38 +22,38 @@ class Test extends React.Component {
   handleAPIclick = () => {
     // Pass in the correct function arguments here
     this.props.testFunc(
-      // authToken(),
-      {
-        GENERAL:{ 
-          age: 40, 
-          zipcode: '14850', 
-          marital_status: 'married', 
-          health_condition: 'good', 
-          annual_income: '60000', 
-          spouse_annual_income: '0', 
-          num_kids: '3', 
-          kid_ages: [1,2,3],
-          gender: 'female' 
-        },
-        HEALTH: {
-          q_1:"",
-          q_2:"", 
-          q_5:"",
-          q_6:"", 
-          q_7:"", 
-          q_8:"", 
-          q_9:"", 
-          q_10:"",
-          q_11:"",
-          q_12:""
-        }, 
-        LIFE: {
-          mortgage_balance: 20000,
-          other_debts_balance: 500,
-          existing_life_insurance:100,
-          balance_investings_savings: 1000,
-        }
-      }
+      authToken(),
+      // {
+      //   GENERAL:{ 
+      //     age: 40, 
+      //     zipcode: '14850', 
+      //     marital_status: 'married', 
+      //     health_condition: 'good', 
+      //     annual_income: '60000', 
+      //     spouse_annual_income: '0', 
+      //     num_kids: '3', 
+      //     kid_ages: [1,2,3],
+      //     gender: 'female' 
+      //   },
+      //   HEALTH: {
+      //     q_1: 'No',
+      //     q_2: 'No', 
+      //     q_5: 'Might go',
+      //     q_6: 'Never or just for my annual physical', 
+      //     q_7: "Drink some tea, it'll pass", 
+      //     q_8: 'Find out cost before booking appt', 
+      //     q_9: 'It crosses my mind sometimes.', 
+      //     q_10: 'It crosses my mind sometimes.',
+      //     q_11: 'Convenient time with any doctor',
+      //     q_12: 'If my doc says so'
+      //   }, 
+      //   LIFE: {
+      //     mortgage_balance: 20000,
+      //     other_debts_balance: 500,
+      //     existing_life_insurance:100,
+      //     balance_investings_savings: 1000,
+      //   }
+      // }
       // {age: 27, zipcode: '14850', marital_status: 'married', health: 'good', annual_income: '10000', spouse_annual_income: '0', spouse_age: '25', num_kids: '3', gender: 'female', kid_ages: [1,2,3] }
       // 'LIFE',
       // {
@@ -94,7 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
 
   loadUserData: (token) => dispatch(Actions.fetchUserInfo(token)),
-  testFunc: (data) => dispatch(Actions.generateInsuranceQuotes(data))
+  testFunc: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
 
 });
 
