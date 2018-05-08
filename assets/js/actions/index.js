@@ -190,8 +190,6 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
  */
 const postInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
     let data = getState().app.insuranceData[insuranceType];
-    console.log(data);
-    return;
     $.ajax({
         type: 'POST',
         url: Endpoints.UPDATE_INSURANCE_INFO,

@@ -93,7 +93,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
 	updateInsuranceData: (type, key, value) => dispatch(Actions.updateInsuranceData(type, key, value)),
-	saveInsuranceData: (token) => dispatch(Actions.postInsuranceInfo(token)),
+	saveInsuranceData: (token, insuranceType) => dispatch(Actions.postInsuranceInfo(token, insuranceType)),
 	loadAllInsuranceData: (token) => dispatch(Actions.fetchAllInsuranceInfo(token)),
 	loadInsuranceQuote: (token, type) => dispatch(Actions.fetchInsuranceQuote(token, type)),
 	loadAllInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token)),
