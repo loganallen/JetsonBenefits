@@ -9,24 +9,29 @@ import { Icon } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import RefineQuoteItem from './RefineQuoteItem';
+import { InsuranceTypes } from '../../utils';
+
+/**
+ * props: {
+ *   insuranceType,
+ *   quote,
+ *   userData,
+ *   updateUserData
+ *   isMobile
+ * }
+ */
 
 class QuoteItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: this.props.type,
-      field1: {header: this.props.field1.header, subheader: this.props.field1.subheader},
-      field2: {header: this.props.field2.header, subheader: this.props.field2.subheader},
-      field3: {imagesrc: this.props.field3.imagesrc, carrier: this.props.field3.carrier},
-      permonth: this.props.permonth,
-      quoteid: this.props.quoteid,
       refineOpen: false,
     };
   }
 
-  getRefineComponent = (insuranceType) => (
+  getRefineComponent = () => (
     <RefineQuoteItem 
-      insuranceType={insuranceType}
+      insuranceType={this.props.insuranceType}
       userData={this.props.userData}
       updateUserData={this.props.updateUserData}
       onUpdateQuoteClicked={this.onUpdateQuoteClicked}
@@ -44,15 +49,89 @@ class QuoteItem extends React.Component {
     });
   }
 
+  healthQuoteContent = () => {
+    return (
+      <div className='fields'>
+        <div className='field'>
+          <p className='headerText'>{this.props.quote.plan_type}</p>
+          <p className='subheaderText'>Plan Type</p>
+        </div>
+        <div className='field'>
+          <p className='headerText'>{`$${this.props.quote.deductible}`}</p>
+          <p className='subheaderText'>Deductible</p>
+        </div>
+        <div className='field'>
+          <p className='logo'>{this.props.quote.carrier}</p>
+          <p className='subheaderText'>Carrier</p>
+        </div>
+      </div>
+    );
+  }
+
+  lifeQuoteContent = () => {
+    return (
+      <div className='fields'>
+        <div className='field'>
+          <p className='headerText'>{`$${this.props.quote.policy_amount}`}</p>
+          <p className='subheaderText'>Policy Amount</p>
+        </div>
+        <div className='field'>
+          <p className='headerText'>{`${this.props.quote.policy_term}YR`}</p>
+          <p className='subheaderText'>Term</p>
+        </div>
+        <div className='field'>
+          <p className='logo'>{this.props.quote.carrier}</p>
+          <p className='subheaderText'>Carrier</p>
+        </div>
+      </div>
+    );
+  }
+
+  disabilityQuoteContent = () => {
+    return (
+      <div className='fields'>
+        <div className='field'>
+          <p className='headerText'>{`$${this.props.quote.benefit_amount}`}</p>
+          <p className='subheaderText'>Benefit Amount</p>
+        </div>
+        <div className='field'>
+          <p className='headerText'>{`${this.props.quote.duration}YR`}</p>
+          <p className='subheaderText'>Duration</p>
+        </div>
+        <div className='field'>
+          <p className='logo'>{`$${this.props.quote.monthly}`}</p>
+          <p className='subheaderText'>Monthly Cost</p>
+        </div>
+      </div>
+    );
+  }
+
+  getQuoteContent = () => {
+    let quoteContent = (type => {
+      switch (type) {
+        case InsuranceTypes.HEALTH:
+          return this.healthQuoteContent();
+        case InsuranceTypes.LIFE:
+          return this.lifeQuoteContent();
+        case InsuranceTypes.DISABILITY:
+          return this.disabilityQuoteContent();
+        default:
+          return;
+      }
+    })(this.props.insuranceType);
+
+    return quoteContent;
+  }
+
   desktopRender() {
     return (
       <div className='quoteOuterWrapper'>
         <div className={classNames('quoteItem', { 'refine-open': this.state.refineOpen })}>
-          <div className='quoteLeft'>
 
+          <div className='quoteLeft'>
             <div className='top'>
-              <div className="insuranceType">{this.props.type} INSURANCE</div>
-              {this.state.insuranceType != 'disability' && <button
+              <div className="insuranceType">{this.props.insuranceType} INSURANCE</div>
+              {this.props.insuranceType != InsuranceTypes.DISABILITY && <button
                 className='refineButton'
                 onClick={(e) => this.onRefineClick(e)}>
                 Refine <Icon name={classNames('angle', {
@@ -61,56 +140,41 @@ class QuoteItem extends React.Component {
                 })} />
               </button>}
             </div>
-
-            <div className='fields'>
-              <div className='field'>
-                <p className='headerText'> {this.state.field1.header} </p>
-                <p className='subheaderText'> {this.state.field1.subheader} </p>
-              </div>
-              <div className='field'>
-                <p className='headerText'> {this.state.field2.header} </p>
-                <p className='subheaderText'> {this.state.field2.subheader} </p>
-              </div>
-              <div className='field'>
-                <p className='logo'> LOGO </p>
-                <p className='subheaderText'> {this.state.field3.carrier} </p>
-              </div>
-            </div>
-
+            {this.getQuoteContent()}
           </div>
-          <div className='quoteRight'>
 
+          <div className='quoteRight'>
             <div className='permonth'>
               <p className='estimatedLabel'>estimated</p>
               <p className='headerText'>${this.state.permonth}</p>
               <p className='permonthLabel'>PER MONTH</p>
             </div>
-
             <button
               className='getCoveredButton'
-              onClick={() => this.props.onCoverageClick(this.state.quoteid)}
+              onClick={() => this.props.onCoverageClick(null)}
             >GET COVERED
             </button>
-
           </div>
+
         </div>
 
         {this.state.refineOpen &&
           <div className='refineWrapper'>
-            {this.getRefineComponent(this.state.type)}
+            {this.getRefineComponent()}
           </div>}
       </div>
     );
   }
 
+  // TODO: FIX
   mobileRender() {
     return (
       <div className='quoteOuterWrapper'>
         <div className='quoteItem'>
 
           <div className='top'>
-            <div className="insuranceType">{this.props.type} INSURANCE</div>
-            {this.state.insuranceType != 'disability' && <button
+            <div className="insuranceType">{this.props.insuranceType} INSURANCE</div>
+            {this.props.insuranceType != InsuranceTypes.DISABILITY && <button
               className='refineButton'
               onClick={(e) => this.onRefineClick(e)}>
               Refine <Icon name={classNames('angle', {
@@ -120,20 +184,7 @@ class QuoteItem extends React.Component {
             </button>}
           </div>
 
-          <div className='fields'>
-            <div className='field'>
-              <p className='subheaderText'> {this.state.field1.subheader} </p>
-              <p className='headerText'> {this.state.field1.header} </p>
-            </div>
-            <div className='field'>
-              <p className='subheaderText'> {this.state.field2.subheader} </p>
-              <p className='headerText'> {this.state.field2.header} </p>
-            </div>
-            <div className='field'>
-              <p className='subheaderText'> {this.state.field3.carrier} </p>
-              <p className='logo'> LOGO </p>
-            </div>
-          </div>
+          {this.getQuoteContent()}
 
           <button
             className='getCoveredButton'
@@ -143,7 +194,7 @@ class QuoteItem extends React.Component {
 
           {this.state.refineOpen &&
             <div className='refineWrapper'>
-              {this.getRefineComponent(this.state.type)}
+              {this.getRefineComponent()}
             </div>}
 
         </div>

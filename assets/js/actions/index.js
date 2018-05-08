@@ -1,5 +1,5 @@
 import ActionTypes from './actionTypes';
-import { Endpoints } from '../utils';
+import { Endpoints, InsuranceTypes } from '../utils';
 import Auth from '../auth';
 
 /*
@@ -49,6 +49,19 @@ const updateUserAuth = (hasAuthToken, name='') => ({
     }
 });
 
+const updateInsuranceQuote = (insuranceType, quote) => ({
+    type: ActionTypes.UPDATE_INSURANCE_QUOTE,
+    data: {
+        type: insuranceType,
+        quote: quote
+    }
+})
+
+const clearAllUserInfo = () => ({
+    type: ActionTypes.CLEAR_ALL_USER_INFO,
+    data: {}
+});
+
 /**
  * Thunks for API requests
  */
@@ -68,6 +81,7 @@ const loginUser = (username, password) => (dispatch, getState) => {
             if (res.success) {
                 dispatch(updateUserAuth(true, res.name));
                 dispatch(updateLoginModal(false));
+                dispatch(fetchUserInfo(Auth.authToken()));
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
@@ -95,7 +109,7 @@ const signupUser = (userData) => (dispatch, getState) => {
             } else {
                 dispatch(updateUserAuth(false));
                 // TODO: Display error message
-                console.log(res.error);
+                console.log('signupUser ERROR', res.error);
             }
         })
     } else {
@@ -110,6 +124,7 @@ const signupUser = (userData) => (dispatch, getState) => {
 const logoutUser = () => (dispatch, getState) => {
     Auth.logout();
     dispatch(updateUserAuth(false));
+    dispatch(clearAllUserInfo());
 }
 
 /**
@@ -129,12 +144,11 @@ const postUserInfo = (token, data) => (dispatch, getState) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
+        console.log('postUserInfo SUCCESS', res);
     }).fail(err => {
-        console.log(err);
+        console.log('postUserInfo FAILURE', err);
     });
 }
-
 /**
  * fetchUserInfo: get user info for the active auth user
  * @param {String} token
@@ -143,17 +157,14 @@ const fetchUserInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_USER_INFO,
-        data: {
-            csrfmiddlewaretoken: env.csrf_token
-        },
+        data: {},
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
         dispatch(updateBulkUserData(res.data));
     }).fail(err => {
-        console.log(err);
+        console.log('fetchUserInfo FAILURE', err);
     });
 }
 
@@ -176,12 +187,11 @@ const postInsuranceInfo = (token, insuranceType, data) => (dispatch, getState) =
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
+        console.log('postInsuranceInfo SUCCESS', res);
     }).fail(err => {
-        console.log(err);
+        console.log('postInsuranceInfo FAILURE', err);
     });
 }
-
 /**
  * fetchInsuranceInfo: get specific insurance info for the active auth user
  * @param {String} token
@@ -192,16 +202,15 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_INSURANCE_INFO,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
             insuranceType: insuranceType
         },
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
+        console.log('fetchInsuranceInfo SUCCESS', res);
     }).fail(err => {
-        console.log(err);
+        console.log('fetchInsuranceInfo FAILURE', err);
     });
 }
 
@@ -213,16 +222,14 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_INFO,
-        data: {
-            csrfmiddlewaretoken: env.csrf_token
-        },
+        data: {},
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
+        console.log('fetchAllInsuranceInfo SUCCESS', res);
     }).fail(err => {
-        console.log(err);
+        console.log('fetchAllInsuranceInfo FAILURE', err);
     });
 }
 
@@ -236,37 +243,70 @@ const fetchInsuranceQuote = (token, insuranceType) => (dispatch, getState) => {
         type: 'GET',
         url: Endpoints.GET_INSURANCE_QUOTE,
         data: {
-            csrfmiddlewaretoken: env.csrf_token,
             insuranceType: insuranceType
         },
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
+        console.log('fetchInsuranceQuote SUCCESS', res);
+        dispatch(updateInsuranceQuote(insuranceType, res.data));
     }).fail(err => {
-        console.log(err);
+        console.log('fetchInsuranceQuote FAILURE', err);
     });
 }
 
 /**
- * fetchAllInsuranceQuote: get all insurance quote info for the active auth user
+ * fetchAllInsuranceQuotes: get all insurance quote info for the active auth user
  * @param {String} token
  */
 const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
         url: Endpoints.GET_ALL_INSURANCE_QUOTES,
-        data: {
-            csrfmiddlewaretoken: env.csrf_token
-        },
+        data: {},
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", "Token " + token);
         }
     }).done(res => {
-        console.log(res);
+        console.log('fetchAllInsuranceQuotes SUCCESS', res);
+        Object.keys(res.data).forEach(key => {
+            if (Object.keys(InsuranceTypes).includes(key)) {
+                dispatch(updateInsuranceQuote(key, res.data[key]));
+            }
+        });
     }).fail(err => {
-        console.log(err);
+        console.log('fetchAllInsuranceQuote FAILURE', err);
+    });
+}
+
+/**
+ * generateInsuranceQuotes: get all insurance quote info for the anonymous user
+ */
+const generateInsuranceQuotes = () => (dispatch, getState) => {
+    let state = getState().app;
+    let data = {
+        GENERAL: state.userData,
+        HEALTH: state.insuranceData[InsuranceTypes.HEALTH],
+        LIFE: state.insuranceData[InsuranceTypes.LIFE],
+        DISABILITY: state.insuranceData[InsuranceTypes.DISABILITY],
+    }
+    
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GENERATE_INSURANCE_QUOTES,
+        data: {
+            userData: JSON.stringify(data)
+        }
+    }).done(res => {
+        console.log('generateInsuranceQuotes SUCCESS', res);
+        Object.keys(res.data).forEach(key => {
+            if (Object.keys(InsuranceTypes).includes(key)) {
+                dispatch(updateInsuranceQuote(key, res.data[key]));
+            }
+        });
+    }).fail(err => {
+        console.log('generateInsuranceQuotes FAILURE', err);
     });
 }
 
@@ -276,6 +316,8 @@ export default {
     changeMenuTheme,
     updateLoginModal,
     updateUserData,
+    updateBulkUserData,
+    updateInsuranceQuote,
     loginUser,
     signupUser,
     logoutUser,
@@ -285,5 +327,6 @@ export default {
     fetchInsuranceInfo,
     fetchAllInsuranceInfo,
     fetchInsuranceQuote,
-    fetchAllInsuranceQuotes
+    fetchAllInsuranceQuotes,
+    generateInsuranceQuotes
 };

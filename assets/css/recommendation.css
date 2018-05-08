@@ -200,6 +200,12 @@ blue color: #3AAFA9;
   font-size: 2.4em;
 }
 
+#breadcrumbWrapper {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
 /* Mobile Only Styles */
 @media screen and (max-device-width: 768px) {
   #questionsWrapper {
@@ -247,5 +253,12 @@ blue color: #3AAFA9;
   }
   .sidebar-item {
     font-size: 1em;
+  }
+
+  #breadcrumbWrapper {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 2%;
   }
 }

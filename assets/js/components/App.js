@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Menu from './Menu';
 import Actions from '../actions';
 
 class App extends React.Component {
@@ -22,7 +21,6 @@ class App extends React.Component {
     return (
       <div id='containerWrapper' className={this.props.menuTheme}>
         <div className='container'>
-          <Menu />
           {children}
         </div>
       </div>

@@ -7,7 +7,7 @@ Controller filepath:
 */
 
 import React from 'react';
-import { List, Label, Icon } from 'semantic-ui-react';
+import { List, Label, Icon, Breadcrumb } from 'semantic-ui-react';
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -44,9 +44,22 @@ class Sidebar extends React.Component {
     return this.state.values.reduce((acc, item) => (acc + parseInt(item.value)), 0)
   }
 
+  breadcrumbs = () => {
+		return this.props.isMobile && (
+      <div id="breadcrumbWrapper">
+        <Breadcrumb size='massive'>
+          <Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
+          <Breadcrumb.Divider>/</Breadcrumb.Divider>
+          <Breadcrumb.Section link active>Recommendations</Breadcrumb.Section>
+        </Breadcrumb>
+      </div>
+		);
+	}
+
   render() {
     return (
       <div id='sidebarWrapper'>
+        {this.breadcrumbs()}
         <h1 id="sidebarTitle">JETSON RECOMMENDS</h1>
       	<List>
           {this.listContent()}
