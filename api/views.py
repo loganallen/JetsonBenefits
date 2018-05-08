@@ -756,7 +756,7 @@ def getQuoteHelper(user, insurance_type):
     is_married = False
     num_kids = 0
     age = 0
-
+    user_kids_age = []
     data = None
 
     if (user_general_answers.objects.filter(user_id = user).exists()):
