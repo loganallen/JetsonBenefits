@@ -836,7 +836,7 @@ def getQuoteHelper(user, insurance_type):
             # get data
         benefit_amount_d, duration_d, monthly_d = disability_rec(gen_answers)
 
-        disability_quote = {'benefit_amount': num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
+        disability_quote = {'benefit_amount': abbrev_num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
 
         # TODO: What to do with disability quotes
         # user_rec = user_recommendation.objects.filter(user_id=user)
