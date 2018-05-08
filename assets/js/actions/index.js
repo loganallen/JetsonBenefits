@@ -19,11 +19,11 @@ const changeMenuTheme = (theme) => ({
     }
 });
 
-const updateLoginModal = (isOpen=false, isLogin=true) => ({
+const updateLoginModal = (isOpen=false, isTypeLogin=true) => ({
     type: ActionTypes.UPDATE_LOGIN_MODAL,
     data: {
         isOpen: isOpen,
-        isLogin: isLogin
+        isTypeLogin: isTypeLogin
     }
 });
 

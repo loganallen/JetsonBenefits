@@ -185,7 +185,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
   updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
   loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token))

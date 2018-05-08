@@ -67,7 +67,7 @@ class LoginModal extends React.Component {
   }
 
   desktopRender = () => {
-    const header = this.props.isLogin ? (
+    const header = this.props.isTypeLogin ? (
       <div className="loginHeaderWrapper">
         <h1 className="loginHeader">Sign In</h1>
       </div>
@@ -78,7 +78,7 @@ class LoginModal extends React.Component {
       </div>
     );
 
-    const content = this.props.isLogin ? (
+    const content = this.props.isTypeLogin ? (
       <div>
         <input 
           name="loginEmail"
@@ -170,7 +170,7 @@ class LoginModal extends React.Component {
   };
 
   mobileRender = () => {
-    const content = this.props.isLogin ? (
+    const content = this.props.isTypeLogin ? (
       <div>
         <input 
           name="loginEmail"
@@ -268,7 +268,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
   onLogin: (username, password, cb) => dispatch(Actions.loginUser(username, password)),
   onSignup: (userData) => dispatch(Actions.signupUser(userData))
 });

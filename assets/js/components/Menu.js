@@ -31,8 +31,16 @@ class Menu extends React.Component {
     this.props.history.push('/home');
   }
 
-  fakeClick = () => {
-    console.log('menu item clicked');
+  onHowItWorkClick = () => {
+    // TODO: Navigate to How It Works page
+  }
+
+  onBlogClick = () => {
+    // TODO: Navigate to Blog page
+  }
+
+  onResourcesClick = () => {
+    // TODO: Navigate to Resources page
   }
 
   updateMobileMenu = () => {
@@ -61,15 +69,15 @@ class Menu extends React.Component {
       <div id='menuWrapper' className={this.props.menuTheme}>
         <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
-          <button type='button' className='menuButton'>HOW IT WORKS</button>
-          <button type='button' className='menuButton'>BLOG</button>
-          <button type='button' className='menuButton'>RESOURCES</button>
+          <button type='button' onClick={this.onHowItWorksClick} className='menuButton'>HOW IT WORKS</button>
+          <button type='button' onClick={this.onBlogClick} className='menuButton'>BLOG</button>
+          <button type='button' onClick={this.onResourcesClick} className='menuButton'>RESOURCES</button>
           {loginButton}
         </div>
-        { this.props.isLoggedIn && (
+        {!this.props.isLoggedIn && (
           <LoginModal
             isOpen={this.props.loginModalOpen}
-            isLogin={this.props.loginModalType}
+            isTypeLogin={this.props.loginModalType}
             onClose={this.props.closeLoginModal}
             history={this.props.history}
           />
@@ -96,10 +104,10 @@ class Menu extends React.Component {
               )}
             </button>
           </div>
-          { this.props.isLoggedIn && (
+          {!this.props.isLoggedIn && (
             <LoginModal
               isOpen={this.props.loginModalOpen}
-              isLogin={this.props.loginModalType}
+              isTypeLogin={this.props.loginModalType}
               onClose={this.closeLoginModalMobile}
               history={this.props.history}
             />
@@ -109,12 +117,11 @@ class Menu extends React.Component {
           vertical
           size='massive'
           id='mobileMenu'
-          className={classNames({
-            hidden: !this.state.mobileMenuShowing
-        })}>
-          <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
-          <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
-          <ReactMenu.Item onClick={this.fakeClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
+          className={classNames({ hidden: !this.state.mobileMenuShowing })
+        }>
+          <ReactMenu.Item onClick={this.onHowItWorksClick}><p className='mobileMenuButton'>HOW IT WORKS</p></ReactMenu.Item>
+          <ReactMenu.Item onClick={this.onBlogClick}><p className='mobileMenuButton'>BLOG</p></ReactMenu.Item>
+          <ReactMenu.Item onClick={this.onResourcesClick}><p className='mobileMenuButton'>RESOURCES</p></ReactMenu.Item>
           {loginButton}
         </ReactMenu>
       </div>
@@ -132,8 +139,7 @@ const mapStateToProps = (state) => ({
   loginModalOpen: state.app.loginModal.isOpen,
   loginModalType: state.app.loginModal.isLogin,
   deviceWidth: state.app.deviceWidth,
-  isLoggedIn: state.app.user.isAuth,
-  userName: state.app.user.name
+  isLoggedIn: state.app.user.isAuth
 });
 
 const mapDispatchToProps = (dispatch) => ({

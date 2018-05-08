@@ -72,7 +72,7 @@ const initialState = {
   },
   loginModal: {
     isOpen: false,
-    isLogin: true
+    isTypeLogin: true
   }
 };
 
