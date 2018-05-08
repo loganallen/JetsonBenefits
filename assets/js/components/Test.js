@@ -94,11 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
   // Choose which API function to test here
 
   loadUserData: (token) => dispatch(Actions.fetchUserInfo(token)),
-<<<<<<< HEAD
-  testFunc: (token) => dispatch(Actions.fetchAllInsuranceInfo(token))
-=======
   testFunc: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token))
->>>>>>> master
 
 });
 
