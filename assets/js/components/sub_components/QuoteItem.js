@@ -21,7 +21,7 @@ import { InsuranceTypes } from '../../utils';
  *   isMobile,
  *   updateUserData,
  *   updateInsuranceData,
- *   saveInsuranceInfo,
+ *   saveInsuranceData,
  *   loadInsuranceQuote,
  *   generateInsuranceQuotes,
  *   onCoverageClick
@@ -50,7 +50,7 @@ class QuoteItem extends React.Component {
   onUpdateQuoteClicked = () => {
     if (isLoggedIn()) {
       // Save insurance info and load new insurance quotes
-      this.props.saveInsuranceInfo(authToken(), this.props.insuranceType);
+      this.props.saveInsuranceData(authToken(), this.props.insuranceType);
       this.props.loadInsuranceQuote(authToken(), this.props.insuranceType);
     } else {
       this.props.generateInsuranceQuotes();

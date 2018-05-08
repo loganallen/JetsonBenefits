@@ -48,7 +48,12 @@ const updateInsuranceData = (type, key, value) => ({
         key: key,
         value: value
     }
-})
+});
+
+const updateBulkInsuranceData = (type, data) => ({
+    type: ActionTypes.UPDATE_BULK_INSURANCE_DATA,
+    data: data
+});
 
 const updateUserAuth = (hasAuthToken, name='') => ({
     type: ActionTypes.UPDATE_USER_AUTH,
@@ -221,6 +226,7 @@ const fetchInsuranceInfo = (token, insuranceType) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('fetchInsuranceInfo SUCCESS', res);
+        dispatch(updateBulkInsuranceData(insuranceType, res.data));
     }).fail(err => {
         console.log('fetchInsuranceInfo FAILURE', err);
     });
@@ -240,6 +246,11 @@ const fetchAllInsuranceInfo = (token) => (dispatch, getState) => {
         }
     }).done(res => {
         console.log('fetchAllInsuranceInfo SUCCESS', res);
+        Object.keys(res.data).forEach(key => {
+            if (Object.keys(InsuranceTypes).includes(key)) {
+                dispatch(updateBulkInsuranceData(key, res.data[key]));
+            }
+        });
     }).fail(err => {
         console.log('fetchAllInsuranceInfo FAILURE', err);
     });
@@ -303,7 +314,7 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
         LIFE: state.insuranceData[InsuranceTypes.LIFE],
         DISABILITY: state.insuranceData[InsuranceTypes.DISABILITY],
     }
-    
+    console.log('here', data);
     $.ajax({
         type: 'GET',
         url: Endpoints.GENERATE_INSURANCE_QUOTES,

@@ -25,8 +25,6 @@ const initialState = {
     [InsuranceTypes.HEALTH]: {
       q_1: '',
       q_2: '',
-      q_3: '',
-      q_4: '',
       q_5: '',
       q_6: '',
       q_7: '',
@@ -125,11 +123,32 @@ const mainReducer = (state = initialState, action) => {
           updatedUserData[key] = action.data[key];
         }
       });
-      // console.log('Update bulk', updatedUserData);
       return {
         ...state,
         userData: updatedUserData
       };
+    }
+    case ActionTypes.UPDATE_INSURANCE_DATA:
+      let updatedInsuranceItem = { ...state.insuranceData[action.data.type] };
+      updatedInsuranceItem[action.data.key] = action.data.value;
+      return {
+        ...state,
+        insuranceData: {
+          ...state.insuranceData,
+          [action.data.type]: updatedInsuranceItem
+        }
+      };
+    case ActionTypes.UPDATE_BULK_INSURANCE_DATA: {
+      let updatedInsuranceData = { ...state.insuranceData };
+      Object.keys(action.data).forEach(key => {
+        if (Object.keys(state.insuranceData).includes(key)) { 
+          updatedInsuranceData[key] = action.data[key];
+        }
+      });
+      return {
+        ...state,
+        insuranceData: updatedInsuranceData
+      }
     }
     case ActionTypes.UPDATE_USER_AUTH:
       return {

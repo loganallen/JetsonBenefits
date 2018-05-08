@@ -270,7 +270,7 @@ def updateInsuranceInfo(request):
             q_5 is 'No chance', 'Might go', 'I'll definitely go'
             q_6 is '1-3 times besides my physical exam', 'Never or just for my annual physical', or 'More than 3 times a year'
             q_7 is 'More than 3 times a year', 'If I don't feel better in a few days, I'm going to the doctor', or 'Go to the doctor immediately'
-            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Find out cost before booking appt'
+            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Schedule right away'
             q_9 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
             q_10 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
             q_11 is 'I don't...', 'Convenient time with any doctor', or 'Must see my doc'
@@ -651,13 +651,14 @@ def generateInsuranceQuotes(request):
             general_post['user_id'] = User()
             
             user_kids_ages = general_post['kid_ages']
+            print(user_kids_ages)
             del general_post['kid_ages']
 
             # general_post['health_condition'] = general_post['health_condition']
             # del general_post['health_condition']
             
             num_kids = asInt(general_post['num_kids'])
-            num_kids = min(int(num_kids), 2)
+            num_kids = min(num_kids, 2)
 
             general_obj = user_general_answers(**general_post)
         
@@ -672,13 +673,13 @@ def generateInsuranceQuotes(request):
                 if (key != 'user_id'):
                     if (len(health_post[key]) > 0):
                         num = int(key[key.find('_')+1:])
+                        # TODO: Make the value of health_post[q_#] be an int [0...2] and index into string array instead of passing
+                        # that long string value from the frontend
                         health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
                     else:
                         health_post[key] = None
-
+                        
             health_obj = user_health_questions_answer(**health_post)
-        
-
         
         if (general_obj is not None):
             if (general_obj.marital_status == 'married'):

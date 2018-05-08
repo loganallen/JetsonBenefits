@@ -23,6 +23,7 @@ class QuotesContainer extends React.Component {
 		componentWillMount() {
 			if (isLoggedIn()) {
 				this.props.loadAllInsuranceQuotes(authToken());
+				this.props.loadAllInsuranceData(authToken());
 			} else {
 				this.props.generateInsuranceQuotes();
 			}
@@ -44,7 +45,7 @@ class QuotesContainer extends React.Component {
 					isMobile={this.props.isMobile}
 					updateUserData={this.props.updateUserData}
 					updateInsuranceData={this.props.updateInsuranceData}
-					saveInsuranceInfo={this.props.saveInsuranceInfo}
+					saveInsuranceData={this.props.saveInsuranceData}
 					loadInsuranceQuote={this.props.loadInsuranceQuote}
 					generateInsuranceQuotes={this.props.generateInsuranceQuotes}
 					onCoverageClick={this.onCoverageClick}
@@ -92,7 +93,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
 	updateInsuranceData: (type, key, value) => dispatch(Actions.updateInsuranceData(type, key, value)),
-	saveInsuranceInfo: (token) => dispatch(Actions.postInsuranceInfo(token)),
+	saveInsuranceData: (token) => dispatch(Actions.postInsuranceInfo(token)),
+	loadAllInsuranceData: (token) => dispatch(Actions.fetchAllInsuranceInfo(token)),
 	loadInsuranceQuote: (token, type) => dispatch(Actions.fetchInsuranceQuote(token, type)),
 	loadAllInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token)),
 	generateInsuranceQuotes: () => dispatch(Actions.generateInsuranceQuotes())

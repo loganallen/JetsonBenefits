@@ -28,7 +28,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		if (len(user_kids_age) < 1):
 			min_age = 0
 		else:
-			min_age = min(list(map(int, user_kids_age)))
+			min_age = min(list(map(asInt, user_kids_age)))
 		other_debts_balance  = asInt(life_insurance_dict.other_debts_balance)
 		existing_life_insurance = asInt(life_insurance_dict.existing_life_insurance)
 		num_kids = asInt(general_questions_dict.num_kids)
@@ -87,7 +87,7 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		critical_illness = 0.0
 		
 		fields = user_health_questions_answer._meta.get_fields()
-		health_insurance_dict = model_to_dict(health_insurance_obj)
+		health_insurance_dict = model_to_dict(health_insurance_obj) # TODO: Necessary???
 
 		denom_dict = health_insurance_totals(health_insurance_total)
 		print(denom_dict)
@@ -124,8 +124,8 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		if (critical_illness_ratio >= 0.33):
 			critical_illness = True
 
-		if (health_insurance_obj.q_5 is not None and health_insurance_dict.q_6 is not None and health_insurance_dict.q_7 is not None):
-			if (health_insurance_obj.q_5.option == 'No chance' and health_insurance_dict.q_6.option == 'Never or just for my annual physical' and health_insurance_dict.q_7.option == 'Drink some tea, it will pass'):
+		if (health_insurance_obj.q_5 is not None and health_insurance_obj.q_6 is not None and health_insurance_obj.q_7 is not None):
+			if (health_insurance_obj.q_5.option == 'No chance' and health_insurance_obj.q_6.option == 'Never or just for my annual physical' and health_insurance_obj.q_7.option == 'Drink some tea, it will pass'):
 				plan_type = 'HMO'
 
 		if (health_insurance_obj.q_2 is not None):
