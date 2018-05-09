@@ -35,6 +35,7 @@ class QuotesContainer extends React.Component {
 		}
 
     quoteItems = () => {
+			// TODO: Render nothing if the quote item is incomplete
 			let quotes = Object.keys(this.props.quotes).map(insuranceType => (
 				<QuoteItem
 					key={insuranceType}

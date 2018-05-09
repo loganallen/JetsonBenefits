@@ -26,6 +26,7 @@ class RefineQuoteItem extends React.Component {
     this.props.updateUserData(key, event.target.value);
   }
 
+  // TODO: Dynamically reload quote after a single element is refined
   onInsuranceDataInputChange = (key, event) => {
     // TODO: Validate inputs
     this.props.updateInsuranceData(this.state.insuranceType, key, event.target.value);

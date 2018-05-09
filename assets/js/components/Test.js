@@ -27,7 +27,6 @@ class Test extends React.Component {
   }
 
   render() {
-    console.log(this.props.insuranceQuotes);
     return (
       <div>
         <Menu history={this.props.history} />

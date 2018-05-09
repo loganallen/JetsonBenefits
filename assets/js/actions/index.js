@@ -313,6 +313,7 @@ const fetchAllInsuranceQuotes = () => (dispatch, getState) => {
             dispatch(updateInsuranceQuote(insuranceType, res.data[insuranceType]));
         });
     }).fail(err => {
+        // TODO: Handle failure due to incomplete user inputs
         console.log('fetchAllInsuranceQuote FAILURE', err);
     });
 }
@@ -342,6 +343,7 @@ const generateInsuranceQuotes = () => (dispatch, getState) => {
             dispatch(updateInsuranceQuote(insuranceType, res.data[insuranceType]));
         });
     }).fail(err => {
+        // TODO: Handle failure due to incomplete user inputs
         console.log('generateInsuranceQuotes FAILURE', err);
     });
 }
