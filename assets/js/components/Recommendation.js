@@ -15,7 +15,10 @@ import Sidebar from './sub_components/Sidebar';
 import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
+import Menu from './Menu';
 import { isMobile } from '../utils';
+import { isLoggedIn, authToken } from '../auth';
+
 import '../../css/recommendation.css';
 
 /**
@@ -33,7 +36,21 @@ class Recommendation extends React.Component {
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
-        // TODO: Remove this action and put menu inside Recommendation component
+        if (isLoggedIn()) {
+            this.props.loadUserData(authToken());
+        } else {
+            // Grab from localStorage to update redux store with cached data
+            // let userData = localStrorage.getItem("userData");
+            // if (userData) {
+            //   this.props.updateBulkUserData(JSON.parse(userData));
+            // }
+        }
+    }
+
+    componentWillUnmount() {
+        // if (!isLoggedIn()) {
+        //   localStorage.setItem(JSON.stringify(this.props.userData));
+        // }
     }
 
     onMobileNextClick = () => {
@@ -42,7 +59,17 @@ class Recommendation extends React.Component {
         });
     }
 
+    updateStage = (stage) => {
+        this.setState(
+            { stage: stage }
+        )
+    }
+
     onShowQuotesClick = () => {
+        if (isLoggedIn()) {
+            // Save userData to the backend
+            this.props.saveUserData(authToken(), this.props.userData);
+        }
         this.setState({
             stage: 'quotes'
         });
@@ -56,7 +83,9 @@ class Recommendation extends React.Component {
                     onNextClick={(this.state.isMobile) ? this.onMobileNextClick : this.onShowQuotesClick}
                     userData={this.props.userData}
                     updateUserData={this.props.updateUserData}
+                    updateBulkUserData={this.props.updateBulkUserData}
                     isMobile={this.state.isMobile}
+                    updateStage={this.updateStage}
                 />
             </div>
         );
@@ -68,6 +97,7 @@ class Recommendation extends React.Component {
             <Sidebar
                 isMobile={this.state.isMobile}
                 onNextClick={this.onShowQuotesClick}
+                updateStage={this.updateStage}
             />
         );
     }
@@ -78,6 +108,7 @@ class Recommendation extends React.Component {
                 userData={this.props.userData}
                 updateUserData={this.props.updateUserData}
                 isMobile={this.state.isMobile}
+                updateStage={this.updateStage}
             />
         );
     }
@@ -95,10 +126,13 @@ class Recommendation extends React.Component {
                     return this.questionsContent();
             }
         })(this.state.stage);
-
+        
         return (
-            <div id='rec'>
-                {renderedContent}
+            <div>
+                <Menu history={this.props.history} />
+                <div id='rec'>
+                    {renderedContent}
+                </div>
             </div>
         );
     }
@@ -111,7 +145,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
-    updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value))
+    updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
+    updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
+    saveUserData: (token, data) => dispatch(Actions.postUserInfo(token, data)),
+    loadUserData: (token) => dispatch(Actions.fetchUserInfo(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);

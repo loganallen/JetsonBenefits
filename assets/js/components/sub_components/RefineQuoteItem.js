@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Button, Dropdown, Checkbox } from 'semantic-ui-react';
+import { MaritalStatus, InsuranceTypes } from '../../utils';
 
 class RefineQuoteItem extends React.Component {
   constructor(props) {
@@ -10,34 +11,33 @@ class RefineQuoteItem extends React.Component {
   }
 
   onInputChange = (key, event) => {
-      // TODO: Validate inputs
-      this.props.updateUserData(key, event.target.value);
-    }
+    // TODO: Validate inputs
+    this.props.updateUserData(key, event.target.value);
+  }
 
   onKidAgeChange = (idx, event) => {
-      let age = event.target.value;
-      this.props.updateUserData('kidAges', { idx: idx, age: age });
-    }
+    let age = event.target.value;
+    this.props.updateUserData('kid_ages', { idx: idx, age: age });
+  }
 
   onDropdownChange = (value, id) => {
-    console.log(id);
-    console.log(this.props.userData[`dropdown${id}`]);
     this.props.updateUserData(`dropdown${id}`, value);
   }
 
-  createDropdown = (answers, id) => (
+  createDropdown = (options, id) => (
     <Dropdown
       selection
       id={`dropdown${id}`}
-      placeholder={`${answers[0].text}`}
-      className={'questionDropdown'}
+      placeholder={options[0].text}
+      className='questionDropdown'
       key={`dropdown${id}`}
-      options={answers}
+      options={options}
       value={this.props.userData[`dropdown${id}`]}
       onChange={(_, option) => this.onDropdownChange(option.value, id)}
     />
   );
 
+  // TODO: Styling for mobile needs fixing
   generateChildRows = (kidAges) => {
     return kidAges.map((age, idx) => {
       return (
@@ -162,7 +162,7 @@ class RefineQuoteItem extends React.Component {
       <p className='refine-title'>Great! We just need a litle more information from you</p>
       <div className='grid-wrapper'>
       {
-        (this.props.userData.marriageStatus == 'married' || (this.props.userData.kidAges).length > 0)
+        (this.props.userData.marital_status === MaritalStatus.married || (this.props.userData.kid_ages).length > 0)
         && <Grid columns={4}>
         <Grid.Row>
           <Grid.Column>
@@ -179,7 +179,7 @@ class RefineQuoteItem extends React.Component {
           <p>Will you pay for college</p>
           </Grid.Column>
         </Grid.Row>
-        {this.props.userData.marriageStatus == 'married' && <Grid.Row>
+        {this.props.userData.marital_status === MaritalStatus.married && <Grid.Row>
           <Grid.Column>
           Spouse
           </Grid.Column>
@@ -196,15 +196,15 @@ class RefineQuoteItem extends React.Component {
           <Grid.Column>
           <input
             type='text'
-            id='spouseAge'
+            id='spouse_age'
             className='refine-input-grid'
-            onChange={(e) => this.onInputChange('spouseAge', e)}
-            value={this.props.userData.spouseAge}
+            onChange={(e) => this.onInputChange('spouse_age', e)}
+            value={this.props.userData.spouse_ge}
             placeholder=''
           />
           </Grid.Column>
         </Grid.Row>}
-        {this.generateChildRows(this.props.userData.kidAges)}
+        {this.generateChildRows(this.props.userData.kid_ages)}
       </Grid>}
       </div>
       <div className='refine-question'>
@@ -274,11 +274,21 @@ class RefineQuoteItem extends React.Component {
   }
 
   render() {
+    let content = (type => {
+      switch(type) {
+        case InsuranceTypes.HEALTH:
+          return this.healthQuestions();
+        case InsuranceTypes.LIFE:
+          return this.lifeQuestions();
+        case InsuranceTypes.DISABILITY:
+          return this.disabilityQuestions();
+        default:
+          return;
+      }
+    })(this.state.insuranceType);
+
     return (
-      <div>
-      {this.state.insuranceType == 'HEALTH' && this.healthQuestions()}
-      {this.state.insuranceType == 'LIFE' && this.lifeQuestions()}
-      </div>
+      <div>{content}</div>
     );
   }
 }

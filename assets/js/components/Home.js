@@ -12,8 +12,9 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 
+import Menu from './Menu';
 import Actions from '../actions';
-import { authToken } from '../auth';
+import { isLoggedIn, authToken } from '../auth';
 import { isMobile } from '../utils';
 
 import '../../css/home.css';
@@ -28,10 +29,25 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
+    if (isLoggedIn()) {
+      this.props.loadUserInfo(authToken());
+    } else {
+      // Grab from localStorage to update redux store with cached data
+      // let userData = localStrorage.getItem("userData");
+      // if (userData) {
+      //   this.props.updateBulkUserData(JSON.parse(userData));
+      // }
+    }
+  }
+
+  componentWillUnmount() {
+    // if (!isLoggedIn()) {
+    //   localStorage.setItem(JSON.stringify(this.props.userData));
+    // }
   }
 
   onInputChange = (id, event) => {
-    let value = parseInt(event.target.value);
+    let value = event.target.value;
 
     // TODO: Validate user input
     if (id == 'age') {
@@ -118,9 +134,11 @@ class Home extends React.Component {
             <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
               FIND MY BENEFITS
             </button><br/>
-            <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
-              or Sign Up
+            {!isLoggedIn() && (
+              <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
+                or Sign Up
             </button>
+            )}
           </div>
         </div>
       );
@@ -149,6 +167,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+        <Menu history={this.props.history} />
         {this.section1()}
         {this.section2()}
         {this.section3()}
@@ -168,7 +187,8 @@ const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
   updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
-  postUserInfo: (token, data) => dispatch(Actions.postUserInfo(token, data))
+  updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
+  loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

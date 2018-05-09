@@ -1,5 +1,6 @@
 import ActionTypes from '../actions/actionTypes';
 import { isLoggedIn } from '../auth';
+import { InsuranceTypes, MaritalStatus } from '../utils';
 
 const initialState = {
   menuTheme: "themeWhite",
@@ -11,12 +12,63 @@ const initialState = {
   userData: {
     age: '',
     zipcode: '',
-    maritalStatus: '',
-    spouseAge: '',
-    numKids: '',
-    kidAges: [],
-    income: '',
-    healthCondition: ''
+    gender: '',
+    marital_status: '',
+    spouse_age: '',
+    spouse_annual_income: '',
+    num_kids: '',
+    kid_ages: [],
+    annual_income: '',
+    health_condition: ''
+  },
+  insuranceData: {
+    [InsuranceTypes.HEALTH]: {
+      q_1: '',
+      q_2: '',
+      q_5: '',
+      q_6: '',
+      q_7: '',
+      q_8: '',
+      q_9: '',
+      q_10: '',
+      q_11: '',
+      q_12: ''
+    },
+    [InsuranceTypes.LIFE]: {
+      mortgage_balance: '',
+      other_debts_balance: '',
+      existing_life_insurance: '',
+      balance_investings_savings: '',
+    },
+    [InsuranceTypes.DISABILITY]: {}
+  },
+  insuranceQuotes: {
+    [InsuranceTypes.HEALTH]: {
+      carrier: '',
+      deductible: '',
+      deductible_level: '',
+      has_spouse: '',
+      health_plan_id: '',
+      medal: '',
+      monthly_premium: '',
+      num_kids: '',
+      plan_name: '',
+      plan_type: ''
+    },
+    [InsuranceTypes.LIFE]: {
+      age: '',
+      carrier: '',
+      gender: '',
+      life_plan_id: '',
+      monthly: '',
+      policy_amount: '',
+      policy_term: ''
+    },
+    [InsuranceTypes.DISABILITY]: {
+      benefit_amount: '',
+      duration: '',
+      monthly: ''
+    }
   },
   loginModal: {
     isOpen: false,
@@ -41,31 +93,63 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         loginModal: action.data
       };
-    case ActionTypes.UPDATE_USER_DATA:
-      var updatedValue = action.data.value;
-      if (action.data.key === 'kidAges') {
-        // TODO: This yields warning but not sure why
-        updatedValue = [ ...state.userData.kidAges ];
-        updatedValue[action.data.value.idx] = action.data.value.age;
-      }
-      return {
-        ...state,
-        userData: {
-          ...state.userData,
-          [action.data.key]: updatedValue
-        }
-      };
-    case ActionTypes.UPDATE_BULK_USER_DATA:
+    case ActionTypes.UPDATE_USER_DATA: {
       let updatedUserData = { ...state.userData };
-      // TODO: Walk through action.data and update each key/value pair
+      let updatedValue = action.data.value;
+      if (action.data.key === 'num_kids' && action.data.value == 0) {
+        // Clear kid_ages since no kids
+        updatedUserData['kid_ages'] = [];
+      }
+      else if (action.data.key === 'kid_ages') {
+        let ages = [ ...state.userData.kid_ages ];
+        ages[action.data.value.idx] = action.data.value.age;
+        updatedValue = ages;
+      }
+      else if (action.data.key === 'marital_status' && action.data.value !== MaritalStatus.married) {
+        // Clear spouse data since not married
+        updatedUserData['spouse_age'] = '';
+        updatedUserData['spouse_annual_income'] = '';
+      }
+      updatedUserData[action.data.key] = updatedValue;
       return {
         ...state,
         userData: updatedUserData
       };
+    }
+    case ActionTypes.UPDATE_BULK_USER_DATA: {
+      let updatedUserData = { ...state.userData };
+      Object.keys(action.data).forEach(key => {
+        if (Object.keys(state.userData).includes(key)) { 
+          updatedUserData[key] = action.data[key];
+        }
+      });
+      // console.log('Update bulk', updatedUserData);
+      return {
+        ...state,
+        userData: updatedUserData
+      };
+    }
     case ActionTypes.UPDATE_USER_AUTH:
       return {
         ...state,
         user: action.data
+      }
+    case ActionTypes.UPDATE_INSURANCE_QUOTE: {
+      let insuranceType = action.data.type;
+      return {
+        ...state,
+        insuranceQuotes: {
+          ...state.insuranceQuotes,
+          [insuranceType]: action.data.quote
+        }
+      }
+    }
+    case ActionTypes.CLEAR_ALL_USER_INFO:
+      return {
+        ...state,
+        userData: initialState.userData,
+        insuranceData: initialState.insuranceData,
+        insuranceQuotes: initialState.insuranceQuotes
       }
     default:
       return state;

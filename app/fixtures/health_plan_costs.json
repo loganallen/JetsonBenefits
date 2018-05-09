@@ -1,0 +1,1486 @@
+[
+    {
+        "model": "app.health_plan_costs",
+        "pk":2,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 6650",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":319.31,
+            "deductible":6650,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":3,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Bronze 209",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":320.44,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":4,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Bronze HMO 205",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":379.31,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":5,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 4 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":385.33,
+            "deductible":7050,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":6,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 201",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":392.2,
+            "deductible":5500,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":7,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Silver 210",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":392.93,
+            "deductible":3750,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":8,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":397.24,
+            "deductible":6500,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":9,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 4000",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":402.16,
+            "deductible":4000,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":10,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":403.2,
+            "deductible":5500,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":11,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":416.66,
+            "deductible":6500,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":12,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":416.71,
+            "deductible":3000,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":13,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":422.91,
+            "deductible":5500,
+            "deductible_level":"High",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":14,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 202",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":431.3,
+            "deductible":2850,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":15,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 3400",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":435.02,
+            "deductible":3400,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":16,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":437.08,
+            "deductible":3000,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":17,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 12 Standardized (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":446.9,
+            "deductible":3500,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":18,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"BlueCare Direct Silver 212 with Advocate",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":462.31,
+            "deductible":2250,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":19,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Gold 211",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":466.61,
+            "deductible":500,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":20,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Silver HMO 206",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":486.64,
+            "deductible":2250,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":21,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Secure Care 1 (2018) With 3 Free PCP Visits: IlliniCare Health Network",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":501.32,
+            "deductible":1000,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":22,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 1400",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":506.02,
+            "deductible":1400,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":23,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Gold HMO 207",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":515.13,
+            "deductible":500,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":24,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Silver PPO 203",
+            "medal":"Silver", 
+            "plan_type":"PPO",
+            "monthly_premium":528.39,
+            "deductible":1450,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":25,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Gold PPO 204",
+            "medal":"Gold", 
+            "plan_type":"PPO",
+            "monthly_premium":553.89,
+            "deductible":740,
+            "deductible_level":"Low",
+            "has_spouse":0,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":26,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 7150",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":473.92,
+            "deductible":14300,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":27,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 6650",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":519.2,
+            "deductible":13300,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":28,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Bronze 209",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":521.04,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":29,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Bronze HMO 205",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":616.77,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":30,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 4 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":626.55,
+            "deductible":14100,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":31,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 201",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":637.71,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":32,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Silver 210",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":638.92,
+            "deductible":11250,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":33,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":645.92,
+            "deductible":13000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":34,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 4000",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":653.92,
+            "deductible":8000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":35,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":655.61,
+            "deductible":11000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":36,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":677.5,
+            "deductible":13000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":37,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":677.58,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":38,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":687.66,
+            "deductible":11000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":39,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 202",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":701.3,
+            "deductible":8550,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":40,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 3400",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":707.35,
+            "deductible":6800,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":41,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":710.7,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":42,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 12 Standardized (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":726.67,
+            "deductible":7000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":43,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"BlueCare Direct Silver 212 with Advocate",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":751.72,
+            "deductible":6750,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":44,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Gold 211",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":758.72,
+            "deductible":1500,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":45,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Silver HMO 206",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":791.29,
+            "deductible":6750,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":46,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Secure Care 1 (2018) With 3 Free PCP Visits: IlliniCare Health Network",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":815.16,
+            "deductible":2000,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":47,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 1400",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":822.8,
+            "deductible":2800,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":48,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Gold HMO 207",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":837.61,
+            "deductible":1500,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":49,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Silver PPO 203",
+            "medal":"Silver", 
+            "plan_type":"PPO",
+            "monthly_premium":859.17,
+            "deductible":4350,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":50,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Gold PPO 204",
+            "medal":"Gold", 
+            "plan_type":"PPO",
+            "monthly_premium":900.64,
+            "deductible":2250,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":0
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":51,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 7150",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":765.38,
+            "deductible":14300,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":52,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 6650",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":838.51,
+            "deductible":13300,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":53,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Bronze 209",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":841.48,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":54,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Bronze HMO 205",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":996.08,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":55,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 4 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1011.88,
+            "deductible":14100,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":56,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 201",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":1029.93,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":57,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Silver 210",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1031.85,
+            "deductible":11250,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":58,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1043.16,
+            "deductible":13000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":59,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 4000",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1056.08,
+            "deductible":8000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":60,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1058.81,
+            "deductible":11000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":61,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1094.16,
+            "deductible":13000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":62,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1094.29,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":63,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1110.57,
+            "deductible":11000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":64,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 202",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":1132.6,
+            "deductible":8550,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":65,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 3400",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1142.37,
+            "deductible":6800,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":66,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1147.78,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":67,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 12 Standardized (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1173.57,
+            "deductible":7000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":68,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"BlueCare Direct Silver 212 with Advocate",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1214.03,
+            "deductible":6750,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":69,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Gold 211",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1225.33,
+            "deductible":1500,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":70,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Silver HMO 206",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1277.93,
+            "deductible":6750,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":71,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Secure Care 1 (2018) With 3 Free PCP Visits: IlliniCare Health Network",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1316.48,
+            "deductible":2000,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":72,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 1400",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1328.82,
+            "deductible":2800,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":73,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Gold HMO 207",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1352.74,
+            "deductible":1500,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":74,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Silver PPO 203",
+            "medal":"Silver", 
+            "plan_type":"PPO",
+            "monthly_premium":1387.56,
+            "deductible":4350,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":75,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Gold PPO 204",
+            "medal":"Gold", 
+            "plan_type":"PPO",
+            "monthly_premium":1454.53,
+            "deductible":2250,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":1
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":76,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 7150",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":947.84,
+            "deductible":14300,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":77,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 6650",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":1038.4,
+            "deductible":13300,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":78,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Bronze 209",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":1042.08,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":79,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Bronze HMO 205",
+            "medal":"Bronze", 
+            "plan_type":"HMO",
+            "monthly_premium":1233.54,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":80,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 4 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1253.1,
+            "deductible":14100,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":81,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 201",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":1275.46,
+            "deductible":14700,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":82,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Silver 210",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1277.84,
+            "deductible":11250,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":83,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1291.84,
+            "deductible":13000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":84,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 4000",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1307.84,
+            "deductible":8000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":85,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1311.22,
+            "deductible":11000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":86,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 2 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1355,
+            "deductible":13000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":87,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1355.16,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":88,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 1 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1375.32,
+            "deductible":11000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":89,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Bronze PPO 202",
+            "medal":"Bronze", 
+            "plan_type":"PPO",
+            "monthly_premium":1402.6,
+            "deductible":8550,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":90,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 3400",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1414.7,
+            "deductible":6800,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":91,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 3 (2018) + Vision + Adult Dental: IlliniCare Health Netowrk",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1421.4,
+            "deductible":6000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":92,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Balanced Care 12 Standardized (2018): IlliniCare Health Network",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1453.34,
+            "deductible":7000,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":93,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"BlueCare Direct Silver 212 with Advocate",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1503.44,
+            "deductible":6750,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":94,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue FocusCare Gold 211",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1517.44,
+            "deductible":1500,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":95,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Silver HMO 206",
+            "medal":"Silver", 
+            "plan_type":"HMO",
+            "monthly_premium":1582.58,
+            "deductible":6750,
+            "deductible_level":"High",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":96,
+        "fields":{
+            "carrier":"Ambetter Insured by Celtic", 
+            "plan_name":"Ambetter Secure Care 1 (2018) With 3 Free PCP Visits: IlliniCare Health Network",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1630.32,
+            "deductible":2000,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":97,
+        "fields":{
+            "carrier":"Cigna Healthcare", 
+            "plan_name":"Cigna Connect 1400",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1645.6,
+            "deductible":2800,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":98,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Precision Gold HMO 207",
+            "medal":"Gold", 
+            "plan_type":"HMO",
+            "monthly_premium":1675.22,
+            "deductible":1500,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":99,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Silver PPO 203",
+            "medal":"Silver", 
+            "plan_type":"PPO",
+            "monthly_premium":1718.34,
+            "deductible":4350,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    },
+    {
+        "model": "app.health_plan_costs",
+        "pk":100,
+        "fields":{
+            "carrier":"Blue Cross and Blue Shield of Illinois", 
+            "plan_name":"Blue Choice Preferred Gold PPO 204",
+            "medal":"Gold", 
+            "plan_type":"PPO",
+            "monthly_premium":1801.28,
+            "deductible":2250,
+            "deductible_level":"Low",
+            "has_spouse":1,
+            "num_kids":2
+        }
+    }]
