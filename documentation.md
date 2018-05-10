@@ -41,6 +41,10 @@
   We are using [PIP](https://pypi.org/project/pip/) to manage our back-end dependencies.  A list of all of our dependencies can be found in `requirements.txt` in the root directory.  To easily install all of the required dependencies, use the command `pip install -r requirements.txt`.
 
   #### Database
+  
+  To connect the application to the Oracle MYSQL database the settings.py has the connection details. All the details have to be consistent from the mysql database and django application side. Refer [here](https://docs.djangoproject.com/en/2.0/ref/databases/) for in detail steps for the connection.
+  
+  The database tables are written in the file `app/models.py`. Each table is represented as a class where the columns are represented as attributes. This is easily extensible when new columns have to be added. The database is populted from the files which are present in `app/fixtures`. These are `.json` files which have the data from the tables.   
 
   #### How it Works
   Our back-end Django application can be separated out into three parts: configuration, file serving, and API.
