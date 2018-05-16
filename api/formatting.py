@@ -31,7 +31,11 @@ def num_to_usd(num):
     : param num: the number to convert
     : return --> correctly formatted usd string
   """
-  return '$' + num_to_decimal(num, 2)
+  temp = num_to_decimal(num, 2)
+  if temp[-2] + temp[-1] == '00':
+    return '$' + temp[:-3]
+  else:
+    return '$' + temp
 
 def abbrev_num(num):
   """
@@ -55,15 +59,15 @@ def abbrev_num(num):
   """
   # only abbreviate numbers greater than 100K
   if num < HUNDRED_THOUSAND:
-    return num_to_string(num)
+    return num_to_usd(num)
 
   # numbers between 100K and 1M
   if num < ONE_MILLION:
     # cast to float 
     dec = float(num) / THOUSAND
     rep = num_to_decimal(dec, 1)
-    if rep[1] == '0':
-      return rep[:-2]
+    if rep[-1] == '0':
+      return rep[:-2] + 'K'
     else:
       return num_to_decimal(dec, 1) + 'K'
   
@@ -71,7 +75,7 @@ def abbrev_num(num):
   if num < TEN_MILLION:
     dec = float(num) / ONE_MILLION
     rep = num_to_decimal(dec, 1)
-    if rep[1] == '0':
+    if rep[-1] == '0':
       return rep[:-2]
     else:
       return num_to_decimal(dec, 1) + 'M'
@@ -85,4 +89,7 @@ def abbrev_num_to_usd(num):
     : param num: the number to convert
     : return --> correctly formatted usd string
   """
-  return '$' + abbrev_num(num)
+  if num < HUNDRED_THOUSAND:
+    return abbrev_num(num)
+  else:
+    return '$' + abbrev_num(num)

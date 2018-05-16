@@ -28,7 +28,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		if (len(user_kids_age) < 1):
 			min_age = 0
 		else:
-			min_age = min(list(map(int, user_kids_age)))
+			min_age = min(list(map(asInt, user_kids_age)))
 		other_debts_balance  = asInt(life_insurance_dict.other_debts_balance)
 		existing_life_insurance = asInt(life_insurance_dict.existing_life_insurance)
 		num_kids = asInt(general_questions_dict.num_kids)
@@ -87,7 +87,7 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		critical_illness = 0.0
 		
 		fields = user_health_questions_answer._meta.get_fields()
-		health_insurance_dict = model_to_dict(health_insurance_obj)
+		health_insurance_dict = model_to_dict(health_insurance_obj) # TODO: Necessary???
 
 		denom_dict = health_insurance_totals(health_insurance_total)
 		print(denom_dict)
