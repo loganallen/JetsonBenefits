@@ -168,7 +168,6 @@ def updateUserInfo(request):
     res = { 'success': False, 'error': '' }
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
-        user_id = user.id
         userData = json.loads(request.POST['userData'])
         userData['user_id'] = user
         kid_ages = userData['kid_ages']
@@ -187,7 +186,7 @@ def updateUserInfo(request):
         user_kids.objects.filter(user_id=user).delete()
         i = 0
         while(i<len(kid_ages)):
-            age = user_kids(user_id = user, kid_age = asInt(kid_ages[i]), will_pay_for_college = 'yes')
+            age = user_kids(user_id=user, kid_age = asInt(kid_ages[i]), will_pay_for_college = 'yes')
             age.save()
             i = i+1
 
@@ -215,7 +214,6 @@ def getUserInfo(request):
                 num_kids:, 
                 spouse_age:,
                 spouse_annual_income:,
-                user_id_id:
                 zipcode:
             }
     """
@@ -230,9 +228,8 @@ def getUserInfo(request):
         if len(user_answers)>=1:
             userData = user_answers[0]
 
-
-        if (user_kids.objects.filter(user_id = user).exists()):
-            user_kids_ages = list(user_kids.objects.values_list('kid_age', flat = True).filter(user_id = user))
+        if (user_kids.objects.filter(user_id=user).exists()):
+            user_kids_ages = list(user_kids.objects.values_list('kid_age', flat = True).filter(user_id=user))
             userData['kid_ages'] = user_kids_ages
         else:
             userData['kid_ages'] = []
@@ -292,24 +289,21 @@ def updateInsuranceInfo(request):
 
     if (validateRequest(request, requiredKeys, 'POST', res)):
         user = request.user
-        user_id = user
         insuranceType = request.POST['insuranceType']
         insuranceData = json.loads(request.POST['insuranceData'])
 
         print(insuranceData)
 
-
         if (insuranceType == 'HEALTH'):
-            healthRecord = user_health_questions_answer(user_id = user)
+            healthRecord = user_health_questions_answer(user_id=user)
             
             health_dict = {}
             for key in insuranceData:
                 if insuranceData[key] == '':
                     continue
-                else:
-                    num = int(key[key.find('_')+1:]) #get id number
-                    q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
-                    health_dict[key] = q
+                num = int(key[key.find('_')+1:]) #get id number
+                q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
+                health_dict[key] = q
 
             for attr, value in health_dict.items():
                 setattr(healthRecord, attr, value)
@@ -317,14 +311,17 @@ def updateInsuranceInfo(request):
 
         elif (insuranceType == 'LIFE'):
 
-            lifeRecord = user_life_answers(user_id = user)
-            for key in insuranceData:
-                setattr(lifeRecord, key, val)
-                lifeRecord.save()
+            lifeRecord = user_life_answers(user_id=user)
+            for attr, val in insuranceData.items():
+                if val == '':
+                    continue
+                setattr(lifeRecord, attr, val)
+            lifeRecord.save()
 
         elif (insuranceType == 'DISABILITY'):
-            #disability data already stored
-            a = 1
+            # DO NOTHING -- disability data already stored
+            ### TODO: Is this correct???
+            pass
 
         res['success'] = True
     
@@ -381,7 +378,6 @@ def getInsuranceInfo(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        user_id = user
         insuranceType = request.GET['insuranceType']
         
         if (insuranceType == 'HEALTH' or insuranceType == 'LIFE' or insuranceType == 'DISABILITY'):
@@ -434,9 +430,6 @@ def getAllInsuranceInfo(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-        health_info = {}
-        life_info = {}
-        disability_info = {}
 
         health_info = getInsuranceInfoHelper(user, 'HEALTH')
         life_info = getInsuranceInfoHelper(user, 'LIFE')
@@ -496,14 +489,12 @@ def getInsuranceQuote(request):
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
-
         insurance_type = request.GET['insuranceType']
-        if (insurance_type == 'HEALTH' or insurance_type == 'LIFE' or insurance_type == 'DISABILITY'):
 
+        if (insurance_type == 'HEALTH' or insurance_type == 'LIFE' or insurance_type == 'DISABILITY'):
             data = getQuoteHelper(user, insurance_type)
             res['data'] = data
             res['success'] = True
-
         else:
             res['error'] = 'invalid insurance type'
     
@@ -657,7 +648,6 @@ def generateInsuranceQuotes(request):
             general_post['user_id'] = User()
             
             user_kids_ages = general_post['kid_ages']
-            print(user_kids_ages)
             del general_post['kid_ages']
 
             # general_post['health_condition'] = general_post['health_condition']
@@ -737,6 +727,7 @@ def getQuoteHelper(user, insurance_type):
     :param 
         insurance_type 'HEALTH', 'LIFE' or 'DISABILITY'
         user is User instance 
+
     :return dictionary data
         data = {
             carrier:,
@@ -781,28 +772,23 @@ def getQuoteHelper(user, insurance_type):
 
     data = {}
 
-    if (user_general_answers.objects.filter(user_id = user).exists()):
-        gen_answers = user_general_answers.objects.get(user_id = user)
-        if (gen_answers.marital_status == 'married'):
-            is_married= True
-        if (gen_answers.num_kids>2):
-           num_kids = 2
-        
-    if (user_health_questions_answer.objects.filter(user_id = user).exists()):
-        health_info = user_health_questions_answer.objects.get(user_id = user)
-        
-    if (user_life_answers.objects.filter(user_id = user).exists()):
-        life_info = user_life_answers.objects.filter(user_id = user.id)[0]
-        
     if (user_general_answers.objects.filter(user_id=user).exists()):
+        gen_answers = user_general_answers.objects.get(user_id=user)
+        is_married = (gen_answers.marital_status == 'married')
+        num_kids = min(gen_answers.num_kids, 2)
         disability_info = user_general_answers.objects.filter(user_id=user.id).values('annual_income')[0]
         age = str(min([25, 35], key=lambda x:abs(x-gen_answers.age)))
+        
+    if (user_health_questions_answer.objects.filter(user_id=user).exists()):
+        health_info = user_health_questions_answer.objects.get(user_id=user)
+        
+    if (user_life_answers.objects.filter(user_id=user).exists()):
+        life_info = user_life_answers.objects.filter(user_id=user.id)[0]    
 
-    if (user_kids.objects.filter(user_id = user).exists()):
-        user_kids_age = list(user_kids.objects.values_list('kid_age', flat = True).filter(user_id = user))
+    if (user_kids.objects.filter(user_id=user).exists()):
+        user_kids_age = list(user_kids.objects.values_list('kid_age', flat = True).filter(user_id=user))
 
     if (insurance_type == 'HEALTH'):
-        # get data
         health_totals = health_questions.objects.all()
         plan_type, deductible, critical_illness = health_insurance(health_totals, health_info)
         num_kids = min(num_kids, 2)
@@ -816,15 +802,12 @@ def getQuoteHelper(user, insurance_type):
             data['deductible'] = num_to_usd(data['deductible'])
         
     elif (insurance_type == 'LIFE'):
-            # get data
         need_insurance, coverage_amount, term = life_insurance(life_info, gen_answers, user_kids_age)
-
-        gender = 'male'
+        gender = 'male' # Default gender if not present
             
         if (gen_answers is not None):
-            gender = gen_answers.gender
-            if gender is 'none' or gender is None:
-                gender = 'male'
+            if gender is not 'none' and gender is not None:
+                gender = gen_answers.gender
             
         if (life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age).exists()):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
@@ -832,7 +815,8 @@ def getQuoteHelper(user, insurance_type):
             user_rec.save()
             data = model_to_dict(life_quote)
             data['policy_amount'] = abbrev_num_to_usd(data['policy_amount'])
-        else: #return default value since no match found
+        else:
+            # Return default quote since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = gen_answers, user_kids_age = user_kids_age) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0]
             user_rec = user_recommendation(user_id=user, life_plan_id = life_quote)
@@ -841,9 +825,7 @@ def getQuoteHelper(user, insurance_type):
             data['policy_amount'] = abbrev_num_to_usd(data['policy_amount'])
 
     elif (insurance_type == 'DISABILITY'):
-            # get data
         benefit_amount_d, duration_d, monthly_d = disability_rec(gen_answers)
-
         disability_quote = {'benefit_amount': abbrev_num_to_usd(benefit_amount_d), 'duration': duration_d, 'monthly': num_to_usd(monthly_d)}
 
         # TODO: What to do with disability quotes
@@ -855,13 +837,12 @@ def getQuoteHelper(user, insurance_type):
     
     return data    
 
-def getInsuranceInfoHelper(user, insuranceType):
 
+def getInsuranceInfoHelper(user, insuranceType):
     data = {}
+
     if (insuranceType == 'HEALTH'):
         answers_to_options = user_health_questions_answer.objects.get(user_id=user)
-        data = {}
-
         if (answers_to_options is not None):
             fields = user_health_questions_answer._meta.get_fields()
             for field in fields:
@@ -873,12 +854,13 @@ def getInsuranceInfoHelper(user, insuranceType):
 
     elif (insuranceType == 'LIFE'):
         data = list(user_life_answers.objects.filter(user_id=user).values())
-        if len(data)>0:
+        if len(data) > 0:
             data = data[0]
     
     elif (insuranceType == 'DISABILITY'):
         data = list(user_general_answers.objects.filter(user_id=user).values('annual_income'))
-        if len(data)>0:
+        if len(data) > 0:
             data = data[0]
 
+    data.pop('user_id_id', None)
     return data

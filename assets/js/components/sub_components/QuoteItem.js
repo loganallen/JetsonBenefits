@@ -9,7 +9,7 @@ import { Icon } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import RefineQuoteItem from './RefineQuoteItem';
-import { isLoggedIn, authToken } from '../../auth';
+import { isAuthenticated } from '../../auth';
 import { InsuranceTypes } from '../../utils';
 
 /**
@@ -48,10 +48,10 @@ class QuoteItem extends React.Component {
   );
 
   onUpdateQuoteClicked = () => {
-    if (isLoggedIn()) {
+    if (isAuthenticated()) {
       // Save insurance info and load new insurance quotes
-      this.props.saveInsuranceData(authToken(), this.props.insuranceType);
-      this.props.loadInsuranceQuote(authToken(), this.props.insuranceType);
+      this.props.saveInsuranceData(this.props.insuranceType);
+      this.props.loadInsuranceQuote(this.props.insuranceType);
     } else {
       this.props.generateInsuranceQuotes();
     }

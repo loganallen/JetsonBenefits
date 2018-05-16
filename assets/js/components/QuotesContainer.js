@@ -11,7 +11,7 @@ import { Breadcrumb } from 'semantic-ui-react';
 
 import QuoteItem from './sub_components/QuoteItem';
 import Actions from '../actions';
-import { isLoggedIn, authToken } from '../auth';
+import { isAuthenticated } from '../auth';
 
 import '../../css/quotes.css';
 
@@ -21,9 +21,9 @@ class QuotesContainer extends React.Component {
 		}
 		
 		componentWillMount() {
-			if (isLoggedIn()) {
-				this.props.loadAllInsuranceQuotes(authToken());
-				this.props.loadAllInsuranceData(authToken());
+			if (isAuthenticated()) {
+				this.props.loadAllInsuranceQuotes();
+				this.props.loadAllInsuranceData();
 			} else {
 				this.props.generateInsuranceQuotes();
 			}
@@ -35,6 +35,7 @@ class QuotesContainer extends React.Component {
 		}
 
     quoteItems = () => {
+			// TODO: Render nothing if the quote item is incomplete
 			let quotes = Object.keys(this.props.quotes).map(insuranceType => (
 				<QuoteItem
 					key={insuranceType}
@@ -93,10 +94,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
 	updateInsuranceData: (type, key, value) => dispatch(Actions.updateInsuranceData(type, key, value)),
-	saveInsuranceData: (token, insuranceType) => dispatch(Actions.postInsuranceInfo(token, insuranceType)),
-	loadAllInsuranceData: (token) => dispatch(Actions.fetchAllInsuranceInfo(token)),
-	loadInsuranceQuote: (token, type) => dispatch(Actions.fetchInsuranceQuote(token, type)),
-	loadAllInsuranceQuotes: (token) => dispatch(Actions.fetchAllInsuranceQuotes(token)),
+	saveInsuranceData: (insuranceType) => dispatch(Actions.postInsuranceInfo(insuranceType)),
+	loadAllInsuranceData: () => dispatch(Actions.fetchAllInsuranceInfo()),
+	loadInsuranceQuote: (insuranceType) => dispatch(Actions.fetchInsuranceQuote(insuranceType)),
+	loadAllInsuranceQuotes: () => dispatch(Actions.fetchAllInsuranceQuotes()),
 	generateInsuranceQuotes: () => dispatch(Actions.generateInsuranceQuotes())
 });
 

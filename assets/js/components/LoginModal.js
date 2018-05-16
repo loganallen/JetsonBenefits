@@ -17,7 +17,7 @@ import { isMobile } from '../utils';
 
 import '../../css/login.css';
 
-class Login extends React.Component {
+class LoginModal extends React.Component {
   
   constructor(props) {
     super(props);
@@ -33,8 +33,12 @@ class Login extends React.Component {
   }
 
   onLoginClick = () => {
-  if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
-      this.props.onLogin(this.state.loginEmail, this.state.loginPassword);
+    let callback = (success) => {
+      // Route to recommendation page upon login
+      if (success) { this.props.history.push('/recommendation'); }
+    }
+    if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
+      this.props.onLogin(this.state.loginEmail, this.state.loginPassword, callback);
     }
   }
 
@@ -63,7 +67,7 @@ class Login extends React.Component {
   }
 
   desktopRender = () => {
-    const header = this.props.isLogin ? (
+    const header = this.props.isTypeLogin ? (
       <div className="loginHeaderWrapper">
         <h1 className="loginHeader">Sign In</h1>
       </div>
@@ -74,7 +78,7 @@ class Login extends React.Component {
       </div>
     );
 
-    const content = this.props.isLogin ? (
+    const content = this.props.isTypeLogin ? (
       <div>
         <input 
           name="loginEmail"
@@ -166,7 +170,7 @@ class Login extends React.Component {
   };
 
   mobileRender = () => {
-    const content = this.props.isLogin ? (
+    const content = this.props.isTypeLogin ? (
       <div>
         <input 
           name="loginEmail"
@@ -259,14 +263,13 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
   deviceWidth: state.app.deviceWidth
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
-  onLogin: (username, password) => dispatch(Actions.loginUser(username, password)),
+  updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
+  onLogin: (username, password, cb) => dispatch(Actions.loginUser(username, password, cb)),
   onSignup: (userData) => dispatch(Actions.signupUser(userData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

@@ -64,10 +64,10 @@ const logout = function logout() {
 };
 
 /**
- * isLoggedIn: returns true if logged in, false otherwise
+ * isAuthenticated: returns true if logged in, false otherwise
  * @return {Boolean}
  */
-const isLoggedIn = function isLoggedIn() {
+const isAuthenticated = function isAuthenticated() {
     return !!sessionStorage.token;
 };
 
@@ -108,7 +108,7 @@ const getToken = function getToken(username, password, callback) {
 module.exports = {
     login,
     logout,
-    isLoggedIn,
+    isAuthenticated,
     signup,
     authToken,
     getToken
