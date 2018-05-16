@@ -1,11 +1,8 @@
-/*
-The [Navigation] component is a header bar that gives the user buttons which link
-to the [How It Works], [Blog], [Resources], and [Login] components. Contained within
-both the [Home] and [Recommendation] components.
-
-Model filepath:
-Controller filepath:
-*/
+/**
+ * Menu.js: The navigation menu component that reroutes to other components. This component
+ * is rendered within each of the [Home.js] and [Recommendation.js] components. It is the
+ * delegate for logging out.
+ */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -43,6 +40,7 @@ class Menu extends React.Component {
     // TODO: Navigate to Resources page
   }
 
+  // Redirect to [Home.js] upon logout
   onLogoutClick = () => {
     let callback = (success) => {
       if (success) { this.props.history.push('/home'); }

@@ -1,5 +1,5 @@
 /**
- * auth.js: a module for front-end authentication
+ * auth.js: A module for frontend authentication
  */
 
 import { Endpoints } from './utils';

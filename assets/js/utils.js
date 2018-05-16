@@ -1,5 +1,5 @@
 /**
- * utils.js: a module for useful constants and functions across our application
+ * utils.js: A module for useful constants and functions across our application
  */
 
 import keyMirror from "keymirror";

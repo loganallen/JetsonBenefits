@@ -1,10 +1,7 @@
-/*
-The [Login] component is a modal which prompts the user to either enter their
-login information or create an account on the spot.
-
-Model filepath:
-Controller filepath:
-*/
+/**
+ * LoginModal.js: This modal component prompts the user to enter login credentials
+ * or create an account. There are separate mobile and desktop renders.
+ */
 
 import React from 'react';
 import {Modal, Button, Icon} from 'semantic-ui-react';
@@ -32,9 +29,9 @@ class LoginModal extends React.Component {
     };
   }
 
+  // Reroute to [Recommendation.js] upon successful login
   onLoginClick = () => {
     let callback = (success) => {
-      // Route to recommendation page upon login
       if (success) { this.props.history.push('/recommendation'); }
     }
     if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
@@ -50,20 +47,20 @@ class LoginModal extends React.Component {
       password: this.state.signupPassword
     }
 
-    let valid = Object.values(userData).reduce((acc, val) => acc && val.length > 0, true); // TODO
+    // TODO: Better validation for proper email, etc.
+    let valid = Object.values(userData).reduce((acc, val) => acc && val.length > 0, true);
    
     if (valid) {
       this.props.onSignup(userData);
     }
   }
 
-  /**
-   * Creates a handler that updates the state for the login & sign up modal
-   * @param {Object} event: js event
-   */
-  handleInputChange = event => {
-    this.state[event.target.name] = event.target.value;
-    this.setState(this.state);
+  // Updates the state for an input change
+  // Requires the [name] of the input matches the state variable
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   desktopRender = () => {
