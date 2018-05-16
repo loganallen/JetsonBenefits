@@ -1,9 +1,16 @@
+/**
+ * utils.js: a module for useful constants and functions across our application
+ */
+
 import keyMirror from "keymirror";
 
+// base url for our api
 const baseAPI = `http://${env.baseURL}/api`;
 
+// mobile breakpoint in pixels
 const MOBILE_BREAKPOINT = 768;
 
+// constant for our specific api endpoints
 export const Endpoints = {
   SIGNUP: `${baseAPI}/signup`,
   LOGIN: `${baseAPI}/login`,
@@ -17,6 +24,7 @@ export const Endpoints = {
   GENERATE_INSURANCE_QUOTES: `${baseAPI}/generate-insurance-quotes`
 };
 
+// insurance type constants
 export const InsuranceTypes = keyMirror({
   HEALTH: null,
   LIFE: null,
@@ -39,4 +47,9 @@ export const Gender = keyMirror({
   none: null
 });
 
+/**
+ * isMobile: returns true if the device is mobile, false otherwise
+ * @param {Number} deviceWidth: the current device width
+ * @return {Boolean}
+ */
 export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || env.isMobile);

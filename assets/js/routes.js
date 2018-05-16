@@ -1,11 +1,17 @@
+/**
+ * routes.js: creates the routes for our application
+ * 1. Home --> `/` or `/home`
+ * 2. Recommendation --> `/recommendation`
+ */
+
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+// import base components to conditionally render
 import Test from './components/Test';
 import Home from './components/Home';
 import Recommendation from './components/Recommendation';
 
-// Component 'Home' in route gives error
 const routes = (
   <BrowserRouter>
     <Switch>

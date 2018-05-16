@@ -1,3 +1,8 @@
+"""
+  formatting.py: a helpful module for formatting numbers for display
+"""
+
+# helpful constants
 THOUSAND          = 1000
 HUNDRED_THOUSAND  = 100000
 ONE_MILLION       = 1000000

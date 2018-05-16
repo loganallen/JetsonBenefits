@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "python manage.py runserver",
-    "start-test": "python manage.py runserver 0.0.0.0:8000",
+    "start-test": "ipconfig getifaddr en0 & python manage.py runserver 0.0.0.0:8000",
     "build": "./node_modules/.bin/webpack --config webpack.config.js",
     "autobuild": "./node_modules/.bin/webpack --config webpack.config.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
