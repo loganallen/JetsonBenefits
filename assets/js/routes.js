@@ -2,7 +2,8 @@
  * routes.js: Creates the routes for the application
  * 1. Home --> `/` or `/home`
  * 2. Recommendation --> `/recommendation`
- * 3. Test --> '/test' is used for testing API endpoints
+ * 3. Test --> '/test' is used for testing API endpoints [REMOVE BEFORE DEPLOYMENT]
+ * 4. TODO: Add more routes
  */
 
 import React from 'react';
@@ -19,7 +20,7 @@ const routes = (
       <Route exact path='/' component={Home} />
       <Route path='/home' component={Home} />
       <Route path='/recommendation' component={Recommendation} />
-      {/* <Route path='/test' component={Test} /> */}
+      <Route path='/test' component={Test} />
     </Switch>
   </BrowserRouter>
 );

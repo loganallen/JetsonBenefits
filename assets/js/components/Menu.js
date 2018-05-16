@@ -30,14 +30,17 @@ class Menu extends React.Component {
 
   onHowItWorkClick = () => {
     // TODO: Navigate to How It Works page
+    // this.props.history.push('/howItWorks');
   }
 
   onBlogClick = () => {
     // TODO: Navigate to Blog page
+    // this.props.history.push('/blog');
   }
 
   onResourcesClick = () => {
     // TODO: Navigate to Resources page
+    // this.props.history.push('/resources');
   }
 
   // Redirect to [Home.js] upon logout

@@ -1,9 +1,11 @@
 /**
  * Recommendation.js: This page contains the user input pages, the recommendation engine, and quote
- * serving process. It renders the [QuestionsContainer.js] and [QuotesContainer.js] components conditionally.
- * On mobile interfaces it renders the [Sidebar.js] as the intermedaite page between the aforementioned
- * components. It also contains the [Menu.js] component. It is the delegate for transitioning between
- * the stages of the recommendation flow.
+ * serving process. It renders the [QuestionsContainer.js] and [QuotesContainer.js] components
+ * conditionally. On mobile interfaces it renders the [Sidebar.js] as the intermedaite page
+ * between the aforementioned components. It also contains the [Menu.js] component. It is the
+ * delegate for transitioning between the stages of the recommendation flow.
+ * 
+ * this.state.stage: 'questions' | 'recommendation' | 'quotes'
  */
 
 import React from 'react';
@@ -19,10 +21,6 @@ import { isMobile } from '../utils';
 import { isAuthenticated } from '../auth';
 
 import '../../css/recommendation.css';
-
-/**
- * this.state.stage: ['questions', 'recommendation', 'quotes']
- */
 
 class Recommendation extends React.Component {
   constructor(props) {

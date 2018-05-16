@@ -1,8 +1,8 @@
-/*
-The [QuestionsContainer] component queries the database and serves the user a 
-given set of quesions. Contains the [Sidebar] component.
-This component is contained within the [Recommendation] component.
-*/
+/**
+ * QuestionsContainer.js: This component renders the content for general user input questions.
+ * It contains the [Sidebar.js] component on desktop renders, but on mobile interfaces
+ * it exclusively renders the user input questions.
+ */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -11,6 +11,8 @@ import classNames from 'classnames';
 
 import Sidebar from './sub_components/Sidebar';
 import { HealthConditions, MaritalStatus, Gender, isEmpty } from '../utils';
+
+// TODO: Dynamically save userData to the backend? So not just when clicking 'next'?
 
 class QuestionsContainer extends React.Component {
   constructor(props) {
