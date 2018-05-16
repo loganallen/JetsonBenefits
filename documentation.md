@@ -60,6 +60,46 @@
 
   Finally, the API portion of our Django application is in the `api/` directory.  The `api/urls.py` file specifies the defined api urls that can be accessed.  The `api/views.py` holds all the implementation logic for our api functions.  These functions have built in user authentication using token authentication.
 
+  #### Authentication and Security
+
+  Our application uses built in Django token authentication scheme to allow users to access our API.  We chose to implement our API in a stateless style, so we opted token authentication over session authentication.
+  
+  When a user signs up for our platform, we create a Django User object that out of the box provides a lot of functionality.  The User class has a username field, and password field where it stores hashed passwords.  To authenticate users, you cannot access the plaintext version of the password that was stored, so we use the `authenticate(username, password)` function from `django.contrib.auth`.  When a user access our user signup endpoint, we create a User object with the data sent via POST.  Then we create a Token object that is supplied by the Django Rest Framework.  This object has a foreign key for a User object, so once a Token is created it is associated with a user.  This Token object is used to authenticate users accessing our API via HTTP.  Our application sends a token key to the user once they have authenticated that is stored by our frontend application.  This key is then included in every API request that is sent from the frontend, so that the user can access the API; without a valid token, their access will be denied.  We use authentication decorators for our API functions that either deny request without valid tokens, or add a user field to the request field if authenticated.  An example of a POST request that requires authentication is below:
+
+  ```python
+  @api_view(['POST'])
+  @authentication_classes((TokenAuthentication,))
+  @permission_classes((IsAuthenticated,))
+  def authenticatedUsersOnly():
+    # if you are here, the user is authenticated
+    user = request.user
+  ```
+  
+  To correctly pass a token to the API, you must set the HTTP `Authorization` header to include the token.  The required format is:
+
+    Authorization: Token token_string_here
+  
+  Below is an example from `assets/js/actions/index.js` of correctly sending the token over the network in an AJAX request.
+
+  ```javascript
+  const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
+    $.ajax({
+        type: 'GET',
+        url: Endpoints.GET_ALL_INSURANCE_QUOTES,
+        data: {},
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", "Token " + token);
+        }
+    }).done(res => {
+        // action when the request is done
+    }).fail(err => {
+        console.log('fetchAllInsuranceQuote FAILURE', err);
+    });
+  }
+  ```
+  
+  Here in the `beforeSend` object, we set a function that takes the request and adds the correctly formatted authorization header.
+
 ## Next Steps
 
   While the MVP for this project is more or less complete, there are a few steps that should be taken to convert this a production ready site.  The front-end portion of this project is easy to change and easy to deploy in its current form.  These suggestions for deployment considerations are exclusively for the back-end of this project.  The Django documentation has good advice and will go into more detail about these issues.
