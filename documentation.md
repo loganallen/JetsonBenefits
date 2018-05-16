@@ -44,7 +44,9 @@
   
   To connect the application to the Oracle MYSQL database the settings.py has the connection details. All the details have to be consistent from the mysql database and django application side. Refer [here](https://docs.djangoproject.com/en/2.0/ref/databases/) for in detail steps for the connection.
   
-  The database tables are written in the file `app/models.py`. Each table is represented as a class where the columns are represented as attributes. This is easily extensible when new columns have to be added. The database is populted from the files which are present in `app/fixtures`. These are `.json` files which have the data from the tables.   
+  The database tables are written in the file `app/models.py`. Each table is represented as a class where the columns are represented as attributes. This is easily extensible when new columns have to be added. The database is populted from the files which are present in `app/fixtures`. These are `.json` files which have the data from the tables.
+
+  In order to make changes to the database, you can edit the models in `app/models.py`.  It is important that when you edit the models, you run two commands to update your working database according to your changes.  First you must run `python manage.py makemigrations`.  If there are errors present, then you can fix them, otherwise you then run `python manage.py migrate`.
 
   #### How it Works
   Our back-end Django application can be separated out into three parts: configuration, file serving, and API.
