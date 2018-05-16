@@ -28,7 +28,7 @@ class Home extends React.Component {
     if (isAuthenticated()) {
       this.props.loadUserData();
     } else {
-      // TODO: Grab cached app state from localStorage to update redux store. Can apply to [Recommendation.js] as well
+      // TODO: Grab cached app state from localStorage to update redux store
       // let userData = localStrorage.getItem('userData');
       // if (userData) {
       //   this.props.updateBulkUserData(JSON.parse(userData));

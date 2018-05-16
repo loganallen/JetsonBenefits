@@ -96,9 +96,15 @@ const mainReducer = (state = initialState, action) => {
     case ActionTypes.UPDATE_USER_DATA: {
       let updatedUserData = { ...state.userData };
       let updatedValue = action.data.value;
-      if (action.data.key === 'num_kids' && action.data.value == 0) {
-        // Clear kid_ages since no kids
-        updatedUserData['kid_ages'] = [];
+      if (action.data.key === 'num_kids') { 
+        if (action.data.value == 0) {
+          // Clear kid_ages since no kids
+          updatedUserData['kid_ages'] = [];
+        } else {
+          // Make empty array of length = num_kids
+          let numKids = parseInt(action.data.value);
+          updatedUserData['kid_ages'] = (new Array(numKids)).fill('');
+        }
       }
       else if (action.data.key === 'kid_ages') {
         let ages = [ ...state.userData.kid_ages ];

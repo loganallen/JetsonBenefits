@@ -53,3 +53,9 @@ export const Gender = keyMirror({
  * @return {Boolean}
  */
 export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || env.isMobile);
+
+/**
+ * isEmpty: return true if the string is empty (use for requiring input fields)
+ * @param {String} str 
+ */
+export const isEmpty = (str) => (!str || str.length === 0);
