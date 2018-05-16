@@ -14,7 +14,7 @@ import classNames from 'classnames';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import { isLoggedIn, authToken } from '../auth';
+import { isAuthenticated } from '../auth';
 import { isMobile } from '../utils';
 
 import '../../css/home.css';
@@ -29,8 +29,8 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
-    if (isLoggedIn()) {
-      this.props.loadUserInfo(authToken());
+    if (isAuthenticated()) {
+      this.props.loadUserData();
     } else {
       // Grab from localStorage to update redux store with cached data
       // let userData = localStrorage.getItem("userData");
@@ -41,7 +41,7 @@ class Home extends React.Component {
   }
 
   componentWillUnmount() {
-    // if (!isLoggedIn()) {
+    // if (!isAuthenticated()) {
     //   localStorage.setItem(JSON.stringify(this.props.userData));
     // }
   }
@@ -134,7 +134,7 @@ class Home extends React.Component {
             <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
               FIND MY BENEFITS
             </button><br/>
-            {!isLoggedIn() && (
+            {!isAuthenticated() && (
               <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
                 or Sign Up
             </button>
@@ -185,10 +185,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
   updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
-  loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token))
+  loadUserData: () => dispatch(Actions.fetchUserInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

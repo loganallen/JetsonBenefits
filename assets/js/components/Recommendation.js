@@ -17,7 +17,7 @@ import QuotesContainer from './QuotesContainer';
 import Actions from '../actions';
 import Menu from './Menu';
 import { isMobile } from '../utils';
-import { isLoggedIn, authToken } from '../auth';
+import { isAuthenticated } from '../auth';
 
 import '../../css/recommendation.css';
 
@@ -36,8 +36,8 @@ class Recommendation extends React.Component {
 
     componentWillMount() {
         this.props.changeMenuTheme('themeBlue');
-        if (isLoggedIn()) {
-            this.props.loadUserData(authToken());
+        if (isAuthenticated()) {
+            this.props.loadUserData();
         } else {
             // Grab from localStorage to update redux store with cached data
             // let userData = localStrorage.getItem("userData");
@@ -48,7 +48,7 @@ class Recommendation extends React.Component {
     }
 
     componentWillUnmount() {
-        // if (!isLoggedIn()) {
+        // if (!isAuthenticated()) {
         //   localStorage.setItem(JSON.stringify(this.props.userData));
         // }
     }
@@ -66,9 +66,9 @@ class Recommendation extends React.Component {
     }
 
     onShowQuotesClick = () => {
-        if (isLoggedIn()) {
+        if (isAuthenticated()) {
             // Save userData to the backend
-            this.props.saveUserData(authToken());
+            this.props.saveUserData();
         }
         this.setState({
             stage: 'quotes'
@@ -145,8 +145,8 @@ const mapDispatchToProps = (dispatch) => ({
     changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
     updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
     updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
-    saveUserData: (token) => dispatch(Actions.postUserInfo(token)),
-    loadUserData: (token) => dispatch(Actions.fetchUserInfo(token))
+    saveUserData: () => dispatch(Actions.postUserInfo()),
+    loadUserData: () => dispatch(Actions.fetchUserInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recommendation);
