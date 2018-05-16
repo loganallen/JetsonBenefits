@@ -6,6 +6,7 @@
 * [Frontend](#frontend-and-react)
 * [Backend](#backend-and-django)
 * [Next Steps](#next-steps)
+* [Comments](#comments)
 * [Contact Us](#contact-us)
 
 ## Architecture Overview
@@ -24,7 +25,7 @@
   #### Build Process
   We use a combination of NPM and Webpack to manage our build process for our front-end code.  In our `package.json` file, we have defined a number of commands that allow you to easily build and run the project.  See our `README.md` for specific commands to run.  They are defined in `package.json` in the `scripts` object.
 
-  While we use NPM to trigger our build process, Webpack does the actual work of creating our JS packages that we serve to the browser.  All of the configuration of Webpack can be found in `webpack.config.js` located in the root directory.  Webpack starts at the entry point of our JS files, defined in `config.entry` and recursively moves through that file and all of the depended on files to create on package called `index.bundle.min.js` in the `static/js` directory.  Also included in our config are plugins that: compile our common code into another bundle called `common.bundle.min.js`, inject dependencies into our code, and uglify our production code.  Our Webpack configuration has rules to load different files in `assets/` with loaders.
+  While we use NPM to trigger our build process, Webpack does the actual work of creating our JS packages that we serve to the browser.  All of the configuration of Webpack can be found in `webpack.config.js` located in the root directory.  Webpack starts at the entry point of our JS files, defined in `config.entry` and recursively moves through that file and all of the depended on files to create on package called `index.bundle.min.js` in the `static/js` directory.  Also included in our config are plugins that: compile our common code into another bundle called `common.bundle.min.js` and inject dependencies into our code.  Our Webpack configuration has rules to load different files in `assets/` with their correct loaders.
 
   #### How it Works
   We used React to create our front-end interfaces.  All of the pre-bundled code can be found in `assets/js`.
@@ -34,6 +35,9 @@
   We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses front-end code related to creating network requests for signing in or up for our application.  Utils, in `assets/js/utils.js` provides some functions as well as constants that are useful through the application. 
 
   Most components have their own css files.  To change the styles for a component look for the related file in `assets/css`.
+
+  #### Testing
+  TODO
 
 ## Backend and Django
 
@@ -113,15 +117,20 @@
   
   Here in the `beforeSend` object, we set a function that takes the request and adds the correctly formatted authorization header.
 
+  #### Testing
+  TODO
+
 ## Next Steps
 
   While the MVP for this project is more or less complete, there are a few steps that should be taken to convert this a production ready site.  The front-end portion of this project is easy to change and easy to deploy in its current form.  These suggestions for deployment considerations are exclusively for the back-end of this project.  The Django documentation has good advice and will go into more detail about these issues.
 
   #### Security
-  For a production ready deployment of this application, you will most likely want a custom domain name.  While this is not a security issue, you want to configure your domain to use HTTPS.  This will allow end-to-end encryption of any web traffic that is sent from a users browser to the server.  You do not want your new users' passwords sent in plaintext to the backend when they are signing up.  Refer to [here](https://docs.djangoproject.com/en/2.0/topics/security/) for more detail on ths topic.  Note that at this stage of our application, we leveraged Django's built in security tools.  We have taken steps to combat cross-site scripting and sql injections.
+  For a production ready deployment of this application, you will most likely want a custom domain name.  While this is not a security issue, you want to configure your domain to use HTTPS.  This will allow end-to-end encryption of any web traffic that is sent from a users browser to the server.  You do not want your new users' passwords sent in plaintext to the backend when they are signing up.  Refer to [here](https://docs.djangoproject.com/en/2.0/topics/security/) for more detail on this topic.  Note that at this stage of our application, we leveraged Django's built in security  to secure our API.  We have also taken steps to combat cross-site scripting and SQL injections.
 
   #### Hosting
   Refer [here](https://docs.djangoproject.com/en/2.0/howto/deployment/) for deploying this Django application to a live server.
+
+## Comments
 
 ## Contact Us
 
