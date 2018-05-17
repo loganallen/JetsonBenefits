@@ -74,7 +74,8 @@ class Menu extends React.Component {
       (<button type='button' className='menuButton' onClick={this.props.openLoginModal}>LOGIN</button>);
 
     return (
-      <div id='menuWrapper' className={this.props.menuTheme}>
+      // Note: had to conditionally add 'noUser' class due to improper spacing: see note on line 86
+      <div id='menuWrapper' className={classNames(this.props.menuTheme, { 'noUser': !this.props.isLoggedIn })} >
         <Header id='menuTitle' onClick={this.onHomeClick}>jetsonbenefits</Header>
         <div id='menuButtonWrapper'>
           <button type='button' onClick={this.onHowItWorksClick} className='menuButton'>HOW IT WORKS</button>
@@ -82,7 +83,8 @@ class Menu extends React.Component {
           <button type='button' onClick={this.onResourcesClick} className='menuButton'>RESOURCES</button>
           {loginButton}
         </div>
-        {!this.props.isLoggedIn && (
+        { // Note: LoginModal adds an empty div to the menu bar that causes spacing problems
+          !this.props.isLoggedIn && (
           <LoginModal
             isOpen={this.props.loginModalOpen}
             isTypeLogin={this.props.loginModalType}
