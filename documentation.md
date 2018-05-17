@@ -259,6 +259,7 @@ We are using [PIP](https://pypi.org/project/pip/) to manage our backend dependen
 - Similarly, dynamically display the 'recommended packages' to the user. This component `Sidebar.js` needs editing to subscribe to the redux store.
 - Implement estimated prices for quotes
 - Some styling and dynamic quote regeneration for refine quote components  
+- Image optimization for the home page.  Users on mobile devices don't need the same sized images as desktop users.
 
 ### Security
   For a production ready deployment of this application, you will most likely want a custom domain name.  While this is not a security issue, you want to configure your domain to use HTTPS.  This will allow end-to-end encryption of any web traffic that is sent from a users browser to the server.  You do not want your new users' passwords sent in plaintext to the backend when they are signing up.  Refer to [here](https://docs.djangoproject.com/en/2.0/topics/security/) for more detail on this topic.  Note that at this stage of our application, we leveraged Django's built in security  to secure our API.  We have also taken steps to combat cross-site scripting and SQL injections.
