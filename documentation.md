@@ -153,7 +153,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Component);
   ```
 
 ### Comments
-You will find both file and function specifications throughout the codebase. These should provide enough insite to understand the role of each component, the dependencies it has, and which components it serves as the delegate for.
+You will find both file and function specifications throughout the codebase. These should provide enough insight to understand the role of each component, the dependencies it has, and which components it serves as the delegate for.
 
 #### Class Method Declaration
 When extending `React.Component` to create our own custom components, we used two different syntaxes to declare class methods.
@@ -266,7 +266,7 @@ We are using [PIP](https://pypi.org/project/pip/) to manage our backend dependen
 
 ### Testing
  
-  We used Unit test cases to test the working of the recommendation of the insurance quotes from the scripts. 
+  We used unit test cases to test the working of the recommendation of the insurance quotes from the scripts. 
 
 ## Next Steps
 
@@ -290,7 +290,8 @@ We are using [PIP](https://pypi.org/project/pip/) to manage our backend dependen
   Refer [here](https://docs.djangoproject.com/en/2.0/howto/deployment/) for deploying this Django application to a live server.
 
 ## General Comments and Potential Problems
-TODO TODO TODO
+ - It should be noted that currently questions in the recommendation and refine components have hard coded text and input fields, this means that if one wished to add a new question to either the main questions page or a refine component, one would have to directly modify the javascript. We did not create a system for automatically generating javascript components from the database as we deemed it would be significantly more difficult to implement for a marginally beneficial cost. 
+ - Seeing as there is not a suite of unit tests for the front end code, caution should be excercised when making architectural changes as there is no checklist to determine which functionality is preserved/broken.
 
 ## Contact Us
 
