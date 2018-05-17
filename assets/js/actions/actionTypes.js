@@ -1,3 +1,6 @@
+/**
+ * actionTypes.js: This module defines all of the redux ACTION TYPES
+ */
 import keyMirror from 'keymirror';
 
 const ActionTypes = keyMirror({
