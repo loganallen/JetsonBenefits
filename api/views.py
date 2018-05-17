@@ -172,6 +172,7 @@ def updateUserInfo(request):
         kid_ages = userData['kid_ages']
         del userData['kid_ages']
         
+        #save user answers into object
         getAnswers = user_general_answers(**userData)
         getAnswers.save()
 
@@ -217,12 +218,13 @@ def getUserInfo(request):
     if (validateRequest(request, requiredKeys, 'GET', res)):
         user = request.user
 
+        #get users answers
         user_answers = list(user_general_answers.objects.filter(user_id=user).values())
         userData = {}
         if len(user_answers)>=1:
             userData = user_answers[0]
 
-
+        #get users kids
         if (user_kids.objects.filter(user_id = user).exists()):
             user_kids_ages = list(user_kids.objects.values_list('kid_age', flat = True).filter(user_id = user))
             userData['kid_ages'] = user_kids_ages
@@ -297,14 +299,14 @@ def updateInsuranceInfo(request):
                 num = int(key[key.find('_')+1:]) #get id number
                 q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
                 health_dict[key] = q
-
+            #save health info
             healthRecord = user_health_questions_answer(**health_dict)
             healthRecord.save()
 
         elif (insuranceType == 'LIFE'):
 
             insuranceData['user_id'] = user
-
+            #save life info
             lifeRecord = user_life_answers(**insuranceData)
             lifeRecord.save()
 
@@ -639,31 +641,36 @@ def generateInsuranceQuotes(request):
         age = 0
         gender = 'male'
 
+        #get general answers
         if (general_post != {}):
             general_post['user_id'] = User()
             
             user_kids_ages = general_post['kid_ages']
             del general_post['kid_ages']
 
-            # general_post['health_condition'] = general_post['health_condition']
-            # del general_post['health_condition']
-            
+            #get number of kids
             num_kids = asInt(general_post['num_kids'])
             num_kids = min(int(num_kids), 2)
 
+            #save answers
             general_obj = user_general_answers(**general_post)
         
+        #get life answers
         if (life_post != {}):
             life_post['user_id'] = User()
             life_obj = user_life_answers(**life_post)
         
+        #get health answers
         if (health_post != {}):
             health_post['user_id'] = User()
 
+            #get every specific answer
             for key in health_post:
                 if (key != 'user_id'):
                     if (len(health_post[key]) > 0):
+                        #get id
                         num = int(key[key.find('_')+1:])
+                        #get specific option_id number
                         health_post[key] = health_question_options.objects.get(health_question_id = num, option = health_post[key])
                     else:
                         health_post[key] = None
@@ -676,6 +683,7 @@ def generateInsuranceQuotes(request):
             if (general_obj.marital_status == 'married'):
                 is_married= True
             
+            #to query db have to map ages to these numbers
             age = str(min([25, 35], key=lambda x:abs(x-int(general_obj.age))))
             gender = general_obj.gender
             
@@ -684,6 +692,7 @@ def generateInsuranceQuotes(request):
 
         health_totals = health_questions.objects.all()
 
+        #run recommendation scripts
         need_insurance, coverage_amount, term = life_insurance(life_obj, general_obj, user_kids_ages)
         plan_type, deductible, critical_illness = health_insurance(health_totals, health_obj)
         benefit_amount_d, duration_d, monthly_d = disability_rec(general_obj)
@@ -692,13 +701,15 @@ def generateInsuranceQuotes(request):
         life_quote = {}
         disability_quote = {}
 
+        #get health rec
         if (health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids).exists()):
             health_quote = health_plan_costs.objects.filter(plan_type= plan_type, deductible_level = deductible, has_spouse= is_married, num_kids = num_kids)[0]
             health_quote = model_to_dict(health_quote)
-        
+        #get life rec
         if (life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age).exists()):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
+        #get disabilty rec
         else: #return default value since no match found
             need_insurance, coverage_amount, term = life_insurance(life_insurance_dict = None, general_questions_dict = general_obj, user_kids_age = user_kids_ages) 
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = 'female', age = 25)[0] 
@@ -835,7 +846,47 @@ def getQuoteHelper(user, insurance_type):
     return data    
 
 def getInsuranceInfoHelper(user, insuranceType):
+    """
+        Gets insurance info for a user
+        :param
+            insuranceType = 'HEALTH' | 'LIFE' | 'DISABILITY'
+            user = user object
 
+        :return JsonResponse
+            { success: bool, error: string, data: object }
+            If insuranceType is HEALTH
+            data = {
+                q_1:, 
+                q_2:, 
+                q_5:,
+                q_6:, 
+                q_7:, 
+                q_8:, 
+                q_9:, 
+                q_10:,
+                q_11:,
+                q_12:
+            }
+            q_1 is 'Yes' or 'No'
+            q_2 is 'Yes' or 'No'
+            q_5 is 'No chance', 'Might go', 'I'll definitely go'
+            q_6 is '1-3 times besides my physical exam', 'Never or just for my annual physical', or 'More than 3 times a year'
+            q_7 is 'More than 3 times a year', 'If I don't feel better in a few days, I'm going to the doctor', or 'Go to the doctor immediately'
+            q_8 is 'Do nothing, I feel fine', 'Find out cost before booking appt' or 'Find out cost before booking appt'
+            q_9 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
+            q_10 is 'It crosses my mind sometimes.', 'Not a lot.', or 'Huge worry'
+            q_11 is 'I don't...', 'Convenient time with any doctor', or 'Must see my doc'
+            q_12 is 'If my doc says so', 'Not likely', or 'I love second opinions'
+
+            if a user hasnt answered a question, the value will be ''
+            if insuranceType is LIFE
+            data = {
+                mortgage_balance:,
+                other_debts_balance:,
+                existing_life_insurance:,
+                balance_investings_savings:,
+            }
+    """
     data = {}
     if (insuranceType == 'HEALTH'):
         answers_to_options = user_health_questions_answer.objects.get(user_id=user)
