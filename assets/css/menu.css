@@ -43,6 +43,14 @@
     #menuTitle {
         font-size: 2em;
     }
+
+    /* This is a hacky fix: the semantic-ui libary adds an empty div when creating the 
+       login modal on line 85 of Menu.js.  In order to not mess up the spacing,
+       don't display the empty modal
+    */
+    #menuWrapper div:last-child {
+        display: none;
+    }
 }
 
 /* Mobile Only Styles */
