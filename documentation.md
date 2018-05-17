@@ -262,7 +262,8 @@ We are using [PIP](https://pypi.org/project/pip/) to manage our backend dependen
 ### Hosting
   Refer [here](https://docs.djangoproject.com/en/2.0/howto/deployment/) for deploying this Django application to a live server.
 
-## Comments
+## General Comments and Potential Problems
+TODO TODO TODO
 
 ## Contact Us
 
