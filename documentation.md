@@ -34,7 +34,29 @@ We use a combination of NPM and Webpack to manage our build processes for our fr
 
   Our React entry point is in `assets/js/index.js`.  Outside of `assets/js/index.js` all of our React code can be found in `assets/js/components/`.  We have 3 folders that hold our Redux related code: `assets/js/actions`, `assets/js/store`, `assets/js/reducers`.
   
-  We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses frontend code related to creating network requests for logging in or signing up.  Utils, in `assets/js/utils.js` provides some functions as well as constants/enums that are useful through the application.
+  We have created the following React components to create this Application.
+  
+- **App** (`assets/js/components/App.js`): the base component for our application
+- **Home** (`assets/js/components/Home.js`): the home page
+- **Menu** (`assets/js/components/Menu.js`): the menu bar
+- **LoginModal** (`assets/js/components/LoginModal.js`): the login modal for signing in and up
+- **Recommendation** (`assets/js/components/Recommendation.js`): the recommendation base page
+- **QuestionsContainer** (`assets/js/components/QuestionsContainer.js`): contains recommendation page questions
+- **Sidebar** (`assets/js/sub_components/Sidebar.js`): the sidebar for the recommendation questions
+- **QuotesContainer** (`assets/js/components/QuotesContainer.js`): contains the layout for the quotes
+- **QuoteItem** (`assets/js/sub_components/QuoteItem.js`): contains the layout for an individual quote
+- **RefineQuoteItem** (`assets/js/sub_components/RefineQuoteItem.js`): contains the layout the refine section of a quote
+
+
+Below are the important files related to Redux.
+  
+- **configureStore** (`assets/js/store/configureStore.js`): boilerplate configuration of Redux store
+- **actionTypes** (`assets/js/actions/actionTypes.js`): defines all the types of Redux actions we use
+- **actions/index** (`assets/js/actions/index.js`): implements all of our actions and thunks
+- **reducers/index** (`assets/js/reducers/index.js`): defines our root reducer
+- **mainReducer** (`assets/js/reducers/mainReducer.js`): creates store initial state and handles dispatched actions
+
+We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses frontend code related to creating network requests for logging in or signing up.  Utils, in `assets/js/utils.js` provides some functions as well as constants/enums that are useful through the application.
   
 ### Why React?
 
