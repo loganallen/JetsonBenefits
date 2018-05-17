@@ -185,7 +185,8 @@
   Here in the `beforeSend` object, we set a function that takes the request and adds the correctly formatted authorization header.
 
   ### Testing
-  TODO
+ 
+  We used Unit test cases to test the working of the recommendation of the insurance quotes from the scripts. 
 
 ## Next Steps
 
