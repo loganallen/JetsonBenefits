@@ -120,7 +120,7 @@ class Recommendation extends React.Component {
     return (
       <div>
         <Menu history={this.props.history} />
-        <div id='rec'>
+        <div className='container' id='rec'>
           {renderedContent}
         </div>
       </div>

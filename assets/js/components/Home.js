@@ -162,10 +162,12 @@ class Home extends React.Component {
     return (
       <div>
         <Menu history={this.props.history} />
-        {this.section1()}
-        {this.section2()}
-        {this.section3()}
-        {this.section4()}
+        <div className='container'>
+          {this.section1()}
+          {this.section2()}
+          {this.section3()}
+          {this.section4()}
+        </div>
       </div>
     );
   }

@@ -23,9 +23,7 @@ class App extends React.Component {
 
     return (
       <div id='containerWrapper' className={this.props.menuTheme}>
-        <div className='container'>
-          {children}
-        </div>
+        {children}
       </div>
     );
   }
