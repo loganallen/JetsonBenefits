@@ -20,21 +20,56 @@
 ## Frontend and React
   
   ### Dependencies
-  We are using [NPM](https://www.npmjs.com/) (node package manager) to manage all of our frontend dependicies.  The file `package.json` in the root directory of our project lists all of our javascript dependencies and the versions we used during development.  You can use the command `npm install` to quickly install all the dependencies listed in the file.
+  We are using [NPM](https://www.npmjs.com/) (node package manager) to manage all of our frontend dependicies.  The file `package.json` in the root directory of our project lists all of our Javascript dependencies and the versions we used during development.  You can use the command `npm install` to quickly install all the dependencies listed in the file.
   
   ### Build Process
   We use a combination of NPM and Webpack to manage our build process for our frontend code.  In our `package.json` file, we have defined a number of commands that allow you to easily build and run the project.  See our `README.md` for specific commands to run.  They are defined in `package.json` in the `scripts` object.
 
   While we use NPM to trigger our build process, Webpack does the actual work of creating our JS packages that we serve to the browser.  All of the configuration of Webpack can be found in `webpack.config.js` located in the root directory.  Webpack starts at the entry point of our JS files, defined in `config.entry` and recursively moves through that file and all of the depended on files to create on package called `index.bundle.min.js` in the `static/js` directory.  Also included in our config are plugins that: compile our common code into another bundle called `common.bundle.min.js` and inject dependencies into our code.  Our Webpack configuration has rules to load different files in `assets/` with their correct loaders.
 
-  ### How it Works
-  We used React to create our frontend interfaces.  All of the pre-bundled code can be found in `assets/js`.
-  
-  Our React entry point is in `assets/js/index.js`.  We are using Redux in combination with React.  Outside of `assets/js/index.js` all of our React code can be found in `assets/js/components/`.  We have 3 folders that hold our Redux related code: `assets/js/actions`, `assets/js/store`, `assets/js/reducers`.
-  
-  We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses frontend code related to creating network requests for signing in or up for our application.  Utils, in `assets/js/utils.js` provides some functions as well as constants that are useful through the application. 
+  ### Directory Structure
 
-  Most components have their own css files.  To change the styles for a component look for the related file in `assets/css`.
+  All of our frontend source code can be found in the `assets/js` directory.
+
+  Our React entry point is in `assets/js/index.js`.  Outside of `assets/js/index.js` all of our React code can be found in `assets/js/components/`.  We have 3 folders that hold our Redux related code: `assets/js/actions`, `assets/js/store`, `assets/js/reducers`.
+  
+  We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses frontend code related to creating network requests for signing in or up for our application.  Utils, in `assets/js/utils.js` provides some functions as well as constants that are useful through the application. =
+  
+  ### Using React
+
+  We used React to build our frontend interfaces for this project.  React is a Javascript view framework written by Facebook, the documentation can be found [here](https://reactjs.org/).  The basic idea behind React is that it allows for very fast page re-rendering by creating what a `virtual-dom` and then using diff algorithms to only re-render the real `dom` elements that have changed.  It also provides a convientent way to structure out frontend code so that it doesn't get too messy.
+
+  The building blocks of a React application are components.  We can create components by extending `React.Component`.  You can see examples of this in every component we have created for the site.  For the simplest example, look to `assets/js/App.js`.  This is the base component that gets rendered in our webapp.
+
+  ```Javascript
+  class MyComponent extend React.Component {
+    render() {
+      // render markup here
+      <h1>Page Title</h1>
+    }
+  }
+  ```
+
+  The example above shows the most basic way to make a component.  To actual display something, you must override the `render` method.  Look to any of our Javascript files in `assets/components` for examples of rendering components.
+  
+  React is often used with JSX, which provides a convienent way to write HTML markup directly into a Javascript.  In our Webpack configuration, we have told webpack to use `babel-loader` which transpiles this JSX into valid Javascript.  This is why we are able to write a `<h1>` tag directly into our Javascript function.
+
+  This should be enough to get you started if you have never used React before.  For a more detailed tutorial, visit [https://reactjs.org/](https://reactjs.org/).
+
+  ### Redux and React Router
+  TODO
+
+  ### CSS Styling
+
+  Most React components have their own css files.  To change the styles for a component look for the related file in `assets/css`.
+
+  To create styles for different viewports, we used CSS media queries.  They allow you to specify different style rules based on viewport, medium, etc.  You can find examples of this in any of our css files.  Look for the following sytnax below:
+
+  ```css
+  @media screen and (/* condition */) {
+    /* styles here */
+  }
+  ```
 
   ### Comments
 
@@ -42,7 +77,7 @@
 
   Please note, when extending `React.Component` to create our own custom components, we use two different syntaxs to declare class methods.
   
-  ```javascript
+  ```Javascript
   class App extends React.Component {
     ...
     componentWillMount() {
@@ -55,7 +90,7 @@
   ```
   The example above is taken from the App class in `App.js`.  We use this method declaration syntax because the function `componentWillMount` overrides a class method specified in the `React.Component` class we are extending.  These functions have the `this` (the class object) correctly bound to the function already.
 
-  ```javascript
+  ```Javascript
   class App extends React.Component {
     ...
     onUnload = () => {
@@ -130,7 +165,7 @@
   
   Below is an example from `assets/js/actions/index.js` of correctly sending the token over the network in an AJAX request.
 
-  ```javascript
+  ```Javascript
   const fetchAllInsuranceQuotes = (token) => (dispatch, getState) => {
     $.ajax({
         type: 'GET',
