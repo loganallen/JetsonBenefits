@@ -6,7 +6,7 @@
 
  import React from 'react';
 import { Grid, Button, Dropdown, Checkbox } from 'semantic-ui-react';
-import { MaritalStatus, InsuranceTypes } from '../../utils';
+import { MaritalStatus, InsuranceTypes, isValidNumber } from '../../utils';
 
 /**
  * props: {
@@ -27,20 +27,25 @@ class RefineQuoteItem extends React.Component {
     };
   }
 
-  onUserDataInputChange = (key, event) => {
-    // TODO: Validate inputs
-    this.props.updateUserData(key, event.target.value);
+  onUserDataInputChange = (key, event, type = 'string', bounds = [0,0]) => {
+    let value = event.target.value;
+    if (type === 'number' && !isValidNumber(value, bounds)) return;
+    this.props.updateUserData(key, value);
   }
 
   // TODO: Dynamically reload quote after a single element is refined
-  onInsuranceDataInputChange = (key, event) => {
-    // TODO: Validate inputs
-    this.props.updateInsuranceData(this.state.insuranceType, key, event.target.value);
+  onLifeInsuranceDataInputChange = (key, event, bounds = [0,0]) => {
+    let value = event.target.value;
+    if (isValidNumber(value, bounds)) {
+      this.props.updateInsuranceData(this.state.insuranceType, key, value);
+    }
   }
 
   onKidAgeChange = (idx, event) => {
     let age = event.target.value;
-    this.props.updateUserData('kid_ages', { idx: idx, age: age });
+    if (isValidNumber(age, [1, 99])) {
+      this.props.updateUserData('kid_ages', { idx: idx, age: age });
+    }
   }
 
   onDropdownChange = (id, value) => {
@@ -225,7 +230,7 @@ class RefineQuoteItem extends React.Component {
                   type='text'
                   id='spouse_age'
                   className='refine-input-grid'
-                  onChange={(e) => this.onUserDataInputChange('spouse_age', e)}
+                  onChange={(e) => this.onUserDataInputChange('spouse_age', e, 'number', [0, 99])}
                   value={this.props.userData.spouse_age}
                   placeholder='25'
                 />
@@ -242,7 +247,7 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='mortgageInput'
             className='refine-input-currency'
-            onChange={(e) => this.onInsuranceDataInputChange('mortgage_balance', e)}
+            onChange={(e) => this.onLifeInsuranceDataInputChange('mortgage_balance', e, [0, 10000000])}
             value={this.props.insuranceData.mortgage_balance}
             placeholder='100,000'
           />
@@ -256,7 +261,7 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='debtTotal'
             className='refine-input-currency'
-            onChange={(e) => this.onInsuranceDataInputChange('other_debts_balance', e)}
+            onChange={(e) => this.onLifeInsuranceDataInputChange('other_debts_balance', e, [0, 10000000])}
             value={this.props.insuranceData.other_debts_balance}
             placeholder='250,000'
             />
@@ -270,7 +275,7 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='existingLifeInsurance'
             className='refine-input-currency'
-            onChange={(e) => this.onInsuranceDataInputChange('existing_life_insurance', e)}
+            onChange={(e) => this.onLifeInsuranceDataInputChange('existing_life_insurance', e, [0, 10000000])}
             value={this.props.insuranceData.existing_life_insurance}
             placeholder='1,000,000'
             />
@@ -284,7 +289,7 @@ class RefineQuoteItem extends React.Component {
             type='number'
             id='investments'
             className='refine-input-currency'
-            onChange={(e) => this.onInsuranceDataInputChange('balance_investings_savings', e)}
+            onChange={(e) => this.onLifeInsuranceDataInputChange('balance_investings_savings', e, [0, 10000000])}
             value={this.props.insuranceData.balance_investings_savings}
             placeholder='60,000'
             />

@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import Menu from './Menu';
 import Actions from '../actions';
 import { isAuthenticated } from '../auth';
-import { isMobile } from '../utils';
+import { isMobile, isValidNumber } from '../utils';
 
 import '../../css/home.css';
 
@@ -43,14 +43,11 @@ class Home extends React.Component {
     // }
   }
 
-  onInputChange = (id, event) => {
+  onInputChange = (key, event, bounds = [0,0]) => {
     let value = event.target.value;
 
-    // TODO: Validate user input
-    if (id == 'age') {
-      this.props.updateUserData('age', value);
-    } else if (id == 'zipcode') {
-      this.props.updateUserData('zipcode', value);
+    if (isValidNumber(value, bounds)) {
+      this.props.updateUserData(key, value);
     }
   }
 
@@ -80,7 +77,7 @@ class Home extends React.Component {
                 type='number'
                 className='homeS2Input'
                 id='homeS2Input1'
-                onChange={(e) => this.onInputChange('age', e)}
+                onChange={(e) => this.onInputChange('age', e, [1, 99])}
                 placeholder='30'
                 value={this.props.age}
               />
@@ -92,7 +89,7 @@ class Home extends React.Component {
                 type='number'
                 className='homeS2Input'
                 id='homeS2Input2'
-                onChange={(e) => this.onInputChange('zipcode', e)}
+                onChange={(e) => this.onInputChange('zipcode', e, [0, 99999])}
                 placeholder='60601'
                 value={this.props.zipcode}
               />
@@ -114,7 +111,7 @@ class Home extends React.Component {
               type='text'
               className='homeS2Input'
               id='homeS2Input1'
-              onChange={(e) => this.onInputChange('age', e)}
+              onChange={(e) => this.onInputChange('age', e, [1, 99])}
               placeholder='30'
               value={this.props.age}
             />
@@ -123,7 +120,7 @@ class Home extends React.Component {
               type='text'
               className='homeS2Input'
               id='homeS2Input2'
-              onChange={(e) => this.onInputChange('zipcode', e)}
+              onChange={(e) => this.onInputChange('zipcode', e, [0, 99999])}
               placeholder='60601'
               value={this.props.zipcode}
             />

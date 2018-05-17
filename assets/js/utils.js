@@ -63,4 +63,19 @@ export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || en
  * isEmpty: return true if the string is empty (use for requiring input fields)
  * @param {String} str 
  */
-export const isEmpty = (str) => (!str || str.length === 0);
+export const isEmpty = (str) => {
+  if (str === 0) return false;
+  return !str || str.length === 0;
+};
+
+/**
+ * isValidNumber: validates that [value] is a number and within [bounds], or is empty
+ * @param {String|Number} value
+ * @param {Array} bounds: [min, max]
+ */
+export const isValidNumber = (value, bounds) => {
+  if (value === '') return true;
+  let num = parseInt(value);
+  if (isNaN(num)) return false;
+  if (num >= bounds[0] && num <= bounds[1]) return true;
+}

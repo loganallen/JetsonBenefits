@@ -14,7 +14,7 @@ import { Dropdown, Menu } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import Sidebar from './sub_components/Sidebar';
-import { HealthConditions, MaritalStatus, Gender, isEmpty } from '../utils';
+import { HealthConditions, MaritalStatus, Gender, isEmpty, isValidNumber } from '../utils';
 
 class QuestionsContainer extends React.Component {
   constructor(props) {
@@ -23,7 +23,8 @@ class QuestionsContainer extends React.Component {
   }
 
   // Disable the Next/ShowQuotes button if required user inputs are left empty
-  isButtonDisabled = (userData) => {
+  isButtonDisabled = () => {
+    let userData = this.props.userData;
     var disabled = false;
 
     if (userData.marital_status === MaritalStatus.married) {
@@ -41,9 +42,10 @@ class QuestionsContainer extends React.Component {
     return disabled;
   }
 
-  onInputChange = (key, event) => {
-    // TODO: Validate inputs
-    this.props.updateUserData(key, event.target.value);
+  onInputChange = (key, event, type = 'string', bounds = [0,0]) => {
+    let value = event.target.value;
+    if (type === 'number' && !isValidNumber(value, bounds)) return;
+    this.props.updateUserData(key, value);
   }
 
   onMaritalStatusChange = (value) => {
@@ -56,7 +58,9 @@ class QuestionsContainer extends React.Component {
 
   onKidAgeChange = (idx, event) => {
     let age = event.target.value;
-    this.props.updateUserData('kid_ages', { idx: idx, age: age });
+    if (isValidNumber(age, [1, 99])) {
+      this.props.updateUserData('kid_ages', { idx: idx, age: age });
+    }r
   }
 
   onConditionItemClick = (event, { name }) => {
@@ -67,7 +71,7 @@ class QuestionsContainer extends React.Component {
     <input
       type='text'
       className='questionsInput questionsInputShort'
-      onChange={(e) => this.onInputChange('age', e)}
+      onChange={(e) => this.onInputChange('age', e, 'number', [1, 99])}
       value={this.props.userData.age}
       placeholder='30'
     />
@@ -77,7 +81,7 @@ class QuestionsContainer extends React.Component {
     <input
       type='text'
       className='questionsInput questionsInputLong'
-      onChange={(e) => this.onInputChange('zipcode', e)}
+      onChange={(e) => this.onInputChange('zipcode', e, 'number', [0, 99999])}
       value={this.props.userData.zipcode}
       placeholder='60601'
     />
@@ -118,7 +122,7 @@ class QuestionsContainer extends React.Component {
     <input
       type='text'
       className='questionsInput questionsInputShort'
-      onChange={(e) => this.onInputChange('spouse_age', e)}
+      onChange={(e) => this.onInputChange('spouse_age', e, 'number', [1, 99])}
       value={this.props.userData.spouse_age}
       placeholder='30'
     />
@@ -128,7 +132,7 @@ class QuestionsContainer extends React.Component {
     <input
       type='text'
       className='questionsInput questionsInputShort'
-      onChange={(e) => this.onInputChange('num_kids', e)}
+      onChange={(e) => this.onInputChange('num_kids', e, 'number', [0, 12])}
       value={this.props.userData.num_kids}
       placeholder='0'
     />
@@ -163,7 +167,7 @@ class QuestionsContainer extends React.Component {
     <input
       type='text'
       className='questionsInput questionsInputLong'
-      onChange={(e) => this.onInputChange('annual_income', e)}
+      onChange={(e) => this.onInputChange('annual_income', e, 'number', [0, 10000000])}
       value={this.props.userData.annual_income}
       placeholder='550000'
     />
@@ -173,7 +177,7 @@ class QuestionsContainer extends React.Component {
     <input
       type='text'
       className='questionsInput questionsInputLong'
-      onChange={(e) => this.onInputChange('spouse_annual_income', e)}
+      onChange={(e) => this.onInputChange('spouse_annual_income', e, 'number', [0, 10000000])}
       value={this.props.userData.spouse_annual_income}
       placeholder='550000'
     />
@@ -267,9 +271,9 @@ class QuestionsContainer extends React.Component {
           {this.questionContent()} 
           <button
             id='nextButton'
-            className={classNames({ disabled: this.isButtonDisabled(this.props.userData) })}
+            className={classNames({ disabled: this.isButtonDisabled() })}
             onClick={this.props.onNextClick}
-            disabled={this.isButtonDisabled(this.props.userData)}
+            disabled={this.isButtonDisabled()}
           >{(this.props.isMobile) ? 'Next' : 'Show Quotes'}
           </button>
         </div>

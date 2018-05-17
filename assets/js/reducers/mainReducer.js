@@ -118,6 +118,7 @@ const mainReducer = (state = initialState, action) => {
         }
       }
       else if (action.data.key === 'kid_ages') {
+        console.log(action);
         let ages = [ ...state.userData.kid_ages ];
         ages[action.data.value.idx] = action.data.value.age;
         updatedValue = ages;

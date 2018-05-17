@@ -116,7 +116,7 @@ class Recommendation extends React.Component {
           return this.questionsContent();
       }
     })(this.state.stage);
-      
+    
     return (
       <div>
         <Menu history={this.props.history} />
