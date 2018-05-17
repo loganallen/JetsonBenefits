@@ -11,11 +11,20 @@ class App extends React.Component {
   componentWillMount() {
     // listen for window resize and update deviceWidth in store
     window.addEventListener('resize', this.props.emitDeviceWidthUpdate);
+    window.addEventListener('beforeunload', this.onUnload);
   }
   
   componentWillUnmount() {
     // remove listener when unmounted
     window.removeEventListener('resize', this.props.emitDeviceWidthUpdate);
+    window.removeEventListener('beforeunload', this.onUnload);
+  }
+
+  // Note: this syntax automatically binds the `this` context
+  onUnload = () => {
+    const message = 'Are you sure you want to abondon you unsaved changes?';
+    event.returnValue = message;
+    return message;
   }
 
   render() {
