@@ -11,11 +11,12 @@ class App extends React.Component {
   componentWillMount() {
     // listen for window resize and update deviceWidth in store
     window.addEventListener('resize', this.props.emitDeviceWidthUpdate);
+    // listen for reload, or leaving page events --> makes sure user doesn't lose changes on accident
     window.addEventListener('beforeunload', this.onUnload);
   }
   
   componentWillUnmount() {
-    // remove listener when unmounted
+    // remove listeners when unmounted
     window.removeEventListener('resize', this.props.emitDeviceWidthUpdate);
     window.removeEventListener('beforeunload', this.onUnload);
   }
