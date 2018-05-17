@@ -1,3 +1,10 @@
+/**
+ * mainReducer.js: This module handles all the actions dispatched by the application. It takes
+ * the incoming action: { type, data }, and creates a NEW state with the appropriate new values.
+ * IMPORTANT: The reducer copies the current state of the app and returns a new, updated one, making
+ * the state "immutable," as it should be. This is the only module which can change the state (global store).
+ */
+
 import ActionTypes from '../actions/actionTypes';
 import { isAuthenticated } from '../auth';
 import { InsuranceTypes, MaritalStatus } from '../utils';
@@ -78,27 +85,37 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case ActionTypes.EMIT_DEVICE_WIDTH_UPDATE:
       return {
         ...state,
         deviceWidth: action.data.deviceWidth
       };
+
     case ActionTypes.CHANGE_MENU_THEME:
       return {
         ...state,
         menuTheme: action.data.menuTheme
       };
+
     case ActionTypes.UPDATE_LOGIN_MODAL:
       return {
         ...state,
         loginModal: action.data
       };
+
     case ActionTypes.UPDATE_USER_DATA: {
       let updatedUserData = { ...state.userData };
       let updatedValue = action.data.value;
-      if (action.data.key === 'num_kids' && action.data.value == 0) {
-        // Clear kid_ages since no kids
-        updatedUserData['kid_ages'] = [];
+      if (action.data.key === 'num_kids') { 
+        if (action.data.value == 0) {
+          // Clear kid_ages since no kids
+          updatedUserData['kid_ages'] = [];
+        } else {
+          // Make empty array of length = num_kids
+          let numKids = parseInt(action.data.value);
+          updatedUserData['kid_ages'] = (new Array(numKids)).fill('');
+        }
       }
       else if (action.data.key === 'kid_ages') {
         let ages = [ ...state.userData.kid_ages ];
@@ -116,6 +133,7 @@ const mainReducer = (state = initialState, action) => {
         userData: updatedUserData
       };
     }
+
     case ActionTypes.UPDATE_BULK_USER_DATA: {
       let updatedUserData = { ...state.userData };
       Object.keys(action.data).forEach(key => {
@@ -128,6 +146,7 @@ const mainReducer = (state = initialState, action) => {
         userData: updatedUserData
       };
     }
+
     case ActionTypes.UPDATE_INSURANCE_DATA:
       let updatedInsuranceItem = { ...state.insuranceData[action.data.type] };
       updatedInsuranceItem[action.data.key] = action.data.value;
@@ -138,6 +157,7 @@ const mainReducer = (state = initialState, action) => {
           [action.data.type]: updatedInsuranceItem
         }
       };
+
     case ActionTypes.UPDATE_BULK_INSURANCE_DATA: {
       let updatedInsuranceData = { ...state.insuranceData[action.data.type]};
       Object.keys(action.data.data).forEach(key => {
@@ -149,13 +169,15 @@ const mainReducer = (state = initialState, action) => {
           ...state.insuranceData,
           [action.data.type]: updatedInsuranceData
         }
-      }
+      };
     }
+
     case ActionTypes.UPDATE_USER_AUTH:
       return {
         ...state,
         user: action.data
-      }
+      };
+
     case ActionTypes.UPDATE_INSURANCE_QUOTE: {
       let insuranceType = action.data.type;
       return {
@@ -164,15 +186,17 @@ const mainReducer = (state = initialState, action) => {
           ...state.insuranceQuotes,
           [insuranceType]: action.data.quote
         }
-      }
+      };
     }
+
     case ActionTypes.CLEAR_ALL_USER_INFO:
       return {
         ...state,
         userData: initialState.userData,
         insuranceData: initialState.insuranceData,
         insuranceQuotes: initialState.insuranceQuotes
-      }
+      };
+      
     default:
       return state;
   }

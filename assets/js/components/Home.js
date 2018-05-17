@@ -1,11 +1,7 @@
-/*
-The [Home] component represents the landing page of the JetsonBenefits
-webpage. Contains the [Navigation] component and has a button which links to 
-the [Recommendation] component.
-
-Model filepath:
-Controller filepath:
-*/
+/**
+ * Home.js: The landing page of the website. This component contains the [Menu.js] component,
+ * renders all of the home page content, and pushes to the [Recommendation.js] component.
+ */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -32,8 +28,8 @@ class Home extends React.Component {
     if (isAuthenticated()) {
       this.props.loadUserData();
     } else {
-      // Grab from localStorage to update redux store with cached data
-      // let userData = localStrorage.getItem("userData");
+      // TODO: Grab cached app state from localStorage to update redux store
+      // let userData = localStrorage.getItem('userData');
       // if (userData) {
       //   this.props.updateBulkUserData(JSON.parse(userData));
       // }
@@ -41,8 +37,9 @@ class Home extends React.Component {
   }
 
   componentWillUnmount() {
+    // TODO: Cache local app state before a page refresh
     // if (!isAuthenticated()) {
-    //   localStorage.setItem(JSON.stringify(this.props.userData));
+    //   localStorage.setItem('userData', JSON.stringify(this.props.userData));
     // }
   }
 

@@ -1,3 +1,6 @@
+/**
+ * App.js: the wrapper component for the React website
+ */
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -11,7 +14,7 @@ class App extends React.Component {
   }
   
   componentWillUnmount() {
-    // remove listner when unmounted
+    // remove listener when unmounted
     window.removeEventListener('resize', this.props.emitDeviceWidthUpdate);
   }
 

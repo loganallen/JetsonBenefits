@@ -1,5 +1,5 @@
 /**
- * index.js: this is the entry point of our React application
+ * index.js: The entry point of the React application
  */
 
 import React from 'react';

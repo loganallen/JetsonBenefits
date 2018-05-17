@@ -1,7 +1,9 @@
 /**
- * routes.js: creates the routes for our application
+ * routes.js: Creates the routes for the application
  * 1. Home --> `/` or `/home`
  * 2. Recommendation --> `/recommendation`
+ * 3. Test --> '/test' is used for testing API endpoints [REMOVE BEFORE DEPLOYMENT]
+ * 4. TODO: Add more routes
  */
 
 import React from 'react';
