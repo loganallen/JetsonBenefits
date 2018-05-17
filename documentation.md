@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-* [Architecture](#Architecture-overview)
+* [Architecture](#architecture-overview)
 * [Frontend](#frontend-and-react)
 * [Backend](#backend-and-django)
 * [Next Steps](#next-steps)
@@ -75,7 +75,7 @@ We use a combination of NPM and Webpack to manage our build processes for our fr
   });
 
   const mapDispatchToProps = (dispatch) => ({
-  	  myFunction: (data) => dispatch(Actions.myAction(data))
+	  myFunction: (data) => dispatch(Actions.myAction(data))
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
