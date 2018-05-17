@@ -20,7 +20,9 @@
 ## Frontend and React
   
 ### Dependencies
-We are using [NPM](https://www.npmjs.com/) (node package manager) to manage all of our frontend dependencies.  The file `package.json` in the root directory of our project lists all of our Javascript dependencies and the versions we used during development.  You can use the command `npm install` to quickly install all the dependencies listed in the file.
+We are using [NPM](https://www.npmjs.com/) (node package manager) to manage all of our frontend dependencies.  The file `package.json` in the root directory of our project lists all of our Javascript dependencies and the versions we used during development.  You can use the following command to quickly install all the dependencies listed in the file.
+
+	npm install
   
 ### Build Process
 We use a combination of NPM and Webpack to manage our build processes for our frontend code.  In our `package.json` file, we have defined a number of commands that allow you to easily build and run the project.  See our `README.md` for specific commands to run the app.  They are defined in `package.json` in the `scripts` object.
@@ -164,7 +166,9 @@ We did not use a testing framework for unit testing our frontend code.  Instead,
 ## Backend and Django
 
 ### Dependencies
-We are using [PIP](https://pypi.org/project/pip/) to manage our backend dependencies.  A list of all of our dependencies can be found in `requirements.txt` in the root directory.  To easily install all of the required dependencies, use the command `pip install -r requirements.txt`.
+We are using [PIP](https://pypi.org/project/pip/) to manage our backend dependencies.  A list of all of our dependencies can be found in `requirements.txt` in the root directory.  To easily install all of the required dependencies, use the following command.
+
+	pip install -r requirements.txt
 
 ### Database
   To connect the application to the Oracle MYSQL database the settings.py has the connection details. All the details have to be consistent from the mysql database and django application side. Refer [here](https://docs.djangoproject.com/en/2.0/ref/databases/) for in detail steps for the connection.
