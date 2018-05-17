@@ -32,7 +32,7 @@ We use a combination of NPM and Webpack to manage our build processes for our fr
 
   Our React entry point is in `assets/js/index.js`.  Outside of `assets/js/index.js` all of our React code can be found in `assets/js/components/`.  We have 3 folders that hold our Redux related code: `assets/js/actions`, `assets/js/store`, `assets/js/reducers`.
   
-  We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses frontend code related to creating network requests for loggin in or signing up.  Utils, in `assets/js/utils.js` provides some functions as well as constants/enums that are useful through the application.
+  We also have 2 other useful modules.  Auth, in `assets/js/auth.js` houses frontend code related to creating network requests for logging in or signing up.  Utils, in `assets/js/utils.js` provides some functions as well as constants/enums that are useful through the application.
   
 ### Why React?
 
