@@ -298,9 +298,9 @@ TODO TODO TODO
 
   * Andrew Grossfeld (Frontend, API, Authentication): amg445@cornell.edu
   * Logan Allen (Frontend, API): lga24@cornell.edu
-  * Justin Parratt (Frontend)
-  * Liza Mansbach (UI, UX, User Testing)
-  * Alison Molchadsky (Backend, Database)
-  * Sabah Qazi (Backend, Database)
-  * Nicolas Ferretti (Backend, Database)
-  * Ruzeb Chowdhury (Backend, Database)
+  * Justin Parratt (Frontend): jwp258@cornell.edu
+  * Liza Mansbach (UI, UX, User Testing): lm573@cornell.edu
+  * Alison Molchadsky (Backend, Database): afm75@cornell.edu
+  * Sabah Qazi (Backend, Database): sq75@cornell.edu
+  * Nicolas Ferretti (Backend, Database): nf96@cornell.edu
+  * Ruzeb Chowdhury (Backend, Database): rc647@cornell.edu
