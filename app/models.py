@@ -1,3 +1,7 @@
+"""
+	models.py: defines our database models
+"""
+
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
@@ -82,10 +86,6 @@ class health_plan_costs(models.Model):
 	monthly_premium = models.IntegerField()
 	deductible = models.IntegerField()
 	deductible_level = models.CharField(max_length = 8, choices = level_options)
-	# is_just_me = models.BooleanField(default = True)
-	# is_me_spouse = models.BooleanField(default = False)
-	# is_me_spouse_kid = models.BooleanField(default = False)
-	# is_me_spouse_two_kids = models.BooleanField(default = False)
 	has_spouse = models.BooleanField(default = False);
 	num_kids = models.IntegerField(default = 0)
 

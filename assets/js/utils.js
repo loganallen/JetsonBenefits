@@ -1,9 +1,16 @@
+/**
+ * utils.js: A module for useful constants and functions across our application
+ */
+
 import keyMirror from "keymirror";
 
+// base url for our api
 const baseAPI = `http://${env.baseURL}/api`;
 
+// mobile breakpoint in pixels
 const MOBILE_BREAKPOINT = 768;
 
+// constant for our specific api endpoints
 export const Endpoints = {
   SIGNUP: `${baseAPI}/signup`,
   LOGIN: `${baseAPI}/login`,
@@ -16,6 +23,12 @@ export const Endpoints = {
   GET_ALL_INSURANCE_QUOTES: `${baseAPI}/get-all-insurance-quotes`,
   GENERATE_INSURANCE_QUOTES: `${baseAPI}/generate-insurance-quotes`
 };
+
+export const RecommendationStages = keyMirror({
+  questions: null,
+  recommendation: null,
+  quotes: null
+});
 
 export const InsuranceTypes = keyMirror({
   HEALTH: null,
@@ -39,4 +52,30 @@ export const Gender = keyMirror({
   none: null
 });
 
+/**
+ * isMobile: returns true if the device is mobile, false otherwise
+ * @param {Number} deviceWidth: the current device width
+ * @return {Boolean}
+ */
 export const isMobile = (deviceWidth) => (deviceWidth <= MOBILE_BREAKPOINT || env.isMobile);
+
+/**
+ * isEmpty: return true if the string is empty (use for requiring input fields)
+ * @param {String} str 
+ */
+export const isEmpty = (str) => {
+  if (str === 0) return false;
+  return !str || str.length === 0;
+};
+
+/**
+ * isValidNumber: validates that [value] is a number and within [bounds], or is empty
+ * @param {String|Number} value
+ * @param {Array} bounds: [min, max]
+ */
+export const isValidNumber = (value, bounds) => {
+  if (value === '') return true;
+  let num = parseInt(value);
+  if (isNaN(num)) return false;
+  if (num >= bounds[0] && num <= bounds[1]) return true;
+}

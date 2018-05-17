@@ -1,10 +1,7 @@
-/*
-The [Login] component is a modal which prompts the user to either enter their
-login information or create an account on the spot.
-
-Model filepath:
-Controller filepath:
-*/
+/**
+ * LoginModal.js: This modal component prompts the user to enter login credentials
+ * or create an account. There are separate mobile and desktop renders.
+ */
 
 import React from 'react';
 import {Modal, Button, Icon} from 'semantic-ui-react';
@@ -17,7 +14,7 @@ import { isMobile } from '../utils';
 
 import '../../css/login.css';
 
-class Login extends React.Component {
+class LoginModal extends React.Component {
   
   constructor(props) {
     super(props);
@@ -32,9 +29,13 @@ class Login extends React.Component {
     };
   }
 
+  // Reroute to [Recommendation.js] upon successful login
   onLoginClick = () => {
-  if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
-      this.props.onLogin(this.state.loginEmail, this.state.loginPassword);
+    let callback = (success) => {
+      if (success) { this.props.history.push('/recommendation'); }
+    }
+    if (this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0) {
+      this.props.onLogin(this.state.loginEmail, this.state.loginPassword, callback);
     }
   }
 
@@ -46,24 +47,24 @@ class Login extends React.Component {
       password: this.state.signupPassword
     }
 
-    let valid = Object.values(userData).reduce((acc, val) => acc && val.length > 0, true); // TODO
+    // TODO: Better validation for proper email, etc.
+    let valid = Object.values(userData).reduce((acc, val) => acc && val.length > 0, true);
    
     if (valid) {
       this.props.onSignup(userData);
     }
   }
 
-  /**
-   * Creates a handler that updates the state for the login & sign up modal
-   * @param {Object} event: js event
-   */
-  handleInputChange = event => {
-    this.state[event.target.name] = event.target.value;
-    this.setState(this.state);
+  // Updates the state for an input change
+  // Requires the [name] of the input matches the state variable
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   desktopRender = () => {
-    const header = this.props.isLogin ? (
+    const header = this.props.isTypeLogin ? (
       <div className="loginHeaderWrapper">
         <h1 className="loginHeader">Sign In</h1>
       </div>
@@ -74,7 +75,7 @@ class Login extends React.Component {
       </div>
     );
 
-    const content = this.props.isLogin ? (
+    const content = this.props.isTypeLogin ? (
       <div>
         <input 
           name="loginEmail"
@@ -152,7 +153,7 @@ class Login extends React.Component {
         <Modal size={'large'} open={this.props.isOpen} onClose={this.props.onClose}>
           <div id="modalWrapper">
             <div id="modalImg">
-              <img src='static/img/login_modal_img.png' />
+              <img src='static/img/login.svg' />
               <h1>jetsonbenefits</h1>
             </div>
             <div id="modalContent">
@@ -166,7 +167,7 @@ class Login extends React.Component {
   };
 
   mobileRender = () => {
-    const content = this.props.isLogin ? (
+    const content = this.props.isTypeLogin ? (
       <div>
         <input 
           name="loginEmail"
@@ -243,7 +244,7 @@ class Login extends React.Component {
       <div id='modalWrapperMobile' className={classNames({ hidden: !this.props.isOpen })}>
         <button id="mobileModalClose" onClick={this.props.onClose}><Icon name='close' size='huge' color='black' /></button>
         <div id="modalImg">
-          <img src='static/img/login_modal_img.png' />
+          <img src='static/img/login.svg' />
           <h1>jetsonbenefits</h1>
         </div>
         <div id="modalContent">
@@ -259,14 +260,13 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
   deviceWidth: state.app.deviceWidth
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
-  onLogin: (username, password) => dispatch(Actions.loginUser(username, password)),
+  updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
+  onLogin: (username, password, cb) => dispatch(Actions.loginUser(username, password, cb)),
   onSignup: (userData) => dispatch(Actions.signupUser(userData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

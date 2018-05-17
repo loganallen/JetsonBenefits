@@ -1,3 +1,6 @@
+/**
+ * actionTypes.js: This module defines all of the redux ACTION TYPES
+ */
 import keyMirror from 'keymirror';
 
 const ActionTypes = keyMirror({
@@ -6,6 +9,8 @@ const ActionTypes = keyMirror({
     UPDATE_LOGIN_MODAL: null,
     UPDATE_USER_DATA: null,
     UPDATE_BULK_USER_DATA: null,
+    UPDATE_INSURANCE_DATA: null,
+    UPDATE_BULK_INSURANCE_DATA: null,
     UPDATE_USER_AUTH: null,
     UPDATE_INSURANCE_QUOTE: null,
     CLEAR_ALL_USER_INFO: null,

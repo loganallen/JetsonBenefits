@@ -55,8 +55,10 @@ MIDDLEWARE = [
     'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
+# specifies the file that holds the base url pattens
 ROOT_URLCONF = 'jetson.urls'
 
+# configures our templating: mostly boilerplate but looks in the templates directory
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,6 +75,7 @@ TEMPLATES = [
     },
 ]
 
+# special configuration for django rest framework: specifiy authentication scheme
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -141,6 +144,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# Webpack loading -- specify which directory in static to look for js
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'js/',

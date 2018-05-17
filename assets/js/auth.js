@@ -1,8 +1,12 @@
-// frontent authentication module
+/**
+ * auth.js: A module for frontend authentication
+ */
+
 import { Endpoints } from './utils';
 
 /**
  * login: attempts to login with given username and password
+ * Stores the token in sessionStorage if it exists, will be deleted on browser close
  * @param {String} username
  * @param {String} password
  * @param {Function} callback
@@ -64,10 +68,10 @@ const logout = function logout() {
 };
 
 /**
- * isLoggedIn: returns true if logged in, false otherwise
+ * isAuthenticated: returns true if logged in, false otherwise
  * @return {Boolean}
  */
-const isLoggedIn = function isLoggedIn() {
+const isAuthenticated = function isAuthenticated() {
     return !!sessionStorage.token;
 };
 
@@ -108,7 +112,7 @@ const getToken = function getToken(username, password, callback) {
 module.exports = {
     login,
     logout,
-    isLoggedIn,
+    isAuthenticated,
     signup,
     authToken,
     getToken

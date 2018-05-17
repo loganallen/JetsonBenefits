@@ -1,3 +1,7 @@
+/**
+ * index.js: The entry point of the React application
+ */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -8,7 +12,6 @@ import routes from './routes';
 import '../css/index.css';
 
 import App from './components/App';
-import Home from './components/Home';
 
 const store = configureStore();
 

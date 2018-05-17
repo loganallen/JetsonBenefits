@@ -8,6 +8,16 @@ def asInt(value):
 
 # """Outputs """
 def life_insurance(life_insurance_dict = None, general_questions_dict = None, user_kids_age = None):
+	"""
+	    Life recommendation
+        :param
+            life_insurance_dict = models.user_life_answers
+            general_questions_dict = models.user_general_answers
+            user_kids_ages = array of ints
+
+        :return need_insurance (boolean), coverage_amount_final (int), term(int)
+            
+    """
 	coverage_amount = 0
 	term = 20
 	default = True
@@ -28,7 +38,7 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 		if (len(user_kids_age) < 1):
 			min_age = 0
 		else:
-			min_age = min(list(map(int, user_kids_age)))
+			min_age = min(list(map(asInt, user_kids_age)))
 		other_debts_balance  = asInt(life_insurance_dict.other_debts_balance)
 		existing_life_insurance = asInt(life_insurance_dict.existing_life_insurance)
 		num_kids = asInt(general_questions_dict.num_kids)
@@ -41,6 +51,22 @@ def life_insurance(life_insurance_dict = None, general_questions_dict = None, us
 	return need_insurance, coverage_amount_final, term
 
 def health_insurance_totals(health_insurance_total):
+	"""
+	    Calculates total points for health
+        :param
+            health_insurance_total = models.health_questions
+
+        :return denom_dict = {
+				'HMO_denom',
+				'PPO_denom',
+				'HSA_denom',
+				'high_deduct_denom',
+				'low_deduct_denom',
+				'critical_illness_denom'
+        	}
+
+            
+    """
 	HMO_denom = 0.0
 	PPO_denom = 0.0
 	HSA_denom = 0.0
@@ -66,9 +92,24 @@ def health_insurance_totals(health_insurance_total):
 	denom_dict['critical_illness_denom'] = critical_illness_denom
 
 	return denom_dict
+        
 
 
 def health_insurance(health_insurance_total, health_insurance_obj = None):
+	"""
+	    Genrates health recommendation
+        :param
+            health_insurance_total = models.health_questions
+            health_insurance_obj = models.user_health_questions_answer
+
+
+        :return 
+        	plan_type = HMO or PPO
+        	deductible = High or Low
+        	critical_illness = boolean
+
+            
+    """
 	plan_type = 'HMO'
 	deductible = 'High'
 	critical_illness = False
@@ -87,7 +128,7 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 		critical_illness = 0.0
 		
 		fields = user_health_questions_answer._meta.get_fields()
-		health_insurance_dict = model_to_dict(health_insurance_obj)
+		health_insurance_dict = model_to_dict(health_insurance_obj) # TODO: Necessary???
 
 		denom_dict = health_insurance_totals(health_insurance_total)
 		print(denom_dict)
@@ -139,6 +180,16 @@ def health_insurance(health_insurance_total, health_insurance_obj = None):
 	return plan_type, deductible, critical_illness
 
 def disability_rec(general_questions_dict):
+	"""
+	    Genrates disability recommendation
+        :param
+            general_questions_dict = models.user_general_answers
+
+
+        :return 
+			benefit_amount, duration, monthly (ints)
+            
+    """
 	benefit_amount = 0
 	duration = 65
 

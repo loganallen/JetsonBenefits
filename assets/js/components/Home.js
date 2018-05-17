@@ -1,11 +1,7 @@
-/*
-The [Home] component represents the landing page of the JetsonBenefits
-webpage. Contains the [Navigation] component and has a button which links to 
-the [Recommendation] component.
-
-Model filepath:
-Controller filepath:
-*/
+/**
+ * Home.js: The landing page of the website. This component contains the [Menu.js] component,
+ * renders all of the home page content, and pushes to the [Recommendation.js] component.
+ */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -14,8 +10,8 @@ import classNames from 'classnames';
 
 import Menu from './Menu';
 import Actions from '../actions';
-import { isLoggedIn, authToken } from '../auth';
-import { isMobile } from '../utils';
+import { isAuthenticated } from '../auth';
+import { isMobile, isValidNumber } from '../utils';
 
 import '../../css/home.css';
 
@@ -29,11 +25,11 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.changeMenuTheme('themeWhite');
-    if (isLoggedIn()) {
-      this.props.loadUserInfo(authToken());
+    if (isAuthenticated()) {
+      this.props.loadUserData();
     } else {
-      // Grab from localStorage to update redux store with cached data
-      // let userData = localStrorage.getItem("userData");
+      // TODO: Grab cached app state from localStorage to update redux store
+      // let userData = localStrorage.getItem('userData');
       // if (userData) {
       //   this.props.updateBulkUserData(JSON.parse(userData));
       // }
@@ -41,19 +37,17 @@ class Home extends React.Component {
   }
 
   componentWillUnmount() {
-    // if (!isLoggedIn()) {
-    //   localStorage.setItem(JSON.stringify(this.props.userData));
+    // TODO: Cache local app state before a page refresh
+    // if (!isAuthenticated()) {
+    //   localStorage.setItem('userData', JSON.stringify(this.props.userData));
     // }
   }
 
-  onInputChange = (id, event) => {
+  onInputChange = (key, event, bounds = [0,0]) => {
     let value = event.target.value;
 
-    // TODO: Validate user input
-    if (id == 'age') {
-      this.props.updateUserData('age', value);
-    } else if (id == 'zipcode') {
-      this.props.updateUserData('zipcode', value);
+    if (isValidNumber(value, bounds)) {
+      this.props.updateUserData(key, value);
     }
   }
 
@@ -83,7 +77,7 @@ class Home extends React.Component {
                 type='number'
                 className='homeS2Input'
                 id='homeS2Input1'
-                onChange={(e) => this.onInputChange('age', e)}
+                onChange={(e) => this.onInputChange('age', e, [1, 99])}
                 placeholder='30'
                 value={this.props.age}
               />
@@ -95,7 +89,7 @@ class Home extends React.Component {
                 type='number'
                 className='homeS2Input'
                 id='homeS2Input2'
-                onChange={(e) => this.onInputChange('zipcode', e)}
+                onChange={(e) => this.onInputChange('zipcode', e, [0, 99999])}
                 placeholder='60601'
                 value={this.props.zipcode}
               />
@@ -117,7 +111,7 @@ class Home extends React.Component {
               type='text'
               className='homeS2Input'
               id='homeS2Input1'
-              onChange={(e) => this.onInputChange('age', e)}
+              onChange={(e) => this.onInputChange('age', e, [1, 99])}
               placeholder='30'
               value={this.props.age}
             />
@@ -126,7 +120,7 @@ class Home extends React.Component {
               type='text'
               className='homeS2Input'
               id='homeS2Input2'
-              onChange={(e) => this.onInputChange('zipcode', e)}
+              onChange={(e) => this.onInputChange('zipcode', e, [0, 99999])}
               placeholder='60601'
               value={this.props.zipcode}
             />
@@ -134,7 +128,7 @@ class Home extends React.Component {
             <button type='button' id='homeS2B1' onClick={this.onFindBenefitsClick}>
               FIND MY BENEFITS
             </button><br/>
-            {!isLoggedIn() && (
+            {!isAuthenticated() && (
               <button type='button' id='homeS2B2' onClick={() => this.props.updateLoginModal(true, false)}>
                 or Sign Up
             </button>
@@ -168,10 +162,12 @@ class Home extends React.Component {
     return (
       <div>
         <Menu history={this.props.history} />
-        {this.section1()}
-        {this.section2()}
-        {this.section3()}
-        {this.section4()}
+        <div className='container'>
+          {this.section1()}
+          {this.section2()}
+          {this.section3()}
+          {this.section4()}
+        </div>
       </div>
     );
   }
@@ -185,10 +181,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeMenuTheme: (theme) => dispatch(Actions.changeMenuTheme(theme)),
-  updateLoginModal: (isOpen, isLogin) => dispatch(Actions.updateLoginModal(isOpen, isLogin)),
+  updateLoginModal: (isOpen, isTypeLogin) => dispatch(Actions.updateLoginModal(isOpen, isTypeLogin)),
   updateUserData: (key, value) => dispatch(Actions.updateUserData(key, value)),
   updateBulkUserData: (data) => dispatch(Actions.updateBulkUserData(data)),
-  loadUserInfo: (token) => dispatch(Actions.fetchUserInfo(token))
+  loadUserData: () => dispatch(Actions.fetchUserInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
