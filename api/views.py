@@ -310,7 +310,7 @@ def updateInsuranceInfo(request):
                 q = health_question_options.objects.get(option = insuranceData[key], health_question_id = num)
                 health_dict[key] = q
 
-
+            # runs over the data in the dictionary returned from health questions options
             for attr, value in health_dict.items():
                 setattr(healthRecord, attr, value)
                 healthRecord.save()
@@ -499,6 +499,7 @@ def getInsuranceQuote(request):
         insurance_type = request.GET['insuranceType']
 
         if (insurance_type == 'HEALTH' or insurance_type == 'LIFE' or insurance_type == 'DISABILITY'):
+            #depending on the insurance type, the func getQouteHelper is called
             data = getQuoteHelper(user, insurance_type)
             res['data'] = data
             res['success'] = True
@@ -635,6 +636,7 @@ def generateInsuranceQuotes(request):
     res = { 'success': False, 'error': '', 'data': None }
 
     if (validateRequest(request, requiredKeys, 'GET', res)):
+        #userData fetched from getUserInfo func.
         userData = json.loads(request.GET['userData'])
 
         general_post = userData['GENERAL']
@@ -717,6 +719,7 @@ def generateInsuranceQuotes(request):
             health_quote = model_to_dict(health_quote)
             health_quote['deductible'] = num_to_usd(health_quote['deductible'])
         
+        #get life insurance rec
         if (life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age).exists()):
             life_quote = life_plan_costs.objects.filter(policy_term = term, policy_amount = coverage_amount, gender = gender, age = age)[0]
             life_quote = model_to_dict(life_quote)
@@ -786,7 +789,8 @@ def getQuoteHelper(user, insurance_type):
     user_kids_age = []
 
     data = {}
-
+    
+    #id the user id is present, then gets all the data form the database
     if (user_general_answers.objects.filter(user_id=user).exists()):
         gen_answers = user_general_answers.objects.get(user_id=user)
         is_married = (gen_answers.marital_status == 'married')
