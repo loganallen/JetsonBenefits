@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   // Note: this syntax automatically binds the `this` context
-  onUnload = () => {
+  onUnload = (event) => {
     const message = 'Are you sure you want to abondon you unsaved changes?';
     event.returnValue = message;
     return message;

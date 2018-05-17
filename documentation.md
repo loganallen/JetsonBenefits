@@ -19,15 +19,15 @@
 
 ## Frontend and React
   
-  #### Dependencies
+  ### Dependencies
   We are using [NPM](https://www.npmjs.com/) (node package manager) to manage all of our frontend dependicies.  The file `package.json` in the root directory of our project lists all of our javascript dependencies and the versions we used during development.  You can use the command `npm install` to quickly install all the dependencies listed in the file.
   
-  #### Build Process
+  ### Build Process
   We use a combination of NPM and Webpack to manage our build process for our frontend code.  In our `package.json` file, we have defined a number of commands that allow you to easily build and run the project.  See our `README.md` for specific commands to run.  They are defined in `package.json` in the `scripts` object.
 
   While we use NPM to trigger our build process, Webpack does the actual work of creating our JS packages that we serve to the browser.  All of the configuration of Webpack can be found in `webpack.config.js` located in the root directory.  Webpack starts at the entry point of our JS files, defined in `config.entry` and recursively moves through that file and all of the depended on files to create on package called `index.bundle.min.js` in the `static/js` directory.  Also included in our config are plugins that: compile our common code into another bundle called `common.bundle.min.js` and inject dependencies into our code.  Our Webpack configuration has rules to load different files in `assets/` with their correct loaders.
 
-  #### How it Works
+  ### How it Works
   We used React to create our frontend interfaces.  All of the pre-bundled code can be found in `assets/js`.
   
   Our React entry point is in `assets/js/index.js`.  We are using Redux in combination with React.  Outside of `assets/js/index.js` all of our React code can be found in `assets/js/components/`.  We have 3 folders that hold our Redux related code: `assets/js/actions`, `assets/js/store`, `assets/js/reducers`.
@@ -36,15 +36,47 @@
 
   Most components have their own css files.  To change the styles for a component look for the related file in `assets/css`.
 
-  #### Testing
-  TODO
+  ### Comments
+
+  #### Class Method Declaration
+
+  Please note, when extending `React.Component` to create our own custom components, we use two different syntaxs to declare class methods.
+  
+  ```javascript
+  class App extends React.Component {
+    ...
+    componentWillMount() {
+      // listen for window resize and update deviceWidth in store
+      window.addEventListener('resize', this.props.emitDeviceWidthUpdate);
+      // listen for reload, or leaving page events --> makes sure user doesn't lose changes on accident
+      window.addEventListener('beforeunload', this.onUnload);
+    }
+  }
+  ```
+  The example above is taken from the App class in `App.js`.  We use this method declaration syntax because the function `componentWillMount` overrides a class method specified in the `React.Component` class we are extending.  These functions have the `this` (the class object) correctly bound to the function already.
+
+  ```javascript
+  class App extends React.Component {
+    ...
+    onUnload = () => {
+      const message = 'Are you sure you want to abondon you unsaved changes?';
+      event.returnValue = message;
+      return message;
+    }
+  ```
+  In the example above, we declare an anonymous function and then assign it to the variable `onUnload`.  Because `onUnload` not specified in `React.Component`, we use this syntax to leverge Javascript autobinding the correct `this` object to the function, where `this` is the class instance.
+
+
+  ### Testing
+  
+  We did not use a testing framework for unit testing our frontend code.  Instead, we carried out user testing as detailed in our final project report.  While developing the frontend, we made heavy use of the browser developer console.  If you are not familiar with debuggin frontend code, then I would recommend using Google Chrome for debugging.  It provides a nice interface for inspecting elements and testing.  There are also useful React specific debugging plugins that are available for Chrome.
 
 ## Backend and Django
 
-  #### Dependencies
+  ### Dependencies
   We are using [PIP](https://pypi.org/project/pip/) to manage our back-end dependencies.  A list of all of our dependencies can be found in `requirements.txt` in the root directory.  To easily install all of the required dependencies, use the command `pip install -r requirements.txt`.
 
-  #### Database
+  ### Database
   
   To connect the application to the Oracle MYSQL database the settings.py has the connection details. All the details have to be consistent from the mysql database and django application side. Refer [here](https://docs.djangoproject.com/en/2.0/ref/databases/) for in detail steps for the connection.
   
@@ -52,7 +84,7 @@
 
   In order to make changes to the database, you can edit the models in `app/models.py`.  It is important that when you edit the models, you run two commands to update your working database according to your changes.  First you must run `python manage.py makemigrations`.  If there are errors present, then you can fix them, otherwise you then run `python manage.py migrate`.
 
-  #### How it Works
+  ### How it Works
   Our back-end Django application can be separated out into three parts: configuration, file serving, and API.
 
   The configuration of our application lives in the `jetson/` directory.  In this directory there is a file named `settings.py`, which details the configuration of our server.  A lot of code in this file is boilerplate, however we have specified some specific additional `INSTALLED_APPS` that make our program work.
@@ -66,7 +98,7 @@
 
   Finally, the API portion of our Django application is in the `api/` directory.  The `api/urls.py` file specifies the defined api urls that can be accessed.  The `api/views.py` holds all the implementation logic for our api functions.  These functions have built in user authentication using token authentication.
 
-  #### Authentication and Security
+  ### Authentication and Security
 
   Our application uses built in Django token authentication scheme to allow users to access our API.  We chose to implement our API in a stateless style, so we opted token authentication over session authentication.  To configure our application for this type of authentication, we added `rest_framework.authtoken` to our `INSTALLED_APPS` as well as the following configuration object on line 79 of `jetson/settings.py`.
 
@@ -117,17 +149,17 @@
   
   Here in the `beforeSend` object, we set a function that takes the request and adds the correctly formatted authorization header.
 
-  #### Testing
+  ### Testing
   TODO
 
 ## Next Steps
 
   While the MVP for this project is more or less complete, there are a few steps that should be taken to convert this a production ready site.  The front-end portion of this project is easy to change and easy to deploy in its current form.  These suggestions for deployment considerations are exclusively for the back-end of this project.  The Django documentation has good advice and will go into more detail about these issues.
 
-  #### Security
+  ### Security
   For a production ready deployment of this application, you will most likely want a custom domain name.  While this is not a security issue, you want to configure your domain to use HTTPS.  This will allow end-to-end encryption of any web traffic that is sent from a users browser to the server.  You do not want your new users' passwords sent in plaintext to the backend when they are signing up.  Refer to [here](https://docs.djangoproject.com/en/2.0/topics/security/) for more detail on this topic.  Note that at this stage of our application, we leveraged Django's built in security  to secure our API.  We have also taken steps to combat cross-site scripting and SQL injections.
 
-  #### Hosting
+  ### Hosting
   Refer [here](https://docs.djangoproject.com/en/2.0/howto/deployment/) for deploying this Django application to a live server.
 
 ## Comments
