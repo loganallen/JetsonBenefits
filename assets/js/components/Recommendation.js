@@ -4,8 +4,6 @@
  * conditionally. On mobile interfaces it renders the [Sidebar.js] as the intermedaite page
  * between the aforementioned components. It also contains the [Menu.js] component. It is the
  * delegate for transitioning between the stages of the recommendation flow.
- * 
- * this.state.stage: 'questions' | 'recommendation' | 'quotes'
  */
 
 import React from 'react';
@@ -17,7 +15,7 @@ import QuotesContainer from './QuotesContainer';
 
 import Actions from '../actions';
 import Menu from './Menu';
-import { isMobile } from '../utils';
+import { isMobile, RecommendationStages } from '../utils';
 import { isAuthenticated } from '../auth';
 
 import '../../css/recommendation.css';
@@ -26,7 +24,7 @@ class Recommendation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stage: 'questions',
+      stage: RecommendationStages.questions,
       isMobile: isMobile(this.props.deviceWidth)
     };
   }
@@ -52,7 +50,7 @@ class Recommendation extends React.Component {
   }
 
   onMobileNextClick = () => {
-    this.updateStage('recommendation');
+    this.updateStage(RecommendationStages.recommendation);
   }
 
   updateStage = (newStage) => {
@@ -66,7 +64,7 @@ class Recommendation extends React.Component {
       // Save userData to the backend
       this.props.saveUserData();
     }
-    this.updateStage('quotes');
+    this.updateStage(RecommendationStages.quotes);
   }
 
   questionsContent() {
@@ -108,11 +106,11 @@ class Recommendation extends React.Component {
   render() {
     let renderedContent = (stage => {
       switch (stage) {
-        case 'questions':
+        case RecommendationStages.questions:
           return this.questionsContent();
-        case 'recommendation':
+        case RecommendationStages.recommendation:
           return this.recommendationContent();
-        case 'quotes':
+        case RecommendationStages.quotes:
           return this.quotesContent();
         default:
           return this.questionsContent();

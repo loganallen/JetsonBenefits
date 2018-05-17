@@ -24,7 +24,12 @@ export const Endpoints = {
   GENERATE_INSURANCE_QUOTES: `${baseAPI}/generate-insurance-quotes`
 };
 
-// insurance type constants
+export const RecommendationStages = keyMirror({
+  questions: null,
+  recommendation: null,
+  quotes: null
+});
+
 export const InsuranceTypes = keyMirror({
   HEALTH: null,
   LIFE: null,

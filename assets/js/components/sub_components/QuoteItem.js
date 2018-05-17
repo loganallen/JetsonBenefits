@@ -1,8 +1,8 @@
-/*
-The [QuoteItem] component contains the most relevent quote information for a 
-given area of insurance. Contains a tab which drops down the [RefineQuoteItem]
-component for the given area of insurance.
-*/
+/**
+ * QuoteItem.js: This component displays specific information for a quote, which varies
+ * depending on the insurance type. It contains a button to toggle a [RefineQuoteItem.js]
+ * component for the given insurance type prop.
+ */
 
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
@@ -19,12 +19,12 @@ import { InsuranceTypes } from '../../utils';
  *   quote,
  *   userData,
  *   isMobile,
- *   updateUserData,
- *   updateInsuranceData,
- *   saveInsuranceData,
- *   loadInsuranceQuote,
- *   generateInsuranceQuotes,
- *   onCoverageClick
+ *   updateUserData: function,
+ *   updateInsuranceData: function,
+ *   saveInsuranceData: function,
+ *   loadInsuranceQuote: function,
+ *   generateInsuranceQuotes: function,
+ *   onCoverageClick: function
  * }
  */
 
@@ -36,7 +36,7 @@ class QuoteItem extends React.Component {
     };
   }
 
-  getRefineComponent = () => (
+  refineComponent = () => (
     <RefineQuoteItem 
       insuranceType={this.props.insuranceType}
       insuranceData={this.props.insuranceData}
@@ -58,7 +58,8 @@ class QuoteItem extends React.Component {
     this.onRefineClick();
   }
 
-  onRefineClick = (event) => {
+  // Toggle the refine section of the quote
+  onRefineClick = () => {
     this.setState({
       refineOpen: !this.state.refineOpen
     });
@@ -148,7 +149,7 @@ class QuoteItem extends React.Component {
               <div className="insuranceType">{this.props.insuranceType} INSURANCE</div>
               {this.props.insuranceType != InsuranceTypes.DISABILITY && <button
                 className='refineButton'
-                onClick={(e) => this.onRefineClick(e)}>
+                onClick={this.onRefineClick}>
                 Refine <Icon name={classNames('angle', {
                   up: this.state.refineOpen,
                   down: !this.state.refineOpen
@@ -175,7 +176,7 @@ class QuoteItem extends React.Component {
 
         {this.state.refineOpen &&
           <div className='refineWrapper'>
-            {this.getRefineComponent()}
+            {this.refineComponent()}
           </div>}
       </div>
     );
@@ -208,7 +209,7 @@ class QuoteItem extends React.Component {
 
           {this.state.refineOpen &&
             <div className='refineWrapper'>
-              {this.getRefineComponent()}
+              {this.refineComponent()}
             </div>}
 
         </div>

@@ -1,4 +1,10 @@
-import React from 'react';
+/**
+ * RefineQuoteItem.js: This component displays more user input questions related to the
+ * parent [Quote.js] component. The data affected by this component is:
+ * store.app.insuranceData[insuranceType]
+ */
+
+ import React from 'react';
 import { Grid, Button, Dropdown, Checkbox } from 'semantic-ui-react';
 import { MaritalStatus, InsuranceTypes } from '../../utils';
 
@@ -7,9 +13,9 @@ import { MaritalStatus, InsuranceTypes } from '../../utils';
  *  insuranceType,
  *  insuranceData,
  *  userData,
- *  updateUserData,
- *  updateInsuranceData,
- *  onUpdateQuoteClicked
+ *  updateUserData: function,
+ *  updateInsuranceData: function,
+ *  onUpdateQuoteClicked: function
  * }
  */
 

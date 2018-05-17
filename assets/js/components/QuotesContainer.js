@@ -1,7 +1,7 @@
 /**
  * QuotesContainer.js: This component displays the recommended quotes for the user. It serves
- * up at most three [QuoteItem.js] components corresponding to specific insurance types
- * (HEALTH, LIFE, or DISABILITY). This component is contained within the [Recommendation.js] component.
+ * up at most three [QuoteItem.js] components corresponding to specific insurance types.
+ * This component is contained within the [Recommendation.js] component.
  */
 
 import React from 'react';
@@ -11,6 +11,7 @@ import { Breadcrumb } from 'semantic-ui-react';
 import QuoteItem from './sub_components/QuoteItem';
 import Actions from '../actions';
 import { isAuthenticated } from '../auth';
+import { RecommendationStages } from '../utils';
 
 import '../../css/quotes.css';
 
@@ -30,9 +31,8 @@ class QuotesContainer extends React.Component {
 		}
 	}
 
-	onCoverageClick = (data) => {
-		// TODO: Link to insurance carrier
-		console.log('Linking to insurance carrier for this quote...');
+	onCoverageClick = (quote) => {
+		// TODO: Link to insurance carrier for this quote
 	}
 
 	quoteItems = () => {
@@ -40,12 +40,11 @@ class QuotesContainer extends React.Component {
 			let quote = this.props.quotes[insuranceType];
 			if (Object.keys(quote).length === 0) return <div></div>;
 
-			let insuranceData = this.props.insuranceData[insuranceType];
 			return (
 				<QuoteItem
 					key={insuranceType}
 					insuranceType={insuranceType}
-					insuranceData={insuranceData}
+					insuranceData={this.props.insuranceData[insuranceType]}
 					quote={quote}
 					userData={this.props.userData}
 					isMobile={this.props.isMobile}
@@ -54,7 +53,7 @@ class QuotesContainer extends React.Component {
 					saveInsuranceData={this.props.saveInsuranceData}
 					loadInsuranceQuote={this.props.loadInsuranceQuote}
 					generateInsuranceQuotes={this.props.generateInsuranceQuotes}
-					onCoverageClick={this.onCoverageClick}
+					onCoverageClick={() => this.onCoverageClick(quote)}
 				/>
 			);
 		});
@@ -65,15 +64,27 @@ class QuotesContainer extends React.Component {
 	breadcrumbs = () => {
 		return this.props.isMobile ? (
 			<Breadcrumb size='massive'>
-				<Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
+				<Breadcrumb.Section
+					link
+					onClick={() => this.props.updateStage(RecommendationStages.questions)}
+					>Personal Info
+				</Breadcrumb.Section>
 				<Breadcrumb.Divider>/</Breadcrumb.Divider>
-				<Breadcrumb.Section link onClick={() => this.props.updateStage('recommendation')}>Recommendations</Breadcrumb.Section>
+				<Breadcrumb.Section
+					link
+					onClick={() => this.props.updateStage(RecommendationStages.recommendation)}
+					>Recommendations
+				</Breadcrumb.Section>
 				<Breadcrumb.Divider>/</Breadcrumb.Divider>
 				<Breadcrumb.Section active link>Quotes</Breadcrumb.Section>
 			</Breadcrumb>
 		) : (
 			<Breadcrumb>
-				<Breadcrumb.Section link onClick={() => this.props.updateStage('questions')}>Personal Info</Breadcrumb.Section>
+				<Breadcrumb.Section
+					link
+					onClick={() => this.props.updateStage(RecommendationStages.questions)}
+					>Personal Info
+				</Breadcrumb.Section>
 				<Breadcrumb.Divider>/</Breadcrumb.Divider>
 				<Breadcrumb.Section active link>Quotes</Breadcrumb.Section>
 			</Breadcrumb>

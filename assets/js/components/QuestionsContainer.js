@@ -2,6 +2,10 @@
  * QuestionsContainer.js: This component renders the content for general user input questions.
  * It contains the [Sidebar.js] component on desktop renders, but on mobile interfaces
  * it exclusively renders the user input questions.
+ * 
+ * TODO: Dynamically save userData to the backend. This will also require an endpoint to fetch
+ * generic info regarding which insurance packages are recommended. Save this to the redux store
+ * and render the information in the [Sidebar.js] component.
  */
 
 import React from 'react';
@@ -11,8 +15,6 @@ import classNames from 'classnames';
 
 import Sidebar from './sub_components/Sidebar';
 import { HealthConditions, MaritalStatus, Gender, isEmpty } from '../utils';
-
-// TODO: Dynamically save userData to the backend? So not just when clicking 'next'?
 
 class QuestionsContainer extends React.Component {
   constructor(props) {
